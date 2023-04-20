@@ -1,0 +1,984 @@
+
+@media(max-width: 1166px){
+    .swap-box{
+        width: 50%;
+    }
+
+    /* finance css */
+    .den-box{
+        padding: 30px 40px;
+        height: 1100px;
+    }
+    /* dashboard2*/
+.left-bar {
+    width: 200px;
+}
+/* stake page responsive */
+
+.content-arena > h3{
+    font-size: 20px;
+}
+/* stake page responsive */
+
+    .modal-content{
+        width: 50%;
+    }
+    .c-price {
+        position: absolute;
+        top: 0;
+        left: 46%;
+        margin-top: 52px;
+    }
+    #banner-sec{
+        height: 820px;
+    }
+    .mr-mrt1{
+        margin-top: -20px;
+    }
+    .newpool-box{
+        width: 100%;
+    }
+    .wrptoken-ch > p{
+        font-size: 16px;
+    }
+    .slide-prev {
+        top: 200px;
+    }
+    .slide-next {
+        top: 200px;
+    }
+    .menu-list-d > li > a{
+        font-size: 14px;
+        margin-left: 25px;
+    }
+    .mr-mrt4 {
+        margin-top: -20px;
+    }
+    .mr-mrt2 {
+        margin-right: 128px;
+    }
+    .mr-mrt3 {
+        margin-top: 40px;
+        margin-right: 60px;
+    }
+    .mr-mrt6 {
+        margin-top: 40px;
+        margin-left: 60px;
+    }
+    .market-list3{
+        margin-top: -90px;
+    }
+    .mr-mrt5 {
+        margin-left: 92px;
+    }
+    .team-box{
+        height: 290px;
+    }
+ 
+}
+
+
+
+@media(max-width: 992px){
+    .swap-box {
+        width: 72%;
+    }
+    .tabs6 a{
+        font-size: 12px;
+        padding: 8px 8px;
+        width: 100%;
+    }
+    .product-right-content{
+        margin-top: 40px;
+    }
+    .product-right-content > h1,p,span{
+        text-align: center;
+    }
+    .product-right-content > span{
+        display: block;
+    }
+    .products-list-wrp{
+        margin-top: 30px;
+    }
+    .top-weekly-reponsive{
+        overflow: auto;
+    }
+    .socialcontainer{
+        justify-content: center;
+    }
+    #round-sec{
+        padding-top: 30px;
+    }
+    .round-content{
+        width: 100%;
+    }
+    .den-box{
+        background-image: url(../images/mobileBg.png);
+    }
+    /* finance page css */
+    .bid-box2{
+        margin-top: 30px;
+    }
+   .den-box {
+    height: 1460px;
+}
+        /* stake page responsive */
+
+.stake-box {
+    margin-bottom: 30px;
+}
+    .team-box {
+        height: auto;
+    }
+    #team-sec{
+        height: auto;
+    }
+    .modal-content {
+        width: 70%;
+    }
+    .chicken-box-m > p {
+        font-size: 18px;
+        line-height: 22px;
+        margin-top: 10px;
+    }
+    .mobile-marketplace{
+        display: block;
+    }
+    .desktop-marketplace{
+        display: none;
+    }
+    .marketplace-img{
+        padding-top: 65px;
+        height: auto;
+    }
+    .mr-mrt1 {
+        margin-right: 0;
+    }
+    .mr-mrt2 {
+        margin-right: 0px;
+    }
+    .mr-mrt3{
+        margin-right: 0;
+    }
+    .market-l-img > img {
+        width: 60px;
+    }
+    .market-list > li {
+        margin-bottom: 20px;
+    }
+    .market-p > p{
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .mr-mrt3{
+        margin-top: 20px;
+    }
+    .wrp-chicken-l2{
+        justify-content: center;
+        flex-direction: row-reverse;
+    }
+    .mr-mrt4 {
+        margin-top: 0px;
+        margin-left: 0px;
+    }
+    .mr-mrt5 {
+        margin-left: 0px;
+    }
+    .mr-mrt6{
+        margin-left: 0px;
+    }
+    .wrp-chicken-l3{
+        display: flex! important;
+        text-align: center;
+        margin-top: 80px;
+    }
+    .bgmarketplace{
+        padding: 60px 0px 80px 0px;
+    }
+    .market-p2 > p{
+        font-size: 18px;
+        line-height: 22px;
+    }
+    .market-p2 > p{
+        margin-right: 25px;
+    }
+    .wrp-chicken-l{
+        justify-content: center;
+    }
+    .alienpool-wrp{
+        display: inherit;
+        text-align: center;
+    }
+    .roadmap-text-wrp{
+        display: inherit;
+        text-align: center;
+    }
+    .alienpool{
+        justify-content: center;
+    }
+    .alientime{
+        justify-content: center;
+    }
+    .pool-btns > button{
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+    }
+    .pool-btns > button:first-child {
+        margin-top: 50px;
+    }
+    .alienpool-content {
+        margin-left: 15px;
+        align-self: center;
+    }
+    .pool-btns > button{
+        font-size: 14px;
+    }
+    .roadmap-ims{
+        display: none;
+    }
+    .roadmap-m{
+        display: block;
+    }
+    .slide-prev {
+        top: 130px;
+    }
+    .slide-next {
+        top: 130px;
+    }
+    .menu-list2 > li > a > img {
+        width: 100px;
+        margin-right: 15px;
+    }
+    .menu-list2 > li > a{
+        color: #000;
+    }
+
+    .dashboard-header{
+        display: block;
+        background-color: #6a79ca;
+    }
+    .dashboard-content {
+        margin-left: 0px;
+    }
+    .btd-box{
+        margin-bottom: 30px;
+    }
+    .wrp-address{
+        display: inherit;
+    }
+    .address-c > p{
+        font-size: 14px;
+        text-align: center;
+    }
+    .address-c2{
+        text-align: center;
+    }
+    .dashboard-content > h3{
+        font-size: 26px;
+        margin-bottom: 30px;
+    }
+    .left-side-bar{
+        display: none;
+    }
+    .small-box-b{
+        top: 30px;
+    }
+    .nomic-list-wrp {
+        margin-left: 34px;
+    }
+    .banner-content {
+        padding: 20px 0px 80px 0px;
+    }
+    .head-distri > h3{
+        margin-bottom: 30px;
+    }
+    .img-nomic{
+        width: 100%;
+    }
+    .team-box {
+        margin-top: 30px;
+    }
+    .team-head {
+        margin-bottom: 30px;
+    }
+    
+    .img-nomic > img{
+        width: 100%;
+    }
+    .welcome-content {
+        margin-top: 0px;
+        text-align: center;
+    }
+    .dish-img {
+        width: 100%;
+    }
+    .stoke-r {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .roadmap-c-box {
+        margin-top: 25px;
+        text-align: center;
+    }
+    .mobile-r-head > h3{
+        font-family: 'CHICKEN Pie Regular';
+        color: #bf77b9;
+        font-size: 34px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .tokenomic-head > h3 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .bit-stoke2 {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .welcome-box{
+        margin-top: 50px;
+    }
+    .total-box{
+        margin-bottom: 30px;
+    }
+    .desktop-roamdmap{
+        display: none;
+    }
+    .mobile-roadmap{
+        display: block;
+    }
+    .boost-box{
+        margin-top: 0px;
+    }
+    .burger-area{
+        display: block;
+    }
+    .bit-box{
+        margin-top: 30px;
+    }
+    .menu-list-d{
+        display: none;
+    }
+    .menu-list > li {
+        margin-left: 0px;
+        margin-top: 10px;
+    }
+    .menu-list > li > a {
+        font-size: 12px;
+    }
+    .nomic-list > li > p{
+        font-size: 12px;
+    }
+    .content-f-box {
+        margin-bottom: 30px;
+    }
+    .transition-box > h4 {
+        margin: 30px 0px 30px 0;
+    }
+    .tr-box2{
+        margin-bottom: 30px;
+    }
+    .hen-box{
+        text-align: center;
+    }
+    .claim-p{
+        margin-left: 0px;
+    }
+    .wrptoken-ch > p {
+        font-size: 14px;
+    }
+    .wrptoken-ch > p {
+    font-size: 14px;
+    }
+    .wrptoken-ch > span {
+    font-family: 'Broadway';
+    font-size: 20px;
+    }
+    .mrt-features {
+        margin-top: 0px;
+    }
+    .pool-btns > input{
+        margin-top: 35px;
+    }
+    .market-btn > a > img {
+        width: 185px;
+    }
+    #msform{
+        width: 100%;
+    }
+    .wrp-list-invest {
+        width: 100%;
+        overflow-x: auto;
+    }
+    .cal-list-head{
+        width: 1000px;
+    }
+    .cal-list{
+        width: 1000px;
+    }
+    .upload-head{
+        margin-top: 30px;
+    }
+
+    
+   
+}
+@media(max-width: 767px){
+    
+    .swap-box{
+        width: 100%;
+    }
+    .tabs6{
+        display: inherit;
+    }
+    .tabs6 a {
+        font-size: 13px;
+        padding: 8px 20px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .tabs5{
+        display: flex;
+        justify-content: center! important;
+        width: 100%;
+    }
+    
+    .crate-items{
+        text-align: center;
+    }
+
+    
+   
+}
+@media(max-width: 580px){
+    .crate-items > button{
+        margin-bottom: 30px;
+    }
+    .wrp-create-head{
+        height: 80px;
+    }
+    .create-head > h4{
+        font-size: 24px;
+        line-height: 80px;
+    }
+    .upload-head {
+        margin-top: 0;
+    }
+    .upload-head > h4{
+        text-align: center;
+    }
+    .swap-content > h3{
+        font-size: 24px;
+    }
+    .swap-content > p{
+        font-size: 16px;
+    }
+    .bnb-input {
+        width: 45%;
+    }
+    .max-bnb-box > p{
+        font-size: 16px;
+    }
+    .bnb-content > p{
+        font-size: 16px;
+    }
+    .bnb-content > p > img{
+        margin: 0px 5px 0px 15px;
+        width: 22px;
+    }
+    .down-arrow {
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+    }
+    .bnb-input > p{
+        text-align: left;
+        font-size: 16px;
+    }
+    .bnb-input > input{
+        font-size: 16px;
+    }
+    .down-arrow > img{
+        width: 10px;
+    }
+    .visit-website{
+        margin-top: 20px;
+    }
+    .featuredlist-img{
+        height: auto;
+    }
+    .featuredlist-img{
+        width: 100px;
+    }
+    .featured-list > li{
+        height: auto;
+    }
+    .wrp-featured-list {
+        justify-content: space-between;
+    }
+    .topweekly-content > h3{
+        font-size: 16px;
+    }
+    .topweekly-content > p{
+        font-size: 16px;
+    }
+    .topweekly-list{
+        margin-top: 15px;
+    }
+    .featuredlist-content{
+        margin-left: 20px;
+    }
+    .collection-b{
+        margin-top: 20px;
+    }
+    .top-weekly-sec {
+        padding: 15px 0px 0px 0px;
+    }
+    #product-tips{
+        padding-top: 40px;
+    }
+    .marketplace-sec2 {
+        padding: 90px 0px 0px 0px;
+    }
+    .head-marketchild2 > h3{
+        font-size: 28px;
+    }
+    .product-img{
+        background-position: center;
+    }
+    #product-sec {
+        padding: 40px 0px 60px 0px;
+    }
+    #stake-sec {
+        padding: 40px 0px;
+    }
+    .left-stake > p{
+        font-size: 15px;
+    }
+    .right-stake > p{
+        font-size: 15px;
+    }
+    .alena-arean {
+        margin-top: 30px;
+    }
+    .alena-arean > h3{
+        font-size: 15px;
+    }
+    /* stake page responsive */
+    .p-list-content-c2 > div > a{
+        font-size: 14px;
+    }
+    .p-list-content-c2{
+        margin-left: 15px;
+    }
+    .x-font-normal-blue{
+        font-size: 18px;
+    }
+    .head-calculator > h3{
+        font-size: 26px;
+    }
+    .alienpool-content > h3{
+        font-size: 20px;
+    }
+    .product-right-content{
+        margin-top: 0px;
+    }
+    .product-right-content > h1{
+        font-size: 24px;
+    }
+    #calculator-sec {
+        background-position: center;
+        background-size: cover;
+        padding: 80px 0px 60px 0px;
+    }
+    .market-backbtn > a > img {
+        width: 140px;
+        margin-bottom: 20px;
+    }
+    .conbutton {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .c-price {
+        position: absolute;
+        top: 0;
+        left: 44%;
+        margin-top: 51px;
+    }
+    .c-price > h3 {
+        font-size: 20px;
+    }
+    #team-sec{
+        padding: 60px 0px 60px 0px;
+    }
+    .market-btn > a > img {
+        width: 150px;
+    }
+    .team-box {
+        margin-top: 25px;
+    }
+    .team-head {
+        margin-bottom: 0px;
+    }
+    .team-head > h3{
+        font-size: 28px;
+        text-align: center;
+    }
+    .marketplace-img{
+        background-image: url(../images/mrmobile.png);
+    }
+    #banner-sec {
+        height: 660px;
+        background-size: cover;
+    }
+    .modal-content {
+        width: 90%;
+    }
+    .pop-btn > a > img {
+        width: 112px;
+    }
+    .pop-content-wrp > input{
+        padding: 8px;
+    }
+    .chicken-box-m {
+        margin-bottom: 45px;
+    }
+    .chicken-c-img{
+        width: 100%;
+    }
+    .wrp-btn-back{
+        width: 100%;
+    }
+    .wrp-btn-back > a {
+        display: inline-block;
+        width: 45%;
+    }
+    .bg-chicken{
+        padding: 80px 0px 60px 0px;
+    }
+
+    .market-list2 > li {
+        margin-bottom: 30px;
+    }
+    .bgmarketplace{
+        background-size: cover;
+        padding: 60px 0px 26px 0px;
+    }
+    .mr-mrt6 {
+        margin-top: 30px;
+    }
+  
+    .time-child1 > h3{
+        font-size: 20px;
+    }
+    #choose-sec{
+        padding: 60px 0px 100px 0px;
+        background-size: cover;
+    }
+    .alienbal{
+        margin-top: 20px;
+    }
+    .choose-content {
+        margin-top: 72px;
+    }
+    .slide-heads > h3{
+        font-size: 26px;
+    }
+    .bullet-list-wrp{
+        padding-top: 20px;
+    }
+    .bullet-list1 > a > img{
+        width: 60px;
+    }
+    .slide-prev {
+        top: 45px;
+    }
+    .slide-prev > a > img{
+        width: 32px;
+    }
+    .slide-next {
+        top: 45px;
+    }
+    .slide-next > a > img{
+        width: 32px;
+    }
+    .total-suply-box > h3{
+        font-size: 24px;
+    }
+    .logo-box > a > img {
+        width: 62px;
+    }
+    .burger-area > a > img {
+        width: 34px;
+    }
+    .banner-content > h3 {
+        font-size: 32px;
+    }
+    .banner-content {
+        text-align: center;
+        position: absolute;
+        top: 9%;
+    }
+    .banner-content > p{
+        font-size: 15px;
+    }
+    .banner-content > p > br{
+        display: none;
+    }
+    #about{
+        height: auto;
+        padding-bottom: 60px;
+        background-size: cover;
+    }
+    .about-content > h3{
+        font-size: 28px;
+    }
+    .about-content {
+        margin-top: 40px;
+        text-align: center;
+    }
+    .about-content > p{
+        font-size: 15px;
+    }
+    .about-content > p > br{
+        display: none;
+    }
+    .btn-img {
+        width: 124px;
+        margin-top: 0px;
+    }
+    .features-head > h3{
+        font-size: 28px;
+        text-align: center;
+    }
+    #features-sec {
+        padding: 60px 0px 200px 0px;
+        background-size: cover;
+    }
+    .token-head{
+        text-align: center;
+    }
+    .token-head > h3{
+        font-size: 28px;
+    }
+    .token-head > p{
+        font-size: 15px;
+    }
+    .token-head > p > br{
+        display: none;
+    }
+    #tokensec {
+        padding: 60px 0px 60px 0px;
+        background-size: cover;
+
+    }
+    .transition-box > h4 {
+        margin: 20px 0px 15px 0;
+        text-align: center;
+        font-size: 24px;
+    }
+    .tr-box1 > h3{
+        font-size: 36px;
+    }
+    .tr-box2 > p{
+        font-size: 16px;
+    }
+    .claim-p{
+        text-align: center;
+    }
+    .tokenomic-wrp{
+        display: inherit;
+        margin-top: 15px;
+    }
+    .tokenomic-content{
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .wrptoken-ch > p{
+        margin-top: 3px;
+    }
+    .tokenomic-wrp2{
+        display: inherit;
+    }
+    .tokenomic-content2{
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    #roadmap-sec {
+        padding: 60px 0px 60px 0px;
+        background-size: cover;
+    }
+    .hen-box > img{
+        width: 115px;
+        margin-bottom: 15px;
+    }
+    .total-suply-box{
+        margin-top: 10px;
+        text-align: center;
+    }
+    .roadmap-wrp{
+        text-align: center;
+    }
+    .roadmap-wrp > h3{
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+    .roadmap-m{
+        margin-top: 20px;
+    }
+    #faq-sec{
+        padding: 30px 0px 60px 0px;
+    }
+    .exploration-content{
+        width: 100%;
+    }
+    .exploration-content > h3{
+        font-size: 20px;
+    }
+    .roadmap-list > li{
+        list-style: none;
+        font-size: 15px;
+    }
+    .faqs-container > h3 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        text-align: center;
+    }
+    .faq-singular .faq-question{
+        font-size: 18px;
+    }
+    .faq-answer > div{
+        font-size: 15px;
+    }
+    .faq-answer > div > br{
+        display: none;
+    }
+    .faq-img {
+        margin-top: 30px;
+    }
+    .footer-content > p {
+        font-size: 14px;
+        margin-top: 0px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .footer-list{
+        justify-content: center;
+    }
+    .head-slide > h3{
+        font-size: 24px;
+    }
+    .slides > img{
+        width: 94%;
+        margin: auto;
+    }
+    .slick-next {
+        right: -10px;
+    }
+    .slick-prev {
+        left: -10px;
+    }
+    .indicate-img{
+        width: 60px;
+        object-fit: cover;
+    }
+    .custom-indicator > li{
+        width: 60px;
+        height: 60px;
+    }
+    .custom-indicator{
+        bottom: -80px;
+    }
+    #slide-sec {
+        background-size: cover;
+        padding: 60px 0px 100px 0px;
+        height: auto;
+    }
+    .market-btn > a > img{  
+        margin-right: 0px;
+    }
+    .market-btn > a {
+        display: block;
+        margin-right: 0px;
+        margin-top: 15px;
+    }
+    .pd-b {
+        padding-bottom: 80px;
+    }
+    .tolerance-c-r > p{
+        font-size: 16px;
+    }
+    .enter-amout-box > input{
+        font-size: 20px;
+    }
+    
+}
+@media(max-width: 480px){
+
+    .head-slide10 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .head-slide10 > h3 {
+        font-size: 30px;
+    }
+    .head-slide10 > p {
+        font-size: 15px;
+    }
+    /* new page css open here */
+    .head-slide10 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .head-slide10 > h3 {
+        font-size: 30px;
+    }
+    .head-slide10 > p {
+        font-size: 15px;
+    }
+    .sale-list-wrp{
+        display: inherit;
+    }
+    .sale-list-child1 > img {
+        width: 100%;
+        height: auto;
+        box-shadow:none;
+        border-radius: 24px;
+    }
+    .sale-list-child2{
+        box-shadow: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-radius: 24px;
+    }
+    .head-slide {
+        padding-top: 40px;
+    }
+    .head-slide > p {
+        font-size: 14px;
+    }
+    .slick-arrow.slick-prev{
+        width: 35px;
+        height: 36px;
+    }
+    .slick-arrow.slick-next{
+        width: 40px;
+        height: 40px;
+    }
+    }
+@media(max-width: 375px){
+    .chicken-box-m {
+        margin-bottom: 28px;
+    }
+}
+
+@media(max-width: 360px){
+    .chicken-box-m {
+        margin-bottom: 20px;
+    }
+}
