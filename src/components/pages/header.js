@@ -98,16 +98,14 @@ function changePickupStoreMenu(){
                   {/* <li>
                   <a className="conbutton" href="/choose">Launch App</a>
                     </li> */}
-                  <li>
-                    <ConnectWalletBtn/>
-                   
-
-                    </li>
                 </ul>
               </div>
             <div className="burger-area">
                <a href="#" className="burgers toggle-slide-right"> <img src={burger} alt=''/></a>
               </div>
+            </div>
+            <div className="header-c3">
+              <div className='btnBox'><ConnectWalletBtn/></div>
             </div>
             
           </div>

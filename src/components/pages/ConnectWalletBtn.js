@@ -37,7 +37,7 @@ export const ConnectWalletBtn = () => {
               if (!connected) {
                 return (
                   <button style={{textTransform : 'uppercase'}} className="conbutton" onClick={openConnectModal} type="button">
-                   Connect Wallet
+                   Unlock Wallet
                   </button>
                 );
               }
