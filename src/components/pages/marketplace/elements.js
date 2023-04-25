@@ -7,6 +7,7 @@ import stoke from '../../images/egg-GIF.gif';
 import cb1 from '../../images/cb1.png';
 import cb2 from '../../images/cb2.png';
 import cb3 from '../../images/cb3.png';
+import arrow from '../../images/round_arrow.svg';
 import cb4 from '../../images/cb4.png';
 import cb5 from '../../images/cb5.png';
 import cb6 from '../../images/cb6.png';
@@ -18,56 +19,63 @@ import Web3 from "web3"
 import { useAccount, useBalance, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { useParams } from 'react-router-dom';
 import { ethers } from 'ethers';
+import land from '../../images/land_in_moon.svg'
+import solor from '../../images/solor_cell.svg';
+import mooon from '../../images/moon_pods.svg';
+import mat from '../../images/mat.svg';
+import energy from '../../images/energy.png';
+import eules from '../../images/eules.svg';
+import fluds from '../../images/fluds.png';
 // import {useWallet} from '@binance-chain/bsc-use-wallet'
 
-
+ 
 
 
 const ELEMENTS = {
     'chicken': {
         'name': 'CHICKEN',
         'price': '10',
-        'image': cb1,
+        'image': land,
         'address': '0x0a92bc06443E7D4cd38735ED01B5C5C3C74F6773'
     },
     'chickenegg': {
         'name': 'CHICKEN EGG',
         'price': '0.12',
-        'image': cb5,
+        'image': solor,
         'address': '0x78AC3A5bC58455B41601189FDCF028F63e8c9ced'
     },
     'chickenfood': {
         'name': 'CHICKEN FOOD',
         'price': '1',
-        'image': cb2,
+        'image': mooon,
         'address': '0x50C0268e1D368420Ce99766BF89AbecEfCFC7644'
 
     },
     'boar': {
         'name': 'BOAR',
         'price': '100',
-        'image': cb3,
+        'image': mat,
         'address': '0x486bfd5AE6bf094E403bCF8dae14b708b15B143E'
 
     },
     'sow': {
         'name': 'SOW',
         'price': '100',
-        'image': cb4,
+        'image': energy,
         'address': '0x26B00Fb006Cb64c1f5D4ed407c6aBdF902F1c595'
 
     },
     'piglet': {
         'name': 'PIGLET',
         'price': '10',
-        'image': cb6,
+        'image': eules,
         'address': '0x7f7936Bf782F327bF549809bC6469dbE52280867'
 
     },
     'pigfood': {
         'name': 'PIG FOOD',
         'price': '5',
-        'image': cb7,
+        'image': fluds,
         'address': '0xea049FB6D789deEb85630c16576cC0CEB75555F7'
 
     }
@@ -664,32 +672,68 @@ const elements = (props) => {
             <Header />
             <div className="bg-chicken">
                 <div className="container">
+                <div className='moon___mark'>
+                            <h1>MOON MARKETPLACE</h1>
+                        </div>
                     <div className="row">
-                        <div className="col-lg-12">
+                        <div className="col-lg-3"></div>
+                        <div className="col-lg-6">
+                            <div className='marketplace-box-wrap2'>
+                                <div className="marketplace-box">
                             <div className="chicken-content-wrp">
 
                                 <div className="chicken-c-img">
-                                    <img src={ELEMENTS[key].image} alt="" />
+                                    <img src={ELEMENTS[key].image} alt=""  />
                                 </div>
-                                <div className="c-price"><h3>${ELEMENTS[key].price} ~ {tokenPrice}</h3></div>
+                                <div className='moon___buy__bxc'>
+                                    <h1>LAND IN MOON</h1>
+                                    <p>Rate</p>
+                                    <h6>${ELEMENTS[key].price} ~ {tokenPrice}</h6>
+                                    <div className='moon___buy__btm mb__m'>
+                                        <p>Total Sold</p>
+                                        <p className='amount___p'>0</p>
+
+                                    </div>
+                                    <div className='moon___buy__btm '>
+                                        <p>Total sold value</p>
+                                        <p className='amount___p'>0</p>
+
+                                    </div>
+                                </div>
+                               
                             </div>
-                            <div className="wrp-btn-back">
+<div className='para___by'>
+    <p>Lorem ipsum is placeholder text commonly used in the <br/>
+    graphic, print, and publishing industries for previewing <br/>
+    layouts and visual mockups.</p>
+</div>
+
+                           <div className='buy___btn__box'>
+                           <div className="wrp-btn-back">
                                 {
                                     available === 0 ?
-                                        <a href="#" className="buysellbtn conbutton" >Sold Out</a>
+                                        <a href="#" className="bg___BTN3" >Sold Out</a>
                                         :
-                                        <a href="#" className="buysellbtn conbutton" onClick={buyToggle} >BUY</a>
+                                        <a href="#" className="bg___BTN3" onClick={buyToggle} >Buy</a>
                                 }
-                                <a href="#" className="buysellbtn conbutton" onClick={sellToggle} >SELL</a>
+                                <a href="#" className="bg___BTN3" onClick={sellToggle} >Sell</a>
 
                             </div>
                             <div className="wrp-btn-back">
-                                <a href="/marketplace" className="buysellbtn conbutton">MARKETPLACE</a>
-                                <a href="/choose" className="buysellbtn conbutton">FARMING</a>
+                                <a  href="/marketplace" className="bg___BTN3">Marketplace</a>
+                                <a href="/choose" className="bg___BTN3">Farming</a>
 
                             </div>
+                           </div>
+                            </div>
+                            </div>
                         </div>
+                        <div className="col-lg-3"></div>
                     </div>
+                    <div className='btm___arrow'>
+                    <img src={arrow} alt='arrow image here' />
+                </div>
+                   
                 </div>
 
                 <Modal isOpen={buyModal} toggle={buyToggle} centered={true}>
@@ -858,10 +902,10 @@ const elements = (props) => {
 
                 </Modal>
             </div>
-            <div className="stokes">
+            {/* <div className="stokes">
                 <img src={stoke} alt="" />
-            </div>
-            <Footer />
+            </div> */}
+            {/* <Footer /> */}
         </div>
     );
 

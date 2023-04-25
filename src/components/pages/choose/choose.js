@@ -8,7 +8,7 @@ import choose3 from '../../images/choose3.png';
 import pbtn from '../../images/pbtn.png';
 import pbtn2 from '../../images/pbtn2.png';
 import pbtn3 from '../../images/pbtn3.png';
-
+import arrow from '../../images/round_arrow.svg';
 
 class choose extends Component {
     constructor(props) {
@@ -67,7 +67,11 @@ class choose extends Component {
                             <div className="col-lg-2"></div>
                         </div>
                     </div>
+                    <div className='btm___arrow'>
+                    <img src={arrow} alt='arrow image here' />
+                </div>
                 </section>
+                 
                 {/* <div className="stokes">
 						<img src={stoke} alt=''/>
 				</div> */}

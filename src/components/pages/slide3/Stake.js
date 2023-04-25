@@ -4,7 +4,7 @@ import Footer from '../../pages/footer.js';
 import stoke from '../../images/stoke.png';
 import StakeCard from './StakeCard.js';
 
-
+import arrow from '../../images/round_arrow.svg';
 
 const stake = () => {
  
@@ -13,9 +13,12 @@ const stake = () => {
 		return(
 			<div>
              <Header />
-                <div className="bgmarketplace">
+                <div className="bgmarketplace_staking">
                     <section id="stake-sec">
                         <div className="container">
+                        <div className='moon___mark'>
+                            <h1>STAKING</h1>
+                        </div>
                             <div className="row">
                             {numbers.map((number) =>        
                                     <StakeCard index={number} />
@@ -23,13 +26,16 @@ const stake = () => {
                                  )}
                                  
                             </div>
+                            <div className='btm___arrow2'>
+                    <img src={arrow} alt='arrow image here' />
+                </div>
                         </div>
                     </section>
                 </div>
-                    <div className="stokes">
+                    {/* <div className="stokes">
                         <img src={stoke} alt=""/>
-                    </div>
-                <Footer/>
+                    </div> */}
+                {/* <Footer/> */}
             </div>
 		);
  

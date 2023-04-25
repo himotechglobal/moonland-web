@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 
 
-import tick from '../../images/tick.png';
+import tick from '../../images/tick.svg';
 import { useState } from 'react';
 import { Button, ModalFooter, Modal, ModalBody } from "reactstrap";
 import STAKING_ABI from '../../../Config/STAKING_ABI.json'
 import TOKEN_ABI from '../../../Config/TOKEN_ABI.json'
 import logo from '../../images/MyFarmPet.png';
-import boarIcon from '../../images/boarIcon.png';
-import chickenIcon from '../../images/chickIcon.png';
+import boarIcon from '../../images/boarIcon.svg';
+import chickenIcon from '../../images/chickenIcon.svg';
+import moon from '../../images/moon.svg';
 import Web3 from "web3"
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { ConnectWalletBtn } from '../ConnectWalletBtn.js';
@@ -17,8 +18,8 @@ import { ethers } from 'ethers';
 const STAKING_ARRAY = [
     {
         address: '0x202647795F25E0d8c6724fEd34e575AFE28A5dB5',
-        name: 'MyFarmPet',
-        image: logo,
+        name: 'Moonland',
+        image: moon,
         status: 1,
         apy: 0,
         earn: 'MyFarmPet',
@@ -27,7 +28,7 @@ const STAKING_ARRAY = [
     },
     {
         address: null,
-        name: 'Chicken',
+        name: 'Trade in moon',
         image: chickenIcon,
         status: 3,
         apy: 84,
@@ -37,7 +38,7 @@ const STAKING_ARRAY = [
     },
     {
         address: null,
-        name: 'Pig',
+        name: 'Live in Moon',
         image: boarIcon,
         status: 3,
         apy: 84,
@@ -650,10 +651,11 @@ const StakeCard = (props) => {
     return (
 
         <div className="col-lg-4">
+            <div className='marketplace-box-wrap'>
             <div className="stake-box">
                 <ul className="stake-list">
                     <li>
-                        <div className="wrp-stake">
+                        <div className="wrp-stake2">
                             <div className="left-stake">
                                 <div className="stake-img">
                                     <img src={STAKING_ARRAY[props.index].image} alt="" />
@@ -669,6 +671,9 @@ const StakeCard = (props) => {
                                 </div>
                             </div>
                         </div>
+                    </li>
+                    <li>
+                        <div style={{height:'15px'}}/>
                     </li>
                     <li>
                         <div className="wrp-stake">
@@ -787,7 +792,7 @@ const StakeCard = (props) => {
                     {
                         (STAKING_ARRAY[props.index].status == 3 || (!stakeEnabled && !claimEnabled && !unstakeEnabled)) &&
                         <div className="text-center" >
-                            <button className="conbutton stdbtn"    >Coming Soon</button>
+                            <a className="bg___BTN4"    >Participate</a>
                         </div>
                     }
 
@@ -796,6 +801,7 @@ const StakeCard = (props) => {
 
 
                 </div>
+            </div>
             </div>
 
 
