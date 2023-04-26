@@ -8,47 +8,48 @@ body {
   padding: 0px;
 
 }
+
 @font-face {
- font-family: 'Panton-Trial';
- src: url('../Font/Panton-Trial-Bold.woff2') format('woff2'),
-     url('../Font/Panton-Trial-Bold.woff') format('woff');
- font-weight: bold;
- font-style: normal;
- font-display: swap;
+  font-family: 'Panton-Trial';
+  src: url('../Font/Panton-Trial-Bold.woff2') format('woff2'),
+    url('../Font/Panton-Trial-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
- font-family: 'Panton-Trial';
- src: url('../Font/Panton-Trial-ExtraBold.woff2') format('woff2'),
-     url('../Font/Panton-Trial-ExtraBold.woff') format('woff');
- font-weight: bold;
- font-style: normal;
- font-display: swap;
+  font-family: 'Panton-Trial';
+  src: url('../Font/Panton-Trial-ExtraBold.woff2') format('woff2'),
+    url('../Font/Panton-Trial-ExtraBold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
- font-family: 'Panton-Trial';
- src: url('../Font/Panton-Trial-SemiBold.woff2') format('woff2'),
-     url('../Font/Panton-Trial-SemiBold.woff') format('woff');
- font-weight: 500;
- font-style: normal;
- font-display: swap;
+  font-family: 'Panton-Trial';
+  src: url('../Font/Panton-Trial-SemiBold.woff2') format('woff2'),
+    url('../Font/Panton-Trial-SemiBold.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
- font-family: 'Panton-Trial';
- src: url('../Font/Panton-Trial-Regular.woff2') format('woff2'),
-     url('../Font/Panton-Trial-Regular.woff') format('woff');
- font-weight: normal;
- font-style: normal;
- font-display: swap;
+  font-family: 'Panton-Trial';
+  src: url('../Font/Panton-Trial-Regular.woff2') format('woff2'),
+    url('../Font/Panton-Trial-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 
 @font-face {
   font-family: 'MADE TOMMY';
   src: url('../Font/MADETOMMY-Black.woff2') format('woff2'),
-      url('../Font/MADETOMMY-Black.woff') format('woff');
+    url('../Font/MADETOMMY-Black.woff') format('woff');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -57,7 +58,7 @@ body {
 @font-face {
   font-family: 'MADE TOMMY';
   src: url('../Font/MADETOMMY-Bold.woff2') format('woff2'),
-      url('../Font/MADETOMMY-Bold.woff') format('woff');
+    url('../Font/MADETOMMY-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
@@ -66,19 +67,21 @@ body {
 @font-face {
   font-family: 'MADE TOMMY';
   src: url('../Font/MADETOMMY-ExtraBold.woff2') format('woff2'),
-      url('../Font/MADETOMMY-ExtraBold.woff') format('woff');
+    url('../Font/MADETOMMY-ExtraBold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'MADE TOMMY';
   src: url('../Font/MADETOMMY.woff2') format('woff2'),
-      url('../Font/MADETOMMY.woff') format('woff');
+    url('../Font/MADETOMMY.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'MADE TOMMY';
   src: url('../Font/MADETOMMY-Medium.woff2') format('woff2'),
@@ -138,11 +141,13 @@ p {
   padding: 0px 0px 10px 0px;
 
 }
-.logo-box{
- margin-top: 1rem;
+
+.logo-box {
+  margin-top: 1rem;
 }
-.header-c3{
- margin-top: 1rem;
+
+.header-c3 {
+  margin-top: 1rem;
 }
 
 .depositButton {
@@ -163,15 +168,19 @@ p {
   padding: 10px 20px;
   font-weight: bold;
   font-size: 14px;
-  background: radial-gradient(221px 40px at 183px bottom, #03E1FF, #161895);
+  background: radial-gradient(221px 40px at 183px bottom, #03E1FF, #161895)padding-box,
+  linear-gradient(90deg, #eb00ff99, #03E1FF) border-box;
+border-radius: 50em;
+border: 5px solid transparent;
+box-shadow: inset 0px -12px 12px -10px #08dafc;
   text-transform: capitalize !important;
   border-radius: 30px;
 }
 
 .btnBox {
-  background: linear-gradient(90deg, #EB00FF, #03E1FF);
+  /* background: linear-gradient(90deg, #EB00FF, #03E1FF);
   padding: 4px;
-  border-radius: 30px;
+  border-radius: 30px; */
 }
 
 .header-c2 {
@@ -191,9 +200,9 @@ p {
 }
 
 .choose___Box {
- background: linear-gradient(90deg, #020021, #9901B2);
- border-bottom: 2px solid #027A99;
- border-radius: 36px;
+  background: linear-gradient(90deg, #020021, #9901B2);
+  border-bottom: 2px solid #027A99;
+  border-radius: 36px;
 }
 
 .chooseBox____cont {
@@ -207,32 +216,90 @@ p {
   text-transform: uppercase;
   font-weight: 600;
 }
-.btm___arrow > img{
-padding-top: 9rem;
+
+.btm___arrow>img {
+  padding-top: 9rem;
 }
-.btm___arrow2 > img{
-padding-top: 15rem;
+.btm___arrow3>img {
+  padding-top: 9rem;
 }
-.btm___arrow2{
-text-align: center;
+
+.btm___arrow2>img {
+  padding-top: 15rem;
 }
-.btm___arrow{
-text-align: center;
+
+.btm___arrow2 {
+  text-align: center;
+}
+.btm___arrow3 {
+  text-align: center;
+}
+
+.btm___arrow {
+  text-align: center;
 }
 
 .chooseBox____cont>p {
   font-family: 'MADE TOMMY';
-    font-size: 16px;
-    font-weight: 500;
-    color: #91809F;
+  font-size: 16px;
+  font-weight: 500;
+  color: #91809F;
 }
-.c___img{
- width: 200px;
+
+.c___img {
+  width: 200px;
+  border-radius: 0px 0px 0px 36px;
 }
-.c___img2{
- width: 200px;
- margin-top: 3.2rem;
- border-radius: 0px 0px 0px 36px;
+.cmplace{
+  color: #0581E1 !important;
+}
+.choosemplace___main__wrap{
+  padding-top: 5rem;
+}
+
+.choosemplace___left {
+  background-image: url(../images/choosemplaceleft.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding: 2rem;
+  height: 26rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.choosemplace___right {
+  background-image: url(../images/choosemplaceright.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding: 2rem;
+  height: 26rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.choosemplace___left__cont>h1 {
+  color: #fff;
+  font-family: 'Panton-Trial';
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+.choosemplace___left__cont>p {
+  color: #7200AB;
+  font-family: 'MADE TOMMY';
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+}
+
+.c___img2 {
+  width: 200px;
+  margin-top: 3.2rem;
+  border-radius: 0px 0px 0px 36px;
 }
 
 .bg___BTN {
@@ -248,10 +315,12 @@ text-align: center;
   transition: 0.5s;
   margin: 20px;
 }
-.bg___BTN:hover{
- color: #fff;
+
+.bg___BTN:hover {
+  color: #fff;
   transform: translateY(-6px);
 }
+
 .bg___BTN2 {
   background-image: url(../images/bgBTN.svg);
   background-repeat: no-repeat;
@@ -265,10 +334,12 @@ text-align: center;
   transition: 0.5s;
   margin-top: 2rem;
 }
-.bg___BTN2:hover{
- color: #fff;
+
+.bg___BTN2:hover {
+  color: #fff;
   transform: translateY(-6px);
 }
+
 .bg___BTN4 {
   background-image: url(../images/bgBTN.svg);
   background-repeat: no-repeat;
@@ -282,10 +353,69 @@ text-align: center;
   transition: 0.5s;
   margin-top: 2rem;
 }
-.bg___BTN4:hover{
- color: #fff;
+
+.bg___BTN4:hover {
+  color: #fff;
   transform: translateY(-6px);
 }
+
+.bg___BTN5 {
+  background-image: url(../images/bgBTN.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 25px;
+  display: block !important;
+  text-align: center;
+  color: #fff;
+  font-family: 'poppins';
+  font-weight: 700;
+  transition: 0.5s;
+  /* margin-top: 11.5rem; */
+}
+
+.bg___BTN5:hover {
+  color: #fff;
+  transform: translateY(-6px);
+}
+.bg___BTN6 {
+  background-image: url(../images/bgBTN.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 25px;
+  display: block !important;
+  text-align: center;
+  color: #fff;
+  font-family: 'poppins';
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.5s;
+  /* margin-top: 11.5rem; */
+}
+
+.bg___BTN6:hover {
+  color: #fff;
+  transform: translateY(-6px);
+}
+.bg___BTN7 {
+  background-image: url(../images/bg___BTN7.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 25px;
+  display: block !important;
+  text-align: center;
+  color: #fff;
+  font-family: 'poppins';
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.5s;
+  /* margin-top: 11.5rem; */
+}
+
+.bg___BTN7:hover {
+  color: #fff;
+  transform: translateY(-6px);
+}
+
 .bg___BTN3 {
   background-image: url(../images/bg___BTN2.svg);
   background-repeat: no-repeat;
@@ -298,8 +428,9 @@ text-align: center;
   font-weight: 700;
   transition: 0.5s;
 }
-.bg___BTN3:hover{
- color: #fff;
+
+.bg___BTN3:hover {
+  color: #fff;
   transform: translateY(-6px);
 }
 
@@ -326,6 +457,26 @@ text-align: center;
   color: #000;
   font-weight: 700;
   font-size: 30px;
+}
+.dollar__text{
+  font-family: 'MADE TOMMY';
+  font-weight: 600;
+}
+.time__list{
+  text-align: center;
+}
+.time__list > h3{
+  text-transform: uppercase;
+  font-family: 'Panton-Trial';
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+}
+.time__list > p{
+  font-weight: 500;
+  color: #CBB2D4;
+  font-size: 16px;
+  font-family: 'MADE TOMMY';
 }
 
 .btn-img {
@@ -381,7 +532,8 @@ text-align: center;
   height: auto;
   margin-top: -15px;
 }
-.moon___mark > h1{
+
+.moon___mark>h1 {
   color: #fff;
   font-family: 'Panton-Trial';
   text-align: center;
@@ -391,20 +543,45 @@ text-align: center;
   margin-bottom: 4rem;
 
 }
-.para___by{
+.nft___mark>h1 {
+  color: #fff;
+  font-family: 'Panton-Trial';
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 30px;
+}
+.nft___mark{
+  margin: 8rem 0rem 2rem 0rem;
+}
+.main-tab-box{
+  text-align: center;
+}
+.nft___mark>p {
+  font-weight: 500;
+  color: #808090;
+  font-size: 14px;
+  font-family: 'MADE TOMMY';
+text-align: center;
+}
+
+.para___by {
   padding: 2rem 0rem;
 }
-.para___by > p {
+
+.para___by>p {
   font-weight: 500;
   color: #91809F;
   font-size: 14px;
   font-family: 'MADE TOMMY';
   text-align: center;
 }
-.wrp-stake2{
+
+.wrp-stake2 {
   display: flex;
 }
-.right-stake{
+
+.right-stake {
   margin-left: 1rem;
 }
 
@@ -698,54 +875,65 @@ text-align: center;
   font-size: 30px;
   color: #a72714;
 }
-.chicken-content-wrp{
+
+.chicken-content-wrp {
   display: flex;
-    padding: 2.5rem 0.5rem 0rem 0.5rem;
+  padding: 2.5rem 0.5rem 0rem 0.5rem;
 }
-.moon___buy__bxc > h1{
+
+.moon___buy__bxc>h1 {
   font-family: 'Panton-Trial';
-    width: 150px;
-    font-size: 20px;
-    font-weight: 700;
-    color: white;
+  width: 150px;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
 }
-.moon___buy__bxc > p{
+
+.moon___buy__bxc>p {
   font-weight: 500;
-    color: #91809F;
-    font-size: 14px;
-    font-family: 'MADE TOMMY';
-    margin-top: 1rem;
-}
-.moon___buy__bxc > h6{
-  font-weight: 500;
-    color: #fff;
-    font-size: 16px;
-    font-family: 'MADE TOMMY';
-}
-.mb__m{
+  color: #91809F;
+  font-size: 14px;
+  font-family: 'MADE TOMMY';
   margin-top: 1rem;
 }
-.moon___buy__btm{
+
+.moon___buy__bxc>h6 {
+  font-weight: 500;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'MADE TOMMY';
+}
+
+.mb__m {
+  margin-top: 1rem;
+}
+
+.moon___buy__btm {
   display: flex;
   justify-content: space-between;
 }
-.moon___buy__bxc{
+
+.moon___buy__bxc {
   margin-left: 1.5rem;
   margin-top: 0.5rem;
   width: 60%;
 }
-.chicken-c-img{
+
+.chicken-c-img {
   width: 40%;
 }
-.moon___buy__btm > p{
+
+.moon___buy__btm>p {
   font-weight: 500;
-    color: #91809F;
-    font-size: 14px;
-    font-family: 'MADE TOMMY';
+  color: #91809F;
+  font-size: 14px;
+  font-family: 'MADE TOMMY';
 }
-.amount___p{
+
+.amount___p {
   color: #fff !important;
 }
+
 #roadmap-sec {
   padding: 80px 0px 80px 0px;
   background-image: url(../images/roadmap2.png);
@@ -1661,29 +1849,39 @@ body.smr-open .slide-menu-right {
 }
 
 .newpool-box {
-  width: 82%;
   margin: auto;
-  background-color: #b64e2f;
-  padding: 30px 20px 20px 20px;
-  border-radius: 32px;
-  margin-top: 40px;
-  margin-bottom: 120px;
-  -webkit-box-shadow: 0 0 12px 4px #94e825;
-  box-shadow: 0 0 12px 4px #94e825;
+  background: linear-gradient(45deg, #020021, #AE00C5);
+  border-radius: 27px;
 }
 
-.alienpool-content {
-  margin-left: 10px;
-}
+ 
 
 .alienpool-wrp {
   display: flex;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  align-items: center;
 }
 
 .alienpool {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 27%;
+  background: linear-gradient(45deg, #020021, #AE00C5);
+  border-radius: 27px;
+  padding: 1rem;
+  border-right: 1.6px solid #0a7197;
+}
+.alienpool2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 27%;
+  background: linear-gradient(45deg, #020021, #AE00C5);
+  border-radius: 27px;
+  padding: 1rem;
+  border-right: 1.6px solid #0a7197;
 }
 
 .balance:first-child {
@@ -1696,32 +1894,33 @@ body.smr-open .slide-menu-right {
 
 a.conbutton {
   text-align: center;
-  color: #333;
+  color: #fff;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 a.conbutton:hover {
-  color: #000 !important;
+  color: #fff !important;
 
 }
 
 .balance>h3 {
+  font-family: 'Panton-Trial';
+  font-size: 20px;
   font-weight: 700;
   color: #fff;
-  font-size: 22px;
-  height: 40px;
 }
 
 .balance>p {
-  font-family: PatrickHand-Regular;
-  text-align: left;
-  margin: 0;
-  color: #fff;
+  font-weight: 500;
+  color: #CBB2D4;
   font-size: 16px;
+  font-family: 'MADE TOMMY';
 }
 
 .balance {
-  margin-top: 15px;
+  text-align: center;
+  margin-left: 1.5rem;
 }
 
 .pool-btns {
@@ -1729,12 +1928,41 @@ a.conbutton:hover {
   justify-content: space-between;
 }
 
-.alienpool-img>img {
-  width: 100px;
+ .acc__arrow{
+  width: 8%;
+  text-align: right;
+ }
+.acc__arrow > img{
+  cursor: pointer;
 }
-
+.acc__arrow___icon{
+  cursor: pointer;
+}
+.acc__summery{
+  border-radius: 20px;
+    padding: 1.5px 2px 1.5px 2px;
+    background: linear-gradient(179deg, transparent, #0a719740, #0A7197, #0A7197, #0A7197);
+    margin: -0.1rem 5rem 0rem 5rem;
+}
+.acc__summery__in{
+  background: linear-gradient(45deg, #020021, #AE00C5);
+  border-radius: 0px 0px 20px 20px;
+  padding: 1.5rem;
+}
 .alientime {
   display: flex;
+  width: 80%;
+  justify-content: space-between;
+  padding: 0rem 1.2rem;
+}
+.alientime__accordian {
+  display: flex;
+  width: 92%;
+  justify-content: space-between;
+  padding: 0rem 1.2rem;
+}
+.alienbtns{
+  width: 20%;
 }
 
 .time-child1:first-child {
@@ -1782,7 +2010,8 @@ a.conbutton:hover {
   display: flex;
   justify-content: space-around;
 }
-.buy___btn__box{
+
+.buy___btn__box {
   padding-bottom: 2.5rem;
 }
 
@@ -1827,17 +2056,27 @@ a.conbutton:hover {
 }
 
 .pool-btns {
-  margin-top: -14px;
+  margin-top: 0px;
+}
+.alien___rightBox{
+  display: flex;
+  justify-content: space-between;
+  width: 73%;
+  padding-right: 1.5rem;
 }
 
 .alienpool-content>h3 {
-  font-family: PatrickHand-Regular;
-  font-size: 26px;
+
+  font-family: 'Panton-Trial';
+  font-size: 20px;
+  font-weight: 700;
   color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
 
 .alienpool-content>p {
-  font-family: PatrickHand-Regular;
+
   font-size: 18px;
   color: #fff;
 }
@@ -1861,7 +2100,6 @@ a.btn {
   transition: all .36s ease;
   outline: none;
   border: none;
-  margin-top: 22px;
 }
 
 .novisible {
@@ -1892,11 +2130,11 @@ a.btn {
 }
 
 .slide-bg {
-  background-image: url(../images/homebanner.png);
+  background-image: url(../images/farmingbg.png);
   width: 100%;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  padding: 60px 0px 0px 0px;
+  padding: 140px 0px 80px 0px;
   height: auto;
 }
 
@@ -1908,12 +2146,19 @@ a.btn {
   padding-top: 65px;
 }
 
-.slide-heads>h3 {
-  font-family: PatrickHand-Regular;
-  font-size: 42px;
-  color: #a72714;
-  margin-bottom: 30px;
-  text-transform: uppercase;
+.slide-heads>h1 {
+  color: #fff;
+    font-family: 'Panton-Trial';
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 30px;
+}
+.slide-heads>p {
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+  font-family: 'MADE TOMMY';
   text-align: center;
 }
 
@@ -1957,7 +2202,7 @@ a.btn {
 /* choose page css open here */
 
 #choose-sec {
-  background-image: url(../images/choose.png);
+  background-image: url(../images/stakingbg.png);
   width: 100%;
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -1989,8 +2234,8 @@ a.btn {
 .choose-content {
   margin-top: 60px;
   background: linear-gradient(90deg, #020021, #9901B2);
-   border: 2px solid #027A99;
-   border-radius: 30px;
+  border: 2px solid #027A99;
+  border-radius: 30px;
 }
 
 /* choose page css closed here */
@@ -2023,6 +2268,7 @@ a.btn {
   padding: 60px 0px 120px 0px;
   height: auto;
 }
+
 .bgmarketplace_staking {
   background-image: url(../images/choose.png);
   width: 100%;
@@ -2288,7 +2534,7 @@ p.marquee span {
   height: auto;
 }
 
- 
+
 
 .chicken-c-img>img {
   width: 180px;
@@ -2906,60 +3152,80 @@ p.marquee span {
 /* calculator sec css closed here */
 
 /* marketplace2 css */
-#main-box{
- margin:auto
+#main-box {
+  margin: auto
 }
+
 .mb-5 {
-  margin-bottom: 1.7rem!important;
+  margin-bottom: 1.7rem !important;
 }
+
 .marketplace-box {
   border-radius: 36px;
   background: linear-gradient(123deg, #020021, #440060);
   background-color: #00000069;
   padding: 0px 25px 15px 25px;
 }
+
 .marketplace-box-wrap {
   border-radius: 38px;
- padding: 1.5px 2px 2px 2px;
- background: linear-gradient(359deg, transparent,transparent,#0a719740,#0A7197,#0A7197, #0A7197);
+  padding: 1.5px 2px 2px 2px;
+  background: linear-gradient(359deg, transparent, transparent, #0a719740, #0A7197, #0A7197, #0A7197);
 }
+
+
 .marketplace-box-wrap2 {
   border-radius: 38px;
- padding: 1.5px 2px 2px 1.5px;
- background: linear-gradient(359deg, transparent,transparent,#0a719740,#0A7197,#0A7197, #0A7197);
+  padding: 1.5px 2px 2px 1.5px;
+  background: linear-gradient(359deg, transparent, transparent, #0a719740, #0A7197, #0A7197, #0A7197);
+}
+.marketplace-box-wrap3 {
+  border-radius: 38px;
+  padding: 1.5px 1.5px 2px 2px;
+  background: linear-gradient(359deg, transparent, transparent, #0a719740, #0A7197, #0A7197, #0A7197);
+}
+.marketplace-box-wrap4 {
+  border-radius: 27px;
+  padding: 1.5px 2px 1.5px 2px;
+  background: linear-gradient(179deg, transparent, transparent, #0a719740, #0A7197, #0A7197, #0A7197);
+  margin-top: 1.5rem;
 }
 
 #marketplace-sec2 {
   padding: 140px 0px 60px 0px;
 }
-.bottom-arrow{
- text-align: center;
+
+.bottom-arrow {
+  text-align: center;
 }
 
-.title_head{
- margin-left: 26px;
-   display: flex;
-   flex-direction: column;
-   margin-top: 19px;
+.title_head {
+  margin-left: 26px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 19px;
 }
-.card-title{
+
+.card-title {
   font-family: 'Panton-Trial';
- width: 150px;
-   font-size: 16px;
-   font-weight: 700;
-   color: white;
+  width: 150px;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
 }
-.card-content{
+
+.card-content {
   font-weight: 500;
- color: #91809F;
- font-size: 14px;
- font-family: 'MADE TOMMY';
+  color: #91809F;
+  font-size: 14px;
+  font-family: 'MADE TOMMY';
 }
+
 .img-cb {
- margin-top: 0px;
+  margin-top: 0px;
   width: 180px;
   display: flex;
- flex-direction: row;
+  flex-direction: row;
   /* margin: auto; */
 }
 
@@ -2968,8 +3234,9 @@ p.marquee span {
   height: 70%;
   margin-top: 19px;
 }
-.market-content{
- margin-top: 34px;
+
+.market-content {
+  margin-top: 34px;
 }
 
 .market-content>h3 {
@@ -3092,12 +3359,7 @@ p.marquee span {
   background-color: #a94631d6;
 }
 
-.bgfarmland {
-  /* background-image: url(../images/bgland.png); */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: #a94631d6;
-}
+ 
 
 
 /* stake css open here */
@@ -3133,8 +3395,8 @@ p.marquee span {
 
 .content-arena>h3 {
   font-family: 'Panton-Trial';
-    font-size: 20px;
-    font-weight: 700;
+  font-size: 20px;
+  font-weight: 700;
   color: #fff;
   text-transform: uppercase;
   margin-bottom: 6px;
@@ -3144,10 +3406,10 @@ p.marquee span {
 .tick-content {
   font-size: 14px;
   font-family: 'MADE TOMMY';
-    color: #fff;
-    padding: 3px 20px 5px 5px;
-    border-radius: 40px;
-    background-color: #1c0039;
+  color: #fff;
+  padding: 3px 20px 5px 5px;
+  border-radius: 40px;
+  background-color: #1c0039;
 }
 
 .tick-content>img {
@@ -3172,9 +3434,9 @@ p.marquee span {
 
 .left-stake>p {
   font-weight: 500;
-    color: #91809F;
-    font-size: 16px;
-    font-family: 'MADE TOMMY';
+  color: #91809F;
+  font-size: 16px;
+  font-family: 'MADE TOMMY';
 }
 
 .right-stake>p {
@@ -3184,7 +3446,7 @@ p.marquee span {
 }
 
 .stake-list>li {
-  margin-bottom:8px;
+  margin-bottom: 8px;
 }
 
 .alena-arean {
@@ -4220,10 +4482,10 @@ p.marquee span {
 }
 
 .main-bg-newmarketplace {
-  background-image: url(../images/teambg.png);
+  background-image: url(../images/background_image.png);
   width: 100%;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   height: auto;
 }
 
@@ -5208,32 +5470,37 @@ p.marquee span {
   list-style-type: none;
   margin: 0px;
   padding: 0px;
-  background-color: #62b828;
+  /* background-color: #62b828; */
   padding: 10px;
   border-radius: 8px;
 }
 
 .tabs6 a {
   display: block;
-  padding: 8px 30px;
+  padding: 8px 24px;
   text-decoration: none;
   text-transform: capitalize;
   position: relative;
   margin-bottom: 0;
-  background-color: #9adf3e;
+  background-color: #450168;
   transition: all 0.36s ease;
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: 36px;
+  border: 5px solid transparent;
+  font-weight: 700;
   color: #fff;
-  font-size: 13px;
+  font-size: 16px;
   margin-right: 15px;
   font-family: 'Poppins', sans-serif;
 }
 
 .tabs6 a.active {
-  background-color: #ffffff;
-  color: #f44906;
+  background: radial-gradient(221px 40px at 183px bottom, #03E1FF, #161895)padding-box,
+  linear-gradient(90deg, #eb00ff99, #03E1FF) border-box;
+border-radius: 50em;
+border: 5px solid transparent;
+box-shadow: inset 0px -12px 12px -10px #08dafc;
 }
+ 
 
 .tab-panel {
   display: none;
@@ -5340,7 +5607,7 @@ p.marquee span {
 .product-img {
   width: 100%;
   height: 210px;
-  background-image: url(../images/logo.png);
+  background-image: url(../images/nft_item.svg);
   background-size: contain;
   background-repeat: no-repeat;
 }
@@ -5352,12 +5619,10 @@ p.marquee span {
 
 .product-list {
   position: relative;
-  border-radius: 24px;
-  border: 1px solid #000;
-  background-color: #62b828;
-  padding: 25px 15px;
+  border-radius: 36px;
+  background: linear-gradient(123deg, #020021, #440060);
+  padding: 20px;
   transition: 0.5s;
-  margin-top: 30px;
 }
 
 .product-content>div>h4>a {
@@ -5398,10 +5663,7 @@ p.marquee span {
   font-size: 14px;
 }
 
-.product-list:hover {
-  box-shadow: 1px 1px 10px 4px #ed1eff;
-  transition: 0.5s;
-}
+ 
 
 .main-product-img {
   height: 480px;

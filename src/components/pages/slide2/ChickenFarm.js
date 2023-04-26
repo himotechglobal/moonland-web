@@ -8,16 +8,21 @@ import { Button, ModalFooter, Modal, ModalBody } from "reactstrap";
 import Header from '../header.js';
 import Footer from '../footer.js';
 import egga from '../../images/egga.gif';
-import land from '../../images/land-01.png';
-import childe from '../../images/childe.gif';
+import land from '../../images/land.svg';
+import childe from '../../images/childe.svg';
 import stoke from '../../images/stoke.png';
 import marketbtn from '../../images/marketbtn.png';
+import arrow from '../../images/round_arrow.svg';
 import chicken1 from '../../images/chicken10.png';
 import chicken100 from '../../images/chicken100.png';
+import acc__arrow_revse from '../../images/acc__arrow_revse.svg'
 import chicken1000 from '../../images/chicken1000.png';
 import eggs1 from '../../images/eggs1.png';
+import solerimg1 from '../../images/solerimg1.svg'
+import acc__arrow from '../../images/acc__arrow.svg'
 import eggs100 from '../../images/eggs100.png';
 import eggs1000 from '../../images/eggs1000.png';
+
 import Web3 from "web3"
 // import {useWallet} from '@binance-chain/bsc-use-wallet'
 import { CHICKEN_FARMING, CHICKEN_INCUBATOR, MARKETPLACE } from '../../../Config/index.js';
@@ -501,7 +506,7 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
-console.log('jasim',_userClaimTimesOne);
+    console.log('jasim', _userClaimTimesOne);
 
 
     // console.log(_claimChickenFee1)
@@ -1922,6 +1927,9 @@ console.log('jasim',_userClaimTimesOne);
         setareadamount(e.target.value);
     }
 
+    const [show, setShow] = useState(false);
+    const [show1, setShow1] = useState(false);
+
 
 
 
@@ -1934,8 +1942,8 @@ console.log('jasim',_userClaimTimesOne);
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="slide-heads">
-                                <h3>BUY FARM LAND & CHICKEN AND EARN EGGS.</h3>
-
+                                <h1>BUY MOON LAND and SOLAR HARVESTER</h1>
+                                <p>Combine Solor cells and Fluids Harvest</p>
                             </div>
                             {/* <div className="wrp-slide">
                                     <div className="slide-prev">
@@ -1948,233 +1956,420 @@ console.log('jasim',_userClaimTimesOne);
                                         <a href="/slide3"><img src={righticon} /></a>
                                     </div>
                                 </div> */}
-                            <div className="bullet-list-wrp">
+                            {/* <div className="bullet-list-wrp">
                                 <div className="market-btn">
                                     <a href="/marketplace"><img src={marketbtn} alt="" /></a>
-                                    {/* <a href="/slide3"><img src={farmingbtn} /></a> */}
+                                    <a href="/slide3"><img src={farmingbtn} /></a>
                                 </div>
-                            </div>
-
-                            <div className="newpool-box mr-b bgfarmland" >
-                                <div className="alienpool-wrp mb-3">
-                                    <div className="alienpool">
-                                        <div className="alienpool-img">
-                                            <img src={land} alt="" />
+                            </div> */}
+                            <div className='marketplace-box-wrap4'>
+                                <div className="newpool-box" >
+                                    <div className="alienpool-wrp">
+                                        <div className="alienpool">
+                                            <div className="alienpool-img">
+                                                <img src={land} alt="" />
+                                            </div>
+                                            <div className="alienpool-content">
+                                                <h3>Moon Land</h3>
+                                            </div>
                                         </div>
-                                        <div className="alienpool-content">
-                                            <h3>Farm Land</h3>
-                                        </div>
-                                    </div>
-                                    {/* <div className="alienbal">
+                                        {/* <div className="alienbal">
                                             <div class="balance"><h3>{0.0000}</h3><p>Balance</p></div>
                                             <div class="balance"><h3>0.0000</h3><p>Area</p></div>
                                        </div> */}
-                                    <div className="alientime">
-                                        <div className="time-child1">
-                                            <h3>{farmBalance} {farmSymbol}</h3>
-                                            <p>Your Balance</p>
-                                        </div>
-                                        <div className="time-child1">
-                                            <h3>{farmArea} sq m</h3>
-                                            <p>Your Locked Farm Area</p>
-                                        </div>
-                                        <div className="time-child1">
-                                            <h3>${farmArea * 1}</h3>
-                                            <p>Market Value</p>
-                                        </div>
-                                        <div className="time-child1">
-                                            <h3>{farmCapacity}</h3>
-                                            <p>Chicken Capacity</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div className="alienbtns">
-                                    {/* <div className="pool-btns">
+                                        <div className='alien___rightBox'>
+                                            <div className="alientime">
+                                                <div className="time__list">
+                                                    <h3>{farmBalance} {farmSymbol}</h3>
+                                                    <p>Your Balance</p>
+                                                </div>
+                                                <div className="time__list">
+                                                    <h3>{farmArea} sq m</h3>
+                                                    <p>Your Locked Farm Area</p>
+                                                </div>
+                                                <div className="time__list">
+                                                    <h3><span className='dollar__text'>$</span>{farmArea * 1}</h3>
+                                                    <p>Market Value</p>
+                                                </div>
+                                                <div className="time__list">
+                                                    <h3>{farmCapacity}</h3>
+                                                    <p>Chicken Capacity</p>
+                                                </div>
+                                            </div>
+                                            <div className="alienbtns">
+                                                {/* <div className="pool-btns">
                                    <p style={{color: '#fff'}}>Chicken Farming is being upgraded to a newer version with enhanced features between 8:30 hours UTC to 12:30 hours UTC. During this time you won't be able to perform any actions. </p>
                                    </div> */}
 
-                                    <div className="pool-btns" style={{ justifyContent: 'end' }}>
+                                                <div className="pool-btns" style={{ justifyContent: 'end' }}>
 
 
-                                        {
-                                            !farmLocked && farmBalance > 0 && farmApprove &&
-                                            <a className="btn" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
-                                        }
-                                        {
-                                            farmBalance > 0 && !farmApprove &&
-                                            <a className="btn" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
-                                        }
-                                        {
-                                            farmLocked &&
-                                            <a className="btn" onClick={areaToggle}>Buy More Farm Area</a>
-                                        }
-                                        {
-                                            !farmLocked && farmBalance == 0 &&
-                                            <a className="btn" onClick={buyAreaToggle}>Buy Farm Area</a>
-                                        }
-                                        {
-                                            landIsfree &&
-                                            <a className="btn ml-2" onClick={() => sellfarm()}>Sell Farm Area</a>
-                                        }
+                                                    {
+                                                        !farmLocked && farmBalance > 0 && farmApprove &&
+                                                        <a className="conbutton" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
+                                                    }
+                                                    {
+                                                        farmBalance > 0 && !farmApprove &&
+                                                        <a className="conbutton" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
+                                                    }
+                                                    {
+                                                        farmLocked &&
+                                                        <a className="conbutton" onClick={areaToggle}>Buy More Farm Area</a>
+                                                    }
+                                                    {
+                                                        !farmLocked && farmBalance == 0 &&
+                                                        <a className="conbutton" onClick={buyAreaToggle}>Buy Farm Area</a>
+                                                    }
+                                                    {
+                                                        landIsfree &&
+                                                        <a className="conbutton ml-2" onClick={() => sellfarm()}>Sell Farm Area</a>
+                                                    }
 
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
-                            <div className="newpool-box mr-b bgchicken">
-                                <div className="alienpool-wrp mb-3">
-                                    <div className="alienpool">
-                                        <div className="alienpool-img">
-                                            <img src={egga} alt=""/>
-                                        </div>
-                                        <div className="alienpool-content">
-                                            <h3>Chicken Farm</h3>
-                                            <p>Uses Chicken</p>
 
+
+                            <div className='marketplace-box-wrap4'>
+                                <div className="newpool-box">
+                                    <div className="alienpool-wrp">
+                                        <div className="alienpool2">
+                                            <div className="alienpool-img">
+                                                <img src={solerimg1} alt="" />
+                                            </div>
+                                            <div className="alienpool-content">
+                                                <h3>Solar <br />
+                                                    Harvester</h3>
+
+                                            </div>
+                                        </div>
+                                        <div className='alien___rightBox'>
+                                            <div className="alientime__accordian">
+                                                <div class="time__list">
+                                                    <h3>{chickenBalance} {chickenSymbol}
+                                                        {
+                                                            chickenBalance > 0 && chickenBalance <= 10 &&
+                                                            <img src={chicken1} width="60px" alt="" />
+                                                        }
+                                                        {
+                                                            chickenBalance > 10 && chickenBalance <= 100 &&
+                                                            <img src={chicken100} width="60px" alt="" />
+                                                        }
+                                                        {
+                                                            chickenBalance > 100 && chickenBalance <= 1000 &&
+                                                            <img src={chicken1000} width="60px" alt="" />
+                                                        }
+
+                                                    </h3>
+                                                    <p>Balance</p>
+                                                </div>
+                                                <div className="time__list"><h3>{chickenDeposited} {chickenSymbol}
+
+                                                    {
+                                                        chickenDeposited > 0 && chickenDeposited <= 10 &&
+                                                        <img src={chicken1} width="60px" alt="" />
+                                                    }
+                                                    {
+                                                        chickenDeposited > 10 && chickenDeposited <= 100 &&
+                                                        <img src={chicken100} width="60px" alt="" />
+                                                    }
+                                                    {
+                                                        chickenDeposited > 100 && chickenDeposited <= 1000 &&
+                                                        <img src={chicken1000} width="60px" alt="" />
+                                                    }
+
+                                                </h3><p>Deposited</p></div>
+                                                <div className="time__list">
+                                                    <h3>
+                                                        {parseFloat(eggsearned).toFixed()}
+                                                        {
+                                                            eggsearned > 0 && eggsearned <= 10 &&
+                                                            <img src={eggs1} className="ml-2" width="60px" alt="" />
+                                                        }
+                                                        {
+                                                            eggsearned > 10 && eggsearned <= 100 &&
+                                                            <img src={eggs100} className="ml-2" width="60px" alt='' />
+                                                        }
+                                                        {
+                                                            eggsearned > 100 && eggsearned <= 1000 &&
+                                                            <img src={eggs1000} className="ml-2" width="60px" alt='' />
+                                                        }
+                                                    </h3>
+                                                    <p>Eggs Earned</p>
+                                                    {
+                                                        chickenDeposited > 0 && layEndTime > new Date().getTime() / 1e3 &&
+                                                        <>
+                                                            <h3><span>{layTime}</span></h3>
+                                                            <p>Next Laying Time</p>
+                                                        </>
+                                                    }
+                                                    {
+                                                        chickenDeposited > 0 && layEndTime < new Date().getTime() / 1e3 &&
+                                                        <>
+                                                            <h3 className="marquee"><span>Not Laying Eggs</span></h3>
+
+                                                        </>
+                                                    }
+
+
+                                                </div>
+                                                <div className="time__list">
+                                                    <h3><span className='dollar__text'>$</span>{parseFloat(eggsearned * 0.12).toFixed(2)}</h3>
+                                                    <p>Earned Value</p>
+                                                </div>
+                                                <div className="time__list">
+                                                    <h3>{chickenDeposited * 365}</h3>
+                                                    <p>Eggs per Year</p>
+                                                    {
+                                                        chickenDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
+                                                        <>
+                                                            <h3 className="timer">{endTime}</h3>
+                                                            <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Chicken feed to end.</span></p>
+                                                        </>
+                                                    }
+                                                    {
+                                                        chickenDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
+                                                        <>
+                                                            <h3 className="timer">Feed Exhausted</h3>
+                                                            {/* <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Chicken feed to end.</span></p> */}
+                                                        </>
+                                                    }
+
+
+                                                </div>
+                                            </div>
+
+                                            <div className='acc__arrow'>
+                                                <div className='acc__arrow___icon' onClick={() => setShow(prev => !prev)} >
+
+                                                    {show ?
+                                                        <img src={acc__arrow_revse} alt='' />
+                                                        :
+                                                        <img src={acc__arrow} alt='' />
+                                                    }
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="alienbal">
-                                        <div class="balance"><h3>{chickenBalance} {chickenSymbol}
-                                            {
-                                                chickenBalance > 0 && chickenBalance <= 10 &&
-                                                <img src={chicken1} width="60px" alt=""/>
-                                            }
-                                            {
-                                                chickenBalance > 10 && chickenBalance <= 100 &&
-                                                <img src={chicken100} width="60px" alt=""/>
-                                            }
-                                            {
-                                                chickenBalance > 100 && chickenBalance <= 1000 &&
-                                                <img src={chicken1000} width="60px" alt=""/>
-                                            }
 
 
-                                        </h3><p>Balance</p></div>
-                                        <div class="balance"><h3>{chickenDeposited} {chickenSymbol}
-
-                                            {
-                                                chickenDeposited > 0 && chickenDeposited <= 10 &&
-                                                <img src={chicken1} width="60px" alt=""/>
-                                            }
-                                            {
-                                                chickenDeposited > 10 && chickenDeposited <= 100 &&
-                                                <img src={chicken100} width="60px" alt=""/>
-                                            }
-                                            {
-                                                chickenDeposited > 100 && chickenDeposited <= 1000 &&
-                                                <img src={chicken1000} width="60px" alt=""/>
-                                            }
-
-                                        </h3><p>Deposited</p></div>
-                                    </div>
-                                    <div className="alientime">
-                                        <div className="time-child1">
-                                            <h3>
-                                                {parseFloat(eggsearned).toFixed()}
-                                                {
-                                                    eggsearned > 0 && eggsearned <= 10 &&
-                                                    <img src={eggs1} className="ml-2" width="60px" alt=""/>
-                                                }
-                                                {
-                                                    eggsearned > 10 && eggsearned <= 100 &&
-                                                    <img src={eggs100} className="ml-2" width="60px" alt=''/>
-                                                }
-                                                {
-                                                    eggsearned > 100 && eggsearned <= 1000 &&
-                                                    <img src={eggs1000} className="ml-2" width="60px" alt=''/>
-                                                }
-                                            </h3>
-                                            <p>Eggs Earned</p>
-                                            {
-                                                chickenDeposited > 0 && layEndTime > new Date().getTime() / 1e3 &&
-                                                <>
-                                                    <h3><span>{layTime}</span></h3>
-                                                    <p>Next Laying Time</p>
-                                                </>
-                                            }
-                                            {
-                                                chickenDeposited > 0 && layEndTime < new Date().getTime() / 1e3 &&
-                                                <>
-                                                    <h3 className="marquee"><span>Not Laying Eggs</span></h3>
-
-                                                </>
-                                            }
 
 
-                                        </div>
-                                        <div className="time-child1">
-                                            <h3>${parseFloat(eggsearned * 0.12).toFixed(2)}</h3>
-                                            <p>Earned Value</p>
-                                        </div>
-                                        <div className="time-child1">
-                                            <h3>{chickenDeposited * 365}</h3>
-                                            <p>Eggs per Year</p>
-                                            {
-                                                chickenDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
-                                                <>
-                                                    <h3 className="timer">{endTime}</h3>
-                                                    <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Chicken feed to end.</span></p>
-                                                </>
-                                            }
-                                            {
-                                                chickenDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
-                                                <>
-                                                    <h3 className="timer">Feed Exhausted</h3>
-                                                    {/* <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Chicken feed to end.</span></p> */}
-                                                </>
-                                            }
 
 
-                                        </div>
-                                    </div>
+
 
                                 </div>
-                                <div className="alienbtns">
-                                    {/* <div className="pool-btns">
+                            </div>
+
+                            {show &&
+                                <div className='acc__summery'>
+                                    <div className='acc__summery__in'>
+
+
+
+
+                                        {/* <div className="pool-btns">
                                                         <p style={{color: '#fff'}}>Chicken Farming is being upgraded to a newer version with enhanced features between 8:30 hours UTC to 12:30 hours UTC. During this time you won't be able to perform any actions. </p>
                                                </div> */}
 
-                                    <div className="pool-btns">
-                                        <a className="btn" href="/buy/chicken">Buy Chicken</a>
+                                        <div className="pool-btns">
+                                            <a className="bg___BTN7" href="/buy/chicken">Buy Chicken</a>
 
 
-                                        {
-                                            chickenApproved === 0 &&
-                                            <a className="btn" onClick={approveChicken} >Approve Chicken for Farm</a>
-                                        }
+                                            {
+                                                chickenApproved === 0 &&
+                                                <a className="bg___BTN6" onClick={approveChicken} >Approve Chicken for Farm</a>
+                                            }
 
-                                        {
-                                            chickenApproved > 0 && chickenDeposited === 0 &&
-                                            <a className="btn" onClick={() => setChickenModal(!chickenModal)} >Put Chicken in Farm</a>
-                                        }
-
-
-                                        {
-                                            chickenApproved > 0 && chickenDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
-                                            <a className="btn" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more Chicken in Farm</a>
-                                        }
+                                            {
+                                                chickenApproved > 0 && chickenDeposited === 0 &&
+                                                <a className="bg___BTN6" onClick={() => setChickenModal(!chickenModal)} >Put Chicken in Farm</a>
+                                            }
 
 
+                                            {
+                                                chickenApproved > 0 && chickenDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
+                                                <a className="bg___BTN6" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more Chicken in Farm</a>
+                                            }
 
-                                        {
-                                            chickenDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
 
-                                            <a className="btn" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove Chicken From Farm</a>
 
-                                        }
-                                        {
-                                            eggsearned > 0 &&
-                                            <a className="btn" onClick={claimEggs} >Claim Eggs</a>
-                                        }
-                                        {
-                                            chickenDeposited > 0 &&
-                                            <a className="btn" onClick={() => setaddDaysChickenModal(!addDaysChickenModal)}>Add Feed</a>
+                                            {
+                                                chickenDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
 
-                                        }
+                                                <a className="bg___BTN6" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove Chicken From Farm</a>
+
+                                            }
+                                            {
+                                                eggsearned > 0 &&
+                                                <a className="bg___BTN7" onClick={claimEggs} >Claim Eggs</a>
+                                            }
+                                            {
+                                                chickenDeposited > 0 &&
+                                                <a className="bg___BTN7" onClick={() => setaddDaysChickenModal(!addDaysChickenModal)}>Add Feed</a>
+
+                                            }
+
+                                        </div>
 
                                     </div>
                                 </div>
+                            }
+
+
+
+
+                            <div className='marketplace-box-wrap4'>
+                                <div className="newpool-box">
+                                    <div className="alienpool-wrp">
+                                        <div className="alienpool2">
+                                            <div className="alienpool-img">
+                                                <img src={childe} alt="" />
+                                            </div>
+                                            <div className="alienpool-content">
+                                                <h3>Forginator</h3>
+
+                                            </div>
+                                        </div>
+                                        <div className='alien___rightBox'>
+                                            <div className="alientime__accordian">
+                                                <div class="time__list">
+                                                    <h3>{chickenEggBalance} {chickenEggSymbol}
+
+                                                        {
+                                                            chickenEggBalance > 0 && chickenEggBalance <= 10 &&
+                                                            <img src={eggs1} className="ml-2" width="60px" alt='' />
+                                                        }
+                                                        {
+                                                            chickenEggBalance > 10 && chickenEggBalance <= 100 &&
+                                                            <img src={eggs100} className="ml-2" width="60px" alt='' />
+                                                        }
+                                                        {
+                                                            chickenEggBalance > 100 && chickenEggBalance <= 1000 &&
+                                                            <img src={eggs1000} className="ml-2" width="60px" alt='' />
+                                                        }
+                                                    </h3><p>Your Balance</p>
+                                                </div>
+                                                <div className="time__list"><h3>{chickenEggDeposited} {chickenEggSymbol}
+
+                                                    {
+                                                        chickenEggDeposited > 0 && chickenEggDeposited <= 10 &&
+                                                        <img src={eggs1} className="ml-2" width="60px" alt='' />
+                                                    }
+                                                    {
+                                                        chickenEggDeposited > 10 && chickenEggDeposited <= 100 &&
+                                                        <img src={eggs100} className="ml-2" width="60px" alt='' />
+                                                    }
+                                                    {
+                                                        chickenEggDeposited > 100 && chickenEggDeposited <= 1000 &&
+                                                        <img src={eggs1000} className="ml-2" width="60px" alt='' />
+                                                    }
+
+                                                </h3><p>Deposited</p></div>
+                                                <div className="time__list">
+                                                    <h3>
+
+                                                        {adult}  {chickenSymbol}
+                                                        {
+                                                            adult > 0 && adult <= 10 &&
+                                                            <img src={chicken1} width="60px" alt='' />
+                                                        }
+                                                        {
+                                                            adult > 10 && adult <= 100 &&
+                                                            <img src={chicken100} width="60px" alt='' />
+                                                        }
+                                                        {
+                                                            adult > 100 && adult <= 1000 &&
+                                                            <img src={chicken1000} width="60px" alt='' />
+                                                        }
+
+                                                    </h3>
+                                                    <p>Adult Chickens</p>
+                                                </div>
+                                                
+                                                <div className="time__list">
+
+                                                    <h3 className="timer">{eggTime}</h3>
+                                                    <p>Time to Grow as Adult</p>
+
+
+                                                </div>
+                                                <div className="time__list">
+                                                    <h3><span className='dollar__text'>$</span>{adult * 10}</h3>
+                                                    <p>Market Value</p>
+                                                </div>
+                                                <div className="time__list">
+                                                    <h3 className="timer">{incubCapacity}</h3>
+                                                    <p>Available Incubators</p>
+                                                </div>
+                                            </div>
+
+                                            <div className='acc__arrow'>
+                                                <div className='acc__arrow___icon' onClick={() => setShow1(prev => !prev)} >
+
+                                                    {show ?
+                                                        <img src={acc__arrow_revse} alt='' />
+                                                        :
+                                                        <img src={acc__arrow} alt='' />
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+                                </div>
                             </div>
+
+                            {show1 &&
+                                <div className='acc__summery'>
+                                    <div className='acc__summery__in'>
+
+
+
+
+                                        {/* <div className="pool-btns">
+                                                        <p style={{color: '#fff'}}>Chicken Farming is being upgraded to a newer version with enhanced features between 8:30 hours UTC to 12:30 hours UTC. During this time you won't be able to perform any actions. </p>
+                                               </div> */}
+
+                                        <div className="pool-btns">
+                                            <a className="bg___BTN7" href="/buy/chickenegg">Buy Eggs</a>
+                                            {
+                                                chickenEggApproved == 0 &&
+                                                <a className="bg___BTN6" onClick={approveChickenEgg} >Approve Eggs for Incubator</a>
+                                            }
+                                            {
+                                                chickenEggApproved > 0 && chickenEggDeposited == 0 &&
+                                                <a className="bg___BTN6" onClick={eggtoggle} >Put Eggs in Incubator</a>
+                                            }
+
+                                            {
+                                                adult > 0 && baseApprovedIncub > 0 &&
+                                                <a className="btn" onClick={claimChicken} >Claim Chickens (Fee: {chickenClaimfee} {baseSymbol}) </a>
+                                            }
+
+                                            {
+                                                adult > 0 && baseApprovedIncub == 0 &&
+                                                <a className="btn" onClick={approvebaseTokenIncub} >Approve MyFarmPet to claim Chickens</a>
+                                            }
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
+
                             {/* <div className="col-lg-12">
                                <div className="slide-heads">
                                     <h3>PUT EEGS TO INCUBATORS AND EARN CHICKENS.</h3>
@@ -2186,124 +2381,19 @@ console.log('jasim',_userClaimTimesOne);
                                     </div>
                                 </div>
                                </div> */}
-                            <div className="newpool-box bgegg" >
-                                <div className="alienpool-wrp mb-1">
-                                    <div className="alienpool">
-                                        <div className="alienpool-img">
-                                            <img src={childe} alt=''/>
-                                        </div>
-                                        <div className="alienpool-content">
-                                            <h3>EGG Incubator</h3>
-                                            <p>Uses EGG</p>
-
-                                        </div>
-                                    </div>
-                                    <div className="alienbal">
-                                        <div class="balance"><h3>{chickenEggBalance} {chickenEggSymbol}
-
-                                            {
-                                                chickenEggBalance > 0 && chickenEggBalance <= 10 &&
-                                                <img src={eggs1} className="ml-2" width="60px" alt=''/>
-                                            }
-                                            {
-                                                chickenEggBalance > 10 && chickenEggBalance <= 100 &&
-                                                <img src={eggs100} className="ml-2" width="60px" alt=''/>
-                                            }
-                                            {
-                                                chickenEggBalance > 100 && chickenEggBalance <= 1000 &&
-                                                <img src={eggs1000} className="ml-2" width="60px" alt=''/>
-                                            }
-                                        </h3><p>Balance</p></div>
-                                        <div class="balance"><h3>{chickenEggDeposited} {chickenEggSymbol}
-
-                                            {
-                                                chickenEggDeposited > 0 && chickenEggDeposited <= 10 &&
-                                                <img src={eggs1} className="ml-2" width="60px" alt=''/>
-                                            }
-                                            {
-                                                chickenEggDeposited > 10 && chickenEggDeposited <= 100 &&
-                                                <img src={eggs100} className="ml-2" width="60px" alt=''/>
-                                            }
-                                            {
-                                                chickenEggDeposited > 100 && chickenEggDeposited <= 1000 &&
-                                                <img src={eggs1000} className="ml-2" width="60px" alt=''/>
-                                            }
-
-                                        </h3><p>Deposited</p></div>
-                                    </div>
-                                    <div className="alientime">
-                                        {/* <div className="time-child1">
-                                                <h3>{hatched} {chickenEggSymbol}</h3>
-                                                <p>EGGs Hatched</p>
-                                                <h3>{eggTime2}</h3>
-                                                <p>Time to Hatch</p>
-                                           </div> */}
-                                        <div className="time-child1">
-                                            <h3>
-
-                                                {adult}  {chickenSymbol}
-                                                {
-                                                    adult > 0 && adult <= 10 &&
-                                                    <img src={chicken1} width="60px" alt=''/>
-                                                }
-                                                {
-                                                    adult > 10 && adult <= 100 &&
-                                                    <img src={chicken100} width="60px" alt=''/>
-                                                }
-                                                {
-                                                    adult > 100 && adult <= 1000 &&
-                                                    <img src={chicken1000} width="60px" alt=''/>
-                                                }
-
-                                            </h3>
-                                            <p>Adult Chickens</p>
-                                            <h3 className="timer">{eggTime}</h3>
-                                            <p>Time to Grow as Adult</p>
-                                        </div>
-                                        <div className="time-child1">
-                                            <h3>${adult * 10}</h3>
-                                            <p>Market Value</p>
-                                            <h3 className="timer">{incubCapacity}</h3>
-                                            <p>Available Incubators</p>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div className="alienbtns">
-                                    <div className="pool-btns">
-                                        <a className="btn" href="/buy/chickenegg">Buy Eggs</a>
-                                        {
-                                            chickenEggApproved == 0 &&
-                                            <a className="btn" onClick={approveChickenEgg} >Approve Eggs for Incubator</a>
-                                        }
-                                        {
-                                            chickenEggApproved > 0 && chickenEggDeposited == 0 &&
-                                            <a className="btn" onClick={eggtoggle} >Put Eggs in Incubator</a>
-                                        }
-
-                                        {
-                                            adult > 0 && baseApprovedIncub > 0 &&
-                                            <a className="btn" onClick={claimChicken} >Claim Chickens (Fee: {chickenClaimfee} {baseSymbol}) </a>
-                                        }
-
-                                        {
-                                            adult > 0 && baseApprovedIncub == 0 &&
-                                            <a className="btn" onClick={approvebaseTokenIncub} >Approve MyFarmPet to claim Chickens</a>
-                                        }
-
-                                    </div>
-                                </div>
-                            </div>
+                          
 
                         </div>
                     </div>
+                    <div className='btm___arrow'>
+                    <img src={arrow} alt='arrow image here' />
                 </div>
-                <div className="stokes">
-                    <img src={stoke} alt=''/>
                 </div>
+                {/* <div className="stokes">
+                    <img src={stoke} alt='' />
+                </div> */}
             </div>
-            <Footer />
+            {/* <Footer /> */}
 
 
 

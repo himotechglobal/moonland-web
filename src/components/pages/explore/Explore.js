@@ -630,7 +630,7 @@ useEffect(() => {
                      <div className="row">
                     <div className="col-lg-12">
                       <div className="d-flex justify-content-end">
-                        <button className="mb-3" className="importBtn" onClick={importToggle}>Import Other NFTs</button>
+                        <button className="mb-3 importBtn"   onClick={importToggle}>Import Other NFTs</button>
                       </div>
                       </div>
                       </div>

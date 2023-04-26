@@ -239,7 +239,7 @@ or Explore Our Spell Inventory. </p>
                     {/* <TopSellers /> */}
                  
                     <ExploreNew />
-           <Footer />
+           {/* <Footer /> */}
             </div>
 		);
  
