@@ -17,7 +17,7 @@ import MARKETPLACE_ABI from '../../../Config/MARKETPLACE_ABI.json';
 import TOKEN_ABI from '../../../Config/TOKEN_ABI.json';
 import Web3 from "web3"
 import { useAccount, useBalance, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ethers } from 'ethers';
 import land from '../../images/land_in_moon.svg'
 import solor from '../../images/solor_cell.svg';
@@ -678,7 +678,7 @@ const elements = (props) => {
                     <div className="row">
                         <div className="col-lg-3"></div>
                         <div className="col-lg-6">
-                            <div className='marketplace-box-wrap2'>
+                            <div className='marketplace-box-wrap2 respmrt'>
                                 <div className="marketplace-box">
                             <div className="chicken-content-wrp">
 
@@ -686,9 +686,13 @@ const elements = (props) => {
                                     <img src={ELEMENTS[key].image} alt=""  />
                                 </div>
                                 <div className='moon___buy__bxc'>
-                                    <h1>LAND IN MOON</h1>
+                                   
+                                   <h1>LAND IN MOON</h1>
+                                   <div className='moon___c'>
                                     <p>Rate</p>
+                                   
                                     <h6>${ELEMENTS[key].price} ~ {tokenPrice}</h6>
+                                    </div>
                                     <div className='moon___buy__btm mb__m'>
                                         <p>Total Sold</p>
                                         <p className='amount___p'>0</p>
@@ -731,7 +735,7 @@ const elements = (props) => {
                         <div className="col-lg-3"></div>
                     </div>
                     <div className='btm___arrow'>
-                    <img src={arrow} alt='arrow image here' />
+                    <Link to='/marketplace'><img src={arrow} alt='arrow image here' /></Link>
                 </div>
                    
                 </div>

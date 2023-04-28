@@ -14,10 +14,15 @@ import NFT_ABI from '../../../Config/NFT_ABI.json';
 import TOKEN_ABI from '../../../Config/TOKEN_ABI.json';
 import gtm from '../../images/gtm.png';
 import pigicon from '../../images/pigicon.png';
+import childe from '../../images/childe.svg'
 import pigicon2 from '../../images/pigicon2.png';
 import pigicon3 from '../../images/pigicon3.png';
+import mbuild from '../../images/mbuild.svg'
+import arrow from '../../images/round_arrow.svg';
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { ethers } from 'ethers';
+import land from '../../images/land.svg';
+import { Link } from 'react-router-dom';
 
 
 const PigFarm = () => {
@@ -2091,254 +2096,292 @@ const PigFarm = () => {
         <div>
             <Header />
             <div className="slide-bg">
-                <section id="pigs-sec">
+                <section id="pigs-sec1">
                     <div className="container">
-                        <div className="pig-head">
-                            <h3>BUY FARM LAND & PIG AND EARN PIGLET</h3>
+                        <div className="slide-heads">
+                            <h1>BUY MOON LAND,BUILD <span className='dollar__text2'>$</span> TRADE</h1>
+                            <p>Combine Solor cells and Fluids Harvest</p>
+                        </div>
+                        {/* <div className="pig-head">
+                        
                             <div className="btn-gmt">
                                 <a href="/marketplace">
                                     <img src={gtm} alt="" />
                                 </a>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="row">
+
+
+
                             <div className="col-lg-12">
-                                <div className="farm-land-box">
-                                    <div className="farm-l-content">
-                                        <div className="farm-l-c-chil1">
-                                            <h3>Farm Land</h3>
-                                        </div>
-                                        <div className="farm-l-c-chil2">
-                                            <img src={pigicon} className="pigicon" alt="" />
-                                        </div>
-                                    </div>
-                                    <div className="line-stoke"></div>
-                                    <div className="farm-blnc-wrp">
-                                        <div className="farm-blnc-child1">
-                                            <h3>{farmBalance} {farmSymbol}</h3>
-                                            <p>Your Balance</p>
+                                <div className='marketplace-box-wrap4'>
+                                    <div className="newpool-box" >
+                                        <div className="alienpool-wrp">
+                                            <div className="alienpool">
+                                                <div className="alienpool-img">
+                                                    <img src={land} alt="" />
+                                                </div>
+                                                <div className="alienpool-content">
+                                                    <h3>Moon Land</h3>
+                                                </div>
+                                            </div>
+                                            {/* <div className="alienbal">
+                                            <div class="balance"><h3>{0.0000}</h3><p>Balance</p></div>
+                                            <div class="balance"><h3>0.0000</h3><p>Area</p></div>
+                                       </div> */}
+                                            <div className='alien___rightBox'>
+                                                <div className="alientime">
+                                                    <div className="time__list">
+                                                        <h3>{farmBalance ?? 0} {farmSymbol}</h3>
+                                                        <p>Your Balance</p>
+                                                    </div>
+                                                    <div className="time__list">
+                                                        <h3>{farmArea} sq m</h3>
+                                                        <p>Your Locked Farm Area</p>
+                                                    </div>
+                                                    <div className="time__list">
+                                                        <h3><span className='dollar__text'>$</span>{farmArea * 1}</h3>
+                                                        <p>Market Value</p>
 
-                                        </div>
-                                        <div className="farm-blnc-child1">
-                                            <h3>{farmArea} sq m</h3>
-                                            <p>Your Locked Farm Area</p>
-                                        </div>
-                                        <div className="farm-blnc-child1">
-                                            <h3>${farmArea * 1}</h3>
-                                            <p>Market Value</p>
-                                        </div>
-                                        <div className="farm-blnc-child1">
-                                            <h3>{farmCapacity}</h3>
-                                            <p>Pig Capacity</p>
+                                                    </div>
+                                                    <div className="time__list">
+                                                        <h3>{farmCapacity}</h3>
+                                                        <p>Pig Capacity</p>
+                                                    </div>
+                                                </div>
+                                                <div className="alienbtns">
+                                                    {/* <div className="pool-btns">
+                                   <p style={{color: '#fff'}}>Chicken Farming is being upgraded to a newer version with enhanced features between 8:30 hours UTC to 12:30 hours UTC. During this time you won't be able to perform any actions. </p>
+                                   </div> */}
+
+                                                    <div className="pool-btns" style={{ justifyContent: 'end' }}>
+
+                                                        {
+                                                            !farmLocked && farmBalance > 0 && farmApprove && processed &&
+                                                            <a href="javascript:void" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
+                                                        }
+                                                        {
+                                                            farmBalance > 0 && !farmApprove && processed &&
+                                                            <a href="javascript:void" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
+                                                        }
+                                                        {
+                                                            farmLocked && processed &&
+                                                            <a href="javascript:void" className="mr-3" onClick={areaToggle}>Buy More Farm Area</a>
+                                                        }
+                                                        {
+                                                            !farmLocked && farmBalance == 0 && processed &&
+                                                            <a href="javascript:void" onClick={buyAreaToggle}>Buy Farm Area</a>
+                                                        }
+                                                        {
+                                                            landIsfree && processed &&
+                                                            <a href="javascript:void" onClick={() => sellfarm()}>Sell Farm Area</a>
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                    </div>
-                                    <div className="bfa-btn">
-                                        {
-                                            !farmLocked && farmBalance > 0 && farmApprove && processed &&
-                                            <a href="javascript:void" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
-                                        }
-                                        {
-                                            farmBalance > 0 && !farmApprove && processed &&
-                                            <a href="javascript:void" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
-                                        }
-                                        {
-                                            farmLocked && processed &&
-                                            <a href="javascript:void" className="mr-3" onClick={areaToggle}>Buy More Farm Area</a>
-                                        }
-                                        {
-                                            !farmLocked && farmBalance == 0 && processed &&
-                                            <a href="javascript:void" onClick={buyAreaToggle}>Buy Farm Area</a>
-                                        }
-                                        {
-                                            landIsfree && processed &&
-                                            <a href="javascript:void" onClick={() => sellfarm()}>Sell Farm Area</a>
-                                        }
-                                        {/* <a href="#">Buy Farm Area</a> */}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-lg-6">
-                                <div className="small-pigfarm-box">
-                                    <div className="uses-box">
-                                        <div className="uses-box-child1">
-                                            <h3>Pig Farm</h3>
-                                            <p>Uses Sow and Boar</p>
-                                        </div>
-                                        <div className="uses-box-child1">
-                                            <div className="pig-icon2">
-                                                <img src={pigicon2} alt='' />
+                                <div className='marketplace-box-wrap5'>
+                                    <div className="small-pigfarm-box">
+                                        <div className='marketplace-box-wrap4'>
+                                            <div className='mbuild__TopBox'>
+                                                <div className="mbuild___box">
+                                                    <div>
+                                                        <img src={mbuild} alt="" />
+                                                    </div>
+                                                    <div className="uses-box-child1">
+                                                        <h3>moonpod <br />Builder</h3>
+                                                    </div>
+
+                                                </div>
+
+                                                <div className='build___left'>
+                                                    <div className="build___item">
+                                                        <h3>{eggsearned} PIGLETS</h3>
+                                                        <p>Earned</p>
+                                                    </div>
+                                                    <div className="build___item">
+                                                        <h3><span className='dollar__text'>$</span>{eggsearned * 10}</h3>
+                                                        <p>Earned Value</p>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="line-stoke"></div>
-                                    <div className="pig-value-wrp">
-                                        <div className="pigvalue-child1">
-                                            <h3>{sowDeposited} {sowSymbol}</h3>
+
+                                        <div className="pig-value-wrp">
+                                            <div className="build__value mrt">
+                                                <p>Deposited</p>
+                                                <h3>{sowDeposited} {sowSymbol}</h3>
+                                            </div>
+                                            <div className="build__value mrt">
                                             <p>Deposited</p>
-                                        </div>
-                                        <div className="pigvalue-child1 text-right">
-                                            <h3>{boarDeposited} {boarSymbol}</h3>
-                                            <p>Deposited</p>
-                                        </div>
+                                                <h3>{boarDeposited} {boarSymbol}</h3>
+                                            </div>
 
 
-                                    </div>
-                                    <div className="pig-value-wrp">
-                                        <div className="pigvalue-child1">
-                                            <h3>{eggsearned} PIGLETS</h3>
-                                            <p>Earned</p>
-                                        </div>
-                                        <div className="pigvalue-child1 text-right">
-                                            <h3>${eggsearned * 10}</h3>
-                                            <p>Earned Value</p>
                                         </div>
 
-                                    </div>
-                                    <div className="pig-value-wrp">
-                                        <div className="pigvalue-child1">
-                                            <h3>{sowBalance} {sowSymbol}</h3>
-                                            <p>Balance</p>
+                                        <div className="pig-value-wrp">
+                                            <div className="build__value">
+                                                <h3>{sowBalance} {sowSymbol}</h3>
+                                                <p>Balance</p>
+                                            </div>
+                                            <div className="build__value pigmr">
+                                                <h3>{boarBalance} {boarSymbol}</h3>
+                                                <p>Balance</p>
+                                            </div>
                                         </div>
-                                        <div className="pigvalue-child2 text-right">
-                                            <h3>{boarBalance} {boarSymbol}</h3>
-                                            <p>Balance</p>
-                                        </div>
-                                    </div>
-                                    <div className="pig-value-wrp">
-                                        <div className="pigvalue-child1">
-                                            {/* {layunlockTime}
+                                        <div className="pig-value-wrp">
+                                            <div className="pigvalue-child1">
+                                                {/* {layunlockTime}
                                             {layEndTime} */}
+                                                {
+                                                    sowDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
+                                                    <>
+                                                        <h3 className="timer">{endTime}</h3>
+                                                        <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Pig Food to end.</span></p>
+                                                    </>
+                                                }
+                                                {
+                                                    sowDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
+                                                    <>
+                                                        <h3 className="timer">Food Exhausted</h3>
+                                                        {/* <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Chicken feed to end.</span></p> */}
+                                                    </>
+                                                }
+                                            </div>
+
+                                            <div className="pigvalue-child1  text-right">
+                                                {/* {layEndTime} */}
+                                                {
+                                                    sowDeposited > 0 && layEndTime > new Date().getTime() / 1e3 &&
+                                                    <>
+                                                        <h3><span>{layTime}</span></h3>
+                                                        <p>Next Delivery Time</p>
+                                                    </>
+                                                }
+                                                {
+                                                    sowDeposited > 0 && layEndTime < new Date().getTime() / 1e3 &&
+                                                    <>
+                                                        <h3 className=""><span>Not Breeding</span></h3>
+
+                                                    </>
+                                                }
+                                            </div>
+                                        </div>
+
+
+                                        <div className="btn-bp">
+                                        
+
+                                            <a href="/marketplace" className="bg___BTN2">Buy Sow/Boar</a>
+
                                             {
-                                                sowDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
-                                                <>
-                                                    <h3 className="timer">{endTime}</h3>
-                                                    <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Pig Food to end.</span></p>
-                                                </>
+                                                eggsearned > 0 &&
+                                                <a href="javacript:void" className="bg___BTN2" onClick={claimEggs} >Claim Piglets</a>
                                             }
+
+                                            {
+                                                boarBalance > 0 && sowBalance > 0 && sowDeposited == 0 &&
+                                                <a href="javacript:void" className="bg___BTN2" onClick={sowtoggle} >Deposit Sow</a>
+                                            }
+                                        </div>
+
+
+                                        <div className="btn-bp">
+                                      {
+                                                sowDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
+                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more Sow in Farm</a>
+                                            }
+
                                             {
                                                 sowDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
-                                                <>
-                                                    <h3 className="timer">Food Exhausted</h3>
-                                                    {/* <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Chicken feed to end.</span></p> */}
-                                                </>
+
+                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove Sow From Farm</a>
+
                                             }
+
+                                            {
+                                                sowDeposited > 0 &&
+                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setaddDaysChickenModal(!addDaysChickenModal)}>Add Feed</a>
+
+                                            }
+
                                         </div>
 
-                                        <div className="pigvalue-child1  text-right">
-                                            {/* {layEndTime} */}
-                                            {
-                                                sowDeposited > 0 && layEndTime > new Date().getTime() / 1e3 &&
-                                                <>
-                                                    <h3><span>{layTime}</span></h3>
-                                                    <p>Next Delivery Time</p>
-                                                </>
-                                            }
-                                            {
-                                                sowDeposited > 0 && layEndTime < new Date().getTime() / 1e3 &&
-                                                <>
-                                                    <h3 className=""><span>Not Breeding</span></h3>
-
-                                                </>
-                                            }
-                                        </div>
-                                    </div>
-
-
-                                    <div className="btn-bp">
-
-                                        <a href="/marketplace" className="bp">Buy Sow/Boar</a>
-
-                                        {
-                                            eggsearned > 0 &&
-                                            <a href="javacript:void" onClick={claimEggs} >Claim Piglets</a>
-                                        }
-
-                                        {
-                                            boarBalance > 0 && sowBalance > 0 && sowDeposited == 0 &&
-                                            <a href="javacript:void" onClick={sowtoggle} >Deposit Sow</a>
-                                        }
-                                    </div>
-
-
-                                    <div className="btn-bp">
-                                        {
-                                            sowDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
-                                            <a href="javacript:void" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more Sow in Farm</a>
-                                        }
-
-                                        {
-                                            sowDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
-
-                                            <a href="javacript:void" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove Sow From Farm</a>
-
-                                        }
-
-                                        {
-                                            sowDeposited > 0 &&
-                                            <a href="javacript:void" onClick={() => setaddDaysChickenModal(!addDaysChickenModal)}>Add Feed</a>
-
-                                        }
 
                                     </div>
-
-
                                 </div>
                             </div>
                             <div className="col-lg-6">
-                                <div className="small-pigfarm-box">
-                                    <div className="uses-box">
-                                        <div className="uses-box-child1">
-                                            <h3>Piglet Incubator (Coming Soon)</h3>
-                                            <p>Uses Piglet</p>
-                                        </div>
-                                        <div className="uses-box-child1">
-                                            <div className="pig-icon2">
-                                                <img src={pigicon3} alt='' />
+                                <div className='marketplace-box-wrap5'>
+                                    <div className="small-pigfarm-box">
+                                        <div className='marketplace-box-wrap4'>
+                                    <div className='mbuild__TopBox'>
+                                                <div className="mbuild___box2">
+                                                    <div>
+                                                        <img className='mrb' src={childe} alt="" />
+                                                    </div>
+                                                    <div className="uses-box-child1">
+                                                        <h3>Forginator</h3>
+                                                    </div>
+
+                                                </div>
+
+                                                 
+                                            </div>
+                                            </div>
+                                        <div className="pig-value-wrp mrt">
+                                            <div className="build___item">
+                                                <h3>0 Piglet</h3>
+                                                <p>Balance</p>
+                                            </div>
+                                            <div className="build___item">
+                                                <h3>0 Piglet</h3>
+                                                <p>Deposited</p>
+                                            </div>
+                                            <div className="build___item">
+                                                <h3>0 Pig</h3>
+                                                <p>Earned</p>
+                                            </div>
+                                            <div className="build___item">
+                                                <h3><span className='dollar__text'>$</span>0.00</h3>
+                                                <p>Earned Value</p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="line-stoke"></div>
-                                    <div className="pig-value-wrp">
-                                        <div className="pigvalue-child1">
-                                            <h3>0 Piglet</h3>
-                                            <p>Balance</p>
+                                        <div className="pig-value-wrp2 mrt">
+                                            <div className="build___item bi__one">
+                                                <h3>1000</h3>
+                                                <p>Available Slot</p>
+                                            </div>
                                         </div>
-                                        <div className="pigvalue-child1">
-                                            <h3>0 Piglet</h3>
-                                            <p>Deposited</p>
-                                        </div>
-                                        <div className="pigvalue-child1">
-                                            <h3>0 Pig</h3>
-                                            <p>Earned</p>
-                                        </div>
-                                        <div className="pigvalue-child1">
-                                            <h3>$0.00</h3>
-                                            <p>Earned Value</p>
-                                        </div>
-                                    </div>
-                                    <div className="pig-value-wrp2">
-                                        <div className="pigvalue-child2">
-                                            <h3>1000</h3>
-                                            <p>Available Slot</p>
-                                        </div>
-                                    </div>
-                                    <div className="btn-bp">
-                                        <a href="/marketplace" className="bp">Buy Piglet</a>
+                                        <div className="btn-bp">
+                                            <a href="/marketplace" className="bg___BTN2">Buy Piglet</a>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <div className="stokes">
-                    <img src={stoke} alt='' />
+                <div className='btm___arrow'>
+                    <Link to='/choose'><img src={arrow} alt='arrow image here' /></Link>
                 </div>
+                {/* <div className="stokes">
+                    <img src={stoke} alt='' />
+                </div> */}
             </div>
-            <Footer />
+            {/* <Footer /> */}
 
 
 

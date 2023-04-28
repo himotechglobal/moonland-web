@@ -1,5 +1,47 @@
 
 @media(max-width: 1166px){
+    #sale-wrp {
+        height: 100vh;
+    }
+    .marketplace-box-wrap6 {
+        margin: 0rem 0rem;
+    }
+    .mbuild___box {
+        width: 60%;
+    }
+    .build___left {
+        width: 35%;
+    }
+    .alienpool2 {
+        width: 32%;
+    }
+    .alienpool {
+        width: 32%;
+    }
+    .alien___rightBox {
+        width: 68%;
+    }
+    .chooseTop{
+        padding-top:7rem ;
+      }
+    .wrp-btn-back{
+        width: inherit;
+    }
+    .wrp-btn-back>a {
+        width: 180px;
+    }
+    .chicken-c-img>img {
+        width: 150px;
+    }
+    #choose-sec {
+        padding: 6rem 0rem 6rem 0rem;
+    }
+    .btm___arrow>a>img {
+        padding-top: 5rem;
+    }
+    .chooseBox____cont {
+        padding: 30px 20px 0px 20px;
+    }
     .swap-box{
         width: 50%;
     }
@@ -7,7 +49,6 @@
     /* finance css */
     .den-box{
         padding: 30px 40px;
-        height: 1100px;
     }
     /* dashboard2*/
 .left-bar {
@@ -49,7 +90,7 @@
     }
     .menu-list-d > li > a{
         font-size: 14px;
-        margin-left: 25px;
+        margin-left: 15px;
     }
     .mr-mrt4 {
         margin-top: -20px;
@@ -80,6 +121,55 @@
 
 
 @media(max-width: 992px){
+    .choosemplace___right {
+        margin-top: 2rem;
+    }
+    .bg__playgame{
+        display: inherit;
+    }
+    .game_btn__bg {
+        padding: 2rem 1rem 1rem 1rem;
+    }
+    #sale-wrp {
+        padding: 10rem 0rem 8rem 0rem;
+    }
+    .game__cont {
+        right: 8%;
+        text-align: center;
+    }
+    .alienpool2 {
+        width: 100%;
+    }
+    .alienbtns {
+        width: 60%;
+        padding-bottom: 2rem;
+    }
+    .chooseTop{
+        padding-top:36rem ;
+      }
+     
+    .chicken-c-img>img {
+        width: 200px;
+    }
+    .bg-chicken {
+        padding: 6rem 0rem 6rem 0rem;
+    }
+    .wrp-btn-back>a {
+        width: 285px;
+    }
+    #marketplace-sec2 {
+        padding: 100px 0px 60px 0px;
+    }
+    .conbutton{
+        width: 100%;
+    }
+    .header-c3{
+        display: none;
+    }
+    .header-c2{
+        background-image: inherit;
+        padding: 20px 0px 25px 0px;
+    }
     .swap-box {
         width: 72%;
     }
@@ -112,16 +202,12 @@
     .round-content{
         width: 100%;
     }
-    .den-box{
-        background-image: url(../images/mobileBg.png);
-    }
+    
     /* finance page css */
     .bid-box2{
         margin-top: 30px;
     }
-   .den-box {
-    height: 1460px;
-}
+
         /* stake page responsive */
 
 .stake-box {
@@ -214,10 +300,29 @@
         text-align: center;
     }
     .alienpool{
-        justify-content: center;
+        width: 100%;
+    }
+    .alientime__accordian {
+        width: 100%;
+        padding: 2rem 1.2rem;
+    }
+    .acc__arrow {
+        width: 55%;
+        padding-bottom: 2rem;
+    }
+    .acc__summery {
+        margin: -0.1rem 2rem 0rem 2rem;
+    }
+    .alien___rightBox {
+        display: inherit;
+        width: 100%;
     }
     .alientime{
-        justify-content: center;
+    width: 100%;
+    padding: 2rem 1.2rem;
+    }
+    .alien___rightBox {
+        padding-right: 0rem;
     }
     .pool-btns > button{
         margin-left: auto;
@@ -251,7 +356,7 @@
         margin-right: 15px;
     }
     .menu-list2 > li > a{
-        color: #000;
+        color: #fff;
     }
 
     .dashboard-header{
@@ -428,6 +533,15 @@
    
 }
 @media(max-width: 767px){
+    .btm___arrow3>a>img {
+        padding-top: 4rem;
+    }
+    .choosemplace___main__wrap {
+        padding-top: 3rem;
+    }
+    .choosemplace___left__cont>h1{
+        font-size: 20px;
+    }
     
     .swap-box{
         width: 100%;
@@ -455,6 +569,193 @@
    
 }
 @media(max-width: 580px){
+    .choosemplace___right {
+        margin-top: 1rem;
+    }
+    .den-box>h3 {
+        padding-top: 20px;
+        font-size: 20px;
+    }
+    .round-content{
+        display: inherit;
+    }
+    .next___round {
+        margin-left: 0rem;
+    }
+    .roundbg-img{
+        padding: 20px;
+    }
+    .prepare___next>p {
+        text-align: center;
+        font-size: 18px;
+    }
+    #round-sec {
+        padding-top: 0px;
+    }
+    .finance-king_game>h1 {
+        font-size: 20px;
+    }
+    .den-box>h4 {
+        font-size: 16px;
+    }
+    .finance-king_game>h4 {
+        font-size: 16px;
+    }
+    .finance-king_game>p {
+        font-size: 14px;
+    }
+    .bid-smallbox {
+        width: 100%;
+    }
+    .king__game {
+        padding: 100px 0px 60px 0px;
+    }
+    .dex-box-g {
+        padding: 10px 10px 10px 10px;
+    }
+    .den-box {
+        padding: 0px;
+    }
+    .game__img > img {
+width: 100%;
+    }
+    .game__cont>h3 {
+        font-size: 20px;
+    }
+    .game__cont {
+        right: 5%;
+        top: 16%;
+    }
+    .game_btn__bg {
+        padding: 1rem 1rem 1rem 1rem;
+    }
+    #sale-wrp {
+        padding: 6rem 0rem 4rem 0rem;
+    }
+    .mbuild__TopBox {
+        display: inherit;
+    }
+    .mbuild___box {
+        width: 100%;
+    }
+    .build___left {
+        width: 100%;
+        margin-top: 1rem;
+    }
+    .mrt {
+        margin-top: 20px;
+    }
+    .pig-value-wrp {
+        display: inherit;
+    }
+    .pigmr{
+        margin-top: 1.3rem;
+    }
+    .mrt {
+        margin-top: 20px !important;
+    }
+    .build___item>h3 {
+        text-align: center;
+    }
+    .build___item{
+        text-align: center;
+    }
+    .build__value {
+        width: 100%;
+    }
+    .alientime {
+        flex-wrap: wrap;
+        row-gap: 15px;
+    }
+    .acc__summery {
+        margin: -0.1rem 1rem 0rem 1rem;
+    }
+    .pool-btns {
+        display: inherit;
+        text-align: center;
+    }
+    .acc__summery__in {
+        padding: 0.5rem 0.5rem 1.5rem 0.5rem;
+    }
+    .slide-heads {
+        padding-top: 50px;
+    }
+    .bg___BTN2 {
+        padding: 10px 15px;
+    }
+    .alientime__accordian {
+        flex-wrap: wrap;
+        row-gap: 15px;
+    }
+    .alienbtns {
+        width: 74%;
+    }
+    .slide-heads>h1 {
+        font-size: 20px;
+    }
+    .slide-bg {
+        padding: 60px 0px 60px 0px;
+    }
+    .chooseTop{
+        padding-top:11rem ;
+      }
+    .moon___buy__bxc>h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+        margin-top: 1rem;
+        width: inherit;
+    }
+     .respmrt{
+        margin-top: 5rem;
+     }
+    .chicken-c-img>img {
+        width: 150px;
+    }
+    .chicken-c-img{
+        text-align: center;
+    margin-top: -7rem;
+    }
+    .chicken-content-wrp {
+        display: inherit;
+    }
+    .moon___c {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .bg___BTN3 {
+        padding: 10px 5px;
+    }
+    .para___by>p > br{
+        display: none;
+    }
+    .moon___buy__bxc {
+        margin-left: 0rem;
+        width: 100%;
+    }
+    .mrt {
+        margin-top: 30px;
+    }
+    .img-cb {
+        align-items: center;
+    }
+    .title_head{
+        text-align: left;
+    }
+    .card-title {
+        text-align: left;
+    }
+    .card-content {
+        text-align: left;
+    }
+    #marketplace-sec2 {
+        padding: 60px 0px 60px 0px;
+    }
+    .moon___mark>h1 {
+        font-size: 20px;
+        margin-bottom: 2rem;
+    }
+    
     .crate-items > button{
         margin-bottom: 30px;
     }
@@ -665,8 +966,8 @@
         margin-bottom: 30px;
     }
     .bgmarketplace{
-        background-size: cover;
-        padding: 60px 0px 26px 0px;
+        background-size: 100% 100%;
+        padding: 60px 0px 60px 0px;
     }
     .mr-mrt6 {
         margin-top: 30px;
@@ -676,14 +977,17 @@
         font-size: 20px;
     }
     #choose-sec{
-        padding: 60px 0px 100px 0px;
+        padding: 60px 0px 60px 0px;
         background-size: cover;
+    }
+    .btm___arrow>a>img {
+        padding-top: 4rem;
     }
     .alienbal{
         margin-top: 20px;
     }
     .choose-content {
-        margin-top: 72px;
+        margin-top: 20px;
     }
     .slide-heads > h3{
         font-size: 26px;
@@ -710,7 +1014,10 @@
         font-size: 24px;
     }
     .logo-box > a > img {
-        width: 62px;
+        width: 100px;
+    }
+    .header-box {
+        align-items: center;
     }
     .burger-area > a > img {
         width: 34px;

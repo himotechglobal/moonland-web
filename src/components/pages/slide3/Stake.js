@@ -5,6 +5,7 @@ import stoke from '../../images/stoke.png';
 import StakeCard from './StakeCard.js';
 
 import arrow from '../../images/round_arrow.svg';
+import { Link } from 'react-router-dom';
 
 const stake = () => {
  
@@ -27,7 +28,7 @@ const stake = () => {
                                  
                             </div>
                             <div className='btm___arrow2'>
-                    <img src={arrow} alt='arrow image here' />
+                    <Link to='/'><img src={arrow} alt='arrow image here' /></Link>
                 </div>
                         </div>
                     </section>

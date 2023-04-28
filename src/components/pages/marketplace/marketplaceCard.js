@@ -480,7 +480,7 @@ const MarketplaceCard = (props) => {
                 </li>
               </ul>
               <div className="m-buybtn">
-                <a className='bg___BTN2' href={`/buy/${boxArray?.slug}`}>
+                <a className='bg___BTN4 mrt' href={`/buy/${boxArray?.slug}`}>
                   Buy/Sell
                 </a>
 

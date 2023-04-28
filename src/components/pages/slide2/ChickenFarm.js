@@ -12,11 +12,13 @@ import land from '../../images/land.svg';
 import childe from '../../images/childe.svg';
 import stoke from '../../images/stoke.png';
 import marketbtn from '../../images/marketbtn.png';
+import bysine from '../../images/bysine.png'
 import arrow from '../../images/round_arrow.svg';
 import chicken1 from '../../images/chicken10.png';
 import chicken100 from '../../images/chicken100.png';
 import acc__arrow_revse from '../../images/acc__arrow_revse.svg'
 import chicken1000 from '../../images/chicken1000.png';
+import chickSine from '../../images/chickSine.svg'
 import eggs1 from '../../images/eggs1.png';
 import solerimg1 from '../../images/solerimg1.svg'
 import acc__arrow from '../../images/acc__arrow.svg'
@@ -33,6 +35,7 @@ import NFT_ABI from '../../../Config/NFT_ABI.json';
 import TOKEN_ABI from '../../../Config/TOKEN_ABI.json';
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { ethers } from 'ethers';
+import { Link } from 'react-router-dom';
 
 
 
@@ -1942,7 +1945,7 @@ const ChickenFarm = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="slide-heads">
-                                <h1>BUY MOON LAND and SOLAR HARVESTER</h1>
+                                <h1>BUY MOON LAND <span className='dollar__text2'>$</span> SOLAR HARVESTER</h1>
                                 <p>Combine Solor cells and Fluids Harvest</p>
                             </div>
                             {/* <div className="wrp-slide">
@@ -2006,23 +2009,23 @@ const ChickenFarm = () => {
 
                                                     {
                                                         !farmLocked && farmBalance > 0 && farmApprove &&
-                                                        <a className="conbutton" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
+                                                        <a className="bg___BTN2" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
                                                     }
                                                     {
                                                         farmBalance > 0 && !farmApprove &&
-                                                        <a className="conbutton" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
+                                                        <a className="bg___BTN2" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
                                                     }
                                                     {
                                                         farmLocked &&
-                                                        <a className="conbutton" onClick={areaToggle}>Buy More Farm Area</a>
+                                                        <a className="bg___BTN2" onClick={areaToggle}>Buy More Farm Area</a>
                                                     }
                                                     {
                                                         !farmLocked && farmBalance == 0 &&
-                                                        <a className="conbutton" onClick={buyAreaToggle}>Buy Farm Area</a>
+                                                        <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Farm Area</a>
                                                     }
                                                     {
                                                         landIsfree &&
-                                                        <a className="conbutton ml-2" onClick={() => sellfarm()}>Sell Farm Area</a>
+                                                        <a className="bg___BTN2 ml-2" onClick={() => sellfarm()}>Sell Farm Area</a>
                                                     }
 
                                                 </div>
@@ -2178,23 +2181,27 @@ const ChickenFarm = () => {
                                                </div> */}
 
                                         <div className="pool-btns">
-                                            <a className="bg___BTN7" href="/buy/chicken">Buy Chicken</a>
-
-
+                                            <div >
+                                                <img src={solerimg1} alt="" width={100}/>
+                                                <a className="bg___BTN2" href="/buy/chicken">Buy Chicken</a>
+                                            </div>
+                                            <div>
                                             {
                                                 chickenApproved === 0 &&
-                                                <a className="bg___BTN6" onClick={approveChicken} >Approve Chicken for Farm</a>
+                                                <a className="bg___BTN2" onClick={approveChicken} >
+                                                    <img className='sine' src={chickSine} alt=""/>
+                                                    Approve Chicken for Farm</a>
                                             }
 
                                             {
                                                 chickenApproved > 0 && chickenDeposited === 0 &&
-                                                <a className="bg___BTN6" onClick={() => setChickenModal(!chickenModal)} >Put Chicken in Farm</a>
+                                                <a className="bg___BTN2" onClick={() => setChickenModal(!chickenModal)} >Put Chicken in Farm</a>
                                             }
 
 
                                             {
                                                 chickenApproved > 0 && chickenDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
-                                                <a className="bg___BTN6" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more Chicken in Farm</a>
+                                                <a className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more Chicken in Farm</a>
                                             }
 
 
@@ -2202,19 +2209,20 @@ const ChickenFarm = () => {
                                             {
                                                 chickenDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
 
-                                                <a className="bg___BTN6" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove Chicken From Farm</a>
+                                                <a className="bg___BTN2" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove Chicken From Farm</a>
 
                                             }
                                             {
                                                 eggsearned > 0 &&
-                                                <a className="bg___BTN7" onClick={claimEggs} >Claim Eggs</a>
+                                                <a className="bg___BTN2" onClick={claimEggs} >Claim Eggs</a>
                                             }
                                             {
                                                 chickenDeposited > 0 &&
-                                                <a className="bg___BTN7" onClick={() => setaddDaysChickenModal(!addDaysChickenModal)}>Add Feed</a>
+                                                <a className="bg___BTN2" onClick={() => setaddDaysChickenModal(!addDaysChickenModal)}>Add Feed</a>
 
                                             }
 
+                                                </div>
                                         </div>
 
                                     </div>
@@ -2291,11 +2299,11 @@ const ChickenFarm = () => {
                                                     </h3>
                                                     <p>Adult Chickens</p>
                                                 </div>
-                                                
+
                                                 <div className="time__list">
 
                                                     <h3 className="timer">{eggTime}</h3>
-                                                    <p>Time to Grow as Adult</p>
+                                                    <p>Time to Grow <br />as Adult</p>
 
 
                                                 </div>
@@ -2305,7 +2313,7 @@ const ChickenFarm = () => {
                                                 </div>
                                                 <div className="time__list">
                                                     <h3 className="timer">{incubCapacity}</h3>
-                                                    <p>Available Incubators</p>
+                                                    <p>Available <br />Incubators</p>
                                                 </div>
                                             </div>
 
@@ -2343,25 +2351,32 @@ const ChickenFarm = () => {
                                                         <p style={{color: '#fff'}}>Chicken Farming is being upgraded to a newer version with enhanced features between 8:30 hours UTC to 12:30 hours UTC. During this time you won't be able to perform any actions. </p>
                                                </div> */}
 
+
                                         <div className="pool-btns">
-                                            <a className="bg___BTN7" href="/buy/chickenegg">Buy Eggs</a>
+                                        <div >
+                                                <img src={bysine} alt="" width={100}/>
+                                                <a className="bg___BTN2" href="/buy/chickenegg">Buy Eggs</a>
+                                            </div>
+                                            
                                             {
                                                 chickenEggApproved == 0 &&
-                                                <a className="bg___BTN6" onClick={approveChickenEgg} >Approve Eggs for Incubator</a>
+                                                <a className="bg___BTN2" onClick={approveChickenEgg} >
+                                                     <img className='sine' src={chickSine} alt=""/>
+                                                    Approve Eggs for Incubator</a>
                                             }
                                             {
                                                 chickenEggApproved > 0 && chickenEggDeposited == 0 &&
-                                                <a className="bg___BTN6" onClick={eggtoggle} >Put Eggs in Incubator</a>
+                                                <a className="bg___BTN2" onClick={eggtoggle} >Put Eggs in Incubator</a>
                                             }
 
                                             {
                                                 adult > 0 && baseApprovedIncub > 0 &&
-                                                <a className="btn" onClick={claimChicken} >Claim Chickens (Fee: {chickenClaimfee} {baseSymbol}) </a>
+                                                <a className="bg___BTN2" onClick={claimChicken} >Claim Chickens (Fee: {chickenClaimfee} {baseSymbol}) </a>
                                             }
 
                                             {
                                                 adult > 0 && baseApprovedIncub == 0 &&
-                                                <a className="btn" onClick={approvebaseTokenIncub} >Approve MyFarmPet to claim Chickens</a>
+                                                <a className="bg___BTN2" onClick={approvebaseTokenIncub} >Approve MyFarmPet to claim Chickens</a>
                                             }
 
                                         </div>
@@ -2381,13 +2396,13 @@ const ChickenFarm = () => {
                                     </div>
                                 </div>
                                </div> */}
-                          
+
 
                         </div>
                     </div>
                     <div className='btm___arrow'>
-                    <img src={arrow} alt='arrow image here' />
-                </div>
+                       <Link to='/choose'> <img src={arrow} alt='arrow image here' /></Link>
+                    </div>
                 </div>
                 {/* <div className="stokes">
                     <img src={stoke} alt='' />

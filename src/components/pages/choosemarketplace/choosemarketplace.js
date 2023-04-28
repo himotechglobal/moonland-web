@@ -12,6 +12,8 @@ import nft from '../../images/nft.png'
 import choosemplaceleft from '../../images/choosemplaceleft.svg'
 import choosemplaceright from '../../images/choosemplaceright.svg'
 import arrow from '../../images/round_arrow.svg';
+import { Link } from 'react-router-dom';
+
 
 class choosemarketplace extends Component {
     constructor(props) {
@@ -38,14 +40,16 @@ class choosemarketplace extends Component {
                             <div className="col-lg-4">
 
                                 <div className='choosemplace___left'>
+                                    <img src={choosemplaceleft} alt='' width={'100%'}/>
                                     <div className='choosemplace___left__cont'>
                                     <h1>MOON
                                         <br />
                                         MARKETPLACE</h1>
                                     <p>Turn as you need</p>
                                     </div>
-                                    <div>
-                                    <a href="/marketplace" className="bg___BTN5"    >Participate</a>
+                                    
+                                    <div className='choosemplace___botm'>
+                                    <a href="/marketplace" className="bg___BTN4"    >Participate</a>
                                     </div>
                                 </div>
 
@@ -62,14 +66,16 @@ class choosemarketplace extends Component {
                                 </div> */}
 
                                 <div className='choosemplace___right'>
+                                <img src={choosemplaceright} alt='' width={'100%'}/>
                                     <div className='choosemplace___left__cont'>
                                     <h1>NFT
                                         <br />
                                         MARKETPLACE</h1>
                                     <p className='cmplace'>Protect from sun</p>
                                     </div>
-                                    <div>
-                                    <a href="/nft/marketplace" className="bg___BTN5"    >Participate</a>
+                                     
+                                    <div className='choosemplace___botm'>
+                                    <a href="/nft/marketplace" className="bg___BTN4"    >Participate</a>
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +83,7 @@ class choosemarketplace extends Component {
                         </div>
                        </div>
                         <div className='btm___arrow3'>
-                    <img src={arrow} alt='arrow image here' />
+                   <Link to='/'> <img src={arrow} alt='arrow image here' /></Link>
                 </div>
                     </div>
                 </section>

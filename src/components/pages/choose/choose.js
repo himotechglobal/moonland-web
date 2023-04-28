@@ -9,6 +9,7 @@ import pbtn from '../../images/pbtn.png';
 import pbtn2 from '../../images/pbtn2.png';
 import pbtn3 from '../../images/pbtn3.png';
 import arrow from '../../images/round_arrow.svg';
+import { Link } from 'react-router-dom';
 
 class choose extends Component {
     constructor(props) {
@@ -68,8 +69,8 @@ class choose extends Component {
                         </div>
                     </div>
                     <div className='btm___arrow'>
-                    <img src={arrow} alt='arrow image here' />
-                </div>
+                        <Link to='/'><img src={arrow} alt='arrow image here' /></Link>
+                    </div>
                 </section>
                  
                 {/* <div className="stokes">

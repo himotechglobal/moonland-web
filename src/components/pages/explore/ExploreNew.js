@@ -8,12 +8,14 @@ import Config, { API_URL, MARKETPLACE } from '../../../Config2/index.js';
 import MARKETPLACE_ABI from '../../../Config2/MARKETPLACE_ABI.json';
 import NFT_ABI from '../../../Config2/NFT_ABI.json';
 import Web3 from "web3"
+
 import { useState, useEffect } from 'react';
 import ExploreSingle from './ExploreSingle.js';
 // import useWallet from '@binance-chain/bsc-use-wallet'
 import NftSingle from './NftSingle'
 import axios from "axios";
 import { useAccount } from 'wagmi';
+import { Link } from 'react-router-dom';
 
 const ExploreNew = () => {
   let web3Provider = window.ethereum;
@@ -108,6 +110,7 @@ const ExploreNew = () => {
       rows.push({ count: 1 });
     }
     //  alert(rows);
+    console.log(rows);
     setCounter(rows);
 
 
@@ -436,7 +439,7 @@ const ExploreNew = () => {
                   } 
                   </ul> */}
                 </div>
-                <ExploreSingle/>
+               
                  
 
 
@@ -459,8 +462,10 @@ const ExploreNew = () => {
                           else {
                             if (saleArray.length == 0 && _acounter == 0 && (i == counter.length - 1))
                               return (
-                                <div className="text-center w-100 m-0 p-5  card cards2">
+                                <div className='marketplace-box-wrap8'>
+                                  <div className="text-center w-100 m-0 p-5  card cards2">
                                   <h3>No Auction Available</h3>
+                                </div>
                                 </div>
                               )
                           }
@@ -469,9 +474,10 @@ const ExploreNew = () => {
 
                       {
                         saleArray.length == 0 &&
-
+<div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2" >
                           <h3>No Auction Available</h3>
+                        </div>
                         </div>
 
                       }
@@ -499,8 +505,10 @@ const ExploreNew = () => {
                           else {
                             if (instantArray.length == 0 && _dcounter == 0 && (i == counter.length - 1))
                               return (
+                                <div className='marketplace-box-wrap8'>
                                 <div className="text-center w-100 m-0 p-5  card cards2">
                                   <h3>No Auction Available</h3>
+                                </div>
                                 </div>
                               )
                           }
@@ -509,9 +517,10 @@ const ExploreNew = () => {
 
                       {
                         instantArray.length == 0 &&
-
+<div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2" >
                           <h3>No Auction Available</h3>
+                        </div>
                         </div>
 
                       }
@@ -541,8 +550,10 @@ const ExploreNew = () => {
                           else {
                             if (soldArray.length == 0 && (i == counter.length - 1)) {
                               return (
+                                <div className='marketplace-box-wrap8'>
                                 <div className="text-center w-100 m-0 p-5  card  cards2">
                                   <h3>No Auction Available</h3>
+                                </div>
                                 </div>
                               )
                             }
@@ -551,9 +562,10 @@ const ExploreNew = () => {
 
                       {
                         soldArray.length == 0 &&
-
+<div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2">
                           <h3>No Auction Available</h3>
+                        </div>
                         </div>
 
                       }
@@ -579,17 +591,20 @@ const ExploreNew = () => {
                           }
                           else {
                             return (
+                              <div className='marketplace-box-wrap8'>
                               <div className="text-center w-100 m-0 p-5  card cards2">
                                 <h3>No Bids Available</h3>
+                              </div>
                               </div>
                             )
                           }
                         })}
                       {
                         userBids.length == 0 &&
-
+<div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2">
                           <h3>No Bids Available</h3>
+                        </div>
                         </div>
 
                       }
@@ -617,20 +632,22 @@ const ExploreNew = () => {
                           }
                           else {
                             return (
+                              <div className='marketplace-box-wrap8'>
                               <div className="col-lg-12  cards2">
                                 <h3>No Collection Available</h3>
 
+                              </div>
                               </div>
                             )
                           }
                         })}
                       {
                         userNfts.length == 0 &&
-
+<div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2">
                           <h3>No Collection Available</h3>
                         </div>
-
+</div>
                       }
                     </div>
                     {
@@ -662,11 +679,11 @@ const ExploreNew = () => {
                         })}
                       {
                         importedNfts.length == 0 &&
-
+<div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2">
                           <h3>No Imported Collection Available</h3>
                         </div>
-
+</div>
                       }
                     </div>
 
@@ -680,9 +697,11 @@ const ExploreNew = () => {
 
 
                 </div>
-              </div>
 
+              </div>
+              
             </section>
+            
           </div>
         </div>
       </div>

@@ -11,6 +11,7 @@ import cb6 from '../../images/cb6.png';
 import cb7 from '../../images/cb7.png';
 import arrow from '../../images/round_arrow.svg';
 import MarketplaceCard from './marketplaceCard.js';
+import { Link } from 'react-router-dom';
 const ELEMENTS = [
     {
         'slug': 'chicken',
@@ -86,7 +87,7 @@ const marketplace2 = () => {
                     </div>
                 </section>
                 <div className='bottom-arrow'>
-                    <img src={arrow} alt='arrow image here' />
+                    <Link to='/choosemarketplace'><img src={arrow} alt='arrow image here' /></Link>
                 </div>
             </div>
 

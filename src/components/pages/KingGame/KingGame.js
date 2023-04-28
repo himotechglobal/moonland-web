@@ -6,6 +6,7 @@ import Footer from '../footer.js';
 import flower from '../../images/flower.png';
 import { KINGGAME, TX_LINK } from '../../../Config/index.js';
 import KINGGAME_ABI from '../../../Config/KINGGAME_ABI.json';
+import arrow from '../../images/round_arrow.svg';
 
 import Web3 from "web3"
 // import {useWallet} from '@binance-chain/bsc-use-wallet'
@@ -13,6 +14,7 @@ import Web3 from "web3"
 import TOKEN_ABI from "../../../Config/TOKEN_ABI.json"
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { ethers } from 'ethers';
+import { Link } from 'react-router-dom';
 
 
 const KingGame = () => {
@@ -302,9 +304,9 @@ const KingGame = () => {
 
 	if (bidNowError && modal) {
 		// getLastBidder() ;
-			getOtherInforPer();
+		getOtherInforPer();
 
-			setModal(modal);	
+		setModal(modal);
 	}
 	if (bidNowSuccess && modal) {
 		setModal(false);
@@ -508,198 +510,208 @@ const KingGame = () => {
 	return (
 		<div>
 			<Header />
-			<section id="finance-banner">
-				<div className="banner-finace">
+			<div className='king__game'>
+				<section id="finance-banner">
+					<div className="banner-finace">
+						<div className="container">
+							<div className="finance-king_game">
+								<h1>Moon Emperor</h1>
+								<h4>Lorem ipsum is placeholder text commonly used Lorem </h4>
+								<p>Lorem ipsum is placeholder text commonly used Lorem ipsum is placeholder text <br />
+									commonly used Lorem ipsum is placeholder text commonly used Lorem ipsum is <br />
+									placeholder text commonly used</p>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section id="round-sec">
 					<div className="container">
-						<div className="finance-bnr-c">
-							<h3>The Chicken King</h3>
-							<h4>Compete against other farmers to battle the pest and strike the killing blow to be Crowned the Chicken king.</h4>
-							<p>Win 70% of the pest castle, next pest castle 20%, and 10% Goes to charity.</p>
-						</div>
-					</div>
-				</div>
-			</section>
-			<section id="round-sec">
-				<div className="container">
-					<div className="roundbg-img">
-						<div className="round-content">
-							{
-								!gameOn && !winner &&
-								<h3>Next Round in</h3>
-							}
-							{
-								gameOn && !winner && !waiting &&
-								<h3>Game Started. Ends in</h3>
-							}
-							{
-								gameOn && !winner && waiting &&
-								<h3>Game Started. Waiting for Bids</h3>
-							}
-
-							{
-								!winner && !waiting &&
-								<h4>{timer > 0 ? timer : '00:00:00'}</h4>
-							}
-							{
-								!gameOn && !winner &&
-								<p>Prepare for battle!</p>
-							}
-							{
-								gameOn && !winner &&
-								<p>Participate Now!</p>
-							}
-							{
-								winner &&
-								<>
-									<h3>Round Over.</h3>
-									<p className="choose-w">Winner Choosen!</p>
-								</>
-							}
-
-
-							<p>Bug Treasure:{potBalance > 0 ? potBalance : "0"} {tokenSymbol}</p>
-
-
-							{gameOn &&
-								<>
-									<p>Total Bids: {totalBid > 0 ? totalBid : "0"} {tokenSymbol}</p>
-								</>
-
-							}
-
-						</div>
-					</div>
-					<div className="row mrt-bid">
-						<div className="col-lg-6">
-							<div className="bid-box">
-								<div className="bit-c-img">
-									<h3>Bid Now!</h3>
-									<div className="bid-smallbox">
-										<p>{bidAmount > 0 ? bidAmount : '0'} {tokenSymbol}</p>
-										<p>Your Balance {tokenBalance > 0 ? tokenBalance : '0.00'} {tokenSymbol}</p>
-
-
-
-
-
-										{isConnected && approved == 0 &&
-
-											<button onClick={() => {
-												approveNow()
-											}} className="mt-1 conbutton" >Approve</button>
-										}
-										{isConnected && approved > 0 && !winner && gameOn &&
-											<button className="mt-1 conbutton" onClick={() => bidNow()} >Bid Now</button>
-										}
-										{isConnected && winner && lastBidder === address &&
-											<button className="mt-1 conbutton" onClick={() => claim()} >Claim & Restart</button>
-										}
-										{isConnected && winner && lastBidder !== address &&
-											<button className="mt-1 conbutton" onClick={() => claim()} >Restart</button>
-										}
-
-									</div>
-								</div>
-
-							</div>
-						</div>
-						<div className="col-lg-6">
-							<div className="bid-box2">
-								<div className="bit-c-img2">
-									<img src={flower} alt="" />
-									<h3>Current King</h3>
-									{
-										lastBidder != null &&
-										<p>Last bidder: <span><a style={{ color: '#fff' }} href={`https://bscscan.com/address/${lastBidder.substring(0, 6) + "...." + lastBidder.substring(lastBidder.length - 6)}`} target={'_blank'}>{lastBidder.substring(0, 6) + "...." + lastBidder.substring(lastBidder.length - 6)}</a></span></p>
-									}
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="row">
-						<div className="col-lg-12">
-							<div className="event-g">
-								<div className="events-box">
-									<h3 >Bid History</h3>
-
-									<table className="mt-3 eventTable">
+						<div className='marketplace-box-wrap7'>
+							<div className="roundbg-img">
+								<div className="round-content">
+									<div className='next___round'>
 										{
-											events.length === 0 &&
-											<p>No Events</p>
+											!gameOn && !winner &&
+											<h3>Next Round in</h3>
 										}
-										{events.length > 0 && events.map((value, index) => {
-											if (index < 5) {
-												return (
-													<tr>
-														<td width="65%"><a href={TX_LINK + value.transactionHash} target="_blank">Tx: {value.transactionHash}</a></td>
-														<td width="20%">
-															{value.event == "OnWin" &&
-																<span>Restart</span>
-															}
-															{value.event == "OnBid" &&
-																<span>Bid</span>
-															}
-															{value.event != "OnBid" && value.event != "OnWin" &&
-																<span>{value.event}</span>
-															}
+										{
+											gameOn && !winner && !waiting &&
+											<h3>Game Started. Ends in</h3>
+										}
+										{
+											gameOn && !winner && waiting &&
+											<h3>Game Started. Waiting for Bids</h3>
+										}
 
-														</td>
-														<td className="text-right" width="15%">
-															{value.returnValues.amount &&
-																value.returnValues.amount / 1e1 ** tokenDecimals
-															}
-															{!value.returnValues.amount &&
-																<span>NA</span>
-															}</td>
-													</tr>
-												)
-											}
+										{
+											!winner && !waiting &&
+											<h4>{timer > 0 ? timer : '00:00:00'}</h4>
 										}
-										)}
-									</table>
+									</div>
+									<div className='prepare___next'>
+										{
+											!gameOn && !winner &&
+											<p>Prepare for battle!</p>
+										}
+										{
+											gameOn && !winner &&
+											<p>Participate Now!</p>
+										}
+										{
+											winner &&
+											<>
+												<h3>Round Over.</h3>
+												<p className="choose-w">Winner Choosen!</p>
+											</>
+										}
+
+
+										<p>Bug Treasure:{potBalance > 0 ? potBalance : "0"} {tokenSymbol}</p>
+
+
+										{gameOn &&
+											<>
+												<p>Total Bids: {totalBid > 0 ? totalBid : "0"} {tokenSymbol}</p>
+											</>
+
+										}
+									</div>
 
 								</div>
 							</div>
 						</div>
-					</div>
-					<div className="btnrow">
-						<button className="conbutton" onClick={togglePlay}>How to Play?</button>
-					</div>
-					{
-						showPlay &&
+						<div className="row mrt-bid">
+							<div className="col-lg-6">
+								<div className='marketplace-box-wrap7'>
+									<div className="bid-box">
+										<div className="bit-c-img">
+											<h3>Bid Now!</h3>
+											<div className="bid-smallbox">
+												<p>{bidAmount > 0 ? bidAmount : '0'} {tokenSymbol}</p>
+												<p>Your Balance {tokenBalance > 0 ? tokenBalance : '0.00'} {tokenSymbol}</p>
 
-						<div className="row" >
-							<div className="col-lg-12">
-								<div className="dex-box-g">
-									<div className="den-box">
-										<h3>The Chicken King</h3>
-										<p>Compete against other farmers to battle the pest and strike the killing blow to be Crowned the Chicken king.</p>
-										<h4>How to Play?</h4>
-										<p>The chicken king has a 90 seconds countdown timer which resets on each bid.</p>
-										<p>Use your chickens to place a bid that goes into the Pest Treasure balance, allowing you to become eligible to be crowned the chicken king for 24hours.</p>
-										<p>When the timer reaches zero, the last bid wins the game along with the chicken loot that comes with it.</p>
-										<p>Anyone can restart or the winner can claim and restart.</p>
-										<h4>Winning’s distribution?</h4>
-										<p>The contract resets after claim and sets the countdown before a new round begins.</p>
-										<h4>Chicken Loot distribution?</h4>
-										<p>The pest treasure balance will be distributed as follows:</p>
-										<p>-70% credited instantly to the winners address</p>
-										<p>-20% carried over to the next round</p>
-										<p>-10% distributed to charity.</p>
-										<p>Note:</p>
-										<p>-Winners are crowned Chicken King for 24hours before a new battle.</p>
-										<p>-Anyone can bid but the last bidder wins the game.</p>
-										<p>-All bids are final. Your chickens cannot be returned after bids.</p>
+
+
+
+
+												{isConnected && approved == 0 &&
+
+													<button onClick={() => {
+														approveNow()
+													}} className="mt-1 conbutton" >Approve</button>
+												}
+												{isConnected && approved > 0 && !winner && gameOn &&
+													<button className="mt-1 conbutton" onClick={() => bidNow()} >Bid Now</button>
+												}
+												{isConnected && winner && lastBidder === address &&
+													<button className="mt-1 conbutton" onClick={() => claim()} >Claim & Restart</button>
+												}
+												{isConnected && winner && lastBidder !== address &&
+													<button className="mt-1 conbutton" onClick={() => claim()} >Restart</button>
+												}
+
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<div className="col-lg-6">
+								<div className="bid-box2">
+									<div className="bit-c-img2">
+										<h3>Current King</h3>
+										{
+											lastBidder != null &&
+											<p>Last bidder: <span><a style={{ color: '#fff' }} href={`https://bscscan.com/address/${lastBidder.substring(0, 6) + "...." + lastBidder.substring(lastBidder.length - 6)}`} target={'_blank'}>{lastBidder.substring(0, 6) + "...." + lastBidder.substring(lastBidder.length - 6)}</a></span></p>
+										}
 									</div>
 								</div>
 							</div>
 						</div>
+						<div className="row">
+							<div className="col-lg-12">
+								<div className='marketplace-box-wrap7'>
+									<div className="event-g">
+										<div className="events-box">
+											<h3 >Bid History</h3>
 
-					}
+											<table className="mt-3 eventTable">
+												{
+													events.length === 0 &&
+													<p className='no___event'>No Events</p>
+												}
+												{events.length > 0 && events.map((value, index) => {
+													if (index < 5) {
+														return (
+															<tr>
+																<td width="65%"><a href={TX_LINK + value.transactionHash} target="_blank">Tx: {value.transactionHash}</a></td>
+																<td width="20%">
+																	{value.event == "OnWin" &&
+																		<span>Restart</span>
+																	}
+																	{value.event == "OnBid" &&
+																		<span>Bid</span>
+																	}
+																	{value.event != "OnBid" && value.event != "OnWin" &&
+																		<span>{value.event}</span>
+																	}
+
+																</td>
+																<td className="text-right" width="15%">
+																	{value.returnValues.amount &&
+																		value.returnValues.amount / 1e1 ** tokenDecimals
+																	}
+																	{!value.returnValues.amount &&
+																		<span>NA</span>
+																	}</td>
+															</tr>
+														)
+													}
+												}
+												)}
+											</table>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						 
+						<div className="row" >
+								<div className="col-lg-12">
+									<div className='marketplace-box-wrap7'>
+									<div className="dex-box-g">
+										<div className="den-box">
+											<h3>The Chicken King</h3>
+											<p>Compete against other farmers to battle the pest and strike the killing blow to be Crowned the Chicken king.</p>
+											<h4>How to Play?</h4>
+											<p>The chicken king has a 90 seconds countdown timer which resets on each bid.</p>
+											<p>Use your chickens to place a bid that goes into the Pest Treasure balance, allowing you to become eligible to be crowned the chicken king for 24hours.</p>
+											<p>When the timer reaches zero, the last bid wins the game along with the chicken loot that comes with it.</p>
+											<p>Anyone can restart or the winner can claim and restart.</p>
+											<h4>Winning’s distribution?</h4>
+											<p>The contract resets after claim and sets the countdown before a new round begins.</p>
+											<h4>Chicken Loot distribution?</h4>
+											<p>The pest treasure balance will be distributed as follows:</p>
+											<p>-70% credited instantly to the winners address</p>
+											<p>-20% carried over to the next round</p>
+											<p>-10% distributed to charity.</p>
+											<p>Note:</p>
+											<p>-Winners are crowned Chicken King for 24hours before a new battle.</p>
+											<p>-Anyone can bid but the last bidder wins the game.</p>
+											<p>-All bids are final. Your chickens cannot be returned after bids.</p>
+										</div>
+									</div>
+									</div>
+								</div>
+							</div> 
+					</div>
+				</section>
+				<div className='btm___arrow'>
+					<Link to='/game-center'> <img src={arrow} alt='arrow image here' /></Link>
 				</div>
-			</section>
+			</div>
 
-			<Footer />
 
 			<Modal isOpen={modal} toggle={modalToggle} className="connect-box" centered={true}>
 

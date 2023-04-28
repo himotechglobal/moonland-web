@@ -130,15 +130,15 @@ const Header = () => {
         <div className="menu slide-menu-right menu-list-wrp">
           <button class="close-menu">Close &rarr;</button>
           <ul className="menu-list2">
-            <li><a href="/#banner-sec">Home</a></li>
-            <li><a href="/#about">Invest </a></li>
+            <li><NavLink style={navLinkStyles} to="/">Home</NavLink></li>
+            <li><NavLink style={navLinkStyles} to="/choose">Invest </NavLink></li>
             {/* <li><a href="/#team-sec">The Team </a></li> */}
             {/* <li><a href="/#tokensec">Tokenomics</a></li> */}
 
             {/* <li><a href="/#roadmap-sec">Roadmap</a></li> */}
-            <li><a href="/staking">Stake</a></li>
-            <li><a href="/choosemarketplace">Marketplace</a></li>
-            <li><a href="/game-center">Play</a></li>
+            <li><NavLink style={navLinkStyles} to="/staking">Stake</NavLink></li>
+            <li><NavLink style={navLinkStyles} to="/choosemarketplace">Marketplace</NavLink></li>
+            <li><NavLink style={navLinkStyles} to="/game-center">Play</NavLink></li>
             {/* <li>
                   <a className="conbutton" href="/choose">Launch App</a>
                     </li> */}

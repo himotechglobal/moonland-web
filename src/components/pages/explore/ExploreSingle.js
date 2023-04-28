@@ -16,6 +16,7 @@ import { useAccount } from 'wagmi';
 import { ConnectWalletBtn } from '../ConnectWalletBtn.js';
 
 const ExploreSingle = (props) => {
+  
   let web3Provider = window.ethereum;
   // const wallet = useWallet();
   const { address, isConnected } = useAccount

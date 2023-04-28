@@ -745,7 +745,7 @@ const StakeCard = (props) => {
                             <div className="wrp-harvest">
                                 <div className="input-cont"><input placeholder="0" value={userEarned > 0 ? userEarned : '0'} readOnly /></div>
                                 <div className="btn-havest">
-                                    <button className="conbutton stdbtn" onClick={claimTokens} >Claim</button>
+                                    <a className="bg___BTN3" onClick={claimTokens} >Claim</a>
                                 </div>
                             </div>
                         </>
@@ -759,7 +759,7 @@ const StakeCard = (props) => {
                                 <div className="input-cont"><input placeholder="0" value={userStaked > 0 ? userStaked : '0'} readOnly /></div>
                                 <div className="btn-havest">
 
-                                    <button className="conbutton stdbtn" onClick={withdrawToggle}   >Withdraw</button>
+                                    <a className="bg___BTN3" onClick={withdrawToggle}   >Withdraw</a>
                                 </div>
                             </div>
                         </>
@@ -774,14 +774,16 @@ const StakeCard = (props) => {
                                 <div className="btn-havest">
 
                                     {!address &&
+                                    
                                         <ConnectWalletBtn />
+                                         
                                     }
                                     {address && approved === 0 &&
-                                        <button className="conbutton stdbtn" onClick={approveToken} >Approve</button>
+                                        <a className="bg___BTN3" onClick={approveToken} >Approve</a>
 
                                     }
                                     {address && approved > 0 &&
-                                        <button className="conbutton stdbtn" onClick={depositToggle}  >Deposit</button>
+                                        <a className="bg___BTN3" onClick={depositToggle}  >Deposit</a>
 
                                     }
                                 </div>
@@ -792,7 +794,7 @@ const StakeCard = (props) => {
                     {
                         (STAKING_ARRAY[props.index].status == 3 || (!stakeEnabled && !claimEnabled && !unstakeEnabled)) &&
                         <div className="text-center" >
-                            <a className="bg___BTN4"    >Participate</a>
+                            <a className="bg___BTN3"    >Participate</a>
                         </div>
                     }
 

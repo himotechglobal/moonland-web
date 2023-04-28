@@ -36,17 +36,17 @@ export const ConnectWalletBtn = () => {
             {(() => {
               if (!connected) {
                 return (
-                  <button style={{textTransform : 'uppercase'}} className="conbutton" onClick={openConnectModal} type="button">
+                  <a style={{textTransform : 'uppercase'}} className="conbutton" onClick={openConnectModal} type="button">
                    Unlock Wallet
-                  </button>
+                  </a>
                 );
               }
 
               if (chain.unsupported) {
                 return (
-                  <button className="conbutton" onClick={openChainModal} type="button">
+                  <a className="conbutton" onClick={openChainModal} type="button">
                     Wrong network
-                  </button>
+                  </a>
                 );
               }
 
@@ -80,12 +80,12 @@ export const ConnectWalletBtn = () => {
                     {chain.name}
                   </button> */}
 
-                  <button style={{textTransform : 'uppercase'}} className="conbutton" onClick={openAccountModal} type="button">
+                  <a style={{textTransform : 'uppercase'}} className="conbutton" onClick={openAccountModal} type="button">
                     {account.displayName}
                     {/* {account.displayBalance
                       ? ` (${account.displayBalance})`
                       : ''} */}
-                  </button>
+                  </a>
                 </div>
               );
             })()}
