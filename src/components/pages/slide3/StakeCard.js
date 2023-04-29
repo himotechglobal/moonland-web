@@ -814,7 +814,7 @@ const StakeCard = (props) => {
                     <div className="modaltext text-center mt-4" >Transaction is Processing...</div>
 
                 </ModalBody>
-                <Button className="depositButton mr-auto ml-auto mb-5" onClick={toggle}>Close</Button>
+                <Button className="bg___BTN2 mr-auto ml-auto mb-5" onClick={toggle}>Close</Button>
 
             </Modal>
 
@@ -837,7 +837,7 @@ const StakeCard = (props) => {
                         Enter Amount to Deposit
 
 
-                        <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxDeposit}>Max</span>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxDeposit}>Max</span>
                     </label>
                     <input className="form-control mb-3" onChange={handleDepositChange} type="text" value={damount} />
 
@@ -853,9 +853,9 @@ const StakeCard = (props) => {
                 <ModalFooter>
 
 
-                    <Button className="depositButton mr-3" onClick={depositToken}>Deposit</Button>
+                    <Button className="bg___BTN2 mr-3" onClick={depositToken}>Deposit</Button>
 
-                    <Button className="depositButton" onClick={depositToggle}>Cancel</Button>
+                    <Button className="bg___BTN2" onClick={depositToggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
 
@@ -879,7 +879,7 @@ const StakeCard = (props) => {
                         Enter Amount to Withdraw
 
 
-                        <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxWithdraw}>Max</span>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxWithdraw}>Max</span>
                     </label>
                     <input className="form-control mb-3" onChange={handleWithdrawChange} type="text" value={wamount} />
 
@@ -894,9 +894,9 @@ const StakeCard = (props) => {
                 </ModalBody>
                 <ModalFooter>
 
-                    <Button className="depositButton mr-3" onClick={withdrawToken}>Withdraw</Button>
+                    <Button className="bg___BTN2 mr-3" onClick={withdrawToken}>Withdraw</Button>
 
-                    <Button className="depositButton" onClick={withdrawToggle}>Cancel</Button>
+                    <Button className="bg___BTN2" onClick={withdrawToggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
 

@@ -743,10 +743,10 @@ const ExploreNew = () => {
         </ModalBody>
         <ModalFooter>
 
-          <Button className="depositButton mr-3" onClick={importTokens}  >Import</Button>
+          <Button className="bg___BTN2 mr-3" onClick={importTokens}  >Import</Button>
 
 
-          <Button className="depositButton" onClick={importToggle}>Cancel</Button>
+          <Button className="bg___BTN2" onClick={importToggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
 

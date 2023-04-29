@@ -2709,7 +2709,7 @@ p.marquee span {
 .pop-r-btn {
   margin-left: 20px;
 }
-
+ 
 /* chicken page css closed here */
 
 
@@ -2720,13 +2720,38 @@ p.marquee span {
 
 /* Modal Content */
 .modal-content {
-  background-color: #8cc63f;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: linear-gradient(45deg, #020021, #AE00C5)padding-box, 
+  linear-gradient(179deg, transparent, transparent, #0a719740, #0A7197, #0A7197, #0A7197) border-box;
+  border-radius: 30px;
   margin: auto;
   padding: 20px;
-  border: 1px solid #888;
+  color: #fff;
+  border: 1px solid #88888800;
+  font-family: 'MADE TOMMY';
 
+}
+.btn-secondary:hover{
+  background-color: #5a626800 !important;
+    border-color: #545b6200 !important;
+}
+.btn-secondary:focus{
+  background-color: #5a626800 !important;
+    border-color: #545b6200 !important;
+    box-shadow: inherit !important;
+}
+.form-control{
+  background: linear-gradient(45deg, #020021, #AE00C5)padding-box, linear-gradient(302deg, transparent, transparent, #0a719740, #0A7197, #0A7197, #0A7197) border-box;
+    background-clip: padding-box !important;
+    border: 1px solid #ced4da52 !important;
+    border-radius: 8px !important;
+    color: #fff !important;
+    margin-top: 1rem;
+}
+.form-control:focus{
+  box-shadow: inherit !important;
+}
+.modal-footer{
+  border-top: 1px solid #dee2e638 !important;
 }
 
 /* The Close Button */
@@ -3593,10 +3618,11 @@ p.marquee span {
 
 .input-cont>input {
   display: inline-block;
+  font-family: 'Panton-Trial';
   width: 130px;
   outline: none;
   border: none;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 18px;
   color: #fff;
   background-color: transparent;
@@ -7401,3 +7427,4 @@ a {
 }
 
 /* swap page css closed here */
+

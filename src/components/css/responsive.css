@@ -1,5 +1,11 @@
 
 @media(max-width: 1166px){
+    .bg-new10{
+        background-image: url(../images/gamebg1024.png);
+    }
+    .bgmarketplace_staking{
+        background-image: url(../images/bgmark1024.png);
+    }
     #sale-wrp {
         height: 100vh;
     }
@@ -121,6 +127,18 @@
 
 
 @media(max-width: 992px){
+    .bg-new10{
+        background-image: url(../images/gamebg768.png);
+    }
+    .slide-bg{
+        background-image: url(../images/farmresp768.png);
+    }
+    .bgmarketplace_staking{
+        background-image: url(../images/bgmark768.png);
+    }
+    #choose-sec{
+        background-image: url(../images/stakingbg_resp.png);
+    }
     .choosemplace___right {
         margin-top: 2rem;
     }
@@ -569,6 +587,24 @@
    
 }
 @media(max-width: 580px){
+    .chooseBox____cont>h1{
+        font-size: 2rem;
+    }
+    .js__ac{
+        margin-bottom: 1rem;
+    }
+    .sine{
+        margin-right: 10px;
+    }
+    .bg-new10{
+        background-image: url(../images/gamebg360.png);
+    }
+    .slide-bg{
+        background-image: url(../images/farmresp360.png);
+    }
+    .bgmarketplace_staking {
+        background-image: url(../images/bgmark360.png);
+    }
     .choosemplace___right {
         margin-top: 1rem;
     }
@@ -664,8 +700,9 @@ width: 100%;
         width: 100%;
     }
     .alientime {
-        flex-wrap: wrap;
+        display: grid;
         row-gap: 15px;
+        justify-content: center;
     }
     .acc__summery {
         margin: -0.1rem 1rem 0rem 1rem;
@@ -684,8 +721,12 @@ width: 100%;
         padding: 10px 15px;
     }
     .alientime__accordian {
-        flex-wrap: wrap;
+        display: grid;
         row-gap: 15px;
+        justify-content: center;
+    }
+    .acc__arrow {
+        width: 58%;
     }
     .alienbtns {
         width: 74%;
@@ -978,7 +1019,7 @@ width: 100%;
     }
     #choose-sec{
         padding: 60px 0px 60px 0px;
-        background-size: cover;
+        background-image: url(../images/stakingbg_resp360.png);
     }
     .btm___arrow>a>img {
         padding-top: 4rem;

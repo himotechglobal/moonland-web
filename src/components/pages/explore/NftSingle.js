@@ -120,7 +120,7 @@ const NftSingle = (props) => {
                      </ul>
                      </div>
                      
-                     <button class="x-product-place-bid-button" onClick={saleToggle} >Put On Sale</button>                        
+                     <button class="bg___BTN2" onClick={saleToggle} >Put On Sale</button>                        
                    
 
                  </div>

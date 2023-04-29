@@ -799,14 +799,14 @@ const elements = (props) => {
                         {
                             !isApprovedERC20 ?
 
-                            <Button className="depositButton mr-3" onClick={approveToken}>Approve</Button>
+                            <Button className="bg___BTN2 mr-3" onClick={approveToken}>Approve</Button>
                             :
                             ContractTokenBalance?.formatted<depositAmount
                             ?<p>
                                 marketplace have no {ELEMENTS[key].name} Balance
                             </p> 
                             :
-                            <Button className="depositButton mr-3" onClick={buyFarmTokens}>Buy</Button>
+                            <Button className="bg___BTN2 mr-3" onClick={buyFarmTokens}>Buy</Button>
 
                         }
                         {/* {
@@ -818,16 +818,16 @@ const elements = (props) => {
 
                         {
                             aseetApproval < sellAmount &&
-                            <Button className="depositButton mr-3" onClick={approveAsset}>Approve {ELEMENTS[key].name}</Button>
+                            <Button className="bg___BTN2 mr-3" onClick={approveAsset}>Approve {ELEMENTS[key].name}</Button>
                         }
 
                         {
                             aseetApproval > sellAmount &&
-                            <Button className="depositButton mr-3" onClick={sellFarmTokens}>Sell</Button>
+                            <Button className="bg___BTN2 mr-3" onClick={sellFarmTokens}>Sell</Button>
                         }
 
 
-                        <Button className="depositButton" onClick={buyToggle}>Cancel</Button>
+                        <Button className="bg___BTN2" onClick={buyToggle}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
 
@@ -861,7 +861,7 @@ const elements = (props) => {
                                 </>
                             }
 
-                            <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxSell}>Max</span>
+                            <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxSell}>Max</span>
                         </label>
                         <input className="form-control mb-3" onChange={handleSellChange} type="text" value={samount} />
                         {
@@ -882,14 +882,14 @@ const elements = (props) => {
                     <ModalFooter>
                         {
                             aseetApproval < sellAmount &&
-                            <Button className="depositButton mr-3" onClick={approveAsset}>Approve {ELEMENTS[key].name}</Button>
+                            <Button className="bg___BTN2 mr-3" onClick={approveAsset}>Approve {ELEMENTS[key].name}</Button>
                         }
 
                         {
                             aseetApproval >= sellAmount &&
-                            <Button className="depositButton mr-3" onClick={sellFarmTokens}>Sell</Button>
+                            <Button className="bg___BTN2 mr-3" onClick={sellFarmTokens}>Sell</Button>
                         }
-                        <Button className="depositButton" onClick={sellToggle}>Cancel</Button>
+                        <Button className="bg___BTN2" onClick={sellToggle}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
 
@@ -902,7 +902,7 @@ const elements = (props) => {
                         <div className="modaltext text-center mt-4" >Transaction is Processing...</div>
 
                     </ModalBody>
-                    <Button className="depositButton mr-auto ml-auto mb-5" onClick={toggle}>Close</Button>
+                    <Button className="bg___BTN2 mr-auto ml-auto mb-5" onClick={toggle}>Close</Button>
 
                 </Modal>
             </div>

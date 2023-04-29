@@ -2171,7 +2171,9 @@ const ChickenFarm = () => {
 
                             {show &&
                                 <div className='acc__summery'>
-                                    <div className='acc__summery__in'>
+                                    <div className='acc__summery__in'
+                                    
+                                    >
 
 
 
@@ -2353,7 +2355,7 @@ const ChickenFarm = () => {
 
 
                                         <div className="pool-btns">
-                                        <div >
+                                        <div className='js__ac'>
                                                 <img src={bysine} alt="" width={100}/>
                                                 <a className="bg___BTN2" href="/buy/chickenegg">Buy Eggs</a>
                                             </div>
@@ -2419,7 +2421,7 @@ const ChickenFarm = () => {
                     <div className="modaltext text-center mt-4" >Transaction is Processing...</div>
 
                 </ModalBody>
-                <Button className="depositButton mr-auto ml-auto mb-5" onClick={toggle}>Close</Button>
+                <Button className="bg___BTN2  mr-auto ml-auto mb-5" onClick={toggle}>Close</Button>
 
             </Modal>
 
@@ -2440,7 +2442,7 @@ const ChickenFarm = () => {
                         </span>
                     </div>
                     <label className="mb-3"><br />Enter Quantity to Farm
-                        <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
 
                     </label>
                     <input className="form-control" onChange={handlecDepositChange} type="text" value={cdamount} />
@@ -2466,18 +2468,18 @@ const ChickenFarm = () => {
                 <ModalFooter>
                     {
                         baseApprovedFarm == 0 &&
-                        <Button className="depositButton mr-3" onClick={approvebaseTokenFarm}>Approve {baseSymbol}</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={approvebaseTokenFarm}>Approve {baseSymbol}</Button>
 
                     }
                     {
                         chickenFoodApproved == 0 && baseApprovedFarm > 0 &&
-                        <Button className="depositButton mr-3" onClick={approveChickenFood}>Approve {chickenFoodSymbol}</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={approveChickenFood}>Approve {chickenFoodSymbol}</Button>
                     }
                     {
                         chickenApproved > 0 && chickenFoodApproved > 0 && baseApprovedFarm > 0 &&
-                        <Button className="depositButton mr-3" onClick={depositChicken}>Deposit</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={depositChicken}>Deposit</Button>
                     }
-                    <Button className="depositButton" onClick={chickentoggle}>Cancel</Button>
+                    <Button className="bg___BTN2" onClick={chickentoggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
 
@@ -2499,7 +2501,7 @@ const ChickenFarm = () => {
                         </span>
                     </div>
                     <label className="mb-3"><br />Enter Quantity to add in Farm
-                        <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
 
                     </label>
 
@@ -2520,18 +2522,18 @@ const ChickenFarm = () => {
                 <ModalFooter>
                     {
                         baseApprovedFarm == 0 &&
-                        <Button className="depositButton mr-3" onClick={approvebaseTokenFarm}>Approve {baseSymbol}</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={approvebaseTokenFarm}>Approve {baseSymbol}</Button>
 
                     }
                     {
                         chickenFoodApproved == 0 && baseApprovedFarm > 0 &&
-                        <Button className="depositButton mr-3" onClick={approveChickenFood}>Approve {chickenFoodSymbol}</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={approveChickenFood}>Approve {chickenFoodSymbol}</Button>
                     }
                     {
                         chickenApproved > 0 && chickenFoodApproved > 0 && baseApprovedFarm > 0 &&
-                        <Button className="depositButton mr-3" onClick={depositMoreChicken}>Deposit</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={depositMoreChicken}>Deposit</Button>
                     }
-                    <Button className="depositButton" onClick={moreChickentoggle}>Cancel</Button>
+                    <Button className="bg___BTN2" onClick={moreChickentoggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
 
@@ -2572,13 +2574,13 @@ const ChickenFarm = () => {
                 <ModalFooter>
                     {
                         baseApproved == 0 &&
-                        <Button className="depositButton mr-3" onClick={approvebaseToken}>Approve {baseSymbol}</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={approvebaseToken}>Approve {baseSymbol}</Button>
                     }
                     {
                         baseApproved > 0 &&
-                        <Button className="depositButton mr-3" onClick={buyAreaNFT}>Buy</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={buyAreaNFT}>Buy</Button>
                     }
-                    <Button className="depositButton" onClick={buyAreaToggle}>Cancel</Button>
+                    <Button className="bg___BTN2" onClick={buyAreaToggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
 
@@ -2617,13 +2619,13 @@ const ChickenFarm = () => {
 
                     {
                         baseApproved == 0 &&
-                        <Button className="depositButton mr-3" onClick={approvebaseToken}>Approve {baseSymbol}</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={approvebaseToken}>Approve {baseSymbol}</Button>
                     }
                     {
                         baseApproved > 0 &&
-                        <Button className="depositButton mr-3" onClick={addAreaNFT}>Add</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={addAreaNFT}>Add</Button>
                     }
-                    <Button className="depositButton" onClick={areaToggle}>Cancel</Button>
+                    <Button className="bg___BTN2" onClick={areaToggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
 
@@ -2641,7 +2643,7 @@ const ChickenFarm = () => {
 
                     </div>
                     <label className="mb-3"><br />Enter Quantity to Incubate
-                        <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxceDeposit}>Max</span>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxceDeposit}>Max</span>
 
                     </label>
                     <input className="form-control" onChange={handleeDepositChange} type="text" value={cedamount} />
@@ -2660,13 +2662,13 @@ const ChickenFarm = () => {
 
                     {
                         baseApprovedIncub == 0 &&
-                        <Button className="depositButton mr-3" onClick={approvebaseTokenIncub}>Approve {baseSymbol}</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={approvebaseTokenIncub}>Approve {baseSymbol}</Button>
                     }
                     {
                         chickenEggApproved > 0 && baseApprovedIncub > 0 &&
-                        <Button className="depositButton mr-3" onClick={depositEgg}>Deposit</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={depositEgg}>Deposit</Button>
                     }
-                    <Button className="depositButton" onClick={eggtoggle}>Cancel</Button>
+                    <Button className="bg___BTN2" onClick={eggtoggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
 
@@ -2687,7 +2689,7 @@ const ChickenFarm = () => {
 
                     </div>
                     <label className="mb-3"><br />Enter Days to add in Farming
-                        <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxDayDeposit}>Max</span>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxDayDeposit}>Max</span>
 
                     </label>
                     <input className="form-control" onChange={handleAddDayChange} type="text" value={addDayamount} />
@@ -2704,13 +2706,13 @@ const ChickenFarm = () => {
                 <ModalFooter>
                     {
                         chickenFoodApproved == 0 &&
-                        <Button className="depositButton mr-3" onClick={approveChickenFood}>Approve {chickenFoodSymbol}</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={approveChickenFood}>Approve {chickenFoodSymbol}</Button>
                     }
                     {
                         chickenFoodApproved > 0 &&
-                        <Button className="depositButton mr-3" onClick={addDays}>Add Days</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={addDays}>Add Days</Button>
                     }
-                    <Button className="depositButton" onClick={addDaysChickentoggle}>Cancel</Button>
+                    <Button className="bg___BTN2" onClick={addDaysChickentoggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
 
@@ -2728,7 +2730,7 @@ const ChickenFarm = () => {
 
                     </div>
                     <label className="mb-3"><br />Enter Quantity to remove from Farm
-                        <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxcrDeposit}>Max</span>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcrDeposit}>Max</span>
 
                     </label>
                     <input className="form-control" onChange={handlecrDepositChange} type="text" value={crdamount} />
@@ -2743,13 +2745,13 @@ const ChickenFarm = () => {
                 <ModalFooter>
                     {
                         baseApprovedFarm == 0 &&
-                        <Button className="depositButton mr-3" onClick={approvebaseTokenFarm}>Approve {baseSymbol}</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={approvebaseTokenFarm}>Approve {baseSymbol}</Button>
 
                     }
 
-                    <Button className="depositButton mr-3" onClick={removeChicken}>Remove</Button>
+                    <Button className="bg___BTN2 mr-3" onClick={removeChicken}>Remove</Button>
 
-                    <Button className="depositButton" onClick={removeChickentoggle}>Cancel</Button>
+                    <Button className="bg___BTN2" onClick={removeChickentoggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
 
