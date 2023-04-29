@@ -17,7 +17,7 @@ import pigicon from '../../images/pigicon.png';
 import childe from '../../images/childe.svg'
 import pigicon2 from '../../images/pigicon2.png';
 import pigicon3 from '../../images/pigicon3.png';
-import mbuild from '../../images/mbuild.svg'
+import mbuild from '../../images/mbuild.png'
 import arrow from '../../images/round_arrow.svg';
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { ethers } from 'ethers';

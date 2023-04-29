@@ -7,7 +7,7 @@
         background-image: url(../images/bgmark1024.png);
     }
     #sale-wrp {
-        height: 100vh;
+        min-height: 100vh;
     }
     .marketplace-box-wrap6 {
         margin: 0rem 0rem;
