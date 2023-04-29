@@ -41,7 +41,7 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				{/* <Route exact path="/" element={<Dashboard />} /> */}
-				<Route path="/" name="Home Page" element={<Home />} />
+				<Route path="/" name="Home Page" element={<Choose />} />
 				<Route path="/new" element={<New />} />
 				<Route path="/king-game" element={<KingGame />} />
 				<Route path="/game-center" element={<GameCenter />} />

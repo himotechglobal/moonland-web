@@ -130,8 +130,8 @@ const Header = () => {
         <div className="menu slide-menu-right menu-list-wrp">
           <button class="close-menu">Close &rarr;</button>
           <ul className="menu-list2">
-            <li><NavLink style={navLinkStyles} to="/">Home</NavLink></li>
-            <li><NavLink style={navLinkStyles} to="/choose">Invest </NavLink></li>
+            <li><NavLink style={navLinkStyles} to="/home">Home</NavLink></li>
+            <li><NavLink style={navLinkStyles} to="/">Invest </NavLink></li>
             {/* <li><a href="/#team-sec">The Team </a></li> */}
             {/* <li><a href="/#tokensec">Tokenomics</a></li> */}
 
