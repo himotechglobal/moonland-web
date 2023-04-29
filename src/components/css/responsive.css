@@ -587,6 +587,9 @@
    
 }
 @media(max-width: 580px){
+    .menu-list-wrp{
+        background-image: url(../images/menubgimg360.png);
+    }
     .chooseBox____cont>h1{
         font-size: 2rem;
     }
@@ -619,7 +622,8 @@
         margin-left: 0rem;
     }
     .roundbg-img{
-        padding: 20px;
+        padding: 20px 20px 150px 20px;
+        background-image: url(../images/finresp.png);
     }
     .prepare___next>p {
         text-align: center;
@@ -630,15 +634,16 @@
     }
     .finance-king_game>h1 {
         font-size: 20px;
+        padding-bottom: 1rem;
     }
     .den-box>h4 {
         font-size: 16px;
     }
     .finance-king_game>h4 {
-        font-size: 16px;
+       display: none;
     }
     .finance-king_game>p {
-        font-size: 14px;
+        display: none;
     }
     .bid-smallbox {
         width: 100%;

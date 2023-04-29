@@ -218,7 +218,7 @@ p {
   padding: 10px 20px;
   font-weight: bold;
   font-size: 14px;
-  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff99, #03E1FF) border-box;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
   border-radius: 50em;
   border: 5px solid transparent;
   text-transform: capitalize !important;
@@ -372,7 +372,7 @@ p {
   padding: 10px 20px;
   font-weight: bold;
   font-size: 14px;
-  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff99, #03E1FF) border-box;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
   border-radius: 50em;
   border: 5px solid transparent;
   text-transform: capitalize !important;
@@ -396,7 +396,7 @@ p {
   padding: 10px 20px;
   font-weight: bold;
   font-size: 14px;
-  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff99, #03E1FF) border-box;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
   border-radius: 50em;
   border: 5px solid transparent;
   text-transform: capitalize !important;
@@ -424,7 +424,7 @@ p {
   padding: 10px 20px;
   font-weight: bold;
   font-size: 14px;
-  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff99, #03E1FF) border-box;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
   border-radius: 50em;
   border: 5px solid transparent;
   text-transform: capitalize !important;
@@ -447,7 +447,7 @@ p {
   padding: 10px 20px;
   font-weight: bold;
   font-size: 14px;
-  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff99, #03E1FF) border-box;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
   border-radius: 50em;
   border: 5px solid transparent;
   text-transform: capitalize !important;
@@ -1296,13 +1296,12 @@ p {
 
 /* menu css open here */
 .menu-list-wrp {
-  width: 285px;
-  padding: 40px 20px 40px 40px;
-  background: linear-gradient(239deg, #020021, #9901B2);
-  box-shadow: 0px 0px 12px -2px #DD00F2;
+  width: 100%;
+  padding: 30px;
+  background-image: url(../images/menubgimg.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   position: fixed;
-  border-radius: 32px;
-
   top: 0px;
   height: 100vh;
   z-index: 100000;
@@ -1325,7 +1324,7 @@ p {
 }
 
 .menu-list2 {
-  margin: 0px;
+  margin:7rem 0rem 0rem 0rem;
   padding: 0px;
   list-style: none;
 }
@@ -1497,9 +1496,9 @@ p {
 }
 
 .slide-menu-right {
-  left: -320px;
+  left: -100%;
   top: 0;
-  width: 280px;
+  width: 100%;
   height: 100%;
   text-align: center;
 }
@@ -1512,16 +1511,14 @@ p {
 button.close-menu {
   font-family: 'MADE TOMMY';
   color: #fff;
-  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff99, #03E1FF) border-box;
+  background: inherit;
   border-radius: 8px;
   border: none;
   margin: 0px;
-  width: 100px;
-  padding: 5px 10px;
 }
 
 body.smr-open .slide-menu-right {
-  left: -20px;
+  left: 0px;
 }
 
 .viewdetais-hide {
@@ -2245,7 +2242,7 @@ a.btn {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 140px 0px 80px 0px;
-  height: auto;
+  min-height: 100vh;
 }
 
 .wrp-slide {
@@ -2318,7 +2315,7 @@ a.btn {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 11rem 0rem 6rem 0rem;
-  height: auto;
+  min-height: 100vh;
 }
 
 .choose-img>img {
@@ -2377,7 +2374,7 @@ a.btn {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 60px 0px 120px 0px;
-  height: auto;
+  min-height: 100vh;
 }
 
 .bgmarketplace_staking {
@@ -2386,7 +2383,7 @@ a.btn {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 60px 0px 0px 0px;
-  height: auto;
+  min-height: 100vh;
 }
 
 .marketplace-img {
@@ -2642,7 +2639,7 @@ p.marquee span {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 11rem 0rem 6rem 0rem;
-  height: auto;
+ min-height: 100vh;
 }
 
 
@@ -3713,7 +3710,7 @@ p.marquee span {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 140px 0px 80px 0px;
-  height: auto;
+min-height: 100vh;
 }
 
 .finance-bnr-c {
@@ -5704,7 +5701,7 @@ p.marquee span {
 }
 
 .tabs6 a.active {
-  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff99, #03E1FF) border-box;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
   border-radius: 50em;
   border: 5px solid transparent;
 }

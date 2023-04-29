@@ -11,6 +11,13 @@ import logo from '../images/logo.svg';
 import burger from '../images/burger.png';
 import btn from '../images/btn.png';
 import { TOKEN } from '../../Config';
+import teleg from '../images/teleg.svg'
+import twit from '../images/twit.svg'
+import disc from '../images/disc.svg'
+
+
+
+import closedicon from '../images/closedicon.svg'
 import TOKEN_ABI from '../../Config/TOKEN_ABI.json'
 import {
   useConnectModal,
@@ -128,7 +135,10 @@ const Header = () => {
         </div>
 
         <div className="menu slide-menu-right menu-list-wrp">
-          <button class="close-menu">Close &rarr;</button>
+        <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+        <Link to="/"> <img src={logo} alt=""/></Link>
+          <button class="close-menu"><img src={closedicon} alt=''/></button>
+        </div>
           <ul className="menu-list2">
             <li><NavLink style={navLinkStyles} to="/">Home</NavLink></li>
             <li><NavLink style={navLinkStyles} to="/choose">Invest </NavLink></li>
@@ -142,8 +152,17 @@ const Header = () => {
             {/* <li>
                   <a className="conbutton" href="/choose">Launch App</a>
                     </li> */}
-            <li><ConnectWalletBtn /></li>
+            {/* <li><ConnectWalletBtn /></li> */}
           </ul>
+
+          <ul style={{display:'flex',justifyContent:'center', margin:'24rem 0rem 0rem 0rem',padding:0,listStyle:'none','@media(max-width : 600px)':{margin:'5rem 0rem 0rem 0rem'}}}>
+            <li><a href='#'><img src={teleg} alt=''/></a></li>
+            <li style={{padding:'0rem 2rem'}}><a href='#'><img src={twit} alt=''/></a></li>
+            <li><a href='#'><img src={disc} alt=''/></a></li>
+          </ul>
+          <div style={{marginTop:'2rem'}}>
+          <button className='bg___BTN2'>Get started</button>
+          </div>
         </div>
 
       </div>
