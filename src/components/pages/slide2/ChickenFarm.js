@@ -1945,7 +1945,7 @@ const ChickenFarm = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="slide-heads">
-                                <h1>BUY MOON LAND <span className='dollar__text2'>$</span> SOLAR HARVESTER</h1>
+                                <h1>BUY MOON LAND <span className='dollar__text2'>&</span> SOLAR HARVESTER</h1>
                                 <p>Combine Solor cells and Fluids Harvest</p>
                             </div>
                             {/* <div className="wrp-slide">
@@ -2322,7 +2322,7 @@ const ChickenFarm = () => {
                                             <div className='acc__arrow'>
                                                 <div className='acc__arrow___icon' onClick={() => setShow1(prev => !prev)} >
 
-                                                    {show ?
+                                                    {show1 ?
                                                         <img src={acc__arrow_revse} alt='' />
                                                         :
                                                         <img src={acc__arrow} alt='' />

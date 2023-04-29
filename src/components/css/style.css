@@ -2051,7 +2051,7 @@ a.conbutton:hover {
 }
 
 .acc__summery__in {
-  background: linear-gradient(45deg, #020021, #AE00C5);
+  background-color: #9F04B4;
   border-radius: 0px 0px 20px 20px;
   padding: 1.5rem;
 }

@@ -2099,7 +2099,7 @@ const PigFarm = () => {
                 <section id="pigs-sec1">
                     <div className="container">
                         <div className="slide-heads">
-                            <h1>BUY MOON LAND,BUILD <span className='dollar__text2'>$</span> TRADE</h1>
+                            <h1>BUY MOON LAND,BUILD <span className='dollar__text2'>&</span> TRADE</h1>
                             <p>Combine Solor cells and Fluids Harvest</p>
                         </div>
                         {/* <div className="pig-head">
