@@ -176,6 +176,12 @@ p {
   top: 28%;
   right: 0;
 }
+.imgdesk{
+  display: block;
+}
+.imgmob{
+  display: none;
+}
 
 .game__cont>h3 {
   color: #fff;

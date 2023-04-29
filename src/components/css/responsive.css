@@ -587,6 +587,12 @@
    
 }
 @media(max-width: 580px){
+    .imgdesk{
+        display: none;
+    }
+    .imgmob{
+        display: block;
+    }
     .menu-list-wrp{
         background-image: url(../images/menubgimg360.png);
     }
@@ -755,7 +761,9 @@ width: 100%;
         margin-top: 5rem;
      }
     .chicken-c-img>img {
-        width: 150px;
+        width: 100%;
+        background-color: #250042;
+        border-radius: 35px;
     }
     .chicken-c-img{
         text-align: center;

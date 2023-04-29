@@ -26,9 +26,18 @@ import mat from '../../images/mat.svg';
 import energy from '../../images/energy.png';
 import eules from '../../images/eules.svg';
 import fluds from '../../images/fluds.png';
+
+
+import b1 from '../../images/b1.svg'
+import b2 from '../../images/b2.svg'
+import b3 from '../../images/b3.svg'
+import b4 from '../../images/b4.svg'
+import b5 from '../../images/b5.svg'
+import b6 from '../../images/b6.svg'
+import b7 from '../../images/b7.svg'
 // import {useWallet} from '@binance-chain/bsc-use-wallet'
 
- 
+
 
 
 const ELEMENTS = {
@@ -36,18 +45,21 @@ const ELEMENTS = {
         'name': 'CHICKEN',
         'price': '10',
         'image': land,
+        'img': b1,
         'address': '0x0a92bc06443E7D4cd38735ED01B5C5C3C74F6773'
     },
     'chickenegg': {
         'name': 'CHICKEN EGG',
         'price': '0.12',
         'image': solor,
+        'img': b2,
         'address': '0x78AC3A5bC58455B41601189FDCF028F63e8c9ced'
     },
     'chickenfood': {
         'name': 'CHICKEN FOOD',
         'price': '1',
         'image': mooon,
+        'img': b3,
         'address': '0x50C0268e1D368420Ce99766BF89AbecEfCFC7644'
 
     },
@@ -55,6 +67,7 @@ const ELEMENTS = {
         'name': 'BOAR',
         'price': '100',
         'image': mat,
+        'img': b4,
         'address': '0x486bfd5AE6bf094E403bCF8dae14b708b15B143E'
 
     },
@@ -62,6 +75,7 @@ const ELEMENTS = {
         'name': 'SOW',
         'price': '100',
         'image': energy,
+        'img': b5,
         'address': '0x26B00Fb006Cb64c1f5D4ed407c6aBdF902F1c595'
 
     },
@@ -69,6 +83,7 @@ const ELEMENTS = {
         'name': 'PIGLET',
         'price': '10',
         'image': eules,
+        'img': b6,
         'address': '0x7f7936Bf782F327bF549809bC6469dbE52280867'
 
     },
@@ -76,6 +91,7 @@ const ELEMENTS = {
         'name': 'PIG FOOD',
         'price': '5',
         'image': fluds,
+        'img': b7,
         'address': '0xea049FB6D789deEb85630c16576cC0CEB75555F7'
 
     }
@@ -246,9 +262,9 @@ const elements = (props) => {
         watch: true
     })
 
-    const {data:ContractTokenBalance}=useBalance({
-        address:MARKETPLACE,
-        token:ELEMENTS[key].address
+    const { data: ContractTokenBalance } = useBalance({
+        address: MARKETPLACE,
+        token: ELEMENTS[key].address
     })
     // console.log(ContractTokenBalance?.formatted>=depositAmount);
 
@@ -259,16 +275,16 @@ const elements = (props) => {
         functionName: 'allowance',
         args: [address, MARKETPLACE],
         watch: true,
-        enabled:address!==undefined
+        enabled: address !== undefined
     })
 
-    const [isApprovedERC20,setIsApprovedERC20]=useState(true);
+    const [isApprovedERC20, setIsApprovedERC20] = useState(true);
 
     useEffect(() => {
         if (_approval && address) {
             const price = parseFloat?.(depositAmount === "" ? "0" : depositAmount)
             const allowance = parseFloat?.(ethers.utils.formatUnits?.(_approval))
-            console.log(allowance >= price,price,allowance);
+            console.log(allowance >= price, price, allowance);
             if (allowance >= price) {
                 setIsApprovedERC20(true)
             } else {
@@ -467,7 +483,7 @@ const elements = (props) => {
         abi: MARKETPLACE_ABI,
         functionName: 'buyfarmTokens',
         args: [ELEMENTS[key]?.address, _amount],
-        enabled:ContractTokenBalance?.formatted>=depositAmount && _amount>0
+        enabled: ContractTokenBalance?.formatted >= depositAmount && _amount > 0
 
         // enabled: _amount > 0 ? true : false
     })
@@ -672,72 +688,73 @@ const elements = (props) => {
             <Header />
             <div className="bg-chicken">
                 <div className="container">
-                <div className='moon___mark'>
-                            <h1>MOON MARKETPLACE</h1>
-                        </div>
+                    <div className='moon___mark'>
+                        <h1>MOON MARKETPLACE</h1>
+                    </div>
                     <div className="row">
                         <div className="col-lg-3"></div>
                         <div className="col-lg-6">
                             <div className='marketplace-box-wrap2 respmrt'>
                                 <div className="marketplace-box">
-                            <div className="chicken-content-wrp">
+                                    <div className="chicken-content-wrp">
 
-                                <div className="chicken-c-img">
-                                    <img src={ELEMENTS[key].image} alt=""  />
+                                        <div className="chicken-c-img">
+                                            <img className='imgdesk' src={ELEMENTS[key].image} alt="" />
+                                            <img className='imgmob' src={ELEMENTS[key].img} alt="" />
+                                        </div>
+                                        <div className='moon___buy__bxc'>
+
+                                            <h1>LAND IN MOON</h1>
+                                            <div className='moon___c'>
+                                                <p>Rate</p>
+
+                                                <h6>${ELEMENTS[key].price} ~ {tokenPrice}</h6>
+                                            </div>
+                                            <div className='moon___buy__btm mb__m'>
+                                                <p>Total Sold</p>
+                                                <p className='amount___p'>0</p>
+
+                                            </div>
+                                            <div className='moon___buy__btm '>
+                                                <p>Total sold value</p>
+                                                <p className='amount___p'>0</p>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div className='para___by'>
+                                        <p>Lorem ipsum is placeholder text commonly used in the <br />
+                                            graphic, print, and publishing industries for previewing <br />
+                                            layouts and visual mockups.</p>
+                                    </div>
+
+                                    <div className='buy___btn__box'>
+                                        <div className="wrp-btn-back">
+                                            {
+                                                available === 0 ?
+                                                    <a href="#" className="bg___BTN3" >Sold Out</a>
+                                                    :
+                                                    <a href="#" className="bg___BTN3" onClick={buyToggle} >Buy</a>
+                                            }
+                                            <a href="#" className="bg___BTN3" onClick={sellToggle} >Sell</a>
+
+                                        </div>
+                                        <div className="wrp-btn-back">
+                                            <a href="/marketplace" className="bg___BTN3">Marketplace</a>
+                                            <a href="/choose" className="bg___BTN3">Farming</a>
+
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className='moon___buy__bxc'>
-                                   
-                                   <h1>LAND IN MOON</h1>
-                                   <div className='moon___c'>
-                                    <p>Rate</p>
-                                   
-                                    <h6>${ELEMENTS[key].price} ~ {tokenPrice}</h6>
-                                    </div>
-                                    <div className='moon___buy__btm mb__m'>
-                                        <p>Total Sold</p>
-                                        <p className='amount___p'>0</p>
-
-                                    </div>
-                                    <div className='moon___buy__btm '>
-                                        <p>Total sold value</p>
-                                        <p className='amount___p'>0</p>
-
-                                    </div>
-                                </div>
-                               
-                            </div>
-<div className='para___by'>
-    <p>Lorem ipsum is placeholder text commonly used in the <br/>
-    graphic, print, and publishing industries for previewing <br/>
-    layouts and visual mockups.</p>
-</div>
-
-                           <div className='buy___btn__box'>
-                           <div className="wrp-btn-back">
-                                {
-                                    available === 0 ?
-                                        <a href="#" className="bg___BTN3" >Sold Out</a>
-                                        :
-                                        <a href="#" className="bg___BTN3" onClick={buyToggle} >Buy</a>
-                                }
-                                <a href="#" className="bg___BTN3" onClick={sellToggle} >Sell</a>
-
-                            </div>
-                            <div className="wrp-btn-back">
-                                <a  href="/marketplace" className="bg___BTN3">Marketplace</a>
-                                <a href="/choose" className="bg___BTN3">Farming</a>
-
-                            </div>
-                           </div>
-                            </div>
                             </div>
                         </div>
                         <div className="col-lg-3"></div>
                     </div>
                     <div className='btm___arrow'>
-                    <Link to='/marketplace'><img src={arrow} alt='arrow image here' /></Link>
-                </div>
-                   
+                        <Link to='/marketplace'><img src={arrow} alt='arrow image here' /></Link>
+                    </div>
+
                 </div>
 
                 <Modal isOpen={buyModal} toggle={buyToggle} centered={true}>
@@ -748,7 +765,7 @@ const elements = (props) => {
                         <div className="moveRight">
                             <span className="pull-left">
                                 Your {ELEMENTS[key].name} Balance<br />
-                                {aseetBalance> 0 ? aseetBalance : "0"}
+                                {aseetBalance > 0 ? aseetBalance : "0"}
                             </span>
                             <span className="pull-right">
                                 Your Token Balance<br />
@@ -799,14 +816,14 @@ const elements = (props) => {
                         {
                             !isApprovedERC20 ?
 
-                            <Button className="bg___BTN2 mr-3" onClick={approveToken}>Approve</Button>
-                            :
-                            ContractTokenBalance?.formatted<depositAmount
-                            ?<p>
-                                marketplace have no {ELEMENTS[key].name} Balance
-                            </p> 
-                            :
-                            <Button className="bg___BTN2 mr-3" onClick={buyFarmTokens}>Buy</Button>
+                                <Button className="bg___BTN2 mr-3" onClick={approveToken}>Approve</Button>
+                                :
+                                ContractTokenBalance?.formatted < depositAmount
+                                    ? <p>
+                                        marketplace have no {ELEMENTS[key].name} Balance
+                                    </p>
+                                    :
+                                    <Button className="bg___BTN2 mr-3" onClick={buyFarmTokens}>Buy</Button>
 
                         }
                         {/* {
