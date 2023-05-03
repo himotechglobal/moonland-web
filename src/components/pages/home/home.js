@@ -3,7 +3,6 @@ import React, { Component, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import $ from "jquery";
-
 import Header from '../../pages/header.js';
 import Footer from '../../pages/footer.js';
 import stoke from '../../images/stoke.png';

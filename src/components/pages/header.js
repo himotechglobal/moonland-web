@@ -155,7 +155,7 @@ const Header = () => {
             {/* <li><ConnectWalletBtn /></li> */}
           </ul>
 
-          <ul style={{display:'flex',justifyContent:'center', margin:'24rem 0rem 0rem 0rem',padding:0,listStyle:'none','@media(max-width : 600px)':{margin:'5rem 0rem 0rem 0rem'}}}>
+          <ul style={{display:'flex',justifyContent:'center', margin:'9rem 0rem 0rem 0rem',padding:0,listStyle:'none'}}>
             <li><a href='#'><img src={teleg} alt=''/></a></li>
             <li style={{padding:'0rem 2rem'}}><a href='#'><img src={twit} alt=''/></a></li>
             <li><a href='#'><img src={disc} alt=''/></a></li>
