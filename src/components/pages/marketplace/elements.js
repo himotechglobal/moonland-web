@@ -41,58 +41,58 @@ import b7 from '../../images/b7.svg'
 
 
 const ELEMENTS = {
-    'chicken': {
-        'name': 'CHICKEN',
+    'solar': {
+        'name': 'SOLAR',
         'price': '10',
-        'image': land,
-        'img': b1,
-        'address': '0x0a92bc06443E7D4cd38735ED01B5C5C3C74F6773'
-    },
-    'chickenegg': {
-        'name': 'CHICKEN EGG',
-        'price': '0.12',
         'image': solor,
-        'img': b2,
-        'address': '0x78AC3A5bC58455B41601189FDCF028F63e8c9ced'
+        'img': b1,
+        'address': '0x57f450240b7a9eAEDfb6FE8DfA83087b4f312109'
     },
-    'chickenfood': {
-        'name': 'CHICKEN FOOD',
+    'solarCell': {
+        'name': 'SOLAR CELL',
+        'price': '0.12',
+        'image': energy,
+        'img': b2,
+        'address': '0xD5DF9651c2731dA0d47978A79f4F6594034038eC'
+    },
+    'fluid': {
+        'name': 'FLUID',
         'price': '1',
-        'image': mooon,
+        'image': fluds,
         'img': b3,
-        'address': '0x50C0268e1D368420Ce99766BF89AbecEfCFC7644'
+        'address': '0xd6e52657A95248f51cAB46065f314711a4cd1cdc'
 
     },
-    'boar': {
-        'name': 'BOAR',
+    'thermix': {
+        'name': 'THERMIX',
         'price': '100',
         'image': mat,
         'img': b4,
-        'address': '0x486bfd5AE6bf094E403bCF8dae14b708b15B143E'
+        'address': '0x12F32f5FC8C87b053DfBc8F56C159094B42730d1'
 
     },
-    'sow': {
-        'name': 'SOW',
+    'metlux': {
+        'name': 'METLUX',
         'price': '100',
-        'image': energy,
+        'image': land,
         'img': b5,
-        'address': '0x26B00Fb006Cb64c1f5D4ed407c6aBdF902F1c595'
+        'address': '0x8D1502d8Acc70b861F58186270Bc81F671e0B2d8'
 
     },
-    'piglet': {
-        'name': 'PIGLET',
+    'eule': {
+        'name': 'EULE',
         'price': '10',
         'image': eules,
         'img': b6,
-        'address': '0x7f7936Bf782F327bF549809bC6469dbE52280867'
+        'address': '0xd63E96e180661e094383e66AA838863A87FDeB9F'
 
     },
-    'pigfood': {
-        'name': 'PIG FOOD',
+    'positron': {
+        'name': 'POSITRON',
         'price': '5',
-        'image': fluds,
+        'image': mooon,
         'img': b7,
-        'address': '0xea049FB6D789deEb85630c16576cC0CEB75555F7'
+        'address': '0x16775217Bab1C67D0b60104B52b3504B37E7FB89'
 
     }
 }
@@ -112,13 +112,13 @@ const elements = (props) => {
     const [available, setAvailable] = useState(0);
 
     const [decimals, setDecimals] = useState(0);
-    const [damount, setdAmount] = useState('');
+    const [damount, setdAmount] = useState(0);
 
 
 
     const [samount, setsamount] = useState('');
 
-    const [depositAmount, setDepositAmount] = useState("");
+    const [depositAmount, setDepositAmount] = useState(0);
     const [sellAmount, setSellAmount] = useState(0);
 
     const [depositError, setDepositError] = useState(false);
@@ -144,61 +144,50 @@ const elements = (props) => {
 
 
 
-    useEffect(() => {
-        // if (window.ethereum) {
-        //     web3Provider = window.ethereum;
-        // }
-        // else {
-        //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
-
-        // }
-
-        getData();
-        getPrice();
-    }, [address, modal])
 
 
 
     const { data: _getPriceChicken } = useContractRead({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'getTokenPerChicken',
+        functionName: 'getTokenPerSolar',
         watch: true,
     })
+   
     const { data: _getPriceChickenegg } = useContractRead({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'getTokenPerEgg',
+        functionName: 'getTokenPerCell',
         watch: true,
     })
     const { data: _getPriceChickenfood } = useContractRead({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'getTokenPerChickenFood',
+        functionName: 'getTokenPerSolarFood',
         watch: true,
     })
     const { data: _getPriceBoar } = useContractRead({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'getTokenPerBoar',
+        functionName: 'getTokenPerThermix',
         watch: true,
     })
     const { data: _getPriceSow } = useContractRead({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'getTokenPerSow',
+        functionName: 'getTokenPerMetlux',
         watch: true,
     })
     const { data: _getPricePiglet } = useContractRead({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'getTokenPerPiglet',
+        functionName: 'getTokenPerEule',
         watch: true,
     })
     const { data: _getPricePigfood } = useContractRead({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'getTokenPerPigfood',
+        functionName: 'getTokenPerPositrons',
         watch: true,
     })
     const { data: _getFeeSellFee } = useContractRead({
@@ -226,12 +215,13 @@ const elements = (props) => {
         watch: true,
     })
     const { data: _available } = useContractRead({
-        address: ELEMENTS[key].address?._atoken,
+        address: ELEMENTS[key].address._atoken,
         abi: TOKEN_ABI,
         functionName: 'balanceOf',
         args: [MARKETPLACE],
         watch: true,
     })
+    // console.log(_available);
     const { data: _balance1 } = useContractRead({
         address: _baseToken,
         abi: TOKEN_ABI,
@@ -239,6 +229,7 @@ const elements = (props) => {
         args: [address],
         watch: true,
     })
+   
     const { data: _assetBalance1 } = useContractRead({
         address: ELEMENTS[key].address,
         abi: TOKEN_ABI,
@@ -246,6 +237,21 @@ const elements = (props) => {
         args: [address],
         watch: true
     })
+    const { data: _getSold1 } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalSolarSold",
+        watch: true
+      })
+    // console.log(parseFloat(_getSold1 / 1e18).toFixed(2));
+    const { data: _getSoldValue1 } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalSolarSoldValue",
+        watch: true
+    })
+    // console.log(parseFloat(_getSoldValue1 / 1e18).toFixed(2));
+    // console.log(ELEMENTS[key].address);
     const { data: _assetDecimals } = useContractRead({
         address: ELEMENTS[key].address,
         abi: TOKEN_ABI,
@@ -266,6 +272,7 @@ const elements = (props) => {
         address: MARKETPLACE,
         token: ELEMENTS[key].address
     })
+   
     // console.log(ContractTokenBalance?.formatted>=depositAmount);
 
     // console.log(_assetAdd)
@@ -284,7 +291,7 @@ const elements = (props) => {
         if (_approval && address) {
             const price = parseFloat?.(depositAmount === "" ? "0" : depositAmount)
             const allowance = parseFloat?.(ethers.utils.formatUnits?.(_approval))
-            console.log(allowance >= price, price, allowance);
+            // console.log(allowance >= price, price, allowance);
             if (allowance >= price) {
                 setIsApprovedERC20(true)
             } else {
@@ -297,7 +304,7 @@ const elements = (props) => {
 
     // console.log(parseFloat(ethers.utils.formatEther(_approval)) >= parseFloat(depositAmount))
 
-
+// console.log(_getPriceChicken);
     const getPrice = async () => {
         // let _web3 = new Web3(web3Provider);
         // let _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
@@ -400,13 +407,39 @@ const elements = (props) => {
 
     }
 
+    useEffect(() => {
+        // if (window.ethereum) {
+        //     web3Provider = window.ethereum;
+        // }
+        // else {
+        //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
+
+        // }
+
+        getData();
+        getPrice();
+    }, [address, modal,_getPriceChicken,_assetApproval1,_approval,_assetBalance1,_balance1,_available,_baseToken,_getFeeSellFee,_getPricePigfood,_getPricePiglet,_getPriceSow,_getPriceBoar,_getPriceChickenfood,_getPriceChicken,_getPriceChickenegg,_getSoldValue1,_getSold1])
+
+
+    const handleSellChange = (e) => {
+        // if(e.target.value!==""&&e.target.value!==0){
+        setSellAmount(parseFloat(e.target.value));
+        setsamount(e.target.value);
+    // }else{
+        // setSellAmount(0);
+        // setsamount(0);
+        // }
+
+    }
 
     const { config: sellFarmTokensConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'sellFarmTokens',
-        args: [ELEMENTS[key].address, parseFloat(sellAmount)]
+        functionName: 'sellMoonTokens',
+        args: [ELEMENTS[key].address,isNaN(sellAmount)?0:  ethers.utils.parseEther?.((sellAmount).toString())]
     })
+
+
 
     const { data: sellFarmTokensData, writeAsync: sellFarmTokensWriteAsync, isError: sellFarmTokensError } = useContractWrite(sellFarmTokensConfig_)
 
@@ -417,12 +450,14 @@ const elements = (props) => {
 
     if (sellFarmTokensError && modal) {
         getPrice();
+        setModal(false);
         //     getData();
         //     setModal(modal);
         //     sellToggle()
     }
-    if (sellFarmTokensSuccess && modal) {
+    if (sellFarmTokensSuccess && modal && sellModal) {
         setModal(false);
+        setSellModal(false)
     }
 
 
@@ -435,10 +470,7 @@ const elements = (props) => {
 
         setSellError(false)
         // let _tokenAdd = ELEMENTS[key].address;
-        setModal(!modal);
-        await sellFarmTokensWriteAsync?.()
-
-
+      
 
         let _amount = parseFloat(sellAmount);
 
@@ -450,7 +482,8 @@ const elements = (props) => {
             return false;
         }
         else {
-
+            setModal(!modal);
+            await sellFarmTokensWriteAsync?.()
             // _amount = _web3.utils.toWei(_amount.toString());
 
             // _marketContract.methods.sellFarmTokens(_tokenAdd, _amount).send({
@@ -474,21 +507,28 @@ const elements = (props) => {
 
     }
 
+    const handleDepositChange = (e) => {
+        setDepositAmount(parseFloat(e.target.value));
+        setdAmount(e.target.value);
+    }
 
+
+  
     // let _tokenAdd = ELEMENTS[key]?.address;
-    let _amount = parseInt(depositAmount) ? ethers.utils.parseUnits?.(parseInt(depositAmount).toString()) : 0
-    // console.log(_amount);
+    console.log(depositAmount);
+    let _amount = isNaN(depositAmount)? 0: ethers.utils.parseEther?.((depositAmount).toString())
+  console.log((depositAmount));
     const { config: buyFarmTokensConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'buyfarmTokens',
+        functionName: 'buyMoonTokens',
         args: [ELEMENTS[key]?.address, _amount],
         enabled: ContractTokenBalance?.formatted >= depositAmount && _amount > 0
 
         // enabled: _amount > 0 ? true : false
     })
 
-    // console.log(_amount);
+
 
     const { data: buyFarmTokensData, writeAsync: buyFarmTokensWriteAsync, isError: buyFarmTokensError } = useContractWrite(buyFarmTokensConfig_)
 
@@ -540,18 +580,7 @@ const elements = (props) => {
 
     }
 
-    const handleDepositChange = (e) => {
-        setDepositAmount(e.target.value);
-        setdAmount(e.target.value);
-
-    }
-
-
-    const handleSellChange = (e) => {
-        setSellAmount(parseFloat(e.target.value));
-        setsamount(e.target.value);
-
-    }
+    
 
     let _amount2 = ethers.utils.parseEther(parseInt('10000000000000')?.toString());
     const { config: approveAssetConfig_ } = usePrepareContractWrite({
@@ -704,20 +733,19 @@ const elements = (props) => {
                                         </div>
                                         <div className='moon___buy__bxc'>
 
-                                            <h1>LAND IN MOON</h1>
+                                            <h1>{ELEMENTS[key].name}</h1>
                                             <div className='moon___c'>
                                                 <p>Rate</p>
-
-                                                <h6>${ELEMENTS[key].price} ~ {tokenPrice}</h6>
+                                                <h6>$ {ELEMENTS[key]?.price} ~ {tokenPrice}</h6>
                                             </div>
                                             <div className='moon___buy__btm mb__m'>
                                                 <p>Total Sold</p>
-                                                <p className='amount___p'>0</p>
+                                                <p className='amount___p'>{parseFloat(_getSold1 / 1e18).toFixed()}</p>
 
                                             </div>
                                             <div className='moon___buy__btm '>
                                                 <p>Total sold value</p>
-                                                <p className='amount___p'>0</p>
+                                                <p className='amount___p'>{parseFloat(_getSoldValue1 / 1e18).toFixed()}</p>
 
                                             </div>
                                         </div>
@@ -788,8 +816,9 @@ const elements = (props) => {
                             }
 
                             {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxDeposit}>Max</span> */}
+                          
                         </label>
-                        <input className="form-control mb-3" onChange={handleDepositChange} type="text" value={damount} />
+                        <input className="form-control mb-3" onChange={handleDepositChange} type="number" value={damount} />
                         {
                             (key === 'chickenfood' || key === 'pigfood') &&
 
@@ -813,19 +842,20 @@ const elements = (props) => {
 
 
 
+                    
                         {
                             !isApprovedERC20 ?
-
                                 <Button className="bg___BTN2 mr-3" onClick={approveToken}>Approve</Button>
                                 :
                                 ContractTokenBalance?.formatted < depositAmount
                                     ? <p>
-                                        marketplace have no {ELEMENTS[key].name} Balance
+                                        Marketplace have no {ELEMENTS[key].name} Balance
                                     </p>
                                     :
                                     <Button className="bg___BTN2 mr-3" onClick={buyFarmTokens}>Buy</Button>
 
                         }
+                    
                         {/* {
                             isApprovedERC20  && 
 
@@ -837,7 +867,7 @@ const elements = (props) => {
                             aseetApproval < sellAmount &&
                             <Button className="bg___BTN2 mr-3" onClick={approveAsset}>Approve {ELEMENTS[key].name}</Button>
                         }
-
+  
                         {
                             aseetApproval > sellAmount &&
                             <Button className="bg___BTN2 mr-3" onClick={sellFarmTokens}>Sell</Button>

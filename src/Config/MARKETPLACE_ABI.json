@@ -1,5 +1,71 @@
 [
 	{
+		"inputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_solarToken",
+				"type": "address"
+			},
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_cellToken",
+				"type": "address"
+			},
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_solarFluidToken",
+				"type": "address"
+			},
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_thermixToken",
+				"type": "address"
+			},
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_metluxToken",
+				"type": "address"
+			},
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_euleToken",
+				"type": "address"
+			},
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_positronsToken",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_baseToken",
+				"type": "address"
+			},
+			{
+				"internalType": "contract MoonLandNFT",
+				"name": "_moonLand",
+				"type": "address"
+			},
+			{
+				"internalType": "contract MoonLandNFT",
+				"name": "_moonLandBuild",
+				"type": "address"
+			},
+			{
+				"internalType": "contract BUILDING",
+				"name": "_solarAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "contract BUILDING",
+				"name": "__buildAddress",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -76,868 +142,53 @@
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_area",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "addFarmLandArea",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_area",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "addFarmLandAreaPigsty",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_area",
-				"type": "uint256"
-			}
-		],
-		"name": "buyFarmLand",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_area",
-				"type": "uint256"
-			}
-		],
-		"name": "buyFarmLandPigsty",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_farmtoken",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_quantity",
-				"type": "uint256"
-			}
-		],
-		"name": "buyfarmTokens",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"name": "_buildAddress",
+		"outputs": [
+			{
+				"internalType": "contract BUILDING",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_area",
+				"type": "uint256"
+			},
 			{
 				"internalType": "uint256",
 				"name": "_tokenId",
 				"type": "uint256"
 			}
 		],
-		"name": "sellFarmLand",
+		"name": "addMoonLandArea",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_area",
+				"type": "uint256"
+			},
 			{
 				"internalType": "uint256",
 				"name": "_tokenId",
 				"type": "uint256"
 			}
 		],
-		"name": "sellFarmLandPigsty",
+		"name": "addMoonLandAreaPigsty",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_farmtoken",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_quantity",
-				"type": "uint256"
-			}
-		],
-		"name": "sellFarmTokens",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract Token",
-				"name": "_baseToken",
-				"type": "address"
-			}
-		],
-		"name": "setbaseToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_boarToken",
-				"type": "address"
-			}
-		],
-		"name": "setBoarToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_busdPerBoar",
-				"type": "uint256"
-			}
-		],
-		"name": "setBusdPerBoar",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_busdPerchicken",
-				"type": "uint256"
-			}
-		],
-		"name": "setBusdPerchicken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_busdPerChickenFood",
-				"type": "uint256"
-			}
-		],
-		"name": "setBusdPerChickenFood",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_busdPerEggToken",
-				"type": "uint256"
-			}
-		],
-		"name": "setBusdPerEggToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_busdPerFarmArea",
-				"type": "uint256"
-			}
-		],
-		"name": "setBusdPerFarmArea",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_busdPerPigfood",
-				"type": "uint256"
-			}
-		],
-		"name": "setBusdPerPigfood",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_busdPerPiglet",
-				"type": "uint256"
-			}
-		],
-		"name": "setBusdPerPiglet",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_busdPerSow",
-				"type": "uint256"
-			}
-		],
-		"name": "setBusdPerSow",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_boarBuy",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_boarBuyValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setBuyValuesBoar",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_chickenBuy",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_chickenBuyValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setBuyValuesChicken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_chickenFarmBuy",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_chickenFarmBuyValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setBuyValuesChickenFarm",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_chickenFoodBuy",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_chickenFoodBuyValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setBuyValuesChickenFood",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_eggBuy",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_eggBuyValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setBuyValuesEgg",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pigFarmBuy",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_pigFarmBuyValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setBuyValuesPigFarm",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pigFoodBuy",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_pigFoodBuyValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setBuyValuesPigFood",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pigletBuy",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_pigletBuyValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setBuyValuesPiglet",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_sowBuy",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_sowBuyValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setBuyValuesSow",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_chickenGrams",
-				"type": "uint256"
-			}
-		],
-		"name": "setChickenFoodGramsPerUsd",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_chickenFoodToken",
-				"type": "address"
-			}
-		],
-		"name": "setChickenFoodToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_chickenToken",
-				"type": "address"
-			}
-		],
-		"name": "setChickenToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_eggToken",
-				"type": "address"
-			}
-		],
-		"name": "setEggToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract Farming",
-				"name": "_farmAddress",
-				"type": "address"
-			}
-		],
-		"name": "setFarmAddress",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract FarmLandNFT",
-				"name": "_farmLand",
-				"type": "address"
-			}
-		],
-		"name": "setFarmLand",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_feeTaker",
-				"type": "address"
-			}
-		],
-		"name": "setFeeTaker",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_maintoken",
-				"type": "address"
-			}
-		],
-		"name": "setmainToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bool",
-				"name": "_mintAllowed",
-				"type": "bool"
-			}
-		],
-		"name": "setMintAllowed",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract Farming",
-				"name": "_farmAddress",
-				"type": "address"
-			}
-		],
-		"name": "setPigFarmAddress",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_pigFoodToken",
-				"type": "address"
-			}
-		],
-		"name": "setPigFoodToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_pigletToken",
-				"type": "address"
-			}
-		],
-		"name": "setPigletToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_sellFee",
-				"type": "uint256"
-			}
-		],
-		"name": "setSellfee",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_boarSold",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_boarSoldValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setSoldValuesBoar",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_chickenSold",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_chickenSoldValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setSoldValuesChicken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_chickenFarmSold",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_chickenFarmSoldValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setSoldValuesChickenFarm",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_chickenFoodSold",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_chickenFoodSoldValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setSoldValuesChickenFood",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_eggSold",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_eggSoldValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setSoldValuesEgg",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pigFarmSold",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_pigFarmSoldValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setSoldValuesPigFarm",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pigFoodSold",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_pigFoodSoldValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setSoldValuesPigFood",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_pigletSold",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_pigletSoldValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setSoldValuesPiglet",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_sowSold",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_sowSoldValue",
-				"type": "uint256"
-			}
-		],
-		"name": "setSoldValuesSow",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_sowToken",
-				"type": "address"
-			}
-		],
-		"name": "setSowToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_tokenAddr",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_to",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "transferAnyBEP20Tokens",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_chickenToken",
-				"type": "address"
-			},
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_eggToken",
-				"type": "address"
-			},
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_chickenFoodToken",
-				"type": "address"
-			},
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_boarToken",
-				"type": "address"
-			},
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_sowToken",
-				"type": "address"
-			},
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_pigletToken",
-				"type": "address"
-			},
-			{
-				"internalType": "contract FarmTokens",
-				"name": "_pigFoodToken",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "_baseToken",
-				"type": "address"
-			},
-			{
-				"internalType": "contract FarmLandNFT",
-				"name": "_farmLand",
-				"type": "address"
-			},
-			{
-				"internalType": "contract FarmLandNFT",
-				"name": "_farmLandPig",
-				"type": "address"
-			},
-			{
-				"internalType": "contract Farming",
-				"name": "_farmAddress",
-				"type": "address"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
 	},
 	{
 		"inputs": [],
@@ -954,20 +205,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "boarToken",
-		"outputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "busdPerBoar",
+		"name": "busdPerCellToken",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -980,33 +218,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "busdPerChicken",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "busdPerChickenFood",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "busdPerEggToken",
+		"name": "busdPerEule",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1032,7 +244,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "busdPerPigfood",
+		"name": "busdPerMetlux",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1045,7 +257,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "busdPerPiglet",
+		"name": "busdPerPositrons",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1058,7 +270,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "busdPerSow",
+		"name": "busdPerSolar",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1071,20 +283,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "chickenFoodToken",
-		"outputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "chickenGrams",
+		"name": "busdPerSolarFluid",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1097,10 +296,67 @@
 	},
 	{
 		"inputs": [],
-		"name": "chickenToken",
+		"name": "busdPerThermix",
 		"outputs": [
 			{
-				"internalType": "contract FarmTokens",
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_area",
+				"type": "uint256"
+			}
+		],
+		"name": "buyMoonLand",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_area",
+				"type": "uint256"
+			}
+		],
+		"name": "buyMoonLandPigsty",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_moonToken",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_quantity",
+				"type": "uint256"
+			}
+		],
+		"name": "buyMoonTokens",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "cellToken",
+		"outputs": [
+			{
+				"internalType": "contract MoonTokens",
 				"name": "",
 				"type": "address"
 			}
@@ -1110,62 +366,10 @@
 	},
 	{
 		"inputs": [],
-		"name": "eggToken",
+		"name": "euleToken",
 		"outputs": [
 			{
-				"internalType": "contract FarmTokens",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "farmAddress",
-		"outputs": [
-			{
-				"internalType": "contract Farming",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "farmAddressPig",
-		"outputs": [
-			{
-				"internalType": "contract Farming",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "farmLand",
-		"outputs": [
-			{
-				"internalType": "contract FarmLandNFT",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "farmLandPigsty",
-		"outputs": [
-			{
-				"internalType": "contract FarmLandNFT",
+				"internalType": "contract MoonTokens",
 				"name": "",
 				"type": "address"
 			}
@@ -1196,12 +400,12 @@
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "pure",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [],
-		"name": "getTokenPerBoar",
+		"name": "getTokenPerCell",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1214,33 +418,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "getTokenPerChicken",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getTokenPerChickenFood",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getTokenPerEgg",
+		"name": "getTokenPerEule",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1266,7 +444,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "getTokenPerPigfood",
+		"name": "getTokenPerMetlux",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1279,7 +457,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "getTokenPerPiglet",
+		"name": "getTokenPerPositrons",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1292,7 +470,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "getTokenPerSow",
+		"name": "getTokenPerSolar",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1305,7 +483,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "getTotalBoar",
+		"name": "getTokenPerSolarFood",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1318,7 +496,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "getTotalChicken",
+		"name": "getTokenPerThermix",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1331,7 +509,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "getTotalChickenFood",
+		"name": "getTotalCell",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1344,7 +522,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "getTotalEgg",
+		"name": "getTotalEule",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1357,7 +535,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "getTotalPigFood",
+		"name": "getTotalMetlux",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1370,7 +548,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "getTotalPiglet",
+		"name": "getTotalPositrons",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1383,7 +561,33 @@
 	},
 	{
 		"inputs": [],
-		"name": "getTotalSow",
+		"name": "getTotalSolar",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getTotalSolarFood",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getTotalThermix",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1435,12 +639,51 @@
 	},
 	{
 		"inputs": [],
+		"name": "metluxToken",
+		"outputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "mintAllowed",
 		"outputs": [
 			{
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "moonLand",
+		"outputs": [
+			{
+				"internalType": "contract MoonLandNFT",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "moonLandBuild",
+		"outputs": [
+			{
+				"internalType": "contract MoonLandNFT",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -1474,10 +717,10 @@
 	},
 	{
 		"inputs": [],
-		"name": "pigFoodToken",
+		"name": "positronsToken",
 		"outputs": [
 			{
-				"internalType": "contract FarmTokens",
+				"internalType": "contract MoonTokens",
 				"name": "",
 				"type": "address"
 			}
@@ -1487,15 +730,9 @@
 	},
 	{
 		"inputs": [],
-		"name": "pigletToken",
-		"outputs": [
-			{
-				"internalType": "contract FarmTokens",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1509,6 +746,63 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "sellFee",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "sellMoonLand",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "sellMoonLandPigsty",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_moonToken",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_quantity",
+				"type": "uint256"
+			}
+		],
+		"name": "sellMoonTokens",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1531,24 +825,647 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "sellFee",
-		"outputs": [
+		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "_busdPerCellToken",
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
+		"name": "setBusdPerCellToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_busdPerEule",
+				"type": "uint256"
+			}
+		],
+		"name": "setBusdPerEule",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_busdPerFarmArea",
+				"type": "uint256"
+			}
+		],
+		"name": "setBusdPerFarmArea",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_busdPerMetlux",
+				"type": "uint256"
+			}
+		],
+		"name": "setBusdPerMetlux",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_busdPerPositrons",
+				"type": "uint256"
+			}
+		],
+		"name": "setBusdPerPositrons",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_busdPerSolarFluid",
+				"type": "uint256"
+			}
+		],
+		"name": "setBusdPerSolarFood",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_busdPerThermix",
+				"type": "uint256"
+			}
+		],
+		"name": "setBusdPerThermix",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_busdPersolar",
+				"type": "uint256"
+			}
+		],
+		"name": "setBusdPersolar",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_cellBuy",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_cellBuyValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setBuyValuesCell",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_euleBuy",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_euleBuyValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setBuyValuesEule",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_metluxBuy",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_metluxBuyValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setBuyValuesMetlux",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_pigFarmBuy",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_pigFarmBuyValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setBuyValuesPigFarm",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_positronsBuy",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_positronsBuyValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setBuyValuesPositrons",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_solarBuy",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_solarBuyValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setBuyValuesSolar",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_solarFarmBuy",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_solarFarmBuyValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setBuyValuesSolarFarm",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_solarFoodBuy",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_solarFoodBuyValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setBuyValuesSolarFood",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_thermixBuy",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_thermixBuyValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setBuyValuesThermix",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_cellToken",
+				"type": "address"
+			}
+		],
+		"name": "setCellToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_euleToken",
+				"type": "address"
+			}
+		],
+		"name": "setEuleToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract BUILDING",
+				"name": "_solarAddress",
+				"type": "address"
+			}
+		],
+		"name": "setFarmAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_feeTaker",
+				"type": "address"
+			}
+		],
+		"name": "setFeeTaker",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_metluxToken",
+				"type": "address"
+			}
+		],
+		"name": "setMetluxToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "_mintAllowed",
+				"type": "bool"
+			}
+		],
+		"name": "setMintAllowed",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract MoonLandNFT",
+				"name": "_moonLand",
+				"type": "address"
+			}
+		],
+		"name": "setMoonLand",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract BUILDING",
+				"name": "__buildAddress",
+				"type": "address"
+			}
+		],
+		"name": "setPigFarmAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_positronsToken",
+				"type": "address"
+			}
+		],
+		"name": "setPositronsToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_sellFee",
+				"type": "uint256"
+			}
+		],
+		"name": "setSellfee",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_solarGrams",
+				"type": "uint256"
+			}
+		],
+		"name": "setSolarFoodGramsPerUsd",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_solarFluidToken",
+				"type": "address"
+			}
+		],
+		"name": "setSolarFoodToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_solarToken",
+				"type": "address"
+			}
+		],
+		"name": "setSolarToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_cellSold",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_cellSoldValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setSoldValuesCell",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_euleSold",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_euleSoldValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setSoldValuesEule",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_metluxSold",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_metluxSoldValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setSoldValuesMetlux",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_pigFarmSold",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_pigFarmSoldValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setSoldValuesPigFarm",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_positronsSold",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_positronsSoldValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setSoldValuesPositrons",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_solarSold",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_solarSoldValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setSoldValuesSolar",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_solarFarmSold",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_solarFarmSoldValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setSoldValuesSolarFarm",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_solarFoodSold",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_solarFoodSoldValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setSoldValuesSolarFood",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_thermixSold",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_thermixSoldValue",
+				"type": "uint256"
+			}
+		],
+		"name": "setSoldValuesThermix",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "_thermixToken",
+				"type": "address"
+			}
+		],
+		"name": "setThermixToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "contract Token",
+				"name": "_baseToken",
+				"type": "address"
+			}
+		],
+		"name": "setbaseToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_maintoken",
+				"type": "address"
+			}
+		],
+		"name": "setmainToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [],
-		"name": "sowToken",
+		"name": "solarAddress",
 		"outputs": [
 			{
-				"internalType": "contract FarmTokens",
+				"internalType": "contract BUILDING",
 				"name": "",
 				"type": "address"
 			}
@@ -1558,7 +1475,20 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalBoarBuy",
+		"name": "solarFoodToken",
+		"outputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "solarGrams",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1571,7 +1501,33 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalBoarBuyValue",
+		"name": "solarToken",
+		"outputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "thermixToken",
+		"outputs": [
+			{
+				"internalType": "contract MoonTokens",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalCellBuy",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1584,7 +1540,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalBoarSold",
+		"name": "totalCellBuyValue",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1597,7 +1553,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalBoarSoldValue",
+		"name": "totalCellSold",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1610,7 +1566,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalChickenBuy",
+		"name": "totalCellSoldValue",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1623,7 +1579,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalChickenBuyValue",
+		"name": "totalEuleBuy",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1636,7 +1592,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalChickenFoodBuy",
+		"name": "totalEuleBuyValue",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1649,7 +1605,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalChickenFoodBuyValue",
+		"name": "totalEuleSold",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1662,98 +1618,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalChickenFoodSold",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "totalChickenFoodSoldValue",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "totalChickenSold",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "totalChickenSoldValue",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "totalEggBuy",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "totalEggBuyValue",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "totalEggSold",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "totalEggSoldValue",
+		"name": "totalEuleSoldValue",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1818,6 +1683,58 @@
 	},
 	{
 		"inputs": [],
+		"name": "totalMetluxBuy",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalMetluxBuyValue",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalMetluxSold",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalMetluxSoldValue",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "totalPigFarmBuy",
 		"outputs": [
 			{
@@ -1870,7 +1787,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalPigFoodBuy",
+		"name": "totalPositronsBuy",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1883,7 +1800,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalPigFoodBuyValue",
+		"name": "totalPositronsBuyValue",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1896,7 +1813,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalPigFoodSold",
+		"name": "totalPositronsSold",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1909,7 +1826,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalPigFoodSoldValue",
+		"name": "totalPositronsSoldValue",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1922,7 +1839,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalPigletBuy",
+		"name": "totalSolarBuy",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1935,7 +1852,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalPigletBuyValue",
+		"name": "totalSolarBuyValue",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1948,7 +1865,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalPigletSold",
+		"name": "totalSolarFoodBuy",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1961,7 +1878,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalPigletSoldValue",
+		"name": "totalSolarFoodBuyValue",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1974,7 +1891,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalSowBuy",
+		"name": "totalSolarFoodSold",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1987,7 +1904,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalSowBuyValue",
+		"name": "totalSolarFoodSoldValue",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -2000,7 +1917,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalSowSold",
+		"name": "totalSolarSold",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -2013,7 +1930,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "totalSowSoldValue",
+		"name": "totalSolarSoldValue",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -2022,6 +1939,94 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalThermixBuy",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalThermixBuyValue",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalThermixSold",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalThermixSoldValue",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_tokenAddr",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "transferAnyBEP20Tokens",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]

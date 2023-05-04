@@ -25,53 +25,53 @@ import { useAccount, useContractRead } from 'wagmi';
 import { ethers } from 'ethers';
 const ELEMENTS = [
   {
-    'slug': 'chicken',
-    'name': 'CHICKEN',
-    'price': '10',
-    'image': land,
-    'address': '0x0a92bc06443E7D4cd38735ED01B5C5C3C74F6773'
+      'slug': 'solar',
+      'name': 'SOLAR',
+      'price': '10',
+      'image': solor,
+      'address': '0x57f450240b7a9eAEDfb6FE8DfA83087b4f312109'
   },
   {
-    'slug': 'chickenegg',
-    'name': 'CHICKEN EGG',
-    'price': '0.12',
-    'image': solor,
-    'address': '0x78AC3A5bC58455B41601189FDCF028F63e8c9ced'
+      'slug': 'solarCell',
+      'name': 'SOLAR CELL',
+      'price': '0.12',
+      'image': energy,
+      'address': '0xD5DF9651c2731dA0d47978A79f4F6594034038eC'
   },
   {
-    'slug': 'chickenfood',
-    'name': 'CHICKEN FOOD',
-    'price': '1',
-    'image': mooon,
-    'address': '0x50C0268e1D368420Ce99766BF89AbecEfCFC7644'
+      'slug': 'fluid',
+      'name': 'FLUID',
+      'price': '1',
+      'image': fluds,
+      'address': '0xd6e52657A95248f51cAB46065f314711a4cd1cdc'
   },
   {
-    'slug': 'boar',
-    'name': 'BOAR',
-    'price': '100',
-    'image': mat,
-    'address': '0x486bfd5AE6bf094E403bCF8dae14b708b15B143E'
+      'slug': 'thermix',
+      'name': 'THERMIX',
+      'price': '100',
+      'image': mat,
+      'address': '0x12F32f5FC8C87b053DfBc8F56C159094B42730d1'
   },
   {
-    'slug': 'sow',
-    'name': 'SOW',
-    'price': '100',
-    'image': energy,
-    'address': '0x26B00Fb006Cb64c1f5D4ed407c6aBdF902F1c595'
+      'slug': 'metlux',
+      'name': 'METLUX',
+      'price': '100',
+      'image': land,
+      'address': '0x8D1502d8Acc70b861F58186270Bc81F671e0B2d8'
   },
   {
-    'slug': 'piglet',
-    'name': 'PIGLET',
-    'price': '10',
-    'image': eules,
-    'address': '0x7f7936Bf782F327bF549809bC6469dbE52280867'
+      'slug': 'eule',
+      'name': 'EULE',
+      'price': '10',
+      'image': eules,
+      'address': '0xd63E96e180661e094383e66AA838863A87FDeB9F'
   },
   {
-    'slug': 'pigfood',
-    'name': 'PIG FOOD',
-    'price': '5',
-    'image': fluds,
-    'address': '0xea049FB6D789deEb85630c16576cC0CEB75555F7'
+      'slug': 'positron',
+      'name': 'POSITRON',
+      'price': '5',
+      'image': mooon,
+      'address': '0x16775217Bab1C67D0b60104B52b3504B37E7FB89'
   }
 ];
 const MarketplaceCard = (props) => {
@@ -103,6 +103,7 @@ const MarketplaceCard = (props) => {
     let v = ELEMENTS[props.index]
     setBoxArray(v);
   }
+
   let _atoken = ELEMENTS[props.index].address;
   let _amt = ethers.utils.parseEther("1")
   const { data: _baseTokenPrice1 } = useContractRead({
@@ -125,34 +126,37 @@ const MarketplaceCard = (props) => {
     watch: true
   })
   const { data: _available } = useContractRead({
-    address: ELEMENTS[props.index].address?._atoken,
+    address: ELEMENTS[props.index].address,
     abi: TOKEN_ABI,
     functionName: "balanceOf",
     args: [MARKETPLACE],
     watch: true
   })
-  const { data: baseToken } = useContractRead({
-    address: MARKETPLACE,
-    abi: MARKETPLACE_ABI,
-    functionName: "baseToken",
-    watch: true
-  })
+
+  // const { data: baseToken } = useContractRead({
+  //   address: MARKETPLACE,
+  //   abi: MARKETPLACE_ABI,
+  //   functionName: "baseToken",
+  //   watch: true
+  // })
   const { data: _getPrice1 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "getTokenPerChicken",
+    functionName: "getTokenPerSolar",
     watch: true
   })
+ 
   const { data: _getSold1 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalChickenSold",
+    functionName: "totalSolarSold",
     watch: true
   })
+
   const { data: _getSoldValue1 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalChickenSoldValue",
+    functionName: "totalSolarSoldValue",
     watch: true
   })
   const { data: _available1 } = useContractRead({
@@ -165,73 +169,73 @@ const MarketplaceCard = (props) => {
   const { data: _getPrice2 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "getTokenPerEgg",
+    functionName: "getTokenPerCell",
     watch: true
   })
   const { data: _getSold2 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalEggSold",
+    functionName: "totalCellSold",
     watch: true
   })
   const { data: _getSoldValue2 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalEggSoldValue",
+    functionName: "totalCellSoldValue",
     watch: true
   })
   const { data: _getPrice3 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "getTokenPerChickenFood",
+    functionName: "getTokenPerSolarFood",
     watch: true
   })
   const { data: _getSold3 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalChickenFoodSold",
+    functionName: "totalSolarFoodSold",
     watch: true
   })
   const { data: _getSoldValu3 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalChickenFoodSoldValue",
+    functionName: "totalSolarFoodSoldValue",
     watch: true
   })
   const { data: _getPrice4 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "getTokenPerBoar",
+    functionName: "getTokenPerThermix",
     watch: true
   })
   const { data: _getSold4 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalBoarSold",
+    functionName: "totalThermixSold",
     watch: true
   })
   const { data: _getSoldValue4 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalBoarSoldValue",
+    functionName: "totalThermixSoldValue",
     watch: true
   })
   const { data: _getPrice5 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "getTokenPerSow",
+    functionName: "getTokenPerMetlux",
     watch: true
   })
   const { data: _getSold5 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalSowSold",
+    functionName: "totalMetluxSold",
     watch: true
   })
   const { data: _getSoldValue5 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalSowSoldValue",
+    functionName: "totalMetluxSoldValue",
     watch: true
   })
   const { data: _availablePiglet } = useContractRead({
@@ -250,13 +254,13 @@ const MarketplaceCard = (props) => {
   const { data: _getSoldPiglet } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalPigletSold",
+    functionName: "getTokenPerEule",
     watch: true
   })
   const { data: _getSoldValuePiglet } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalPigletSoldValue",
+    functionName: "totalEuleSoldValue",
     watch: true
   })
   const { data: _availablePigfood } = useContractRead({
@@ -269,19 +273,19 @@ const MarketplaceCard = (props) => {
   const { data: _getPricePigfood } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "getTokenPerPigfood",
+    functionName: "getTokenPerPositrons",
     watch: true
   })
   const { data: _getSoldPigfood } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalPigFoodSold",
+    functionName: "totalPositronsSold",
     watch: true
   })
   const { data: _getSoldValuePigfood } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "totalPigFoodSoldValue",
+    functionName: "totalPositronsSoldValue",
     watch: true
   })
   // console.log(parseInt(_getSoldValuePigfood))
@@ -304,7 +308,7 @@ const MarketplaceCard = (props) => {
     // let _symbol = await _tokenContract.methods.symbol().call();
     setSymbol(_symbol);
     // console.log(_symbol);
-    if (props.slug === 'chicken') {
+    if (props.slug === 'solar') {
       // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
       // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
       // console.log(_available);
@@ -326,7 +330,7 @@ const MarketplaceCard = (props) => {
       // console.log(_getPrice);
       setTokenPrice(_getPrice);
     }
-    else if (props.slug === 'chickenegg') {
+    else if (props.slug === 'solarCell') {
       let _atoken = ELEMENTS[props.index].address;
       // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
       // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
@@ -344,7 +348,7 @@ const MarketplaceCard = (props) => {
       setSoldValue(_getSoldValue);
       // console.log(_getSoldValue);
     }
-    else if (props.slug === 'chickenfood') {
+    else if (props.slug === 'fluid') {
       let _atoken = ELEMENTS[props.index].address;
       // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
       // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
@@ -362,7 +366,7 @@ const MarketplaceCard = (props) => {
       setSoldValue(_getSoldValue);
       // console.log(_getSoldValue);
     }
-    else if (props.slug === 'boar') {
+    else if (props.slug === 'thermix') {
       let _atoken = ELEMENTS[props.index].address;
       // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
       // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
@@ -380,7 +384,7 @@ const MarketplaceCard = (props) => {
       setSoldValue(_getSoldValue);
       // console.log(_getSoldValue);
     }
-    else if (props.slug === 'sow') {
+    else if (props.slug === 'metlux') {
       let _atoken = ELEMENTS[props.index].address;
       // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
       // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
@@ -398,7 +402,7 @@ const MarketplaceCard = (props) => {
       setSoldValue(_getSoldValue);
       // console.log(_getSoldValue);
     }
-    else if (props.slug === 'piglet') {
+    else if (props.slug === 'eule') {
       let _atoken = ELEMENTS[props.index].address;
       // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
       // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
@@ -417,7 +421,7 @@ const MarketplaceCard = (props) => {
       setSoldValue(_getSoldValue);
       // console.log(_getSoldValue);
     }
-    else if (props.slug === 'pigfood') {
+    else if (props.slug === 'positron') {
       let _atoken = ELEMENTS[props.index].address;
       // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
       // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
@@ -446,8 +450,8 @@ const MarketplaceCard = (props) => {
             <div className="img-cb">
               <img src={boxArray?.image} alt="" />
               <div className='title_head'>
-                <p className='card-title'>LAND IN MOON</p>
-                <p className='card-content'>Lorem7 demo checkc content</p>
+                <p className='card-title'>{boxArray?.name}</p>
+                {/* <p className='card-content'>Lorem7 demo checkc content</p> */}
               </div>
             </div>
             <div className="market-content">
@@ -456,7 +460,11 @@ const MarketplaceCard = (props) => {
                 <li>
                   <div className="wrp-rate">
                     <div className="rate">Rate:</div>
-                    <div className="total-r">${parseFloat(baseTokenPrice * tokenPrice > 0 ? tokenPrice : "0").toFixed(2)} ~ {parseFloat(tokenPrice > 0 ? tokenPrice : "0").toFixed(2)} {symbol}</div>
+                    <div className="total-r">$ {" "}
+                    {/* {parseFloat(
+                      // baseTokenPrice
+                      1 * tokenPrice > 0 ? tokenPrice : "0").toFixed(2)} */}
+                    {boxArray?.price}   ~ {parseFloat(tokenPrice > 0 ? tokenPrice : "0").toFixed(2)} {symbol}</div>
                   </div>
                 </li>
                 <li>

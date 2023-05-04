@@ -17,12 +17,12 @@ import { ethers } from 'ethers';
 
 const STAKING_ARRAY = [
     {
-        address: '0x202647795F25E0d8c6724fEd34e575AFE28A5dB5',
+        address: '0x6AbCb15898609327e9C7498180B869752a269C64',
         name: 'Moonland',
         image: moon,
         status: 1,
         apy: 0,
-        earn: 'MyFarmPet',
+        earn: 'Moonland',
         depositFee: 0,
         withdrawFee: 0,
     },
@@ -310,8 +310,7 @@ const StakeCard = (props) => {
             if (address) {
                 // address = '0xbe7c30E0945d019F3aDc84AeEC55Ee2eCEb4247d' ;
                 // let _depositedTokens = await _stakeContract.methods.depositedTokens(address).call();
-                let _depositedTokens = parseFloat(_depositedTokens1 / 1e1 ** _decimals).toFixed(2);
-
+                let _depositedTokens = parseFloat(_depositedTokens1 / 1e1 ** _decimals).toFixed(3);
                 setUserStaked(_depositedTokens);
                 // let _earnedTokens = await _stakeContract.methods.getPendingReward(address).call();
                 let _earnedTokens = parseFloat(_earnedTokens1 / 1e1 ** _decimals).toFixed(2);
@@ -503,7 +502,7 @@ const StakeCard = (props) => {
         // let _web3 = new Web3(web3Provider);
         // let v = STAKING_ARRAY[props.index];
         // let _stakingContract = new _web3.eth.Contract(STAKING_ABI, v.address);
-        setModal(!modal);
+        setModal(true);
         await claimRewardWriteAsync()
 
         // _stakingContract.methods.claimReward().send({
@@ -573,7 +572,7 @@ const StakeCard = (props) => {
 
 
 
-    const setMaxWithdraw = async () => {
+    const setMaxWithdraw =  () => {
 
 
         setwAmount(userStaked)
@@ -587,15 +586,15 @@ const StakeCard = (props) => {
     }
 
 
-    const _amount2 = parseFloat(withdrawAmount) ? ethers.utils.parseEther(parseFloat(withdrawAmount).toString()) : 0
-    // console.log(_amount2);
 
+    const _amount2 = parseFloat(withdrawAmount) ? ethers.utils.parseEther(parseFloat(withdrawAmount).toString()) : 0
+ 
     const { config: withdrawTokenConfig } = usePrepareContractWrite({
         address: STAKING_ARRAY[props.index]?.address,
         abi: STAKING_ABI,
         functionName: 'unstake',
         args: [_amount2],
-        enabled: withdrawAmount > 0
+        enabled: withdrawAmount  > 0 
     })
 
     const { data: withdrawTokenData, writeAsync: withdrawTokenWriteAsync, error: withdrawTokenError, } = useContractWrite(withdrawTokenConfig)
@@ -603,8 +602,6 @@ const StakeCard = (props) => {
     const { isSuccess: withdrawTokenSuccess, } = useWaitForTransaction({
         hash: withdrawTokenData?.hash,
     })
-
-
     if (withdrawTokenError && modal) {
         setModal(false);
     }
@@ -759,7 +756,7 @@ const StakeCard = (props) => {
                                 <div className="input-cont"><input placeholder="0" value={userStaked > 0 ? userStaked : '0'} readOnly /></div>
                                 <div className="btn-havest">
 
-                                    <a className="bg___BTN3" onClick={withdrawToggle}   >Withdraw</a>
+                                    <a className="bg___BTN3" onClick={withdrawToggle}>Withdraw</a>
                                 </div>
                             </div>
                         </>
@@ -794,7 +791,7 @@ const StakeCard = (props) => {
                     {
                         (STAKING_ARRAY[props.index].status == 3 || (!stakeEnabled && !claimEnabled && !unstakeEnabled)) &&
                         <div className="text-center" >
-                            <a className="bg___BTN3"    >Participate</a>
+                            <a className="bg___BTN3">Participate</a>
                         </div>
                     }
 
@@ -881,7 +878,7 @@ const StakeCard = (props) => {
 
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxWithdraw}>Max</span>
                     </label>
-                    <input className="form-control mb-3" onChange={handleWithdrawChange} type="text" value={wamount} />
+                    <input className="form-control mb-3" onChange={handleWithdrawChange} type="number" value={wamount} />
 
                     <span className="info mt-3">Fee: {parseFloat(wamount * unstakeFee / 100).toFixed(2)} {stakeSymbol}</span>
 

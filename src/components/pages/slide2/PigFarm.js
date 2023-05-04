@@ -23,8 +23,6 @@ import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite,
 import { ethers } from 'ethers';
 import land from '../../images/land.svg';
 import { Link } from 'react-router-dom';
-
-
 const PigFarm = () => {
 
     const [farmArea, setFarmArea] = useState(0);
@@ -2137,7 +2135,7 @@ const PigFarm = () => {
                                                         <p>Your Balance</p>
                                                     </div>
                                                     <div className="time__list">
-                                                        <h3>{farmArea} sq m</h3>
+                                                        <h3>{farmArea ?? 0} sq m</h3>
                                                         <p>Your Locked Farm Area</p>
                                                     </div>
                                                     <div className="time__list">
@@ -2220,11 +2218,11 @@ const PigFarm = () => {
                                         <div className="pig-value-wrp">
                                             <div className="build__value mrt">
                                                 <p>Deposited</p>
-                                                <h3>{sowDeposited} {sowSymbol}</h3>
+                                                <h3>{isNaN(sowDeposited)?0:sowDeposited} {sowSymbol}</h3>
                                             </div>
                                             <div className="build__value mrt">
                                             <p>Deposited</p>
-                                                <h3>{boarDeposited} {boarSymbol}</h3>
+                                                <h3>{isNaN(boarDeposited)?0:boarDeposited} {boarSymbol}</h3>
                                             </div>
 
 

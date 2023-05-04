@@ -48,7 +48,7 @@ class choose extends Component {
                                                 & start earning energy</p></div>
                                         <img className='c___img' src={choose1} alt='' />
                                     </div>
-                                    <div><a className='bg___BTN' href="/pig-farming">Get started</a></div>
+                                    <div><Link to="/chicken-farming" className='bg___BTN'>Get started</Link></div>
                                 </div>
                             </div>
                             <div className="col-lg-4">
@@ -60,7 +60,7 @@ class choose extends Component {
                                                 Then start selling and renting</p></div>
                                         <img className='c___img2' src={choose2} alt='' />
                                     </div>
-                                    <div><a className='bg___BTN' href="/chicken-farming">Get started</a></div>
+                                    <div><Link to="/pig-farming" className='bg___BTN'>Get started</Link></div>
                                 </div>
 
 
@@ -69,7 +69,7 @@ class choose extends Component {
                         </div>
                     </div>
                     <div className='btm___arrow'>
-                        <Link to='/'><img src={arrow} alt='arrow image here' /></Link>
+                        <Link onClick={()=>window.history.back()}><img src={arrow} alt='arrow image here' /></Link>
                     </div>
                 </section>
                  

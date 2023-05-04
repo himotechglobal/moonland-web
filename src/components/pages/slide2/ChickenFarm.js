@@ -27,7 +27,7 @@ import eggs1000 from '../../images/eggs1000.png';
 
 import Web3 from "web3"
 // import {useWallet} from '@binance-chain/bsc-use-wallet'
-import { CHICKEN_FARMING, CHICKEN_INCUBATOR, MARKETPLACE } from '../../../Config/index.js';
+import { CHICKEN_FARMING, CHICKEN_INCUBATOR, MARKETPLACE,HARVEST_FARM,FLUID_TOKEN, SOLAR_TOKEN, TOKEN, CELL_TOKEN} from '../../../Config/index.js';
 import CHICKEN_FARMING_ABI from '../../../Config/CHICKEN_FARMING_ABI.json';
 import CHICKEN_INCUBATOR_ABI from '../../../Config/CHICKEN_INCUBATOR_ABI.json';
 import MARKETPLACE_ABI from '../../../Config/MARKETPLACE_ABI.json';
@@ -185,59 +185,13 @@ const ChickenFarm = () => {
     const { address, isConnected } = useAccount()
     let web3Provider = window.ethereum;
 
-    useEffect(() => {
-        // if (window.ethereum) {
-        //     web3Provider = window.ethereum;
-        // }
-        // else {
-        //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
-
-        // }
-        getEggData();
-        getData();
-        if (unlockTime > 0) {
-            clearInterval(timeInterval);
-            timeInterval = setInterval(() => {
-                getTime();
-
-            }, 1000);
-
-        }
-
-        if (layEndTime > 0) {
-            clearInterval(timeInterval1);
-            timeInterval1 = setInterval(() => {
-                getlayTime();
-
-            }, 1000);
-
-        }
-
-        if (eggunlockTime > 0) {
-            clearInterval(timeInterval2);
-            timeInterval2 = setInterval(() => {
-
-                getEggTime();
-            }, 1000);
-
-        }
-
-        if (eggHatchTime > 0) {
-            clearInterval(timeInterval3);
-            timeInterval3 = setInterval(() => {
-                // getEggHatchTime() ;
-
-            }, 1000);
-
-        }
-
-    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime])
+  
 
 
 
     const { data: _tokenPerfarm } = useContractRead({
         address: MARKETPLACE,
-        abi: CHICKEN_FARMING_ABI,
+        abi: MARKETPLACE_ABI,
         functionName: 'getTokenPerFarmArea',
         watch: true,
     })
@@ -250,24 +204,24 @@ const ChickenFarm = () => {
     const { data: _farmToken } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
-        functionName: 'farmLand',
+        functionName: 'moonLand',
         watch: true,
     })
     const { data: _chickenToken } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
-        functionName: 'chickenToken',
+        functionName: 'solarToken',
         watch: true,
     })
     const { data: _chickenFoodToken } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
-        functionName: 'foodToken',
+        functionName: 'fluidToken',
         watch: true,
     })
 
 
-    console.log(_chickenFoodToken);
+    // console.log(_chickenFoodToken);
 
     const { data: _depositFee } = useContractRead({
         address: CHICKEN_FARMING,
@@ -276,6 +230,7 @@ const ChickenFarm = () => {
         args: [1],
         watch: true,
     })
+// console.log(_depositFee);
     const { data: _removeFee } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
@@ -284,65 +239,69 @@ const ChickenFarm = () => {
         watch: true,
     })
     const { data: _chickenFoodSymbol } = useContractRead({
-        address: _chickenFoodToken,
+        address: FLUID_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'symbol',
         watch: true,
     })
     const { data: _symbol } = useContractRead({
-        address: farmToken,
+        address: HARVEST_FARM,
         abi: NFT_ABI,
         functionName: 'symbol',
         watch: true,
     })
     const { data: _chickenSymbol } = useContractRead({
-        address: _chickenToken,
+        address: SOLAR_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'symbol',
         watch: true,
     })
 
     const { data: _baseSymbol } = useContractRead({
-        address: _baseToken,
+        address: TOKEN,
         abi: TOKEN_ABI,
         functionName: 'symbol',
         watch: true,
     })
+    // console.log(_baseSymbol)
     const { data: _baseApproved } = useContractRead({
-        address: _baseToken,
+        address: TOKEN,
         abi: TOKEN_ABI,
         functionName: 'allowance',
         args: [address, MARKETPLACE],
         watch: true,
     })
     const { data: _baseApprovedFarm } = useContractRead({
-        address: _baseToken,
+        address: TOKEN,
         abi: TOKEN_ABI,
         functionName: 'allowance',
         args: [address, CHICKEN_FARMING],
         watch: true,
     })
+    
     const { data: _baseApprovedIncub } = useContractRead({
-        address: _baseToken,
+        address: TOKEN,
         abi: TOKEN_ABI,
         functionName: 'allowance',
         args: [address, CHICKEN_INCUBATOR],
         watch: true,
     })
     const { data: _baseBalance } = useContractRead({
-        address: _baseToken,
+        address: TOKEN,
         abi: TOKEN_ABI,
         functionName: 'balanceOf',
         args: [address],
         watch: true,
     })
     const { data: _nftBalance } = useContractRead({
-        address: farmToken,
+        address: HARVEST_FARM,
         abi: NFT_ABI,
         functionName: 'balanceOf',
         args: [address],
         watch: true,
+        // enabled:farmToken
     })
+    // console.log("balance",parseInt(_nftBalance));
     const { data: _userInfo } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
@@ -353,14 +312,14 @@ const ChickenFarm = () => {
     const { data: _userChickens } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
-        functionName: 'getUserChickens',
+        functionName: 'getUserSolars',
         args: [address],
         watch: true,
     })
     const { data: _userEggs } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
-        functionName: 'pendingEggs',
+        functionName: 'pendingCells',
         args: [address],
         watch: true,
     })
@@ -372,42 +331,44 @@ const ChickenFarm = () => {
         watch: true,
     })
     const { data: _chickenFoodBalance1 } = useContractRead({
-        address: _chickenFoodToken,
+        address: FLUID_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'balanceOf',
         args: [address],
         watch: true,
     })
     const { data: _chickenBalance2 } = useContractRead({
-        address: _chickenToken,
+        address: SOLAR_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'balanceOf',
         args: [address],
         watch: true,
     })
     const { data: _chickenApproved } = useContractRead({
-        address: _chickenToken,
+        address: SOLAR_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'allowance',
         args: [address, CHICKEN_FARMING],
         watch: true,
     })
+    // console.log(parseInt(_chickenApproved));
     const { data: _chickenFoodApproved } = useContractRead({
-        address: _chickenFoodToken,
+        address: FLUID_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'allowance',
         args: [address, CHICKEN_FARMING],
         watch: true,
     })
     const { data: _nftTokenId } = useContractRead({
-        address: farmToken,
+        address: HARVEST_FARM,
         abi: NFT_ABI,
         functionName: 'ownerTokens',
         args: [address],
         watch: true,
     })
+    // console.log(parseInt(_nftTokenId));
     const { data: _approved } = useContractRead({
-        address: farmToken,
+        address: HARVEST_FARM,
         abi: NFT_ABI,
         functionName: 'getApproved',
         args: [_nftTokenId],
@@ -430,7 +391,7 @@ const ChickenFarm = () => {
     const { data: _chickenEggToken } = useContractRead({
         address: CHICKEN_INCUBATOR,
         abi: CHICKEN_INCUBATOR_ABI,
-        functionName: 'eggToken',
+        functionName: 'cellToken',
         watch: true,
     })
     const { data: _capacity } = useContractRead({
@@ -447,13 +408,13 @@ const ChickenFarm = () => {
         watch: true,
     })
     const { data: _chickenEggSymbol } = useContractRead({
-        address: _chickenEggToken,
+        address: CELL_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'symbol',
         watch: true,
     })
     const { data: _balance } = useContractRead({
-        address: _chickenEggToken,
+        address: CELL_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'balanceOf',
         args: [address],
@@ -467,7 +428,7 @@ const ChickenFarm = () => {
         watch: true,
     })
     const { data: _chickenEggApproved } = useContractRead({
-        address: _chickenEggToken,
+        address: CELL_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'allowance',
         args: [address, CHICKEN_INCUBATOR],
@@ -509,204 +470,259 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
-    console.log('jasim', _userClaimTimesOne);
-
-
+   
     // console.log(_claimChickenFee1)
-
+    
     const getData = async () => {
-        let _web3 = new Web3(web3Provider);
-        let _farmingContract = new _web3.eth.Contract(CHICKEN_FARMING_ABI, CHICKEN_FARMING);
-        let _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-        // let _tokenPerfarm = await _marketContract.methods.getTokenPerFarmArea().call();
-        //   console.log(parseFloat(_tokenPerfarm));
+        // console.log(parseInt(_nftBalance));
+        
+        setFarmBalance(parseInt(_nftBalance));
+
         setFarmPrice(parseFloat(_tokenPerfarm / 1e18).toFixed(2));
-        // let _baseToken = await _marketContract.methods.baseToken().call();
-        // console.log(_baseToken);
-
-        let _baseTokenContract = new _web3.eth.Contract(TOKEN_ABI, _baseToken);
         setbaseToken(_baseToken);
-        // let farmToken = await _farmingContract.methods.farmLand().call();
-        // console.log(farmToken)
-        // let _chickenToken = await _farmingContract.methods.chickenToken().call();
-
-        // let _chickenFoodToken = await _farmingContract.methods.foodToken().call();
-        //  console.log(_chickenFoodToken)
         setFarmToken(_farmToken);
-
-        // let _depositFee = await _farmingContract.methods.getDepositFee(1).call();
         setChickenDepositFee(_depositFee);
-        // console.log(_depositFee);
-        // let _removeFee = await _farmingContract.methods.getRemoveFee(1).call();
-        // console.log(_removeFee);
         setChickenRemoveFee(_removeFee);
         setChickenFoodToken(_chickenFoodToken)
         setChickenToken(_chickenToken)
-        let _nftContract = new _web3.eth.Contract(NFT_ABI, farmToken);
-        let _chickenContract = new _web3.eth.Contract(TOKEN_ABI, _chickenToken);
-        let _chickenFoodContract = new _web3.eth.Contract(TOKEN_ABI, _chickenFoodToken);
-        // let _chickenFoodSymbol = await _chickenFoodContract.methods.symbol().call();
-        // console.log(_chickenFoodSymbol);
+         setChickenFoodApproved(_chickenFoodApproved);
+        //   console.log(parseInt(_nftTokenId));
+        if (_nftBalance > 0 || _userInfo?.landlocked) {
+            setBaseApprovedFarm(parseInt(_baseApprovedFarm));
+            setChickenApproved(parseInt(_chickenApproved));
+            setFarmTokenId(parseInt(_nftTokenId));
+                    if (_approved === CHICKEN_FARMING) {
+                        setFarmApprove(true);
+                    }
+                    // let _landIsfree = await _farmingContract.methods.landIsfree(_nftTokenId, address).call();
+                    setLandIsfree(_landIsfree);
+            //         // let _userInfo2 = await _farmingContract.methods.getUserToken(address).call();
+    
+                    setFarmLocked(_userInfo2[4]);
+    
+    
+            //         // console.log(_userInfo[4]);
+                    if (_userInfo2[4]) {
+                        setFarmTokenId(_userInfo2[1]);
+    
+                        setFarmArea(parseFloat(_userInfo2[2] / 1e18).toFixed());
+                        setFarmCapacity(parseFloat(_userInfo2[3] / 1e18).toFixed());
+    
+                    }
+                }
+
+        // let _web3 = new Web3(web3Provider);
+        // let _farmingContract = new _web3.eth.Contract(CHICKEN_FARMING_ABI, CHICKEN_FARMING);
+        // let _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+        // // let _tokenPerfarm = await _marketContract.methods.getTokenPerFarmArea().call();
+        //   console.log("token::" , parseFloat(_tokenPerfarm));
+        // // let _baseToken = await _marketContract.methods.baseToken().call();
+        // // console.log(_baseToken);
+
+        // let _baseTokenContract = new _web3.eth.Contract(TOKEN_ABI, _baseToken);
+        // // let farmToken = await _farmingContract.methods.farmLand().call();
+        // // console.log(farmToken)
+        // // let _chickenToken = await _farmingContract.methods.chickenToken().call();
+
+        // // let _chickenFoodToken = await _farmingContract.methods.foodToken().call();
+        // //  console.log(_chickenFoodToken)
+
+        // // let _depositFee = await _farmingContract.methods.getDepositFee(1).call();
+        // // console.log(_depositFee);
+        // // let _removeFee = await _farmingContract.methods.getRemoveFee(1).call();
+        // // console.log(_removeFee);
+        // // let _nftContract = new _web3.eth.Contract(NFT_ABI, farmToken);
+        // // let _chickenContract = new _web3.eth.Contract(TOKEN_ABI, _chickenToken);
+        // // let _chickenFoodContract = new _web3.eth.Contract(TOKEN_ABI, _chickenFoodToken);
+        // // let _chickenFoodSymbol = await _chickenFoodContract.methods.symbol().call();
+        // // console.log(_chickenFoodSymbol);
         setChickenFoodSymbol(_chickenFoodSymbol);
-        // let _symbol = await _nftContract.methods.symbol().call();
-        // console.log(_symbol);
+        // // let _symbol = await _nftContract.methods.symbol().call();
+        // // console.log(_symbol);
         setFarmSymbol(_symbol);
-        // let _chickenSymbol = await _chickenContract.methods.symbol().call();
-        // console.log(_chickenSymbol);
+        // // let _chickenSymbol = await _chickenContract.methods.symbol().call();
+        // // console.log(_chickenSymbol);
         setChickenSymbol(_chickenSymbol);
-        // let _baseSymbol = await _baseTokenContract.methods.symbol().call();
-        // console.log(_baseSymbol);
+        // // let _baseSymbol = await _baseTokenContract.methods.symbol().call();
+        // // console.log(_baseSymbol);
         setBaseSymbol(_baseSymbol);
 
-        if (address) {
-            // address = '0xef519A99b4921aC70387A3e1Fb6cCDeB853C0aB2' ;
-            // let _baseApproved = await _baseTokenContract.methods.allowance(address, MARKETPLACE).call();
+        // if (address) {
+        //     // address = '0xef519A99b4921aC70387A3e1Fb6cCDeB853C0aB2' ;
+        //     // let _baseApproved = await _baseTokenContract.methods.allowance(address, MARKETPLACE).call();
 
             setBaseApproved(_baseApproved);
 
-            // let _baseApprovedFarm = await _baseTokenContract.methods.allowance(address, CHICKEN_FARMING).call();
-            // console.log(_baseApproved);
-            setBaseApprovedFarm(_baseApprovedFarm);
-            // let _baseApprovedIncub = await _baseTokenContract.methods.allowance(address, CHICKEN_INCUBATOR).call();
-            // console.log('Incub Approved' , _baseApprovedIncub);    
+        //     // let _baseApprovedFarm = await _baseTokenContract.methods.allowance(address, CHICKEN_FARMING).call();
+        //     // console.log(_baseApproved);
+        //     // let _baseApprovedIncub = await _baseTokenContract.methods.allowance(address, CHICKEN_INCUBATOR).call();
+        //     // console.log('Incub Approved' , _baseApprovedIncub);    
             setBaseApprovedIncub(_baseApprovedIncub);
-            // let _baseBalance = await _baseTokenContract.methods.balanceOf(address).call();
-            // console.log(_baseBalance); 
+        //     // let _baseBalance = await _baseTokenContract.methods.balanceOf(address).call();
+        //     // console.log(_baseBalance); 
             setBaseBalance(parseFloat(_baseBalance / 1e18).toFixed(2));
 
 
-            // let _nftBalance = await _nftContract.methods.balanceOf(address).call();
-            // let _userInfo = await _farmingContract.methods.userInfo(address).call();
-            // let _userChickens = await _farmingContract.methods.getUserChickens(address).call();
-            // if(_userInfo)
-            // console.log(_userChickens);
+        //     // let _nftBalance = await _nftContract.methods.balanceOf(address).call();
+        //     // let _userInfo = await _farmingContract.methods.userInfo(address).call();
+        //     // let _userChickens = await _farmingContract.methods.getUserChickens(address).call();
+        //     // if(_userInfo)
+        //     // console.log(_userChickens);
             setChickenDeposited(parseFloat(_userChickens / 1e18).toFixed());
-            if (_userInfo.chickens > 0) {
-                // let _userEggs = await _farmingContract.methods.pendingEggs(address).call();
-                // console.log(_userEggs);
+        //     if (_userInfo.chickens > 0) {
+        //         // let _userEggs = await _farmingContract.methods.pendingEggs(address).call();
+        //         // console.log(_userEggs);
                 setEggsearned(parseFloat(_userEggs / 1e18).toFixed());
-            }
+        //     }
 
 
-            if (_userChickens > 0) {
+        //     if (_userChickens > 0) {
 
 
-                // let _userChickenDie = await _farmingContract.methods.getUnlockTime(address).call();
+        //         // let _userChickenDie = await _farmingContract.methods.getUnlockTime(address).call();
 
                 setUnlockTime(_userChickenDie);
 
 
-            }
+        //     }
 
-            if (_userChickens > 0) {
+        //     if (_userChickens > 0) {
 
 
-                // let _userClaimTimes = await _farmingContract.methods.getNextClaim(address).call();
-                // console.log(_userClaimTimes)
+        //         // let _userClaimTimes = await _farmingContract.methods.getNextClaim(address).call();
+        //         // console.log(_userClaimTimes)
                 let _userClaimTimes = Object.keys(_userClaimTimesOne).map((key) => _userClaimTimes[key]);
                 // console.log("claimeTimes", _userClaimTimes[1]);
                 setlayUnlockTime(_userClaimTimes[1]);
                 setlayEndTime(_userClaimTimes[0]);
 
 
-            }
+        //     }
 
 
-            // let _chickenFoodBalance = await _chickenFoodContract.methods.balanceOf(address).call();
-            // console.log(_chickenFoodBalance)
+        //     // let _chickenFoodBalance = await _chickenFoodContract.methods.balanceOf(address).call();
+        //     // console.log(_chickenFoodBalance)
             let _chickenFoodBalance = parseFloat(_chickenFoodBalance1 / 1e18).toFixed();
             setChickenFoodBalance(_chickenFoodBalance);
-            // let _chickenBalance = await _chickenContract.methods.balanceOf(address).call();
-            // let _chickenApproved = await _chickenContract.methods.allowance(address, CHICKEN_FARMING).call();
-            setChickenApproved(_chickenApproved);
-            // let _chickenFoodApproved = await _chickenFoodContract.methods.allowance(address, CHICKEN_FARMING).call();
-            setChickenFoodApproved(_chickenFoodApproved);
+        //     // let _chickenBalance = await _chickenContract.methods.balanceOf(address).call();
+        //     // let _chickenApproved = await _chickenContract.methods.allowance(address, CHICKEN_FARMING).call();
+           
+        //     // let _chickenFoodApproved = await _chickenFoodContract.methods.allowance(address, CHICKEN_FARMING).call();
+           
 
             let _chickenBalance = parseFloat(_chickenBalance2 / 1e18).toFixed();
             setChickenBalance(_chickenBalance);
-            // console.log(_userInfo);
-            if (_nftBalance > 0 || _userInfo.landlocked) {
-                // let _nftTokenId = await _nftContract.methods.ownerTokens(address).call();
-                // let _approved = await _nftContract.methods.getApproved(_nftTokenId).call();
-                if (_approved === CHICKEN_FARMING) {
-                    setFarmApprove(true);
-                }
-                setFarmTokenId(_nftTokenId);
-                // let _landIsfree = await _farmingContract.methods.landIsfree(_nftTokenId, address).call();
-                setLandIsfree(_landIsfree);
-                // let _userInfo2 = await _farmingContract.methods.getUserToken(address).call();
-
-                setFarmLocked(_userInfo2[4]);
-
-                // console.log(_userInfo[4]);
-                if (_userInfo2[4]) {
-                    setFarmTokenId(_userInfo2[1]);
-
-                    setFarmArea(parseFloat(_userInfo2[2] / 1e18).toFixed());
-                    setFarmCapacity(parseFloat(_userInfo2[3] / 1e18).toFixed());
-
-                }
-            }
-            setFarmBalance(_nftBalance);
-        }
+        //     // console.log(_userInfo);
+         
+        // }
 
 
     }
+// console.log(chickenApproved);
+    useEffect(() => {
+        // if (window.ethereum) {
+        //     web3Provider = window.ethereum;
+        // }
+        // else {
+        //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
 
+        // }
+        // getEggData();
+        getData();
+        getEggData()
+        if (unlockTime > 0) {
+            clearInterval(timeInterval);
+            timeInterval = setInterval(() => {
+                getTime();
 
+            }, 1000);
+
+        }
+
+        if (layEndTime > 0) {
+            clearInterval(timeInterval1);
+            timeInterval1 = setInterval(() => {
+                getlayTime();
+
+            }, 1000);
+
+        }
+
+        if (eggunlockTime > 0) {
+            clearInterval(timeInterval2);
+            timeInterval2 = setInterval(() => {
+
+                getEggTime();
+            }, 1000);
+
+        }
+
+        if (eggHatchTime > 0) {
+            clearInterval(timeInterval3);
+            timeInterval3 = setInterval(() => {
+                // getEggHatchTime() ;
+
+            }, 1000);
+
+        }
+
+        // alert(farmBalance)
+
+    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_baseApprovedFarm])
+    
     const getEggData = async () => {
-        let _web3 = new Web3(web3Provider);
-        let _incubatorContract = new _web3.eth.Contract(CHICKEN_INCUBATOR_ABI, CHICKEN_INCUBATOR);
-        // let _chickenEggToken = await _incubatorContract.methods.eggToken().call();
-        // console.log(_chickenEggToken)
+        // let _web3 = new Web3(web3Provider);
+        // let _incubatorContract = new _web3.eth.Contract(CHICKEN_INCUBATOR_ABI, CHICKEN_INCUBATOR);
+        // // let _chickenEggToken = await _incubatorContract.methods.eggToken().call();
+        // // console.log(_chickenEggToken)
         setChickenEggToken(_chickenEggToken);
 
-        // let _capacity = await _incubatorContract.methods.capacity().call();
+        // // let _capacity = await _incubatorContract.methods.capacity().call();
         setIncubCapacity(_capacity / 1e18);
 
-        // let _depositFee = await _incubatorContract.methods.getDepositFee(1).call();
+        // // let _depositFee = await _incubatorContract.methods.getDepositFee(1).call();
         setEggDepositFee(_depositFee1);
 
 
 
-        let _chickenEggContract = new _web3.eth.Contract(TOKEN_ABI, _chickenEggToken);
+        // let _chickenEggContract = new _web3.eth.Contract(TOKEN_ABI, _chickenEggToken);
 
-        // let _chickenEggSymbol = await _chickenEggContract.methods.symbol().call();
+        // // let _chickenEggSymbol = await _chickenEggContract.methods.symbol().call();
         setChickenEggSymbol(_chickenEggSymbol);
 
-        if (address) {
-            // address = '0xef519A99b4921aC70387A3e1Fb6cCDeB853C0aB2' ;
+        // if (address) {
+        //     // address = '0xef519A99b4921aC70387A3e1Fb6cCDeB853C0aB2' ;
 
-            // let _balance = await _chickenEggContract.methods.balanceOf(address).call();
-            // let _userInfo = await _incubatorContract.methods.userInfo(address).call();
+        //     // let _balance = await _chickenEggContract.methods.balanceOf(address).call();
+        //     // let _userInfo = await _incubatorContract.methods.userInfo(address).call();
             setChickenEggBalance(parseFloat(_balance / 1e18).toFixed())
             setChickenEggDeposited(parseFloat(_userInfo3[1] / 1e18).toFixed());
 
-            // let _chickenEggApproved = await _chickenEggContract.methods.allowance(address, CHICKEN_INCUBATOR).call();
+        //     // let _chickenEggApproved = await _chickenEggContract.methods.allowance(address, CHICKEN_INCUBATOR).call();
             setChickenEggApproved(_chickenEggApproved);
 
 
-            if (_userInfo3[0] > 0) {
-                // let _userItens = await _incubatorContract.methods.pendingItems(address).call();
-                //   console.log(_userItens);
+        //     if (_userInfo3[0] > 0) {
+        //         // let _userItens = await _incubatorContract.methods.pendingItems(address).call();
+        //         //   console.log(_userItens);
                 setHatched(parseFloat(_userItens[0] / 1e18).toFixed());
                 let _adults = parseFloat(_userItens[1] / 1e18).toFixed();
                 setAdult(_adults);
-                // let _unlockItem = await _incubatorContract.methods.getUnlockTime(address).call();
+        //         // let _unlockItem = await _incubatorContract.methods.getUnlockTime(address).call();
                 setEggUnlockTime(_unlockItem);
-                // let _unlockItem2 = await _incubatorContract.methods.getHatchTime(address).call();
+        //         // let _unlockItem2 = await _incubatorContract.methods.getHatchTime(address).call();
                 setEggHatchTime(_unlockItem2);
-                // let _amt = _web3.utils.toWei('1');
-                // let _claimChickenFee = await _incubatorContract.methods.getClaimFee(_amt).call();
-                // console.log(_claimChickenFee);
+        //         // let _amt = _web3.utils.toWei('1');
+        //         // let _claimChickenFee = await _incubatorContract.methods.getClaimFee(_amt).call();
+        //         // console.log(_claimChickenFee);
                 let _claimChickenFee = parseFloat(_adults * _claimChickenFee1 / 1e18).toFixed(2)
                 setChickenClaimfee(_claimChickenFee);
 
 
 
-            }
+        //     }
 
-        }
+        // }
 
 
     }
@@ -717,7 +733,7 @@ const ChickenFarm = () => {
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
         functionName: 'checkAndTransferLand',
-        args: [address, farmTokenId]
+        args: [address, farmTokenId],
     })
 
     const { data: lockNFTData, writeAsync: lockNFTWriteAsync, isError: lockNFTError } = useContractWrite(lockNFTConfig_)
@@ -937,7 +953,7 @@ const ChickenFarm = () => {
     const { config: removeChickenConfig_ } = usePrepareContractWrite({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
-        functionName: 'removeChicken',
+        functionName: 'removeSolar',
         args: [parseFloat(crdamount)]
     })
 
@@ -1134,8 +1150,8 @@ const ChickenFarm = () => {
 
     let _amount = ethers.utils.parseEther('5000000000000000000').toString()
     const { config: approvebaseTokenFarmConfig_ } = usePrepareContractWrite({
-        address: CHICKEN_FARMING,
-        abi: CHICKEN_FARMING_ABI,
+        address: TOKEN,
+        abi: TOKEN_ABI,
         functionName: 'approve',
         args: [CHICKEN_FARMING, _amount]
     })
@@ -1158,7 +1174,7 @@ const ChickenFarm = () => {
     const approvebaseTokenFarm = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await approvebaseTokenFarmWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _baseTokenContract = new _web3.eth.Contract(TOKEN_ABI, baseToken);
@@ -1181,7 +1197,7 @@ const ChickenFarm = () => {
 
 
     const { config: approvebaseTokenIncubConfig_ } = usePrepareContractWrite({
-        address: baseToken,
+        address: TOKEN,
         abi: TOKEN_ABI,
         functionName: 'approve',
         args: [CHICKEN_FARMING,
@@ -1231,7 +1247,7 @@ const ChickenFarm = () => {
 
 
     const { config: approvebaseTokenConfig_ } = usePrepareContractWrite({
-        address: baseToken,
+        address: TOKEN,
         abi: TOKEN_ABI,
         functionName: 'approve',
         args: [MARKETPLACE,
@@ -1280,7 +1296,7 @@ const ChickenFarm = () => {
     }
 
     const { config: approveChickenFoodConfig_ } = usePrepareContractWrite({
-        address: chickenFoodToken,
+        address: FLUID_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'approve',
         args: [CHICKEN_FARMING,
@@ -1385,7 +1401,7 @@ const ChickenFarm = () => {
     const { config: claimEggsConfig_ } = usePrepareContractWrite({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
-        functionName: 'claimEggs',
+        functionName: 'claimCells',
         watch: true,
     })
 
@@ -1429,7 +1445,7 @@ const ChickenFarm = () => {
 
 
     const { config: approveChickenEggConfig_ } = usePrepareContractWrite({
-        address: chickenEggToken,
+        address: CELL_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'approve',
         args: [CHICKEN_INCUBATOR, ethers.utils.parseEther('5000000000000000000')],
@@ -1477,13 +1493,13 @@ const ChickenFarm = () => {
 
 
     const { config: approveChickenConfig_ } = usePrepareContractWrite({
-        address: chickenToken,
+        address: SOLAR_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'approve',
         args: [CHICKEN_FARMING, ethers.utils.parseEther('5000000000000000000')],
         watch: true,
     })
-
+// console.log( ethers.utils.parseEther('5000000000000000000'));
     const { data: approveChickenData, writeAsync: approveChickenWriteAsync, isError: approveChickenError } = useContractWrite(approveChickenConfig_)
 
     const { isSuccess: approveChickenSuccess } = useWaitForTransaction({
@@ -1652,9 +1668,9 @@ const ChickenFarm = () => {
     const { config: sellfarmConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'sellFarmLand',
+        functionName: 'sellMoonLand',
         args: [farmTokenId],
-        watch: true,
+        enabled:farmTokenId
     })
 
     const { data: sellfarmData, writeAsync: sellfarmWriteAsync, isError: sellfarmError } = useContractWrite(sellfarmConfig_)
@@ -1699,10 +1715,11 @@ const ChickenFarm = () => {
     }
 
     let _area = buyareadamount.toString();
+    // console.log("area",_area);
     const { config: buyAreaNFTConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'buyFarmLand',
+        functionName: 'buyMoonLand',
         args: [_area],
         watch: true,
     })
@@ -1725,12 +1742,14 @@ const ChickenFarm = () => {
 
 
 
+
     const buyAreaNFT = async () => {
         // let _web3 = new Web3(web3Provider);
         setbuyareadepositError(false);
+       
+
         if (buyareadamount * farmPrice > baseBalance) {
             setbuyareadepositError("Error: Insufficient Balance");
-
         }
         else {
 
@@ -1763,7 +1782,7 @@ const ChickenFarm = () => {
     const { config: addAreaNFTConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'addFarmLandArea',
+        functionName: 'addMoonLandArea',
         args: [parseFloat(areadamount), farmTokenId],
         watch: true,
     })
@@ -1820,12 +1839,13 @@ const ChickenFarm = () => {
 
 
     const { config: approveNFTConfig_ } = usePrepareContractWrite({
-        address: farmToken,
+        address: HARVEST_FARM,
         abi: NFT_ABI,
         functionName: 'approve',
-        args: [parseFloat(areadamount), farmTokenId],
+        args: [CHICKEN_FARMING, farmTokenId],
         watch: true,
     })
+    // console.log("amount",farmTokenId);
 
     const { data: approveNFTData, writeAsync: approveNFTWriteAsync, isError: approveNFTError } = useContractWrite(approveNFTConfig_)
 
@@ -1837,10 +1857,11 @@ const ChickenFarm = () => {
     if (approveNFTError && modal) {
         setModal(false);
         getData();
-        lockNFT();
+       
     }
     if (approveNFTSuccess && modal) {
         setModal(false);
+        lockNFT();
     }
 
     const approveNFT = async () => {
@@ -1983,20 +2004,21 @@ const ChickenFarm = () => {
                                         <div className='alien___rightBox'>
                                             <div className="alientime">
                                                 <div className="time__list">
-                                                    <h3>{farmBalance} {farmSymbol}</h3>
+                                                    {/* {farmBalance} */}
+                                                    <h3>{isNaN(farmBalance)? 0.00 :farmBalance} {farmSymbol}</h3>
                                                     <p>Your Balance</p>
                                                 </div>
                                                 <div className="time__list">
                                                     <h3>{farmArea} sq m</h3>
-                                                    <p>Your Locked Farm Area</p>
+                                                    <p>Your Locked Harvest Area</p>
                                                 </div>
                                                 <div className="time__list">
-                                                    <h3><span className='dollar__text'>$</span>{farmArea * 1}</h3>
+                                                    <h3><span className='dollar__text'>${" "}</span>{farmArea * 1}</h3>
                                                     <p>Market Value</p>
                                                 </div>
                                                 <div className="time__list">
-                                                    <h3>{farmCapacity}</h3>
-                                                    <p>Chicken Capacity</p>
+                                                    <h3>{farmCapacity ?? 0}</h3>
+                                                    <p>Solar Capacity</p>
                                                 </div>
                                             </div>
                                             <div className="alienbtns">
@@ -2017,15 +2039,15 @@ const ChickenFarm = () => {
                                                     }
                                                     {
                                                         farmLocked &&
-                                                        <a className="bg___BTN2" onClick={areaToggle}>Buy More Farm Area</a>
+                                                        <a className="bg___BTN2" onClick={areaToggle}>Buy More Harvest Area</a>
                                                     }
                                                     {
                                                         !farmLocked && farmBalance == 0 &&
-                                                        <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Farm Area</a>
+                                                        <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Harvest Area</a>
                                                     }
                                                     {
-                                                        landIsfree &&
-                                                        <a className="bg___BTN2 ml-2" onClick={() => sellfarm()}>Sell Farm Area</a>
+                                                        !landIsfree &&
+                                                        <a className="bg___BTN2 ml-2" onClick={sellfarm}>Sell Harvest Area</a>
                                                     }
 
                                                 </div>
@@ -2053,7 +2075,7 @@ const ChickenFarm = () => {
                                         <div className='alien___rightBox'>
                                             <div className="alientime__accordian">
                                                 <div class="time__list">
-                                                    <h3>{chickenBalance} {chickenSymbol}
+                                                    <h3>{isNaN(chickenBalance) ? 0.00 :chickenBalance} {chickenSymbol}
                                                         {
                                                             chickenBalance > 0 && chickenBalance <= 10 &&
                                                             <img src={chicken1} width="60px" alt="" />
@@ -2070,7 +2092,7 @@ const ChickenFarm = () => {
                                                     </h3>
                                                     <p>Balance</p>
                                                 </div>
-                                                <div className="time__list"><h3>{chickenDeposited} {chickenSymbol}
+                                                <div className="time__list"><h3>{isNaN(chickenDeposited)? 0.00:chickenDeposited} {chickenSymbol}
 
                                                     {
                                                         chickenDeposited > 0 && chickenDeposited <= 10 &&
@@ -2121,7 +2143,7 @@ const ChickenFarm = () => {
 
                                                 </div>
                                                 <div className="time__list">
-                                                    <h3><span className='dollar__text'>$</span>{parseFloat(eggsearned * 0.12).toFixed(2)}</h3>
+                                                    <h3><span className='dollar__text'>${" "}</span>{parseFloat(eggsearned * 0.12).toFixed(2)}</h3>
                                                     <p>Earned Value</p>
                                                 </div>
                                                 <div className="time__list">
@@ -2185,18 +2207,19 @@ const ChickenFarm = () => {
                                         <div className="pool-btns">
                                             <div >
                                                 <img src={solerimg1} alt="" width={100}/>
-                                                <a className="bg___BTN2" href="/buy/chicken">Buy Chicken</a>
+                                                <Link className="bg___BTN2" to="/buy/chicken">Buy Solar</Link>
                                             </div>
                                             <div>
+                                               
                                             {
                                                 chickenApproved === 0 &&
                                                 <a className="bg___BTN2" onClick={approveChicken} >
                                                     <img className='sine' src={chickSine} alt=""/>
-                                                    Approve Chicken for Farm</a>
+                                                    Approve Solar for Harvest</a>
                                             }
 
                                             {
-                                                chickenApproved > 0 && chickenDeposited === 0 &&
+                                                chickenApproved > 0 && chickenDeposited == 0 &&
                                                 <a className="bg___BTN2" onClick={() => setChickenModal(!chickenModal)} >Put Chicken in Farm</a>
                                             }
 
@@ -2310,7 +2333,7 @@ const ChickenFarm = () => {
 
                                                 </div>
                                                 <div className="time__list">
-                                                    <h3><span className='dollar__text'>$</span>{adult * 10}</h3>
+                                                    <h3><span className='dollar__text'>${" "}</span>{adult * 10}</h3>
                                                     <p>Market Value</p>
                                                 </div>
                                                 <div className="time__list">
@@ -2466,6 +2489,7 @@ const ChickenFarm = () => {
 
                 </ModalBody>
                 <ModalFooter>
+           
                     {
                         baseApprovedFarm == 0 &&
                         <Button className="bg___BTN2 mr-3" onClick={approvebaseTokenFarm}>Approve {baseSymbol}</Button>
@@ -2563,7 +2587,7 @@ const ChickenFarm = () => {
 
                     </label>
                     <input className="form-control" onChange={handleBuyAreaChange} type="text" value={buyareadamount} />
-                    <span className="info mt-3"><b>Cost:</b> {buyareadamount * farmPrice} {baseSymbol}</span>
+                    <span className="info mt-3"><b>Cost:</b> {parseFloat(buyareadamount * farmPrice).toFixed(4)} {baseSymbol}</span>
 
                     {
                         buyareadepositError &&
@@ -2607,7 +2631,7 @@ const ChickenFarm = () => {
 
                     </label>
                     <input className="form-control" onChange={handleAreaChange} type="text" value={areadamount} />
-                    <span className="info mt-3"><b>Cost:</b> {areadamount * farmPrice} {baseSymbol}</span>
+                    <span className="info mt-3"><b>Cost:</b> {parseFloat(areadamount * farmPrice).toFixed(4)} {baseSymbol}</span>
 
                     {
                         areadepositError &&

@@ -28,7 +28,7 @@ const stake = () => {
                                  
                             </div>
                             <div className='btm___arrow2'>
-                    <Link to='/'><img src={arrow} alt='arrow image here' /></Link>
+                    <Link onClick={()=>window.history.back()}><img src={arrow} alt='arrow image here' /></Link>
                 </div>
                         </div>
                     </section>

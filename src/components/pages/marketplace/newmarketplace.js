@@ -14,53 +14,53 @@ import MarketplaceCard from './marketplaceCard.js';
 import { Link } from 'react-router-dom';
 const ELEMENTS = [
     {
-        'slug': 'chicken',
-        'name': 'CHICKEN',
+        'slug': 'solar',
+        'name': 'SOLAR',
         'price': '10',
         'image': cb1,
-        'address': '0x0a92bc06443E7D4cd38735ED01B5C5C3C74F6773'
+        'address': '0x57f450240b7a9eAEDfb6FE8DfA83087b4f312109'
     },
     {
-        'slug': 'chickenegg',
-        'name': 'CHICKEN EGG',
+        'slug': 'solarCell',
+        'name': 'SOLAR CELL',
         'price': '0.12',
         'image': cb5,
-        'address': '0x78AC3A5bC58455B41601189FDCF028F63e8c9ced'
+        'address': '0xD5DF9651c2731dA0d47978A79f4F6594034038eC'
     },
     {
-        'slug': 'chickenfood',
-        'name': 'CHICKEN FOOD',
+        'slug': 'fluid',
+        'name': 'FLUID',
         'price': '1',
         'image': cb2,
-        'address': '0x50C0268e1D368420Ce99766BF89AbecEfCFC7644'
+        'address': '0xd6e52657A95248f51cAB46065f314711a4cd1cdc'
     },
     {
-        'slug': 'boar',
-        'name': 'BOAR',
+        'slug': 'thermix',
+        'name': 'THERMIX',
         'price': '100',
         'image': cb3,
-        'address': '0x486bfd5AE6bf094E403bCF8dae14b708b15B143E'
+        'address': '0x12F32f5FC8C87b053DfBc8F56C159094B42730d1'
     },
     {
-        'slug': 'sow',
-        'name': 'SOW',
+        'slug': 'metlux',
+        'name': 'METLUX',
         'price': '100',
         'image': cb4,
-        'address': '0x26B00Fb006Cb64c1f5D4ed407c6aBdF902F1c595'
+        'address': '0x8D1502d8Acc70b861F58186270Bc81F671e0B2d8'
     },
     {
-        'slug': 'piglet',
-        'name': 'PIGLET',
+        'slug': 'eule',
+        'name': 'EULE',
         'price': '10',
         'image': cb6,
-        'address': '0x7f7936Bf782F327bF549809bC6469dbE52280867'
+        'address': '0xd63E96e180661e094383e66AA838863A87FDeB9F'
     },
     {
-        'slug': 'pigfood',
-        'name': 'PIG FOOD',
+        'slug': 'positron',
+        'name': 'POSITRON',
         'price': '5',
         'image': cb7,
-        'address': '0xea049FB6D789deEb85630c16576cC0CEB75555F7'
+        'address': '0x16775217Bab1C67D0b60104B52b3504B37E7FB89'
     }
 ];
 const marketplace2 = () => {
