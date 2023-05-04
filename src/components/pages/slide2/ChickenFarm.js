@@ -351,7 +351,7 @@ const ChickenFarm = () => {
         args: [address, CHICKEN_FARMING],
         watch: true,
     })
-    // console.log(parseInt(_chickenApproved));
+    console.log(parseInt(_chickenApproved));
     const { data: _chickenFoodApproved } = useContractRead({
         address: FLUID_TOKEN,
         abi: TOKEN_ABI,
@@ -510,6 +510,10 @@ const ChickenFarm = () => {
     
                     }
                 }
+                let _chickenBalance = parseFloat(_chickenBalance2 / 1e18).toFixed();
+                setChickenBalance(_chickenBalance);
+
+
 
         // let _web3 = new Web3(web3Provider);
         // let _farmingContract = new _web3.eth.Contract(CHICKEN_FARMING_ABI, CHICKEN_FARMING);
@@ -610,8 +614,7 @@ const ChickenFarm = () => {
         //     // let _chickenFoodApproved = await _chickenFoodContract.methods.allowance(address, CHICKEN_FARMING).call();
            
 
-            let _chickenBalance = parseFloat(_chickenBalance2 / 1e18).toFixed();
-            setChickenBalance(_chickenBalance);
+          
         //     // console.log(_userInfo);
          
         // }
@@ -743,12 +746,13 @@ const ChickenFarm = () => {
     })
 
 
-    if (lockNFTError && modal) {
-        getData();
+    if (lockNFTError) {
         setModal(false);
     }
-    if (lockNFTSuccess && modal) {
+    if (lockNFTSuccess ) {
         setModal(false);
+        getData();
+
     }
 
 
@@ -1311,12 +1315,13 @@ const ChickenFarm = () => {
 
 
     if (approveChickenFoodError && modal) {
-        getData();
         setModal(false);
-        depositChicken();
     }
     if (approveChickenFoodSuccess && modal) {
         setModal(false);
+        getData();
+        depositChicken();
+
     }
 
     const approveChickenFood = async () => {
@@ -1514,6 +1519,9 @@ const ChickenFarm = () => {
     }
     if (approveChickenSuccess && modal) {
         setModal(false);
+        getEggData();
+        getData();
+
     }
 
 
@@ -1856,12 +1864,13 @@ const ChickenFarm = () => {
 
     if (approveNFTError && modal) {
         setModal(false);
-        getData();
        
     }
-    if (approveNFTSuccess && modal) {
+    if (approveNFTSuccess) {
         setModal(false);
         lockNFT();
+        getData();
+
     }
 
     const approveNFT = async () => {
@@ -2076,7 +2085,7 @@ const ChickenFarm = () => {
                                             <div className="alientime__accordian">
                                                 <div class="time__list">
                                                     <h3>{isNaN(chickenBalance) ? 0.00 :chickenBalance} {chickenSymbol}
-                                                        {
+                                                        {/* {
                                                             chickenBalance > 0 && chickenBalance <= 10 &&
                                                             <img src={chicken1} width="60px" alt="" />
                                                         }
@@ -2087,7 +2096,7 @@ const ChickenFarm = () => {
                                                         {
                                                             chickenBalance > 100 && chickenBalance <= 1000 &&
                                                             <img src={chicken1000} width="60px" alt="" />
-                                                        }
+                                                        } */}
 
                                                     </h3>
                                                     <p>Balance</p>
@@ -2207,7 +2216,7 @@ const ChickenFarm = () => {
                                         <div className="pool-btns">
                                             <div >
                                                 <img src={solerimg1} alt="" width={100}/>
-                                                <Link className="bg___BTN2" to="/buy/chicken">Buy Solar</Link>
+                                                <Link className="bg___BTN2" to="/buy/solar">Buy Solar</Link>
                                             </div>
                                             <div>
                                                
@@ -2476,8 +2485,8 @@ const ChickenFarm = () => {
 
                     <input className="form-control" onChange={handleDayChange} type="text" value={dayamount} />
                     <span className="info">Est. Food: {cdamount * 20 * dayamount} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {chickenSymbol} daily)</span>
-                    <span className="info mt-3"><b>Your Available Chicken Food:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
-                    <span className="info mt-3"><b>Your Chicken Food Cost for Total Chicken in Farm:</b> {parseFloat((parseFloat(chickenDeposited) + parseFloat(cdamount)) * dayamount * 20).toFixed(2)} {chickenFoodSymbol}</span>
+                    <span className="info mt-3"><b>Your Available SOLAR FLUID:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
+                    <span className="info mt-3"><b>Your SOLAR FLUID Cost for Total SOLAR in Harvest:</b> {parseFloat((parseFloat(chickenDeposited) + parseFloat(cdamount)) * dayamount * 20).toFixed(2)} {chickenFoodSymbol}</span>
                     <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} {baseSymbol} (@ {chickenDepositFee} per chicken )</span>
 
 

@@ -48,7 +48,7 @@ class choose extends Component {
                                                 & start earning energy</p></div>
                                         <img className='c___img' src={choose1} alt='' />
                                     </div>
-                                    <div><Link to="/chicken-farming" className='bg___BTN'>Get started</Link></div>
+                                    <div><Link to="/solar-harvesting" className='bg___BTN'>Get started</Link></div>
                                 </div>
                             </div>
                             <div className="col-lg-4">

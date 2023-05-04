@@ -3,7 +3,7 @@ module.exports = {
   TX_LINK: "https://bscscan.com/tx/",
   ROUTER: "0x10ed43c718714eb63d5aa57b78b54704e256024e", // Live 1
   MARKETPLACE: "0xA9A2B3725152F99E3171BABB7430c96FEc262d1A", // Live 3 (marketplace)
-  CHICKEN_FARMING: "0x64a075179C32214fd707494298f301d4CB009a08", // Live 7  Final (harvesting)
+  CHICKEN_FARMING: "0xA2f404fedB40d0BB2772927bfC8D210A38159837", // Live 7  Final (harvesting)
   CHICKEN_INCUBATOR: "0x84A7636703fB10E6e24f13b74825e253EB9ecB91", // Live 4  (forginator)
   TOKEN: "0xa24Bc69743Ec68053B6E9fe31be60eFDd8f29f2a", // Live (token)
   NFT_MARKETPLACE: "0xbE1dd167B0031DCA243f7ce5F2654127703FA0e8", // Live 2 (nftmarketplace)

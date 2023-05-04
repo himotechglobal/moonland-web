@@ -52,7 +52,7 @@ function App() {
 				<Route path="/fslide3" element={<Fslide3 />} />
 				<Route path="/step" element={<Step />} />
 				<Route path="/pig-farming" element={<PigFarm />} />
-				<Route path="/chicken-farming" element={<ChickenFarm />} />
+				<Route path="/solar-harvesting" element={<ChickenFarm />} />
 				<Route path="/chicken-farming-data" element={<NewChickenFarm />} />
 				<Route path="/choose" element={<Choose />} />
 				<Route path="/marketplace" element={<Marketplace2 />} />

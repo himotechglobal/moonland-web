@@ -884,7 +884,7 @@ const elements = (props) => {
                                         </div>
                                         <div className="wrp-btn-back">
                                             <a href="/marketplace" className="bg___BTN3">Marketplace</a>
-                                            <a href="/choose" className="bg___BTN3">Farming</a>
+                                            <a href="/choose" className="bg___BTN3">Invest</a>
 
                                         </div>
                                     </div>
