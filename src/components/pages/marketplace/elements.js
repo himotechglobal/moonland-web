@@ -100,7 +100,9 @@ const ELEMENTS = {
 
 const elements = (props) => {
     const [balance, setBalance] = useState(0);
+
     const { key } = useParams();
+    const multiplier = ((key == "fluid" || key == "positron") ? 600 : 1)
     const [symbol, setSymbol] = useState(0);
     const [baseToken, setBaseToken] = useState(null);
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -135,6 +137,8 @@ const elements = (props) => {
 
     const [sellModal, setSellModal] = useState(false);
     const sellToggle = () => setSellModal(!sellModal);
+    const [sold, setSold] = useState(0);
+    const [soldValue, setSoldValue] = useState(0);
 
 
 
@@ -284,6 +288,78 @@ const elements = (props) => {
         watch: true,
         enabled: address !== undefined
     })
+    const { data: _getSold2 } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalCellSold",
+        watch: true
+      })
+      const { data: _getSoldValue2 } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalCellSoldValue",
+        watch: true
+      })
+      const { data: _getSold3 } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalSolarFoodSold",
+        watch: true
+      })
+      const { data: _getSoldValu3 } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalSolarFoodSoldValue",
+        watch: true
+      })
+      const { data: _getSold4 } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalThermixSold",
+        watch: true
+      })
+      const { data: _getSoldValue4 } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalThermixSoldValue",
+        watch: true
+      })
+      const { data: _getSold5 } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalMetluxSold",
+        watch: true
+      })
+      const { data: _getSoldValue5 } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalMetluxSoldValue",
+        watch: true
+      })
+      const { data: _getSoldPiglet } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "getTokenPerEule",
+        watch: true
+      })
+      const { data: _getSoldValuePiglet } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalEuleSoldValue",
+        watch: true
+      })
+      const { data: _getSoldPigfood } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalPositronsSold",
+        watch: true
+      })
+      const { data: _getSoldValuePigfood } = useContractRead({
+        address: MARKETPLACE,
+        abi: MARKETPLACE_ABI,
+        functionName: "totalPositronsSoldValue",
+        watch: true
+      })
 
     const [isApprovedERC20, setIsApprovedERC20] = useState(true);
 
@@ -308,47 +384,82 @@ const elements = (props) => {
     const getPrice = async () => {
         // let _web3 = new Web3(web3Provider);
         // let _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-        if (key === 'chicken') {
+        if (key === 'solar') {
             // let _getPrice = await _marketContract.methods.getTokenPerChicken().call();
             let _getPrice = parseFloat(_getPriceChicken / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
+            let _getSold = parseFloat(_getSold1 / 1e18).toFixed()
+      setSold(_getSold);
+      let _getSoldValue = parseFloat(_getSoldValue1 / 1e18).toFixed()
+      setSoldValue(_getSoldValue);
 
         }
-        else if (key === 'chickenegg') {
+        else if (key === 'solarCell') {
             // let _getPrice = await _marketContract.methods.getTokenPerEgg().call();
             let _getPrice = parseFloat(_getPriceChickenegg / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
             // console.log(_getPriceChickenegg);
+            let _getSold = parseFloat(_getSold2 / 1e18).toFixed()
+      setSold(_getSold);
+      // let _getSoldValue = await _marketContract.methods.totalEggSoldValue().call();
+      let _getSoldValue = parseFloat(_getSoldValue2 / 1e18).toFixed()
+      setSoldValue(_getSoldValue);
         }
-        else if (key === 'chickenfood') {
+        else if (key === 'fluid') {
             // let _getPrice = await _marketContract.methods.getTokenPerChickenFood().call();
             let _getPrice = parseFloat(_getPriceChickenfood * 600 / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
+            let _getSold = parseFloat(_getSold3 / 1e18).toFixed()
+            setSold(_getSold);
+            // let _getSoldValue = await _marketContract.methods.totalChickenFoodSoldValue().call();
+            let _getSoldValue = parseFloat(_getSoldValu3 / 1e18).toFixed()
+            setSoldValue(_getSoldValue);
 
         }
-        else if (key === 'boar') {
+        else if (key === 'thermix') {
             // let _getPrice = await _marketContract.methods.getTokenPerBoar().call();
             let _getPrice = parseFloat(_getPriceBoar / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
+            let _getSold = parseFloat(_getSold4 / 1e18).toFixed()
+      setSold(_getSold);
+      // console.log(_getSold);
+      // let _getSoldValue = await _marketContract.methods.totalBoarSoldValue().call();
+      let _getSoldValue = parseFloat(_getSoldValue4 / 1e18).toFixed()
+      setSoldValue(_getSoldValue);
 
         }
-        else if (key === 'sow') {
+        else if (key === 'metlux') {
             // let _getPrice = await _marketContract.methods.getTokenPerSow().call();
             let _getPrice = parseFloat(_getPriceSow / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
+            let _getSold = parseFloat(_getSold5 / 1e18).toFixed()
+            setSold(_getSold);
+            // let _getSoldValue = await _marketContract.methods.totalSowSoldValue().call();
+            let _getSoldValue = parseFloat(_getSoldValue5 / 1e18).toFixed()
+            setSoldValue(_getSoldValue);
 
         }
-        else if (key === 'piglet') {
+        else if (key === 'eule') {
             // let _getPrice = await _marketContract.methods.getTokenPerPiglet().call();
             let _getPrice = parseFloat(_getPricePiglet / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
-
+            let _getSold = parseFloat(_getSoldPiglet / 1e18).toFixed()
+            setSold(_getSold);
+            // console.log(_getSold);
+            // let _getSoldValue = await _marketContract.methods.totalPigletSoldValue().call();
+            let _getSoldValue = parseFloat(_getSoldValuePiglet / 1e18).toFixed()
+            setSoldValue(_getSoldValue);
         }
-        else if (key === 'pigfood') {
+        else if (key === 'positron') {
             // let _getPrice = await _marketContract.methods.getTokenPerPigfood().call();
             let _getPrice = parseFloat(_getPricePigfood * 600 / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
-
+            let _getSold = parseFloat(_getSoldPigfood / 1e18).toFixed()
+            setSold(_getSold);
+            // console.log(_getSold)
+            // let _getSoldValue = await _marketContract.methods.totalPigFoodSoldValue().call();
+            let _getSoldValue = parseFloat(_getSoldValuePigfood / 1e18).toFixed()
+            setSoldValue(_getSoldValue);
         }
 
         // let _getFee = await _marketContract.methods.sellFee().call();
@@ -436,10 +547,10 @@ const elements = (props) => {
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
         functionName: 'sellMoonTokens',
-        args: [ELEMENTS[key].address,isNaN(sellAmount)?0:  ethers.utils.parseEther?.((sellAmount).toString())]
+        args: [ELEMENTS[key].address,isNaN(sellAmount)?0:  ethers.utils.parseEther?.((sellAmount*multiplier).toString())]
     })
 
-
+// console.log(parseInt(multiplier*parseInt(sellAmount)));
 
     const { data: sellFarmTokensData, writeAsync: sellFarmTokensWriteAsync, isError: sellFarmTokensError } = useContractWrite(sellFarmTokensConfig_)
 
@@ -474,9 +585,10 @@ const elements = (props) => {
 
         let _amount = parseFloat(sellAmount);
 
-        if (key === 'chickenfood' || key === 'pigfood') {
+        if (key === 'fluid' || key === 'positron') {
             _amount = _amount * 600;
         }
+
         if (_amount > aseetBalance) {
             setSellError("Error: Insufficient Balance");
             return false;
@@ -515,15 +627,17 @@ const elements = (props) => {
 
   
     // let _tokenAdd = ELEMENTS[key]?.address;
-    console.log(depositAmount);
-    let _amount = isNaN(depositAmount)? 0: ethers.utils.parseEther?.((depositAmount).toString())
-  console.log((depositAmount));
+    // console.log(_amount);
+    let _amount = isNaN(depositAmount)? 0: ethers.utils.parseEther?.((depositAmount*multiplier).toString())
+    console.log(depositAmount*multiplier);
+
+//   console.log((depositAmount));
     const { config: buyFarmTokensConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
         functionName: 'buyMoonTokens',
-        args: [ELEMENTS[key]?.address, _amount],
-        enabled: ContractTokenBalance?.formatted >= depositAmount && _amount > 0
+        args: [ELEMENTS[key]?.address,  _amount],
+        enabled: ContractTokenBalance?.formatted >= depositAmount && depositAmount > 0
 
         // enabled: _amount > 0 ? true : false
     })
@@ -556,7 +670,7 @@ const elements = (props) => {
         await buyFarmTokensWriteAsync?.();
         // let _amount = parseFloat(depositAmount);
 
-        if (key === 'chickenfood' || key === 'pigfood') {
+        if (key === 'fluid' || key === 'positron') {
             // _amount = _amount * 600;
         }
         // _amount = _web3.utils.toWei(_amount.toString());
@@ -699,7 +813,7 @@ const elements = (props) => {
 
     async function setMaxSell() {
         let _amt = parseFloat(aseetBalance)
-        if (key === 'chickenfood' || key === 'pigfood') {
+        if (key === 'fluid' || key === 'positron') {
             _amt = parseFloat(_amt / 600).toFixed()
         }
 
@@ -740,12 +854,12 @@ const elements = (props) => {
                                             </div>
                                             <div className='moon___buy__btm mb__m'>
                                                 <p>Total Sold</p>
-                                                <p className='amount___p'>{parseFloat(_getSold1 / 1e18).toFixed()}</p>
+                                                <p className='amount___p'>{sold > 0 ? sold : "0"}</p>
 
                                             </div>
                                             <div className='moon___buy__btm '>
                                                 <p>Total sold value</p>
-                                                <p className='amount___p'>{parseFloat(_getSoldValue1 / 1e18).toFixed()}</p>
+                                                <p className='amount___p'>{soldValue > 0 ? soldValue : '0'} {symbol}</p>
 
                                             </div>
                                         </div>
@@ -802,14 +916,14 @@ const elements = (props) => {
                         </div>
                         <label className="mb-3"><br />
                             {
-                                (key === 'chickenfood' || key === 'pigfood') &&
+                                (key === 'fluid' || key === 'positron') &&
 
                                 <>
-                                    Enter number in multiple of 600 gms to Buy
+                                    Enter number in multiple of 600 ml to Buy
                                 </>
                             }
                             {
-                                key !== 'chickenfood' && key !== 'pigfood' &&
+                                key !== 'fluid' && key !== 'positron' &&
                                 <>
                                     Enter Quantity to Buy
                                 </>
@@ -820,9 +934,9 @@ const elements = (props) => {
                         </label>
                         <input className="form-control mb-3" onChange={handleDepositChange} type="number" value={damount} />
                         {
-                            (key === 'chickenfood' || key === 'pigfood') &&
+                            (key === 'fluid' || key === 'positron') &&
 
-                            <span className="info mt-3">Weight: {parseFloat(damount * 600).toFixed(2)} grams ({ELEMENTS[key].name})</span>
+                            <span className="info mt-3">Quantity: {parseFloat(damount * 600).toFixed(2)} ml ({ELEMENTS[key].name})</span>
 
                         }
                         <span className="info mt-3">Cost: {parseFloat(damount * tokenPrice).toFixed(2)} {symbol}</span>
@@ -847,7 +961,7 @@ const elements = (props) => {
                             !isApprovedERC20 ?
                                 <Button className="bg___BTN2 mr-3" onClick={approveToken}>Approve</Button>
                                 :
-                                ContractTokenBalance?.formatted < depositAmount
+                                ContractTokenBalance?.formatted < depositAmount*multiplier
                                     ? <p>
                                         Marketplace have no {ELEMENTS[key].name} Balance
                                     </p>
@@ -896,13 +1010,13 @@ const elements = (props) => {
                         <label className="mb-3"><br />
                             {/* {key} */}
                             {
-                                (key === 'chickenfood' || key === 'pigfood') &&
+                                (key === 'fluid' || key === 'positron') &&
                                 <>
-                                    Enter number in multiple of 600 gms to Sell
+                                    Enter number in multiple of 600 ml to Sell
                                 </>
                             }
                             {
-                                (key !== 'chickenfood' && key !== 'pigfood') &&
+                                (key !== 'fluid' && key !== 'positron') &&
                                 <>
                                     Enter Quantity to Sell
                                 </>
@@ -912,8 +1026,8 @@ const elements = (props) => {
                         </label>
                         <input className="form-control mb-3" onChange={handleSellChange} type="text" value={samount} />
                         {
-                            (key === 'chickenfood' || key === 'pigfood') &&
-                            <span className="info mt-3">Weight: {parseFloat(samount * 600).toFixed(2)} grams ({ELEMENTS[key].name})</span>
+                            (key === 'fluid' || key === 'positron') &&
+                            <span className="info mt-3">Weight: {parseFloat(samount * 600).toFixed(2)} ml ({ELEMENTS[key].name})</span>
 
                         }
                         <span className="info mt-3">Price: {parseFloat(samount * tokenPrice).toFixed(2)} {symbol}</span>

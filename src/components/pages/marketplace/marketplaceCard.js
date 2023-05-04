@@ -190,6 +190,7 @@ const MarketplaceCard = (props) => {
     functionName: "getTokenPerSolarFood",
     watch: true
   })
+  console.log(parseInt(_getPrice3));
   const { data: _getSold3 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
@@ -248,13 +249,14 @@ const MarketplaceCard = (props) => {
   const { data: _getPricePiglet } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "getTokenPerPiglet",
+    functionName: "getTokenPerEule",
     watch: true
   })
+  console.log((_getPricePiglet));
   const { data: _getSoldPiglet } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
-    functionName: "getTokenPerEule",
+    functionName: "totalEuleSold",
     watch: true
   })
   const { data: _getSoldValuePiglet } = useContractRead({
@@ -357,6 +359,7 @@ const MarketplaceCard = (props) => {
       // let _getPrice = await _marketContract.methods.getTokenPerChickenFood().call();
       let _getPrice = parseFloat(_getPrice3 * 600 / 1e18).toFixed(2)
       setTokenPrice(_getPrice);
+  
       // console.log(_getPrice);
       // let _getSold = await _marketContract.methods.totalChickenFoodSold().call();
       let _getSold = parseFloat(_getSold3 / 1e18).toFixed()
