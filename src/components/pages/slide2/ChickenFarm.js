@@ -356,6 +356,7 @@ const ChickenFarm = () => {
         args: [address, CHICKEN_FARMING],
         watch: true,
     })
+    console.log(parseInt(_chickenApproved));
     const { data: _chickenFoodApproved } = useContractRead({
         address: FLUID_TOKEN,
         abi: TOKEN_ABI,
@@ -370,7 +371,6 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
-
     // console.log(parseInt(_nftTokenId));
     const { data: _approved } = useContractRead({
         address: HARVEST_FARM,
@@ -393,8 +393,6 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
-
-
  
     const { data: _chickenEggToken } = useContractRead({
         address: CHICKEN_INCUBATOR,
@@ -436,8 +434,7 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
-
-
+    // console.log("balance",_userInfo3)
     const { data: _chickenEggApproved } = useContractRead({
         address: CELL_TOKEN,
         abi: TOKEN_ABI,
@@ -446,19 +443,12 @@ const ChickenFarm = () => {
         watch: true,
     })
     
-
-
     const { data: _unlockItem } = useContractRead({
         address: CHICKEN_INCUBATOR,
         abi: CHICKEN_INCUBATOR_ABI,
         functionName: 'getUnlockTime',
         args: [address],
-        watch : true,
-        
     })
-
-
-    
 
     const { data: _userItens } = useContractRead({
         address: CHICKEN_INCUBATOR,
@@ -467,9 +457,8 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
-
     const { data: _unlockItem2 } = useContractRead({
-        address: CHICKEN_FARMING,
+        address: CHICKEN_INCUBATOR,
         abi: CHICKEN_INCUBATOR_ABI,
         functionName: 'getHatchTime',
         args: [address],
@@ -477,7 +466,7 @@ const ChickenFarm = () => {
     })
     let _amt = ethers.utils.parseEther('1').toString();
     const { data: _claimChickenFee1 } = useContractRead({
-        address: CHICKEN_FARMING,
+        address: CHICKEN_INCUBATOR,
         abi: CHICKEN_INCUBATOR_ABI,
         functionName: 'getClaimFee',
         args: [_amt],
@@ -715,7 +704,7 @@ console.log(farmCapacity);
 
         // alert(farmBalance)
 
-    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_baseApprovedFarm,modal,_chickenFoodApproved,])
+    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_baseApprovedFarm,modal,_chickenFoodApproved,_userInfo3])
     // console.log(parseInt(_capacity));
     const getEggData = async () => {
         // let _web3 = new Web3(web3Provider);
@@ -961,7 +950,7 @@ console.log(farmCapacity);
         let _current = new Date().getTime() / 1e3;
         console.log(eggunlockTime);
         if (parseInt(_current) > parseInt(eggunlockTime)) {
-            seteggTime(0);
+            seteggTime("Yielded");
             // console.log('ended')
             // console.log('Current', _current)
         }

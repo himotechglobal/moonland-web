@@ -25,7 +25,7 @@
     "react-toastify": "^9.1.1",
     "reactstrap": "^9.1.6",
     "slick-carousel": "^1.8.1",
-    "wagmi": "^0.9.6",
+    "wagmi": "^0.7.9",
     "web-vitals": "^2.1.4",
     "web3": "^1.8.2"
   },

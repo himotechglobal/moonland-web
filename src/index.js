@@ -7,52 +7,54 @@ import "@rainbow-me/rainbowkit/styles.css";
 import {
   WagmiConfig,
   createClient,
+  defaultChains,
   configureChains,
+  chain,
 } from "wagmi";
-import {bscTestnet,bsc} from "wagmi/chains"
+// import {bscTestnet,bsc} from "wagmi/chains"
 // import { infuraProvider } from "wagmi/providers/infura";
 import { publicProvider } from "wagmi/providers/public";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
-import { getDefaultWallets, RainbowKitProvider, } from "@rainbow-me/rainbowkit";
+import { getDefaultWallets, RainbowKitProvider,darkTheme } from "@rainbow-me/rainbowkit";
 import {  Theme } from '@rainbow-me/rainbowkit'
 import moonlandSheild from '../src/components/images/moonlandSheild.svg'
 
-
-// const bsc = {
-//   id: 56,
-//   name: "BSC Mainnet",
-//   network: "Binance Smart Chain",
-//   nativeCurrency: {
-//     decimals: 18,
-//     name: "BNB",
-//     symbol: "BNB",
-//   },
-//   rpcUrls: {
-//     default: "https://bsc-dataseed.binance.org/",
-//   },
-//   blockExplorers: {
-//     default: { name: "BscScan", url: "https://bscscan.com" },
-//   },
-//   testnet: false,
-// };
-// const bscTest = {
-//   id: 97,
-//   name: "BSC Testnet",
-//   network: "Binance Smart Chain Testnet",
-//   nativeCurrency: {
-//     decimals: 18,
-//     name: "tBNB",
-//     symbol: "tBNB",
-//   },
-//   iconUrl: "",
-//   rpcUrls: {
-//     default: "https://data-seed-prebsc-1-s3.binance.org:8545",
-//   },
-//   blockExplorers: {
-//     default: { name: "BscScan TestNet", url: "https://testnet.bscscan.com" },
-//   },
-//   testnet: true,
-// };
+ 
+const bsc = {
+  id: 56,
+  name: "BSC Mainnet",
+  network: "Binance Smart Chain",
+  nativeCurrency: {
+    decimals: 18,
+    name: "BNB",
+    symbol: "BNB",
+  },
+  rpcUrls: {
+    default: "https://bsc-dataseed.binance.org/",
+  },
+  blockExplorers: {
+    default: { name: "BscScan", url: "https://bscscan.com" },
+  },
+  testnet: false,
+};
+const bscTest = {
+  id: 97,
+  name: "BSC Testnet",
+  network: "Binance Smart Chain Testnet",
+  nativeCurrency: {
+    decimals: 18,
+    name: "tBNB",
+    symbol: "tBNB",
+  },
+  iconUrl: "",
+  rpcUrls: {
+    default: "https://data-seed-prebsc-1-s3.binance.org:8545",
+  },
+  blockExplorers: {
+    default: { name: "BscScan TestNet", url: "https://testnet.bscscan.com" },
+  },
+  testnet: true,
+};
 
 
 const CustomAvatar: AvatarComponent = ({ address, ensImage, size }) => {
@@ -128,16 +130,15 @@ const myCustomTheme = {
 
 
 const { chains,provider,webSocketProvider } = configureChains([
-  bsc,bscTestnet
+  bsc,bscTest
 ], [
   publicProvider(),
-  // infuraProvider({apiKey:"1dddfc946d084fa883705b9a68156642"})
-  jsonRpcProvider({
+   jsonRpcProvider({
     priority:0,
     rpc: (chain) => {
       // console.log(chain,chain.id,chain.rpcUrls.default);
       if (chain.id !== bsc.id) return null
-      return { http: "https://bsc-dataseed.binance.org/" }
+      return { http: chain.rpcUrls.default }
     },
   }),
 ]);
