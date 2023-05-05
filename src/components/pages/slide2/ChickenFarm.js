@@ -83,7 +83,7 @@ const ChickenFarm = () => {
     const [eggHatchTime, setEggHatchTime] = useState(0);
 
     const [baseBalance, setBaseBalance] = useState(0);
-    const [baseSymbol, setBaseSymbol] = useState(0);
+    const [baseSymbol, setBaseSymbol] = useState("");
     const [baseApproved, setBaseApproved] = useState(0);
     const [baseApprovedIncub, setBaseApprovedIncub] = useState(0);
     const [baseApprovedFarm, setBaseApprovedFarm] = useState(0);
@@ -129,6 +129,8 @@ const ChickenFarm = () => {
     const [dayamount, setDayamount] = useState(0);
     const [decimals, setDecimals] = useState(0);
     const [damount, setdAmount] = useState('');
+
+    const [solarAmount, setSolarAmount] = useState('');
     const [cdamount, setcdAmount] = useState('');
     const [cedamount, setcedAmount] = useState('');
     const [crdamount, setcrdAmount] = useState('');
@@ -230,7 +232,7 @@ const ChickenFarm = () => {
         args: [1],
         watch: true,
     })
-// console.log(_depositFee);
+
     const { data: _removeFee } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
@@ -250,6 +252,7 @@ const ChickenFarm = () => {
         functionName: 'symbol',
         watch: true,
     })
+    console.log(_symbol);
     const { data: _chickenSymbol } = useContractRead({
         address: SOLAR_TOKEN,
         abi: TOKEN_ABI,
@@ -263,7 +266,7 @@ const ChickenFarm = () => {
         functionName: 'symbol',
         watch: true,
     })
-    // console.log(_baseSymbol)
+    console.log(_baseSymbol)
     const { data: _baseApproved } = useContractRead({
         address: TOKEN,
         abi: TOKEN_ABI,
@@ -316,6 +319,7 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
+ 
     const { data: _userEggs } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
@@ -337,6 +341,7 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
+   
     const { data: _chickenBalance2 } = useContractRead({
         address: SOLAR_TOKEN,
         abi: TOKEN_ABI,
@@ -388,6 +393,7 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
+ 
     const { data: _chickenEggToken } = useContractRead({
         address: CHICKEN_INCUBATOR,
         abi: CHICKEN_INCUBATOR_ABI,
@@ -407,6 +413,7 @@ const ChickenFarm = () => {
         args: [1],
         watch: true,
     })
+   
     const { data: _chickenEggSymbol } = useContractRead({
         address: CELL_TOKEN,
         abi: TOKEN_ABI,
@@ -427,6 +434,7 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
+    // console.log(_userInfo3);
     const { data: _chickenEggApproved } = useContractRead({
         address: CELL_TOKEN,
         abi: TOKEN_ABI,
@@ -434,6 +442,7 @@ const ChickenFarm = () => {
         args: [address, CHICKEN_INCUBATOR],
         watch: true,
     })
+    
     const { data: _unlockItem } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_INCUBATOR_ABI,
@@ -471,28 +480,68 @@ const ChickenFarm = () => {
         watch: true,
     })
    
-    // console.log(_claimChickenFee1)
-    
+ 
+ 
     const getData = async () => {
         // console.log(parseInt(_nftBalance));
+    console.log("njh")
         
         setFarmBalance(parseInt(_nftBalance));
 
         setFarmPrice(parseFloat(_tokenPerfarm / 1e18).toFixed(2));
         setbaseToken(_baseToken);
         setFarmToken(_farmToken);
-        setChickenDepositFee(_depositFee);
-        setChickenRemoveFee(_removeFee);
+        setChickenDepositFee(parseInt(_depositFee));
+        setChickenRemoveFee(parseInt(_removeFee));
         setChickenFoodToken(_chickenFoodToken)
         setChickenToken(_chickenToken)
-         setChickenFoodApproved(_chickenFoodApproved);
-        //   console.log(parseInt(_nftTokenId));
-        if (_nftBalance > 0 || _userInfo?.landlocked) {
-            setBaseApprovedFarm(parseInt(_baseApprovedFarm));
+         setChickenFoodApproved(parseInt(_chickenFoodApproved));
+       
+        
             setChickenApproved(parseInt(_chickenApproved));
+            setBaseApprovedFarm(parseInt(_baseApprovedFarm));
+            let _chickenBalance = parseFloat(_chickenBalance2 / 1e18).toFixed(2);
+            setChickenBalance(_chickenBalance);
+            setChickenSymbol(_chickenSymbol);
+            setChickenDeposited(parseFloat(_userChickens / 1e18).toFixed(2));
+
+         setFarmSymbol(_symbol);
+         setBaseApproved(_baseApproved);
+         setBaseApprovedIncub(_baseApprovedIncub);
+
+         setBaseBalance(parseFloat(_baseBalance / 1e18).toFixed(2));
+
+        setChickenFoodSymbol(_chickenFoodSymbol)
+        let _chickenFoodBalance = parseFloat(_chickenFoodBalance1 / 1e18).toFixed();
+
+        setChickenFoodBalance(_chickenFoodBalance);
+        setEggsearned(parseFloat(_userEggs / 1e18).toFixed());
+
+        setUnlockTime(_userChickenDie);
+        console.log("hnjj")
+
+        // let _userClaimTimes = Object.keys(_userClaimTimesOne).map((key) => _userClaimTimes[key]);
+        // console.log("claimeTimes", _userClaimTimes[1]);
+        // setlayUnlockTime(_userClaimTimes[1]);
+        // setlayEndTime(_userClaimTimes[0]);
+
+        setBaseSymbol(_baseSymbol);
+
+
+        if (_nftBalance > 0 || _userInfo?.landlocked) {
+
             setFarmTokenId(parseInt(_nftTokenId));
+            console.log("hhh")
+
                     if (_approved === CHICKEN_FARMING) {
                         setFarmApprove(true);
+                    }
+                    if (_userInfo2[4]) {
+                        setFarmTokenId(_userInfo2[1]);
+    
+                        setFarmArea(parseFloat(_userInfo2[2] / 1e18).toFixed(2));
+                        setFarmCapacity(parseFloat(_userInfo2[3] / 1e18).toFixed(2));
+    
                     }
                     // let _landIsfree = await _farmingContract.methods.landIsfree(_nftTokenId, address).call();
                     setLandIsfree(_landIsfree);
@@ -502,16 +551,10 @@ const ChickenFarm = () => {
     
     
             //         // console.log(_userInfo[4]);
-                    if (_userInfo2[4]) {
-                        setFarmTokenId(_userInfo2[1]);
-    
-                        setFarmArea(parseFloat(_userInfo2[2] / 1e18).toFixed());
-                        setFarmCapacity(parseFloat(_userInfo2[3] / 1e18).toFixed());
-    
-                    }
+                 
                 }
-                let _chickenBalance = parseFloat(_chickenBalance2 / 1e18).toFixed();
-                setChickenBalance(_chickenBalance);
+               
+
 
 
 
@@ -540,31 +583,26 @@ const ChickenFarm = () => {
         // // let _chickenFoodContract = new _web3.eth.Contract(TOKEN_ABI, _chickenFoodToken);
         // // let _chickenFoodSymbol = await _chickenFoodContract.methods.symbol().call();
         // // console.log(_chickenFoodSymbol);
-        setChickenFoodSymbol(_chickenFoodSymbol);
         // // let _symbol = await _nftContract.methods.symbol().call();
         // // console.log(_symbol);
-        setFarmSymbol(_symbol);
         // // let _chickenSymbol = await _chickenContract.methods.symbol().call();
         // // console.log(_chickenSymbol);
-        setChickenSymbol(_chickenSymbol);
+        
         // // let _baseSymbol = await _baseTokenContract.methods.symbol().call();
         // // console.log(_baseSymbol);
-        setBaseSymbol(_baseSymbol);
 
         // if (address) {
         //     // address = '0xef519A99b4921aC70387A3e1Fb6cCDeB853C0aB2' ;
         //     // let _baseApproved = await _baseTokenContract.methods.allowance(address, MARKETPLACE).call();
 
-            setBaseApproved(_baseApproved);
 
         //     // let _baseApprovedFarm = await _baseTokenContract.methods.allowance(address, CHICKEN_FARMING).call();
         //     // console.log(_baseApproved);
         //     // let _baseApprovedIncub = await _baseTokenContract.methods.allowance(address, CHICKEN_INCUBATOR).call();
         //     // console.log('Incub Approved' , _baseApprovedIncub);    
-            setBaseApprovedIncub(_baseApprovedIncub);
         //     // let _baseBalance = await _baseTokenContract.methods.balanceOf(address).call();
         //     // console.log(_baseBalance); 
-            setBaseBalance(parseFloat(_baseBalance / 1e18).toFixed(2));
+       
 
 
         //     // let _nftBalance = await _nftContract.methods.balanceOf(address).call();
@@ -572,11 +610,10 @@ const ChickenFarm = () => {
         //     // let _userChickens = await _farmingContract.methods.getUserChickens(address).call();
         //     // if(_userInfo)
         //     // console.log(_userChickens);
-            setChickenDeposited(parseFloat(_userChickens / 1e18).toFixed());
+           
         //     if (_userInfo.chickens > 0) {
         //         // let _userEggs = await _farmingContract.methods.pendingEggs(address).call();
         //         // console.log(_userEggs);
-                setEggsearned(parseFloat(_userEggs / 1e18).toFixed());
         //     }
 
 
@@ -585,7 +622,6 @@ const ChickenFarm = () => {
 
         //         // let _userChickenDie = await _farmingContract.methods.getUnlockTime(address).call();
 
-                setUnlockTime(_userChickenDie);
 
 
         //     }
@@ -595,10 +631,7 @@ const ChickenFarm = () => {
 
         //         // let _userClaimTimes = await _farmingContract.methods.getNextClaim(address).call();
         //         // console.log(_userClaimTimes)
-                let _userClaimTimes = Object.keys(_userClaimTimesOne).map((key) => _userClaimTimes[key]);
-                // console.log("claimeTimes", _userClaimTimes[1]);
-                setlayUnlockTime(_userClaimTimes[1]);
-                setlayEndTime(_userClaimTimes[0]);
+
 
 
         //     }
@@ -606,8 +639,7 @@ const ChickenFarm = () => {
 
         //     // let _chickenFoodBalance = await _chickenFoodContract.methods.balanceOf(address).call();
         //     // console.log(_chickenFoodBalance)
-            let _chickenFoodBalance = parseFloat(_chickenFoodBalance1 / 1e18).toFixed();
-            setChickenFoodBalance(_chickenFoodBalance);
+            
         //     // let _chickenBalance = await _chickenContract.methods.balanceOf(address).call();
         //     // let _chickenApproved = await _chickenContract.methods.allowance(address, CHICKEN_FARMING).call();
            
@@ -622,6 +654,7 @@ const ChickenFarm = () => {
 
     }
 // console.log(chickenApproved);
+console.log(farmCapacity);
     useEffect(() => {
         // if (window.ethereum) {
         //     web3Provider = window.ethereum;
@@ -671,20 +704,24 @@ const ChickenFarm = () => {
 
         // alert(farmBalance)
 
-    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_baseApprovedFarm])
-    
+    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_baseApprovedFarm,modal,_chickenFoodApproved,])
+    // console.log(parseInt(_capacity));
+    console.log(parseFloat(_userInfo3[0] / 1e18).toFixed());
     const getEggData = async () => {
         // let _web3 = new Web3(web3Provider);
         // let _incubatorContract = new _web3.eth.Contract(CHICKEN_INCUBATOR_ABI, CHICKEN_INCUBATOR);
         // // let _chickenEggToken = await _incubatorContract.methods.eggToken().call();
         // // console.log(_chickenEggToken)
         setChickenEggToken(_chickenEggToken);
+        setChickenEggApproved(_chickenEggApproved);
+        setEggDepositFee(parseInt(_depositFee1));
+        setChickenEggBalance(parseFloat(_balance / 1e18).toFixed())
 
         // // let _capacity = await _incubatorContract.methods.capacity().call();
-        setIncubCapacity(_capacity / 1e18);
+        setIncubCapacity(parseInt((_capacity)/1e18).toFixed(2));
 
         // // let _depositFee = await _incubatorContract.methods.getDepositFee(1).call();
-        setEggDepositFee(_depositFee1);
+        
 
 
 
@@ -692,17 +729,16 @@ const ChickenFarm = () => {
 
         // // let _chickenEggSymbol = await _chickenEggContract.methods.symbol().call();
         setChickenEggSymbol(_chickenEggSymbol);
-
+        setChickenEggDeposited(parseFloat(_userInfo3[0] / 1e18).toFixed());
         // if (address) {
         //     // address = '0xef519A99b4921aC70387A3e1Fb6cCDeB853C0aB2' ;
 
         //     // let _balance = await _chickenEggContract.methods.balanceOf(address).call();
         //     // let _userInfo = await _incubatorContract.methods.userInfo(address).call();
-            setChickenEggBalance(parseFloat(_balance / 1e18).toFixed())
-            setChickenEggDeposited(parseFloat(_userInfo3[1] / 1e18).toFixed());
+            
 
         //     // let _chickenEggApproved = await _chickenEggContract.methods.allowance(address, CHICKEN_INCUBATOR).call();
-            setChickenEggApproved(_chickenEggApproved);
+          
 
 
         //     if (_userInfo3[0] > 0) {
@@ -711,6 +747,7 @@ const ChickenFarm = () => {
                 setHatched(parseFloat(_userItens[0] / 1e18).toFixed());
                 let _adults = parseFloat(_userItens[1] / 1e18).toFixed();
                 setAdult(_adults);
+                
         //         // let _unlockItem = await _incubatorContract.methods.getUnlockTime(address).call();
                 setEggUnlockTime(_unlockItem);
         //         // let _unlockItem2 = await _incubatorContract.methods.getHatchTime(address).call();
@@ -1025,7 +1062,7 @@ const ChickenFarm = () => {
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
         functionName: 'depositMore',
-        args: [parseFloat(crdamount), farmTokenId]
+        args: [cdamount==""?0:ethers.utils.parseEther(cdamount).toString(), farmTokenId]
     })
 
     const { data: depositMoreChickenData, writeAsync: depositMoreChickenWriteAsync, isError: depositMoreChickenError } = useContractWrite(depositMoreChickenConfig_)
@@ -1046,7 +1083,7 @@ const ChickenFarm = () => {
     }
 
 
-
+// alert(cdamount)
 
     const depositMoreChicken = async () => {
         // let _web3 = new Web3(web3Provider);
@@ -1087,12 +1124,13 @@ const ChickenFarm = () => {
     }
 
 
-
+// console.log(parseInt(cdamount), parseInt(farmTokenId), parseInt(dayamount));
     const { config: depositChickenConfig_ } = usePrepareContractWrite({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
         functionName: 'deposit',
-        args: [parseFloat(crdamount), farmTokenId, dayamount]
+        args: [parseInt(farmTokenId),solarAmount==""?0: ethers.utils.parseEther(solarAmount.toString()),parseInt(dayamount)]
+        // args: [1, 2,1]
     })
 
     const { data: depositChickenData, writeAsync: depositChickenWriteAsync, isError: depositChickenError } = useContractWrite(depositChickenConfig_)
@@ -1103,7 +1141,7 @@ const ChickenFarm = () => {
 
 
     if (depositChickenError && modal) {
-        getData();
+        // getData();
 
         setModal(false);
         chickentoggle();
@@ -1116,11 +1154,12 @@ const ChickenFarm = () => {
     const depositChicken = async () => {
         // let _web3 = new Web3(web3Provider);
         setcDepositError(false)
-        if (chickenFoodBalance < cdamount * dayamount * 20) {
+        // con
+        if (chickenFoodBalance < solarAmount * dayamount * 20) {
             setcDepositError("Error: Insufficient food Balance");
             return false;
         }
-        else if (cdamount > (farmCapacity - chickenDeposited)) {
+        else if (solarAmount > (farmCapacity - chickenDeposited)) {
             setcDepositError("Error: Insufficient farm Land");
             return false;
         }
@@ -1204,7 +1243,7 @@ const ChickenFarm = () => {
         address: TOKEN,
         abi: TOKEN_ABI,
         functionName: 'approve',
-        args: [CHICKEN_FARMING,
+        args: [CHICKEN_INCUBATOR,
             ethers.utils.parseEther('5000000000000000000').toString()]
     })
 
@@ -1327,7 +1366,7 @@ const ChickenFarm = () => {
     const approveChickenFood = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await approveChickenFoodWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _chickenFoodContract = new _web3.eth.Contract(TOKEN_ABI, chickenFoodToken);
@@ -1615,7 +1654,7 @@ const ChickenFarm = () => {
         address: CHICKEN_INCUBATOR,
         abi: CHICKEN_INCUBATOR_ABI,
         functionName: 'deposit',
-        args: [parseInt(cedamount)],
+        args: [cedamount==""?0:ethers.utils.parseEther?.(cedamount.toString()).toString()],
         watch: true,
     })
 
@@ -1884,7 +1923,7 @@ const ChickenFarm = () => {
 
 
     }
-
+// console.log(chickenEggBalance);
     async function setMaxceDeposit() {
         let _damount = chickenEggBalance;
         if (chickenEggBalance > 50) {
@@ -1925,6 +1964,7 @@ const ChickenFarm = () => {
             _damount = farmCapacity
         }
         setcdAmount(_damount)
+        setSolarAmount(_damount)
         setcDepositAmount(_damount)
     }
 
@@ -1935,6 +1975,7 @@ const ChickenFarm = () => {
     const handlecDepositChange = (e) => {
         setcDepositAmount(e.target.value);
         setcdAmount(e.target.value);
+        setSolarAmount(e.target.value);
     }
 
 
@@ -2103,7 +2144,7 @@ const ChickenFarm = () => {
                                                 </div>
                                                 <div className="time__list"><h3>{isNaN(chickenDeposited)? 0.00:chickenDeposited} {chickenSymbol}
 
-                                                    {
+                                                    {/* {
                                                         chickenDeposited > 0 && chickenDeposited <= 10 &&
                                                         <img src={chicken1} width="60px" alt="" />
                                                     }
@@ -2114,13 +2155,13 @@ const ChickenFarm = () => {
                                                     {
                                                         chickenDeposited > 100 && chickenDeposited <= 1000 &&
                                                         <img src={chicken1000} width="60px" alt="" />
-                                                    }
+                                                    } */}
 
                                                 </h3><p>Deposited</p></div>
                                                 <div className="time__list">
                                                     <h3>
                                                         {parseFloat(eggsearned).toFixed()}
-                                                        {
+                                                        {/* {
                                                             eggsearned > 0 && eggsearned <= 10 &&
                                                             <img src={eggs1} className="ml-2" width="60px" alt="" />
                                                         }
@@ -2131,20 +2172,20 @@ const ChickenFarm = () => {
                                                         {
                                                             eggsearned > 100 && eggsearned <= 1000 &&
                                                             <img src={eggs1000} className="ml-2" width="60px" alt='' />
-                                                        }
+                                                        } */}
                                                     </h3>
-                                                    <p>Eggs Earned</p>
+                                                    <p>Cells Earned</p>
                                                     {
                                                         chickenDeposited > 0 && layEndTime > new Date().getTime() / 1e3 &&
                                                         <>
                                                             <h3><span>{layTime}</span></h3>
-                                                            <p>Next Laying Time</p>
+                                                            <p>Next Harvesting Time</p>
                                                         </>
                                                     }
                                                     {
                                                         chickenDeposited > 0 && layEndTime < new Date().getTime() / 1e3 &&
                                                         <>
-                                                            <h3 className="marquee"><span>Not Laying Eggs</span></h3>
+                                                            <h3 className="marquee"><span>Not Harvesting Solar</span></h3>
 
                                                         </>
                                                     }
@@ -2157,18 +2198,18 @@ const ChickenFarm = () => {
                                                 </div>
                                                 <div className="time__list">
                                                     <h3>{chickenDeposited * 365}</h3>
-                                                    <p>Eggs per Year</p>
+                                                    <p>Cells per Year</p>
                                                     {
                                                         chickenDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
                                                         <>
                                                             <h3 className="timer">{endTime}</h3>
-                                                            <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Chicken feed to end.</span></p>
+                                                            <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Solar Fluid to end.</span></p>
                                                         </>
                                                     }
                                                     {
                                                         chickenDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
                                                         <>
-                                                            <h3 className="timer">Feed Exhausted</h3>
+                                                            <h3 className="timer">Fluid Used</h3>
                                                             {/* <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Chicken feed to end.</span></p> */}
                                                         </>
                                                     }
@@ -2229,13 +2270,13 @@ const ChickenFarm = () => {
 
                                             {
                                                 chickenApproved > 0 && chickenDeposited == 0 &&
-                                                <a className="bg___BTN2" onClick={() => setChickenModal(!chickenModal)} >Put Chicken in Farm</a>
+                                                <a className="bg___BTN2" onClick={() => setChickenModal(!chickenModal)} >Put Solar for Harvest</a>
                                             }
 
 
                                             {
                                                 chickenApproved > 0 && chickenDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
-                                                <a className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more Chicken in Farm</a>
+                                                <a className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more Solar in Harvest</a>
                                             }
 
 
@@ -2243,16 +2284,16 @@ const ChickenFarm = () => {
                                             {
                                                 chickenDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
 
-                                                <a className="bg___BTN2" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove Chicken From Farm</a>
+                                                <a className="bg___BTN2" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove Solar From Harvest</a>
 
                                             }
                                             {
                                                 eggsearned > 0 &&
-                                                <a className="bg___BTN2" onClick={claimEggs} >Claim Eggs</a>
+                                                <a className="bg___BTN2" onClick={claimEggs} >Claim Cells</a>
                                             }
                                             {
                                                 chickenDeposited > 0 &&
-                                                <a className="bg___BTN2" onClick={() => setaddDaysChickenModal(!addDaysChickenModal)}>Add Feed</a>
+                                                <a className="bg___BTN2" onClick={() => setaddDaysChickenModal(!addDaysChickenModal)}>Add Fluid</a>
 
                                             }
 
@@ -2283,7 +2324,7 @@ const ChickenFarm = () => {
                                                 <div class="time__list">
                                                     <h3>{chickenEggBalance} {chickenEggSymbol}
 
-                                                        {
+                                                        {/* {
                                                             chickenEggBalance > 0 && chickenEggBalance <= 10 &&
                                                             <img src={eggs1} className="ml-2" width="60px" alt='' />
                                                         }
@@ -2294,12 +2335,12 @@ const ChickenFarm = () => {
                                                         {
                                                             chickenEggBalance > 100 && chickenEggBalance <= 1000 &&
                                                             <img src={eggs1000} className="ml-2" width="60px" alt='' />
-                                                        }
+                                                        } */}
                                                     </h3><p>Your Balance</p>
                                                 </div>
                                                 <div className="time__list"><h3>{chickenEggDeposited} {chickenEggSymbol}
 
-                                                    {
+                                                    {/* {
                                                         chickenEggDeposited > 0 && chickenEggDeposited <= 10 &&
                                                         <img src={eggs1} className="ml-2" width="60px" alt='' />
                                                     }
@@ -2310,14 +2351,14 @@ const ChickenFarm = () => {
                                                     {
                                                         chickenEggDeposited > 100 && chickenEggDeposited <= 1000 &&
                                                         <img src={eggs1000} className="ml-2" width="60px" alt='' />
-                                                    }
+                                                    } */}
 
                                                 </h3><p>Deposited</p></div>
                                                 <div className="time__list">
                                                     <h3>
 
                                                         {adult}  {chickenSymbol}
-                                                        {
+                                                        {/* {
                                                             adult > 0 && adult <= 10 &&
                                                             <img src={chicken1} width="60px" alt='' />
                                                         }
@@ -2328,26 +2369,26 @@ const ChickenFarm = () => {
                                                         {
                                                             adult > 100 && adult <= 1000 &&
                                                             <img src={chicken1000} width="60px" alt='' />
-                                                        }
+                                                        } */}
 
                                                     </h3>
-                                                    <p>Adult Chickens</p>
+                                                    <p>Solar</p>
                                                 </div>
 
                                                 <div className="time__list">
 
                                                     <h3 className="timer">{eggTime}</h3>
-                                                    <p>Time to Grow <br />as Adult</p>
+                                                    <p>Time to Yield Solar</p>
 
 
                                                 </div>
                                                 <div className="time__list">
-                                                    <h3><span className='dollar__text'>${" "}</span>{adult * 10}</h3>
+                                                    <h3><span className='dollar__text'>${" "}</span>{adult * 10}</h3> 
                                                     <p>Market Value</p>
                                                 </div>
                                                 <div className="time__list">
                                                     <h3 className="timer">{incubCapacity}</h3>
-                                                    <p>Available <br />Incubators</p>
+                                                    <p>Available <br />Forginator</p>
                                                 </div>
                                             </div>
 
@@ -2389,28 +2430,28 @@ const ChickenFarm = () => {
                                         <div className="pool-btns">
                                         <div className='js__ac'>
                                                 <img src={bysine} alt="" width={100}/>
-                                                <a className="bg___BTN2" href="/buy/chickenegg">Buy Eggs</a>
+                                                <a className="bg___BTN2" href="/buy/chickenegg">Buy Cells</a>
                                             </div>
                                             
                                             {
                                                 chickenEggApproved == 0 &&
                                                 <a className="bg___BTN2" onClick={approveChickenEgg} >
                                                      <img className='sine' src={chickSine} alt=""/>
-                                                    Approve Eggs for Incubator</a>
+                                                    Approve Cells for Incubator</a>
                                             }
                                             {
                                                 chickenEggApproved > 0 && chickenEggDeposited == 0 &&
-                                                <a className="bg___BTN2" onClick={eggtoggle} >Put Eggs in Incubator</a>
+                                                <a className="bg___BTN2" onClick={eggtoggle} >Put Cells in Incubator</a>
                                             }
 
                                             {
                                                 adult > 0 && baseApprovedIncub > 0 &&
-                                                <a className="bg___BTN2" onClick={claimChicken} >Claim Chickens (Fee: {chickenClaimfee} {baseSymbol}) </a>
+                                                <a className="bg___BTN2" onClick={claimChicken} >Claim Solar (Fee: {chickenClaimfee} {baseSymbol}) </a>
                                             }
 
                                             {
                                                 adult > 0 && baseApprovedIncub == 0 &&
-                                                <a className="bg___BTN2" onClick={approvebaseTokenIncub} >Approve MyFarmPet to claim Chickens</a>
+                                                <a className="bg___BTN2" onClick={approvebaseTokenIncub} >Approve Moonland to claim Solar</a>
                                             }
 
                                         </div>
@@ -2473,21 +2514,21 @@ const ChickenFarm = () => {
                             {farmCapacity - chickenDeposited} sq m
                         </span>
                     </div>
-                    <label className="mb-3"><br />Enter Quantity to Farm
+                    <label className="mb-3"><br />Enter Solar for Harvest
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
 
                     </label>
-                    <input className="form-control" onChange={handlecDepositChange} type="text" value={cdamount} />
+                    <input className="form-control" onChange={handlecDepositChange} type="number" value={solarAmount} />
                     <span className="info">Max: {farmCapacity - chickenDeposited} {chickenSymbol} @ (1 {chickenSymbol} per sq. m.)</span>
 
-                    <label className=""><br />Enter Days to Farm
+                    <label className=""><br />Enter Days to Harvest
                     </label>
 
                     <input className="form-control" onChange={handleDayChange} type="text" value={dayamount} />
-                    <span className="info">Est. Food: {cdamount * 20 * dayamount} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {chickenSymbol} daily)</span>
+                    <span className="info">Est. Fluid: {solarAmount * 20 * dayamount} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {chickenSymbol} daily)</span>
                     <span className="info mt-3"><b>Your Available SOLAR FLUID:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
-                    <span className="info mt-3"><b>Your SOLAR FLUID Cost for Total SOLAR in Harvest:</b> {parseFloat((parseFloat(chickenDeposited) + parseFloat(cdamount)) * dayamount * 20).toFixed(2)} {chickenFoodSymbol}</span>
-                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} {baseSymbol} (@ {chickenDepositFee} per chicken )</span>
+                    <span className="info mt-3"><b>Your SOLAR FLUID Cost for Total SOLAR in Harvest:</b> {chickenDeposited>0 ? parseFloat((parseFloat(chickenDeposited) + parseFloat(solarAmount)) * dayamount * 20).toFixed(2):0} {chickenFoodSymbol}</span>
+                    <span className="info mt-1"><b>Fee:</b> {chickenDepositFee>0? parseFloat(chickenDepositFee * solarAmount).toFixed(2):0} {baseSymbol} (@ {chickenDepositFee} per chicken )</span>
 
 
 
@@ -2498,7 +2539,7 @@ const ChickenFarm = () => {
 
                 </ModalBody>
                 <ModalFooter>
-           
+        
                     {
                         baseApprovedFarm == 0 &&
                         <Button className="bg___BTN2 mr-3" onClick={approvebaseTokenFarm}>Approve {baseSymbol}</Button>
@@ -2508,6 +2549,7 @@ const ChickenFarm = () => {
                         chickenFoodApproved == 0 && baseApprovedFarm > 0 &&
                         <Button className="bg___BTN2 mr-3" onClick={approveChickenFood}>Approve {chickenFoodSymbol}</Button>
                     }
+               
                     {
                         chickenApproved > 0 && chickenFoodApproved > 0 && baseApprovedFarm > 0 &&
                         <Button className="bg___BTN2 mr-3" onClick={depositChicken}>Deposit</Button>
@@ -2679,9 +2721,10 @@ const ChickenFarm = () => {
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxceDeposit}>Max</span>
 
                     </label>
+                  
                     <input className="form-control" onChange={handleeDepositChange} type="text" value={cedamount} />
-                    <span className="info mt-3"><b>Fee:</b> {cedamount * eggDepositFee} {baseSymbol} (@{eggDepositFee} {baseSymbol} per Egg)</span><br />
-                    <span className="info"><b>Maximum Per User:</b> 50 Eggs</span>
+                    <span className="info mt-3"><b>Fee:</b> {cedamount * eggDepositFee} {baseSymbol} (@{eggDepositFee} {baseSymbol} per Cells)</span><br />
+                    <span className="info"><b>  Maximum Per User:</b> 50 Cells</span>
 
 
 
@@ -2721,13 +2764,13 @@ const ChickenFarm = () => {
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter Days to add in Farming
+                    <label className="mb-3"><br />Enter Days you want to add fluid for
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxDayDeposit}>Max</span>
 
                     </label>
                     <input className="form-control" onChange={handleAddDayChange} type="text" value={addDayamount} />
-                    <span className="info mt-3"><b>Your Chicken Food Cost for Total Chicken in Farm:</b> {parseFloat(chickenDeposited * addDayamount * 20).toFixed(2)} {chickenFoodSymbol}</span>
-                    <span className="info mt-3"><b>Your Available Chicken Food:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
+                    <span className="info mt-3"><b>Your Solar Fluid Cost for Total Solar in Harvest:</b> {parseFloat(chickenDeposited * addDayamount * 20).toFixed(2)} {chickenFoodSymbol}</span>
+                    <span className="info mt-3"><b>Your Available Solar Fluid:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
 
                     {
                         addDdepositError &&
@@ -2743,7 +2786,7 @@ const ChickenFarm = () => {
                     }
                     {
                         chickenFoodApproved > 0 &&
-                        <Button className="bg___BTN2 mr-3" onClick={addDays}>Add Days</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={addDays}>Add Fluid</Button>
                     }
                     <Button className="bg___BTN2" onClick={addDaysChickentoggle}>Cancel</Button>
                 </ModalFooter>
@@ -2762,7 +2805,7 @@ const ChickenFarm = () => {
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter Quantity to remove from Farm
+                    <label className="mb-3"><br />Enter Quantity to remove from Harvest
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcrDeposit}>Max</span>
 
                     </label>
