@@ -57,7 +57,7 @@ const bscTest = {
 };
 
 
-const CustomAvatar: AvatarComponent = ({ address, ensImage, size }) => {
+const CustomAvatar = ({ address, ensImage, size }) => {
   return ensImage ? (
     <img
       src={ensImage}

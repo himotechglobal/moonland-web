@@ -18,6 +18,7 @@ import { ethers } from 'ethers';
 const STAKING_ARRAY = [
     {
         address: '0x6AbCb15898609327e9C7498180B869752a269C64',
+        key:"0xa24Bc69743Ec68053B6E9fe31be60eFDd8f29f2a",
         name: 'Moonland',
         image: moon,
         status: 1,
@@ -28,6 +29,7 @@ const STAKING_ARRAY = [
     },
     {
         address: null,
+        key:null,
         name: 'Trade in moon',
         image: chickenIcon,
         status: 3,
@@ -38,6 +40,7 @@ const STAKING_ARRAY = [
     },
     {
         address: null,
+        key:null,
         name: 'Live in Moon',
         image: boarIcon,
         status: 3,
@@ -96,25 +99,6 @@ const StakeCard = (props) => {
 
 
 
-    useEffect(() => {
-
-        // if (window.ethereum) {
-        //     web3Provider = window.ethereum;
-        // }
-        // else {
-        //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
-
-        // }
-
-
-        getData();
-        // if (address) {
-        //     setInterval(() => {
-        //         getEarned()
-        //     }, 5000);
-        // }
-
-    }, [address])
 
     const { data: _stakeToken } = useContractRead({
         address: STAKING_ARRAY[props.index]?.address,
@@ -132,6 +116,7 @@ const StakeCard = (props) => {
         abi: TOKEN_ABI,
         functionName: "decimals"
     })
+
     const { data: _rewardToken } = useContractRead({
         address: STAKING_ARRAY[props.index]?.address,
         abi: STAKING_ABI,
@@ -167,11 +152,13 @@ const StakeCard = (props) => {
         abi: STAKING_ABI,
         functionName: "stakeEnabled",
     })
+// console.log(_stakeEnabled);
     const { data: _unstakeEnabled } = useContractRead({
         address: STAKING_ARRAY[props.index]?.address,
         abi: STAKING_ABI,
         functionName: "unstakeEnabled",
     })
+  
     const { data: _claimEnabled } = useContractRead({
         address: STAKING_ARRAY[props.index]?.address,
         abi: STAKING_ABI,
@@ -182,11 +169,14 @@ const StakeCard = (props) => {
         abi: STAKING_ABI,
         functionName: "totalStakedTokens",
     })
+//    console.log(_totalStaked1);
+// console.log( parseFloat(_totalStaked1 / 1e1 ** _decimals).toFixed(2));
     const { data: _totalEarned1 } = useContractRead({
         address: STAKING_ARRAY[props.index]?.address,
         abi: STAKING_ABI,
         functionName: "totalClaimedRewards",
     })
+  
     const { data: _depositedTokens1 } = useContractRead({
         address: STAKING_ARRAY[props.index]?.address,
         abi: STAKING_ABI,
@@ -200,12 +190,14 @@ const StakeCard = (props) => {
         functionName: "getPendingReward",
         args: [address],
     })
+ 
     const { data: _approved } = useContractRead({
-        address: _stakeToken,
+        address:  STAKING_ARRAY[props.index]?.key,
         abi: TOKEN_ABI,
         functionName: "allowance",
         args: [address, STAKING_ARRAY[props.index]?.address,],
     })
+// console.log(parseInt(_approved));
     const { data: _balance1 } = useContractRead({
         address: _stakeToken,
         abi: TOKEN_ABI,
@@ -242,6 +234,7 @@ const StakeCard = (props) => {
         // let _web3 = new Web3(web3Provider);
 
         let v = STAKING_ARRAY[props.index];
+        setStakeEnabled(_stakeEnabled);
         // alert(v.address);
         if (v.address) {
             // let _stakeContract = new _web3.eth.Contract(STAKING_ABI, v.address);
@@ -281,7 +274,7 @@ const StakeCard = (props) => {
 
 
             // let _stakeEnabled = await _stakeContract.methods.stakeEnabled().call();
-            setStakeEnabled(_stakeEnabled);
+            
 
 
             // let _unstakeEnabled = await _stakeContract.methods.unstakeEnabled().call();
@@ -304,23 +297,24 @@ const StakeCard = (props) => {
             // console.log(_totalStaked);
 
             // let _totalEarned = await _stakeContract.methods.totalClaimedRewards().call();
-            let _totalEarned = parseFloat(_totalEarned1 / 1e1 ** _decimals).toFixed(2);
+            let _totalEarned = parseFloat(_totalEarned1 / 1e1 ** _decimals).toFixed(6);
             setTotalEarned(_totalEarned);
             // console.log(_totalEarned);
+            setApproved(parseInt(_approved));
             if (address) {
                 // address = '0xbe7c30E0945d019F3aDc84AeEC55Ee2eCEb4247d' ;
                 // let _depositedTokens = await _stakeContract.methods.depositedTokens(address).call();
-                let _depositedTokens = parseFloat(_depositedTokens1 / 1e1 ** _decimals).toFixed(3);
+                let _depositedTokens = parseFloat(_depositedTokens1 / 1e18).toFixed(4);
                 setUserStaked(_depositedTokens);
                 // let _earnedTokens = await _stakeContract.methods.getPendingReward(address).call();
-                let _earnedTokens = parseFloat(_earnedTokens1 / 1e1 ** _decimals).toFixed(2);
+                let _earnedTokens = parseFloat(_earnedTokens1 / 1e1 ** _decimals).toFixed(4);
 
                 setUserEarned(_earnedTokens);
 
 
 
                 // let _approved = await _stakeTokenContract.methods.allowance(address, v.address).call();
-                setApproved(_approved);
+               
 
                 // console.log(_approved);
 
@@ -348,6 +342,25 @@ const StakeCard = (props) => {
 
 
 
+    useEffect(() => {
+
+        // if (window.ethereum) {
+        //     web3Provider = window.ethereum;
+        // }
+        // else {
+        //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
+
+        // }
+
+
+        getData();
+        // if (address) {
+        //     setInterval(() => {
+        //         getEarned()
+        //     }, 5000);
+        // }
+
+    }, [address,_totalStaked1,])
 
 
     const getEarned = async () => {
@@ -410,7 +423,7 @@ const StakeCard = (props) => {
     if (approveSuccess && modal) {
         setModal(false);
     }
-
+// console.log(stakeEnabled);
     const approveToken = async () => {
         // let _web3 = new Web3(web3Provider);
         // let v = STAKING_ARRAY[props.index];
@@ -539,8 +552,9 @@ const StakeCard = (props) => {
     if (depositTokenError && modal) {
         setModal(false);
     }
-    if (depositTokenSuccess && modal) {
+    if (depositTokenSuccess && modal && depositModal) {
         setModal(false);
+        setDepositModal(false)
     }
 
 
@@ -577,6 +591,7 @@ const StakeCard = (props) => {
 
         setwAmount(userStaked)
         setWithdrawAmount(userStaked)
+        console.log(userStaked);
     }
 
     const handleWithdrawChange = (e) => {
@@ -585,16 +600,16 @@ const StakeCard = (props) => {
 
     }
 
+console.log(parseFloat(withdrawAmount));
 
+    const _amount2 = parseFloat(withdrawAmount) ? ethers.utils.parseEther((withdrawAmount).toString()) : 0
 
-    const _amount2 = parseFloat(withdrawAmount) ? ethers.utils.parseEther(parseFloat(withdrawAmount).toString()) : 0
- 
     const { config: withdrawTokenConfig } = usePrepareContractWrite({
         address: STAKING_ARRAY[props.index]?.address,
         abi: STAKING_ABI,
         functionName: 'unstake',
         args: [_amount2],
-        enabled: withdrawAmount  > 0 
+        // enabled: withdrawAmount  > 0 
     })
 
     const { data: withdrawTokenData, writeAsync: withdrawTokenWriteAsync, error: withdrawTokenError, } = useContractWrite(withdrawTokenConfig)
@@ -774,7 +789,7 @@ const StakeCard = (props) => {
                                     
                                         <ConnectWalletBtn />
                                          
-                                    }
+                                   }
                                     {address && approved === 0 &&
                                         <a className="bg___BTN3" onClick={approveToken} >Approve</a>
 
@@ -786,12 +801,14 @@ const StakeCard = (props) => {
                                 </div>
                             </div>
                         </>
-                    }
+}
 
                     {
                         (STAKING_ARRAY[props.index].status == 3 || (!stakeEnabled && !claimEnabled && !unstakeEnabled)) &&
                         <div className="text-center" >
-                            <a className="bg___BTN3">Participate</a>
+                            <a className="bg___BTN3" 
+                            // onClick={depositToggle}
+                            >Participate</a>
                         </div>
                     }
 
@@ -838,7 +855,7 @@ const StakeCard = (props) => {
                     </label>
                     <input className="form-control mb-3" onChange={handleDepositChange} type="text" value={damount} />
 
-                    <span className="info mt-3">Fee: {parseFloat(damount * depositFee / 100).toFixed(2)} {stakeSymbol}</span>
+                    <span className="info mt-3">Fee: {parseFloat(damount * (depositFee / 100)).toFixed(3)} {stakeSymbol}</span>
 
                     {
                         depositError &&

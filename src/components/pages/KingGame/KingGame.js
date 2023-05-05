@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, ModalBody, } from 'reactstrap';
+import { Modal, ModalBody,Button } from 'reactstrap';
 
 import Header from '../header.js';
 import Footer from '../footer.js';
 import flower from '../../images/flower.png';
-import { KINGGAME, TX_LINK } from '../../../Config/index.js';
+import { KINGGAME, TX_LINK,TOKEN } from '../../../Config/index.js';
 import KINGGAME_ABI from '../../../Config/KINGGAME_ABI.json';
 import arrow from '../../images/round_arrow.svg';
 
@@ -97,11 +97,12 @@ const KingGame = () => {
 		functionName: "symbol",
 	})
 	const { data: _potBalance1 } = useContractRead({
-		address: _token2,
+		address: TOKEN,
 		abi: TOKEN_ABI,
 		functionName: "balanceOf",
 		args: [KINGGAME],
 	})
+
 	const { data: _lastBidder } = useContractRead({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
@@ -113,17 +114,18 @@ const KingGame = () => {
 		functionName: "allowance",
 		args: [address, KINGGAME]
 	})
-	const { data: _nextTime } = useContractRead({
+	const { data: __nextTime } = useContractRead({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: "nextStartTime",
 	})
-	const { data: _lastBidTime } = useContractRead({
+	const { data: __lastBidTime } = useContractRead({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: "lastBidTime",
 	})
-	const { data: _endDelay } = useContractRead({
+
+	const { data: __endDelay } = useContractRead({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: "endDelay",
@@ -230,7 +232,7 @@ const KingGame = () => {
 
 			// const _tokenContract = new _web3.eth.Contract(TOKEN_ABI, _token);
 			// let _approve = await _tokenContract.methods.allowance(address, KINGGAME).call();
-			setApproved(_approve);
+			setApproved(parseInt(_approve));
 			// console.log(_approve);
 		}
 
@@ -238,13 +240,13 @@ const KingGame = () => {
 
 
 	// const _amount = _web3.utils.toWei('1');
-	const _amount = ethers.utils.parseEther('1').toString()
+	const _amount = ethers.utils.parseEther('1000000000').toString()
 	// console.log(_amount);
 	const { config: claimConfig_ } = usePrepareContractWrite({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: 'restartAndClaim',
-		enabled: false
+		enabled: true
 
 	})
 
@@ -292,7 +294,7 @@ const KingGame = () => {
 		abi: KINGGAME_ABI,
 		functionName: 'participate',
 		// args: [KINGGAME, _amount]
-		enabled: false
+		// enabled: false
 
 	})
 
@@ -341,7 +343,7 @@ const KingGame = () => {
 		abi: TOKEN_ABI,
 		functionName: 'approve',
 		args: [KINGGAME, _amount],
-		enabled: false
+		// enabled: false
 
 	})
 
@@ -424,32 +426,18 @@ const KingGame = () => {
 
 		// getLastBidder() ;
 
-	}, [address])
+	}, [address,__nextTime,hasWinner,__lastBidTime,__endDelay,_lastBidder,timer,])
 
 	const getTimer = async () => {
 
-		// let _web3 = new Web3(web3Provider);
-		//  console.log(Config);
-		// const _gameContract = new _web3.eth.Contract(KINGGAME_ABI, KINGGAME);
-
-		// let _nextTime = await _gameContract.methods.nextStartTime().call() ;
-
-		// let _nextTime = await _gameContract.methods.nextStartTime().call();
-
-		// let _lastBidTime = await _gameContract.methods.lastBidTime().call();
-		// console.log(_lastBidTime);
-		// let _endDelay = await _gameContract.methods.endDelay().call();
-		// console.log(_endDelay);
-		// let hasWinner = await _gameContract.methods.hasWinner().call();
-		setWinner(hasWinner);
-
-		// console.log('nextStart2', hasWinner)
-
 		let _currentTime = new Date().getTime() / 1000;
-
+		console.log(new Date().getTime() / 1000);
+		let _nextTime = parseInt(__nextTime);
+		let _lastBidTime = parseInt(__lastBidTime) ;
+		let _endDelay = parseInt(__endDelay)
 		let endTime;
 		let _remainingSeconds;
-		// console.log(_currentTime);
+		console.log("ddd",_lastBidTime);
 
 		setWaiting(false);
 
@@ -479,32 +467,58 @@ const KingGame = () => {
 
 		}
 
+
 		if (_remainingSeconds < 0) {
 			_remainingSeconds = 0;
 		}
-
-		let remainingDay = Math.floor(
-			_remainingSeconds / (60 * 60 * 24)
-		);
-		let remainingHour = Math.floor(
-			(_remainingSeconds % (60 * 60 * 24)) / (60 * 60)
-		);
-		let remainingMinutes = Math.floor(
-			(_remainingSeconds % (60 * 60)) / 60
-		);
-		let remainingSec = Math.floor(_remainingSeconds % 60);
-		if (remainingDay > 0) {
-			endTime = remainingDay + "d : " + remainingHour + "h : " + remainingMinutes + "m";
-			setTimer(endTime);
-
+		if(_remainingSeconds > 0){
+			let remainingDay = Math.floor(
+				_remainingSeconds / (60 * 60 * 24)
+			);
+			
+			let remainingHour = Math.floor(
+				(_remainingSeconds % (60 * 60 * 24)) / (60 * 60)
+			);
+			let remainingMinutes = Math.floor(
+				(_remainingSeconds % (60 * 60)) / 60
+			);
+			let remainingSec = Math.floor(_remainingSeconds % 60);
+		
+			if (remainingDay > 0) {
+				endTime = remainingDay + "d : " + remainingHour + "h : " + remainingMinutes + "m";
+				setTimer(endTime);
+	
+			}
+			else {
+				endTime = remainingHour + "h : " + remainingMinutes + "m : " + remainingSec + "s";
+				console.log(endTime);
+	
+				setTimer(endTime);
+	
+			}
 		}
-		else {
-			endTime = remainingHour + "h : " + remainingMinutes + "m : " + remainingSec + "s";
-			setTimer(endTime);
+		
+		// let _web3 = new Web3(web3Provider);
+		//  console.log(Config);
+		// const _gameContract = new _web3.eth.Contract(KINGGAME_ABI, KINGGAME);
 
-		}
+		// let _nextTime = await _gameContract.methods.nextStartTime().call() ;
+
+		// let _nextTime = await _gameContract.methods.nextStartTime().call();
+
+		// let _lastBidTime = await _gameContract.methods.lastBidTime().call();
+		// console.log(_lastBidTime);
+		// let _endDelay = await _gameContract.methods.endDelay().call();
+		// console.log(_endDelay);
+		// let hasWinner = await _gameContract.methods.hasWinner().call();
+		setWinner(hasWinner);
+
+		// console.log('nextStart2', hasWinner)
+
+	
+
+
 	}
-
 
 
 	return (
@@ -543,10 +557,10 @@ const KingGame = () => {
 											<h3>Game Started. Waiting for Bids</h3>
 										}
 
-										{
-											!winner && !waiting &&
-											<h4>{timer > 0 ? timer : '00:00:00'}</h4>
-										}
+										{/* {
+											!winner && !waiting && */}
+											<h4>{timer != 0 ? timer : ''}</h4>
+										{/* } */}
 									</div>
 									<div className='prepare___next'>
 										{
@@ -560,7 +574,7 @@ const KingGame = () => {
 										{
 											winner &&
 											<>
-												<h3>Round Over.</h3>
+												<h3 style={{color:"#fff",textAlign:"start"}}>Round Over</h3>
 												<p className="choose-w">Winner Choosen!</p>
 											</>
 										}
@@ -585,7 +599,7 @@ const KingGame = () => {
 								<div className='marketplace-box-wrap7'>
 									<div className="bid-box">
 										<div className="bit-c-img">
-											<h3>Bid Now!</h3>
+											{/* <h3>Bid Now!</h3> */}
 											<div className="bid-smallbox">
 												<p>{bidAmount > 0 ? bidAmount : '0'} {tokenSymbol}</p>
 												<p>Your Balance {tokenBalance > 0 ? tokenBalance : '0.00'} {tokenSymbol}</p>
@@ -596,9 +610,7 @@ const KingGame = () => {
 
 												{isConnected && approved == 0 &&
 
-													<button onClick={() => {
-														approveNow()
-													}} className="mt-1 conbutton" >Approve</button>
+													<button onClick={approveNow} className="mt-1 conbutton" >Approve</button>
 												}
 												{isConnected && approved > 0 && !winner && gameOn &&
 													<button className="mt-1 conbutton" onClick={() => bidNow()} >Bid Now</button>
@@ -640,12 +652,14 @@ const KingGame = () => {
 													events.length === 0 &&
 													<p className='no___event'>No Events</p>
 												}
+
+
 												{events.length > 0 && events.map((value, index) => {
 													if (index < 5) {
 														return (
 															<tr>
-																<td width="65%"><a href={TX_LINK + value.transactionHash} target="_blank">Tx: {value.transactionHash}</a></td>
-																<td width="20%">
+																<td ><a href={TX_LINK + value.transactionHash} target="_blank">Tx: {value.transactionHash.substring(0,6)+"..."+value.transactionHash.substring(value.transactionHash.length-6)}</a></td>
+																<td >
 																	{value.event == "OnWin" &&
 																		<span>Restart</span>
 																	}
@@ -657,7 +671,7 @@ const KingGame = () => {
 																	}
 
 																</td>
-																<td className="text-right" width="15%">
+																<td className="text-right">
 																	{value.returnValues.amount &&
 																		value.returnValues.amount / 1e1 ** tokenDecimals
 																	}
@@ -721,6 +735,7 @@ const KingGame = () => {
 
 					</div>
 				</ModalBody>
+					<Button className="bg___BTN2 mr-auto ml-auto mb-5" onClick={modalToggle}>Close</Button>
 
 			</Modal>
 
