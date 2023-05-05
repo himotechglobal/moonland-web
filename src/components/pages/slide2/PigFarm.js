@@ -694,7 +694,7 @@ const PigFarm = () => {
 
         // let _capacity = await _incubatorContract.methods.capacity().call();
         // console.log(_capacity);
-        setIncubCapacity(_capacity / 1e18);
+        setIncubCapacity(parseInt(_capacity));
 
         setChickenEggSymbol(_chickenEggSymbol);
         // console.log(parseFloat(_capacity));
@@ -2186,7 +2186,7 @@ const PigFarm = () => {
                                                             <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Build Area</a>
                                                         }
                                                         {
-                                                            landIsfree && processed &&
+                                                            landIsfree && farmBalance > 0 &&
                                                             <a className="bg___BTN2" onClick={() => sellfarm()}>Sell Build Area</a>
                                                         }
 
@@ -2295,7 +2295,7 @@ const PigFarm = () => {
                                         <div className="btn-bp">
                                         
 
-                                            <a href="/marketplace" className="bg___BTN2">Buy Material</a>
+                                            <a href="/marketplace" className="bg___BTN2 mr-3">Buy Material</a>
 
                                             {
                                                 eggsearned > 0 &&
@@ -2344,27 +2344,34 @@ const PigFarm = () => {
                                                         <img className='mrb' src={childe} alt="" />
                                                     </div>
                                                     <div className="uses-box-child1">
-                                                        <h3>Forginator</h3>
+                                                        <h3 className='ml-3'>FACTORY <br />(Coming Soon)</h3>
                                                     </div>
 
                                                 </div>
+                                                <div className='build___left'>
+                                                    <div className="build___item">
+                                                        <h3>{adult} Material</h3>
+                                                        <p>Earned</p>
+                                                    </div>
+                                                    <div className="build___item">
+                                                        <h3><span className='dollar__text'>$</span>{adult * 10}</h3>
+                                                        <p>Earned Value</p>
+                                                    </div>
 
+                                                </div>
                                                  
                                             </div>
                                             </div>
                                         <div className="pig-value-wrp mrt">
                                             <div className="build___item">
-                                                <h3>0 Piglet</h3>
+                                                <h3>0 {chickenEggSymbol}</h3>
                                                 <p>Balance</p>
                                             </div>
                                             <div className="build___item">
-                                                <h3>0 Piglet</h3>
+                                                <h3>0 {chickenEggSymbol}</h3>
                                                 <p>Deposited</p>
                                             </div>
-                                            <div className="build___item">
-                                                <h3>0 Pig</h3>
-                                                <p>Earned</p>
-                                            </div>
+                                           
                                             <div className="build___item">
                                                 <h3><span className='dollar__text'>$</span>0.00</h3>
                                                 <p>Earned Value</p>
@@ -2372,12 +2379,12 @@ const PigFarm = () => {
                                         </div>
                                         <div className="pig-value-wrp2 mrt">
                                             <div className="build___item bi__one">
-                                                <h3>1000</h3>
+                                                <h3>{incubCapacity}</h3>
                                                 <p>Available Slot</p>
                                             </div>
                                         </div>
                                         <div className="btn-bp">
-                                            <a href="/marketplace" className="bg___BTN2">Buy Piglet</a>
+                                            <a href="/marketplace" className="bg___BTN2">Buy {chickenEggSymbol}</a>
 
                                         </div>
                                     </div>
@@ -2430,7 +2437,7 @@ const PigFarm = () => {
                     </label>
                     <input className="form-control" onChange={handlecDepositChange} type="text" value={cdamount} />
                     <span className="info"><b>Max:</b> {parseFloat(farmCapacity) - (parseFloat(sowDeposited) + parseFloat(boarDeposited))} Materials @ (1 {sowSymbol}/{boarSymbol} per 10 sq. m.)</span>
-                    <span className="info"><b>Note:</b> 1 {boarSymbol} is required for 10 {sowSymbol} to build. {boarSymbol} is automatically dedcuted from your wallet and adjusted to remaining space and required food is dedcuted from your wallet</span>
+                    <span className="info"><b>Note:</b> 1 {boarSymbol} is required for 10 {sowSymbol} to build. {boarSymbol} is automatically dedcuted from your wallet and adjusted to remaining space and required {chickenFoodSymbol} is dedcuted from your wallet</span>
                     <span className="info mt-1"><b>Required {boarSymbol}:</b> {requiredBoar} {boarSymbol} (@ 1 {boarSymbol} per 10 {sowSymbol} )</span>
 
                     <label className=""><br /><b>Enter Weeks to Build</b>
@@ -2441,7 +2448,7 @@ const PigFarm = () => {
                     <span className="info mt-1"><b>Est. {chickenEggSymbol}:</b> {parseFloat(parseFloat(requiredBoar) + parseFloat(cdamount)) * 20 * dayamount * 7} {chickenFoodSymbol} @ (20 {chickenFoodSymbol} per material daily)</span>
                     <span className="info mt-3"><b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
                     <span className="info mt-3"><b>Your {chickenFoodSymbol} Cost for Total Materials in Farm: </b> {parseFloat((parseFloat(sowDeposited) + parseFloat(cdamount) + parseFloat(requiredBoar)) * dayamount * 7 * 20).toFixed(2)} {chickenFoodSymbol}</span>
-                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} {baseSymbol} (@ {chickenDepositFee} per pig )</span>
+                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} {baseSymbol} (@ {chickenDepositFee} per Material )</span>
 
 
 
