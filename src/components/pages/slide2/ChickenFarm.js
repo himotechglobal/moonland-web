@@ -2094,7 +2094,7 @@ console.log(farmCapacity);
                                                         <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Harvest Area</a>
                                                     }
                                                     {
-                                                        !landIsfree &&
+                                                        landIsfree &&
                                                         <a className="bg___BTN2 ml-2" onClick={sellfarm}>Sell Harvest Area</a>
                                                     }
 
@@ -2173,7 +2173,7 @@ console.log(farmCapacity);
                                                         } */}
                                                     </h3>
                                                     <p>Cells Earned</p>
-                                                    {
+                                                    {/* {
                                                         chickenDeposited > 0 && layEndTime > new Date().getTime() / 1e3 &&
                                                         <>
                                                             <h3><span>{layTime}</span></h3>
@@ -2186,7 +2186,7 @@ console.log(farmCapacity);
                                                             <h3 className="marquee"><span>Not Harvesting Solar</span></h3>
 
                                                         </>
-                                                    }
+                                                    } */}
 
 
                                                 </div>
@@ -2201,7 +2201,7 @@ console.log(farmCapacity);
                                                         chickenDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
                                                         <>
                                                             <h3 className="timer">{endTime}</h3>
-                                                            <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Solar Fluid to end.</span></p>
+                                                            <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Solar Fluid.</span></p>
                                                         </>
                                                     }
                                                     {

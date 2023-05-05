@@ -6,7 +6,7 @@ import Header from '../header.js';
 import Footer from '../footer.js';
 import stoke from '../../images/stoke.png';
 import Web3 from "web3"
-import { PIG_FARMING, PIG_INCUBATOR, MARKETPLACE, BUILD_FARM } from '../../../Config/index.js';
+import { PIG_FARMING, PIG_INCUBATOR, MARKETPLACE, BUILD_FARM, METLUX_TOKEN, THERMIX_TOKEN, POSITRONS_TOKEN, TOKEN, EULE_TOKEN } from '../../../Config/index.js';
 import PIG_FARMING_ABI from '../../../Config/PIG_FARMING_ABI.json';
 import PIG_INCUBATOR_ABI from '../../../Config/PIG_INCUBATOR_ABI.json';
 import MARKETPLACE_ABI from '../../../Config/MARKETPLACE_ABI.json';
@@ -198,7 +198,7 @@ const PigFarm = () => {
     const { data: _farmToken } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
-        functionName: "farmLand",
+        functionName: "MoonLand",
     })
  
     const { data: _sowToken } = useContractRead({
@@ -214,7 +214,7 @@ const PigFarm = () => {
     const { data: _chickenFoodToken } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
-        functionName: "foodToken",
+        functionName: "positronsToken",
     })
     const { data: _depositFee } = useContractRead({
         address: PIG_FARMING,
@@ -222,6 +222,8 @@ const PigFarm = () => {
         functionName: "getDepositFee",
         args: [1],
     })
+
+    console.log("DF",_depositFee)
     const { data: _removeFee } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
@@ -229,7 +231,7 @@ const PigFarm = () => {
         args: [1],
     })
     const { data: _chickenFoodSymbol } = useContractRead({
-        address: _chickenFoodToken,
+        address: POSITRONS_TOKEN,
         abi: TOKEN_ABI,
         functionName: "symbol",
     })
@@ -239,40 +241,43 @@ const PigFarm = () => {
         functionName: "symbol",
     })
     const { data: _sowSymbol } = useContractRead({
-        address: _sowToken,
+        address: METLUX_TOKEN,
         abi: TOKEN_ABI,
         functionName: "symbol",
     })
     const { data: _boarymbol } = useContractRead({
-        address: _boarToken,
+        address: THERMIX_TOKEN,
         abi: TOKEN_ABI,
         functionName: "symbol",
     })
     const { data: _baseSymbol } = useContractRead({
-        address: _baseToken,
+        address: TOKEN,
         abi: TOKEN_ABI,
         functionName: "symbol",
     })
     const { data: _baseApproved } = useContractRead({
-        address: _baseToken,
+        address: TOKEN,
         abi: TOKEN_ABI,
         functionName: "allowance",
         args: [address, MARKETPLACE],
     })
     const { data: _baseApprovedFarm } = useContractRead({
-        address: _baseToken,
+        address: TOKEN,
         abi: TOKEN_ABI,
         functionName: "allowance",
         args: [address, PIG_FARMING],
     })
+
+
+    console.log("BA",parseInt(_baseApprovedFarm))
     const { data: _baseApprovedIncub } = useContractRead({
-        address: _baseToken,
+        address: TOKEN,
         abi: TOKEN_ABI,
         functionName: "allowance",
         args: [address, PIG_INCUBATOR],
     })
     const { data: _baseBalance } = useContractRead({
-        address: _baseToken,
+        address: TOKEN,
         abi: TOKEN_ABI,
         functionName: "balanceOf",
         args: [address],
@@ -292,19 +297,19 @@ const PigFarm = () => {
     const { data: _userSow } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
-        functionName: "getUserSow",
+        functionName: "getUserMetlux",
         args: [address],
     })
     const { data: _userBoar } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
-        functionName: "getUserBoar",
+        functionName: "getUserThermix",
         args: [address],
     })
     const { data: _userEggs } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
-        functionName: "pendingPiglets",
+        functionName: "pendingEules",
         args: [address],
     })
     const { data: _userChickenDie } = useContractRead({
@@ -324,38 +329,38 @@ const PigFarm = () => {
     // console.log(_userClaimTimes1);
 
     const { data: _chickenFoodBalance1 } = useContractRead({
-        address: _chickenFoodToken,
+        address: POSITRONS_TOKEN,
         abi: TOKEN_ABI,
         functionName: "balanceOf",
         args: [address],
     })
     const { data: _sowBalance1 } = useContractRead({
-        address: _sowToken,
+        address: METLUX_TOKEN,
         abi: TOKEN_ABI,
         functionName: "balanceOf",
         args: [address],
     })
     const { data: _sowApproved } = useContractRead({
-        address: _sowToken,
+        address: METLUX_TOKEN,
         abi: TOKEN_ABI,
         functionName: "allowance",
         args: [address, PIG_FARMING],
     })
     const { data: _chickenFoodApproved } = useContractRead({
-        address: _chickenFoodToken,
+        address: POSITRONS_TOKEN,
         abi: TOKEN_ABI,
         functionName: "allowance",
         args: [address, PIG_FARMING],
     })
 
     const { data: _boarBalance1 } = useContractRead({
-        address: _boarToken,
+        address: THERMIX_TOKEN,
         abi: TOKEN_ABI,
         functionName: "balanceOf",
         args: [address],
     })
     const { data: _boarApproved } = useContractRead({
-        address: _boarToken,
+        address: THERMIX_TOKEN,
         abi: TOKEN_ABI,
         functionName: "allowance",
         args: [address, PIG_FARMING],
@@ -370,14 +375,16 @@ const PigFarm = () => {
         address: BUILD_FARM,
         abi: NFT_ABI,
         functionName: "getApproved",
-        args: [_nftTokenId],
+        args: [farmTokenId],
     })
     const { data: _landIsfree } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
         functionName: "landIsfree",
-        args: [_nftTokenId, address],
+        args: [farmTokenId, address],
     })
+    console.log("fee 1",parseInt(farmTokenId))
+    console.log("fee",_landIsfree);
     const { data: _userInfo1 } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
@@ -392,47 +399,24 @@ const PigFarm = () => {
 
 
     const getData = async () => {
-        //   setProcessed(false);
+
+        setProcessed(true);
+ 
         setApprovalProcessing(true);
-
-        // let _web3 = new Web3(web3Provider);
-        // let _farmingContract = new _web3.eth.Contract(PIG_FARMING_ABI, PIG_FARMING);
-        // let _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-        //   let _tokenPerfarm = await _marketContract.methods.getTokenPerFarmArea().call() ;
+ 
         setFarmPrice(parseFloat(_tokenPerfarm / 1e18).toFixed(2));
-        //   console.log(_tokenPerfarm)
-        //   let _baseToken = await _marketContract.methods.baseToken().call() ;
-        //   console.log(_baseToken)
-
-        // let _baseTokenContract = new _web3.eth.Contract(TOKEN_ABI, _baseToken);
+     
         setbaseToken(_baseToken);
-        //   let farmToken = await _farmingContract.methods.farmLand().call() ;
-
-        //   let _sowToken = await _farmingContract.methods.sowToken().call() ;
-
-        //   let _boarToken = await _farmingContract.methods.boarToken().call() ;
-        //    console.log(_boarToken);
-        //   let _chickenFoodToken = await _farmingContract.methods.foodToken().call() ;
+        
         setFarmToken(_farmToken);
-        //   console.log(_chickenFoodToken);
-
-        //   let _depositFee = await _farmingContract.methods.getDepositFee(1).call() ;
-        setChickenDepositFee(_depositFee);
-
-        //   console.log(_depositFee);
-
-        //   let _removeFee = await _farmingContract.methods.getRemoveFee(1).call() ;
-        //   console.log(_removeFee);
+        
+        setChickenDepositFee(parseInt(_depositFee));
+ 
         setChickenRemoveFee(_removeFee);
         setChickenFoodToken(_chickenFoodToken)
         setsowToken(_sowToken)
         setboarToken(_boarToken)
-        // let _nftContract = new _web3.eth.Contract(NFT_ABI, farmToken);
-        // let _sowContract = new _web3.eth.Contract(TOKEN_ABI, _sowToken);
-        // let _boarContract = new _web3.eth.Contract(TOKEN_ABI, _boarToken);
-
-        // let _chickenFoodContract = new _web3.eth.Contract(TOKEN_ABI, _chickenFoodToken);
-        // let _chickenFoodSymbol = await _chickenFoodContract.methods.symbol().call();
+        
         setChickenFoodSymbol(_chickenFoodSymbol);
 
         // let _symbol = await _nftContract.methods.symbol().call();
@@ -448,8 +432,7 @@ const PigFarm = () => {
         // let _baseSymbol = await _baseTokenContract.methods.symbol().call();
         setBaseSymbol(_baseSymbol);
         // console.log(_baseSymbol);
-        setFarmBalance(_nftBalance);
-        setProcessed(true);
+        setFarmBalance(parseInt(_nftBalance));
         setApprovalProcessing(false);
         if (address) {
             //address = '0xbe7c30E0945d019F3aDc84AeEC55Ee2eCEb4247d' ;
@@ -459,7 +442,7 @@ const PigFarm = () => {
             // console.log(_baseApproved);
 
             // let _baseApprovedFarm = await _baseTokenContract.methods.allowance(address, PIG_FARMING).call();
-            setBaseApprovedFarm(_baseApprovedFarm);
+            setBaseApprovedFarm(parseInt(_baseApprovedFarm));
             //  console.log(_baseApprovedFarm);
             // let _baseApprovedIncub = await _baseTokenContract.methods.allowance(address, PIG_INCUBATOR).call();
             setBaseApprovedIncub(_baseApprovedIncub);
@@ -480,12 +463,13 @@ const PigFarm = () => {
             // let _userBoar = await _farmingContract.methods.getUserBoar(address).call();
             setboarDeposited(parseFloat(_userBoar / 1e18).toFixed())
             // if(_userInfo)
-            // console.log(_userBoar);
+            // console.log("eggs",_userInfo);
+            // console.log("eggs",ethers.utils.parseEther(_userEggs.toString()).toString());
+            setEggsearned(parseFloat(_userEggs / 1e18).toFixed());
+
             setSowDeposited(parseFloat(_userSow / 1e18).toFixed());
-            if (_userInfo.sow > 0) {
+            if (parseFloat(_userInfo.sow) > 0) {
                 // let _userEggs = await _farmingContract.methods.pendingPiglets(address).call();
-                // console.log(_userEggs);
-                setEggsearned(parseFloat(_userEggs / 1e18).toFixed());
             }
 
 
@@ -503,17 +487,18 @@ const PigFarm = () => {
             if (unlockTime > _current) {
 
                 // let _userClaimTimes = await _farmingContract.methods.getNextClaim(address).call();
-                let _userClaimTimes = Object.keys((_userClaimTimes1?.toString())).map((key) => _userClaimTimes[key]);
+                // let _userClaimTimes = Object.keys((_userClaimTimes1?.toString())).map((key) => _userClaimTimes[key]);
                 // console.log(_userClaimTimes,"yyyyy");
-                setlayUnlockTime(parseInt(_userClaimTimes[1]));
-                setlayEndTime(parseInt(_userClaimTimes[0]));
+                setlayUnlockTime(parseInt(_userClaimTimes1[1]));
+                setlayEndTime(parseInt(_userClaimTimes1[0]));
 
 
             }
 
 
+
             // let _chickenFoodBalance = await _chickenFoodContract.methods.balanceOf(address).call();
-            let _chickenFoodBalance = parseFloat(_chickenFoodBalance1 / 1e18).toFixed();
+            let _chickenFoodBalance = parseFloat(ethers.utils.formatEther(_chickenFoodBalance1)).toFixed();
             setChickenFoodBalance(_chickenFoodBalance);
 
             // let _sowBalance = await _sowContract.methods.balanceOf(address).call();
@@ -568,6 +553,8 @@ const PigFarm = () => {
 
     }
     useEffect(() => {
+        setProcessed(false);
+
         // if (window.ethereum) {
         //     web3Provider = window.ethereum;
         // }
@@ -575,7 +562,7 @@ const PigFarm = () => {
         //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
 
         // }
-        //   getEggData() ;
+          getEggData() ;
         getData();
         if (unlockTime > 0) {
             clearInterval(timeInterval);
@@ -612,11 +599,9 @@ const PigFarm = () => {
 
         }
 
-    }, [])
+    }, [farmTokenId,_nftTokenId,_userEggs,eggsearned,layEndTime,eggHatchTime,eggunlockTime,unlockTime])
 
-    useEffect(() => {
-        setProcessed(false)
-    }, [])
+   
 
     const { data: _chickenpigletToken } = useContractRead({
         address: PIG_INCUBATOR,
@@ -638,13 +623,16 @@ const PigFarm = () => {
         watch: true,
     })
     const { data: _chickenEggSymbol } = useContractRead({
-        address: _chickenpigletToken,
+        address: EULE_TOKEN,
         abi: TOKEN_ABI,
         functionName: "symbol",
         watch: true,
     })
+
+    // console.log("ES",_chickenEggSymbol)
+
     const { data: _balance } = useContractRead({
-        address: _chickenpigletToken,
+        address: EULE_TOKEN,
         abi: TOKEN_ABI,
         functionName: "balanceOf",
         args: [address],
@@ -688,7 +676,7 @@ const PigFarm = () => {
     const { data: _unlockItem2 } = useContractRead({
         address: PIG_INCUBATOR,
         abi: PIG_INCUBATOR_ABI,
-        functionName: "getHatchTime",
+        functionName: "getUnlockTime",
         args: [address],
         watch: true,
     })
@@ -708,6 +696,7 @@ const PigFarm = () => {
         // console.log(_capacity);
         setIncubCapacity(_capacity / 1e18);
 
+        setChickenEggSymbol(_chickenEggSymbol);
         // console.log(parseFloat(_capacity));
 
         // let _depositFee = await _incubatorContract.methods.getDepositFee(1).call();
@@ -715,7 +704,6 @@ const PigFarm = () => {
         // let _chickenEggContract = new _web3.eth.Contract(TOKEN_ABI, _chickenpigletToken);
 
         // let _chickenEggSymbol = await _chickenEggContract.methods.symbol().call();
-        setChickenEggSymbol(_chickenEggSymbol);
 
         if (address) {
 
@@ -1059,10 +1047,12 @@ const PigFarm = () => {
     const { config: depositMoreChickenConfig_ } = usePrepareContractWrite({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
-        functionName: 'depositMoreSow',
-        args: [parseInt(crdamount), farmTokenId],
+        functionName: 'depositMoreMetlux',
+        args: [cdamount == "" ? 0 : ethers.utils.parseEther(cdamount).toString(), parseInt(farmTokenId)],
         watch: true,
     })
+
+    console.log("DM",cdamount == "" ? 0 : ethers.utils.parseEther(cdamount).toString(), parseInt(farmTokenId));
 
 
 
@@ -1085,6 +1075,9 @@ const PigFarm = () => {
 
     const depositMoreChicken = async () => {
         // let _web3 = new Web3(web3Provider);
+
+        console.log("FB" ,parseInt(ethers.utils.formatEther(_chickenFoodBalance1)) , parseInt(parseInt(cdamount) * parseInt(depositedDay) * 20))
+        
         setcDepositError(false)
         if (parseInt(sowBalance) < parseInt(cdamount)) {
             setcDepositError("Error: Insufficient Sow Balance");
@@ -1095,8 +1088,9 @@ const PigFarm = () => {
             setcDepositError("Error: Insufficient farm Land");
             return false;
         }
-        else if (parseInt(chickenFoodBalance) < parseInt(parseInt(cdamount) * parseInt(depositedDay) * 20)) {
-            setcDepositError("Error: Insufficient food Balance");
+        else if (chickenFoodBalance < parseInt(parseInt(cdamount) * parseInt(depositedDay) * 20)) {
+            console.log("FB" ,parseInt(chickenFoodBalance) , parseInt(parseInt(cdamount) * parseInt(depositedDay) * 20))
+            setcDepositError("Error: Inssufficient food Balance");
             return false;
         }
         else {
@@ -1134,9 +1128,11 @@ const PigFarm = () => {
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
         functionName: 'deposit',
-        args: [farmTokenId, parseInt(cdamount), _boar, _dayamount],
+        args: [parseInt(farmTokenId), ethers.utils.parseEther(parseInt(cdamount).toString()).toString(), ethers.utils.parseEther(_boar).toString(), _dayamount],
         watch: true,
     })
+
+    console.log("depost" ,farmTokenId, parseInt(cdamount), (_boar), _dayamount)
 
 
 
@@ -1237,7 +1233,9 @@ const PigFarm = () => {
         setApprovalProcessing(false);
     }
     if (approvebaseTokenFarmSuccess && modal) {
+        getData();
         setModal(false);
+        setApprovalProcessing(false);
     }
 
 
@@ -1340,12 +1338,14 @@ const PigFarm = () => {
 
 
     if (approvebaseTokenError && modal) {
-        getData();
         setModal(false);
-        buyAreaNFT()
+    
     }
     if (approvebaseTokenSuccess && modal) {
         setModal(false);
+        getData();
+       
+
     }
 
     const approvebaseToken = async () => {
@@ -1395,10 +1395,11 @@ const PigFarm = () => {
     if (approveChickenFoodError && modal) {
 
         setApprovalProcessing(false);
-        getData();
         setModal(false);
     }
     if (approveChickenFoodSuccess && modal) {
+        getData();
+
         setModal(false);
         setApprovalProcessing(false);
     }
@@ -1457,7 +1458,7 @@ const PigFarm = () => {
     const { config: claimEggsConfig_ } = usePrepareContractWrite({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
-        functionName: 'claimPiglets',
+        functionName: 'claimEules',
         watch: true,
     })
 
@@ -1537,7 +1538,7 @@ const PigFarm = () => {
 
 
     const { config: approveBoarConfig_ } = usePrepareContractWrite({
-        address: boarToken,
+        address: THERMIX_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'approve',
         args: [PIG_FARMING, ethers.utils.parseEther('5000000000000000000').toString()],
@@ -1556,12 +1557,13 @@ const PigFarm = () => {
     if (approveBoarError && modal) {
 
         setApprovalProcessing(false);
-        getData();
         setModal(false);
     }
     if (approveBoarSuccess && modal) {
         setModal(false);
         setApprovalProcessing(false);
+        getData();
+
     }
 
 
@@ -1594,7 +1596,7 @@ const PigFarm = () => {
 
 
     const { config: approveSowConfig_ } = usePrepareContractWrite({
-        address: sowToken,
+        address: METLUX_TOKEN,
         abi: TOKEN_ABI,
         functionName: 'approve',
         args: [PIG_FARMING, ethers.utils.parseEther('5000000000000000000').toString()],
@@ -1614,11 +1616,12 @@ const PigFarm = () => {
 
         setModal(false);
         setApprovalProcessing(false);
-        getData();
     }
     if (approveSowSuccess && modal) {
         setModal(false);
         setApprovalProcessing(false);
+        getData();
+
     }
 
 
@@ -1677,19 +1680,19 @@ const PigFarm = () => {
 
     const addDays = async () => {
         setaddDdepositError(false);
-        let _maxamount = parseFloat(chickenFoodBalance) / parseFloat(20 * parseFloat(parseFloat(sowDeposited) + parseFloat(boarDeposited)));
-        // console.log(chickenFoodBalance);
-        // console.log(sowDeposited);
-        // console.log(boarDeposited);
-        // console.log(_maxamount);
-        // console.log(addDayamount * 7);
-        if (parseInt(_maxamount) < parseInt(addDayamount * 7)) {
+        // let _maxamount = parseInt(chickenFoodBalance / parseInt(20 * parseFloat(parseFloat(sowDeposited) + parseFloat(boarDeposited))));
+        // // console.log(chickenFoodBalance);
+        // // console.log(sowDeposited);
+        // // console.log(boarDeposited);
+        // // console.log(_maxamount);
+        // // console.log(addDayamount * 7);
+        // if (parseInt(_maxamount) < parseInt(addDayamount * 7)) {
 
-            setaddDdepositError("Error: Insufficient Food Balance");
-            return false;
-        }
+        //     setaddDdepositError("Error: Insufficient Food Balance");
+        //     return false;
+        // }
 
-        else {
+        // else {
             // let _web3 = new Web3(web3Provider);
 
             setModal(!modal);
@@ -1712,7 +1715,7 @@ const PigFarm = () => {
 
             //     });
 
-        }
+        // }
     }
 
 
@@ -1783,11 +1786,12 @@ const PigFarm = () => {
     const { config: sellfarmConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'sellFarmLandPigsty',
+        functionName: 'sellMoonLandPigsty',
         args: [farmTokenId],
         watch: true,
     })
 
+    console.log()
 
 
     const { data: sellfarmData, writeAsync: sellfarmWriteAsync, isError: sellfarmError } = useContractWrite(sellfarmConfig_)
@@ -1838,10 +1842,11 @@ const PigFarm = () => {
 
 
     let _area = buyareadamount.toString();
+    console.log("AREA",_area)
     const { config: buyAreaNFTConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'buyFarmLandPigsty',
+        functionName: 'buyMoonLandPigsty',
         args: [_area],
         watch: true,
     })
@@ -1863,6 +1868,8 @@ const PigFarm = () => {
     }
     if (buyAreaNFTSuccess && modal) {
         setModal(false);
+        getData();
+        buyAreaToggle();
     }
 
 
@@ -1903,7 +1910,7 @@ const PigFarm = () => {
     const { config: addAreaNFTConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
-        functionName: 'addFarmLandAreaPigsty',
+        functionName: 'addMoonLandAreaPigsty',
         args: [parseInt(areadamount).toString(), farmTokenId],
         watch: true,
     })
@@ -1920,11 +1927,12 @@ const PigFarm = () => {
     if (addAreaNFTError && modal) {
 
         setModal(false);
-        getData();
-        areaToggle();
+      
     }
     if (addAreaNFTSuccess && modal) {
         setModal(false);
+        getData();
+        areaToggle();
     }
 
 
@@ -1968,8 +1976,10 @@ const PigFarm = () => {
         functionName: 'approve',
         args: [PIG_FARMING, farmTokenId],
         watch: true,
+        enabled: farmTokenId
     })
 
+    console.log("bd:",farmTokenId)
 
 
     const { data: approveNFTData, writeAsync: approveNFTWriteAsync, isError: approveNFTError } = useContractWrite(approveNFTConfig_)
@@ -1982,11 +1992,13 @@ const PigFarm = () => {
     if (approveNFTError && modal) {
 
         setModal(false);
-        getData();
-        lockNFT();
     }
     if (approveNFTSuccess && modal) {
         setModal(false);
+        lockNFT();
+        getData();
+
+
     }
 
     const approveNFT = async () => {
@@ -2138,7 +2150,7 @@ const PigFarm = () => {
                                                     </div>
                                                     <div className="time__list">
                                                         <h3>{farmArea ?? 0} sq m</h3>
-                                                        <p>Your Locked Farm Area</p>
+                                                        <p>Your Locked Build Area</p>
                                                     </div>
                                                     <div className="time__list">
                                                         <h3><span className='dollar__text'>$</span>{farmArea * 1}</h3>
@@ -2147,7 +2159,7 @@ const PigFarm = () => {
                                                     </div>
                                                     <div className="time__list">
                                                         <h3>{farmCapacity}</h3>
-                                                        <p>Pig Capacity</p>
+                                                        <p>Material Capacity</p>
                                                     </div>
                                                 </div>
                                                 <div className="alienbtns">
@@ -2159,23 +2171,23 @@ const PigFarm = () => {
 
                                                         {
                                                             !farmLocked && farmBalance > 0 && farmApprove && processed &&
-                                                            <a href="javascript:void" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
+                                                            <a  className="bg___BTN2" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
                                                         }
                                                         {
                                                             farmBalance > 0 && !farmApprove && processed &&
-                                                            <a href="javascript:void" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
+                                                            <a className="bg___BTN2" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
                                                         }
                                                         {
                                                             farmLocked && processed &&
-                                                            <a href="javascript:void" className="mr-3" onClick={areaToggle}>Buy More Farm Area</a>
+                                                            <a className="bg___BTN2 mr-3"  onClick={areaToggle}>Buy More Build Area</a>
                                                         }
                                                         {
                                                             !farmLocked && farmBalance == 0 && processed &&
-                                                            <a href="javascript:void" onClick={buyAreaToggle}>Buy Farm Area</a>
+                                                            <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Build Area</a>
                                                         }
                                                         {
                                                             landIsfree && processed &&
-                                                            <a href="javascript:void" onClick={() => sellfarm()}>Sell Farm Area</a>
+                                                            <a className="bg___BTN2" onClick={() => sellfarm()}>Sell Build Area</a>
                                                         }
 
                                                     </div>
@@ -2205,7 +2217,7 @@ const PigFarm = () => {
 
                                                 <div className='build___left'>
                                                     <div className="build___item">
-                                                        <h3>{eggsearned} PIGLETS</h3>
+                                                        <h3>{eggsearned} EULE</h3>
                                                         <p>Earned</p>
                                                     </div>
                                                     <div className="build___item">
@@ -2220,11 +2232,11 @@ const PigFarm = () => {
                                         <div className="pig-value-wrp">
                                             <div className="build__value mrt">
                                                 <p>Deposited</p>
-                                                <h3>{isNaN(sowDeposited)?0:sowDeposited} {sowSymbol}</h3>
+                                                <h3 className='text-right'>{isNaN(sowDeposited)?0:sowDeposited} {sowSymbol}</h3>
                                             </div>
                                             <div className="build__value mrt">
                                             <p>Deposited</p>
-                                                <h3>{isNaN(boarDeposited)?0:boarDeposited} {boarSymbol}</h3>
+                                                <h3 className='text-right'>{isNaN(boarDeposited)?0:boarDeposited} {boarSymbol}</h3>
                                             </div>
 
 
@@ -2248,13 +2260,13 @@ const PigFarm = () => {
                                                     sowDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
                                                     <>
                                                         <h3 className="timer">{endTime}</h3>
-                                                        <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Pig Food to end.</span></p>
+                                                        <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for {chickenFoodSymbol} to end.</span></p>
                                                     </>
                                                 }
                                                 {
                                                     sowDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
                                                     <>
-                                                        <h3 className="timer">Food Exhausted</h3>
+                                                        <h3 className="timer">{chickenFoodSymbol} Exhausted</h3>
                                                         {/* <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Chicken feed to end.</span></p> */}
                                                     </>
                                                 }
@@ -2272,7 +2284,7 @@ const PigFarm = () => {
                                                 {
                                                     sowDeposited > 0 && layEndTime < new Date().getTime() / 1e3 &&
                                                     <>
-                                                        <h3 className=""><span>Not Breeding</span></h3>
+                                                        <h3 className=""><span>Not Building</span></h3>
 
                                                     </>
                                                 }
@@ -2283,16 +2295,16 @@ const PigFarm = () => {
                                         <div className="btn-bp">
                                         
 
-                                            <a href="/marketplace" className="bg___BTN2">Buy Sow/Boar</a>
+                                            <a href="/marketplace" className="bg___BTN2">Buy Material</a>
 
                                             {
                                                 eggsearned > 0 &&
-                                                <a href="javacript:void" className="bg___BTN2" onClick={claimEggs} >Claim Piglets</a>
+                                                <a href="javacript:void" className="bg___BTN2" onClick={claimEggs} >Claim {chickenEggSymbol}</a>
                                             }
 
                                             {
                                                 boarBalance > 0 && sowBalance > 0 && sowDeposited == 0 &&
-                                                <a href="javacript:void" className="bg___BTN2" onClick={sowtoggle} >Deposit Sow</a>
+                                                <a href="javacript:void" className="bg___BTN2" onClick={sowtoggle} >Deposit {sowSymbol}</a>
                                             }
                                         </div>
 
@@ -2300,19 +2312,19 @@ const PigFarm = () => {
                                         <div className="btn-bp">
                                       {
                                                 sowDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
-                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more Sow in Farm</a>
+                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more {sowSymbol} in Farm</a>
                                             }
 
                                             {
                                                 sowDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
 
-                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove Sow From Farm</a>
+                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove {sowSymbol} From Farm</a>
 
                                             }
 
                                             {
                                                 sowDeposited > 0 &&
-                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setaddDaysChickenModal(!addDaysChickenModal)}>Add Feed</a>
+                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setaddDaysChickenModal(!addDaysChickenModal)}>Add {chickenFoodSymbol}</a>
 
                                             }
 
@@ -2409,26 +2421,26 @@ const PigFarm = () => {
                         </span>
                         <span className="pull-right text-right">
                             <b>Your available Capacity</b><br />
-                            {parseFloat(farmCapacity) - (parseFloat(sowDeposited) + parseFloat(boarDeposited))} Pigs
+                            {parseFloat(farmCapacity) - (parseFloat(sowDeposited) + parseFloat(boarDeposited))} Material
                         </span>
                     </div>
-                    <label className="mb-3"><br /><b>Enter Quantity to Farm</b>
+                    <label className="mb-3"><br /><b>Enter Quantity to Build</b>
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
 
                     </label>
                     <input className="form-control" onChange={handlecDepositChange} type="text" value={cdamount} />
-                    <span className="info"><b>Max:</b> {parseFloat(farmCapacity) - (parseFloat(sowDeposited) + parseFloat(boarDeposited))} Pigs @ (1 Sow/Boar per 10 sq. m.)</span>
-                    <span className="info"><b>Note:</b> 1 Boar is required for 10 Sow to breed. Boar is automatically dedcuted from your wallet and adjusted to remaining space and required food is dedcuted from your wallet</span>
-                    <span className="info mt-1"><b>Required Boar:</b> {requiredBoar} {boarSymbol} (@ 1 {boarSymbol} per 10 {sowSymbol} )</span>
+                    <span className="info"><b>Max:</b> {parseFloat(farmCapacity) - (parseFloat(sowDeposited) + parseFloat(boarDeposited))} Materials @ (1 {sowSymbol}/{boarSymbol} per 10 sq. m.)</span>
+                    <span className="info"><b>Note:</b> 1 {boarSymbol} is required for 10 {sowSymbol} to build. {boarSymbol} is automatically dedcuted from your wallet and adjusted to remaining space and required food is dedcuted from your wallet</span>
+                    <span className="info mt-1"><b>Required {boarSymbol}:</b> {requiredBoar} {boarSymbol} (@ 1 {boarSymbol} per 10 {sowSymbol} )</span>
 
-                    <label className=""><br /><b>Enter Weeks to Farm</b>
+                    <label className=""><br /><b>Enter Weeks to Build</b>
                     </label>
 
                     <input className="form-control" onChange={handleDayChange} type="text" value={dayamount} />
-                    <span className="info"><b>Note:</b> It takes One week for each sow to deliver one piglet</span>
-                    <span className="info mt-1"><b>Est. Food:</b> {parseFloat(parseFloat(requiredBoar) + parseFloat(cdamount)) * 20 * dayamount * 7} {chickenFoodSymbol} @ (20 {chickenFoodSymbol} per Pig daily)</span>
-                    <span className="info mt-3"><b>Your Available Pig Food:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
-                    <span className="info mt-3"><b>Your Pig Food Cost for Total Pigs in Farm: </b> {parseFloat((parseFloat(sowDeposited) + parseFloat(cdamount) + parseFloat(requiredBoar)) * dayamount * 7 * 20).toFixed(2)} {chickenFoodSymbol}</span>
+                    <span className="info"><b>Note:</b> It takes One week for each {sowSymbol} to deliver one {chickenEggSymbol}</span>
+                    <span className="info mt-1"><b>Est. {chickenEggSymbol}:</b> {parseFloat(parseFloat(requiredBoar) + parseFloat(cdamount)) * 20 * dayamount * 7} {chickenFoodSymbol} @ (20 {chickenFoodSymbol} per material daily)</span>
+                    <span className="info mt-3"><b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
+                    <span className="info mt-3"><b>Your {chickenFoodSymbol} Cost for Total Materials in Farm: </b> {parseFloat((parseFloat(sowDeposited) + parseFloat(cdamount) + parseFloat(requiredBoar)) * dayamount * 7 * 20).toFixed(2)} {chickenFoodSymbol}</span>
                     <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} {baseSymbol} (@ {chickenDepositFee} per pig )</span>
 
 
@@ -2440,6 +2452,7 @@ const PigFarm = () => {
 
                 </ModalBody>
                 <ModalFooter>
+                    {/* {baseApprovedFarm} */}
                     {
                         (boarApproved == 0 || sowApproved == 0 || chickenFoodApproved == 0 || baseApprovedFarm == 0) &&
 
@@ -2512,8 +2525,8 @@ const PigFarm = () => {
                     <span className="info">Max: {farmCapacity - (parseInt(sowDeposited) + parseInt(boarDeposited))} {sowSymbol} @ (1 {sowSymbol} per sq. m.)</span>
 
 
-                    <span className="info">Est. Food: {cdamount * 20 * depositedDay} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {sowSymbol} daily)</span>
-                    <span className="info mt-3"><b>Your Available Pig Food:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
+                    <span className="info">Est. {chickenFoodSymbol}: {cdamount * 20 * depositedDay} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {sowSymbol} daily)</span>
+                    <span className="info mt-3"><b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
                     <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} {baseSymbol} (@ {chickenDepositFee} per pig )</span>
 
                     {
@@ -2557,18 +2570,19 @@ const PigFarm = () => {
                         </span>
                         <span className="pull-right text-right">
                             Your available {farmSymbol}<br />
+                            
                             {farmCapacity - sowDeposited} sq m
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter in Multiple of ten for Farm Area to Buy (sq m)
+                    <label className="mb-3"><br />Enter in Multiple of ten for Build Area to Buy (sq m)
                         {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
 
                     </label>
                     <input className="form-control" onChange={handleBuyAreaChange} type="text" value={buyareadamount} />
                     <span className="info mt-3"><b>Cost:</b> {buyareadamount * farmPrice * 10} {baseSymbol}</span>
                     <span className="info mt-1"><b>Area:</b> {buyareadamount * 10} sq. m.</span>
-                    <span className="info mt-1"><b>Capacity:</b> {buyareadamount} Pig(s)</span>
+                    <span className="info mt-1"><b>Capacity:</b> {buyareadamount} MATERIAL(s)</span>
 
                     {
                         buyareadepositError &&
@@ -2603,18 +2617,18 @@ const PigFarm = () => {
                         </span>
                         <span className="pull-right text-right">
                             Your available {farmSymbol}<br />
-                            {farmCapacity - sowDeposited} sq m
+                            {farmCapacity*10} sq m
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter in Multiple of ten for Farm Area to add-on  (sq m)
+                    <label className="mb-3"><br />Enter in Multiple of ten for Build Area to add-on  (sq m)
                         {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
 
                     </label>
                     <input className="form-control" onChange={handleAreaChange} type="text" value={areadamount} />
                     <span className="info mt-3"><b>Cost:</b> {areadamount * farmPrice * 10} {baseSymbol}</span>
                     <span className="info mt-1"><b>Area:</b> {areadamount * 10} sq. m.</span>
-                    <span className="info mt-1"><b>Capacity:</b> {areadamount} Pig(s)</span>
+                    <span className="info mt-1"><b>Capacity:</b> {areadamount} Material(s)</span>
 
                     {
                         areadepositError &&
@@ -2649,13 +2663,13 @@ const PigFarm = () => {
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter Quantity to Incubate
+                    <label className="mb-3"><br />Enter Quantity to Transform
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxceDeposit}>Max</span>
 
                     </label>
                     <input className="form-control" onChange={handleeDepositChange} type="text" value={cedamount} />
                     <span className="info mt-3"><b>Fee:</b> {cedamount * eggDepositFee} {baseSymbol} (@{eggDepositFee} {baseSymbol} per Egg)</span><br />
-                    <span className="info"><b>Maximum Per User:</b> 50 Eggs</span>
+                    <span className="info"><b>Maximum Per User:</b> 50 {chickenEggSymbol}</span>
 
 
 
@@ -2690,18 +2704,18 @@ const PigFarm = () => {
 
                     <div className="moveRight">
                         <span className="pull-left">
-                            Your Pig(s) Deposited<br />
+                            Your Material(s) Deposited<br />
                             {sowDeposited} {sowSymbol} and {boarDeposited} {boarSymbol}
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter Weeks to add in Farming
+                    <label className="mb-3"><br />Enter Weeks to add in Building
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxDayDeposit}>Max</span>
 
                     </label>
                     <input className="form-control" onChange={handleAddDayChange} type="text" value={addDayamount} />
-                    <span className="info mt-3"><b>Your Pig Food Cost for Total Pig in Farm:</b> {parseFloat((parseInt(sowDeposited) + parseInt(boarDeposited)) * addDayamount * 7 * 20).toFixed(2)} {chickenFoodSymbol}</span>
-                    <span className="info mt-3"><b>Your Available Pig Food:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
+                    <span className="info mt-3"><b>Your {chickenFoodSymbol} Cost for Total Material in Build:</b> {parseFloat((parseInt(sowDeposited) + parseInt(boarDeposited)) * addDayamount * 7 * 20).toFixed(2)} {chickenFoodSymbol}</span>
+                    <span className="info mt-3"><b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
 
                     {
                         addDdepositError &&
@@ -2736,7 +2750,7 @@ const PigFarm = () => {
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter Quantity to remove from Farm
+                    <label className="mb-3"><br />Enter Quantity to remove from Build
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcrDeposit}>Max</span>
 
                     </label>
