@@ -6,7 +6,7 @@ import Header from '../header.js';
 import Footer from '../footer.js';
 import stoke from '../../images/stoke.png';
 import Web3 from "web3"
-import { PIG_FARMING, PIG_INCUBATOR, MARKETPLACE } from '../../../Config/index.js';
+import { PIG_FARMING, PIG_INCUBATOR, MARKETPLACE, BUILD_FARM } from '../../../Config/index.js';
 import PIG_FARMING_ABI from '../../../Config/PIG_FARMING_ABI.json';
 import PIG_INCUBATOR_ABI from '../../../Config/PIG_INCUBATOR_ABI.json';
 import MARKETPLACE_ABI from '../../../Config/MARKETPLACE_ABI.json';
@@ -177,58 +177,10 @@ const PigFarm = () => {
 
     // const wallet = useWallet();\
     const { address, isConnected } = useAccount()
+  
     let web3Provider = window.ethereum;
 
-    useEffect(() => {
-        // if (window.ethereum) {
-        //     web3Provider = window.ethereum;
-        // }
-        // else {
-        //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
-
-        // }
-        //   getEggData() ;
-        getData();
-        if (unlockTime > 0) {
-            clearInterval(timeInterval);
-            timeInterval = setInterval(() => {
-                getTime();
-            }, 1000);
-
-        }
-
-        if (layEndTime > 0) {
-            clearInterval(timeInterval1);
-            timeInterval1 = setInterval(() => {
-                getlayTime();
-
-            }, 1000);
-
-        }
-
-        if (eggunlockTime > 0) {
-            clearInterval(timeInterval2);
-            timeInterval2 = setInterval(() => {
-
-                // getEggTime() ;
-            }, 1000);
-
-        }
-
-        if (eggHatchTime > 0) {
-            clearInterval(timeInterval3);
-            timeInterval3 = setInterval(() => {
-                // getEggHatchTime() ;
-
-            }, 1000);
-
-        }
-
-    }, [])
-
-    useEffect(() => {
-        setProcessed(false)
-    }, [])
+   
 
 
 
@@ -248,15 +200,16 @@ const PigFarm = () => {
         abi: PIG_FARMING_ABI,
         functionName: "farmLand",
     })
+ 
     const { data: _sowToken } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
-        functionName: "sowToken",
+        functionName: "metluxToken",
     })
     const { data: _boarToken } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
-        functionName: "boarToken",
+        functionName: "thermixToken",
     })
     const { data: _chickenFoodToken } = useContractRead({
         address: PIG_FARMING,
@@ -281,7 +234,7 @@ const PigFarm = () => {
         functionName: "symbol",
     })
     const { data: _symbol } = useContractRead({
-        address: farmToken,
+        address: BUILD_FARM,
         abi: NFT_ABI,
         functionName: "symbol",
     })
@@ -325,11 +278,12 @@ const PigFarm = () => {
         args: [address],
     })
     const { data: _nftBalance } = useContractRead({
-        address: farmToken,
+        address: BUILD_FARM,
         abi: NFT_ABI,
         functionName: "balanceOf",
         args: [address],
     })
+    console.log(_nftBalance);
     const { data: _userInfo } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
@@ -408,13 +362,13 @@ const PigFarm = () => {
         args: [address, PIG_FARMING],
     })
     const { data: _nftTokenId } = useContractRead({
-        address: farmToken,
+        address: BUILD_FARM,
         abi: NFT_ABI,
         functionName: "ownerTokens",
         args: [address],
     })
     const { data: _approved } = useContractRead({
-        address: farmToken,
+        address: BUILD_FARM,
         abi: NFT_ABI,
         functionName: "getApproved",
         args: [_nftTokenId],
@@ -442,8 +396,8 @@ const PigFarm = () => {
         //   setProcessed(false);
         setApprovalProcessing(true);
 
-        let _web3 = new Web3(web3Provider);
-        let _farmingContract = new _web3.eth.Contract(PIG_FARMING_ABI, PIG_FARMING);
+        // let _web3 = new Web3(web3Provider);
+        // let _farmingContract = new _web3.eth.Contract(PIG_FARMING_ABI, PIG_FARMING);
         // let _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
         //   let _tokenPerfarm = await _marketContract.methods.getTokenPerFarmArea().call() ;
         setFarmPrice(parseFloat(_tokenPerfarm / 1e18).toFixed(2));
@@ -495,7 +449,9 @@ const PigFarm = () => {
         // let _baseSymbol = await _baseTokenContract.methods.symbol().call();
         setBaseSymbol(_baseSymbol);
         // console.log(_baseSymbol);
-
+        setFarmBalance(_nftBalance);
+        setProcessed(true);
+        setApprovalProcessing(false);
         if (address) {
             //address = '0xbe7c30E0945d019F3aDc84AeEC55Ee2eCEb4247d' ;
             // let _baseApproved = await _baseTokenContract.methods.allowance(address, MARKETPLACE).call();
@@ -604,9 +560,7 @@ const PigFarm = () => {
 
                 }
             }
-            setFarmBalance(_nftBalance);
-            setProcessed(true);
-            setApprovalProcessing(false);
+          
 
         }
 
@@ -614,7 +568,56 @@ const PigFarm = () => {
 
 
     }
+    useEffect(() => {
+        // if (window.ethereum) {
+        //     web3Provider = window.ethereum;
+        // }
+        // else {
+        //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
 
+        // }
+        //   getEggData() ;
+        getData();
+        if (unlockTime > 0) {
+            clearInterval(timeInterval);
+            timeInterval = setInterval(() => {
+                getTime();
+            }, 1000);
+
+        }
+
+        if (layEndTime > 0) {
+            clearInterval(timeInterval1);
+            timeInterval1 = setInterval(() => {
+                getlayTime();
+
+            }, 1000);
+
+        }
+
+        if (eggunlockTime > 0) {
+            clearInterval(timeInterval2);
+            timeInterval2 = setInterval(() => {
+
+                // getEggTime() ;
+            }, 1000);
+
+        }
+
+        if (eggHatchTime > 0) {
+            clearInterval(timeInterval3);
+            timeInterval3 = setInterval(() => {
+                // getEggHatchTime() ;
+
+            }, 1000);
+
+        }
+
+    }, [])
+
+    useEffect(() => {
+        setProcessed(false)
+    }, [])
 
     const { data: _chickenpigletToken } = useContractRead({
         address: PIG_INCUBATOR,
@@ -1961,7 +1964,7 @@ const PigFarm = () => {
 
 
     const { config: approveNFTConfig_ } = usePrepareContractWrite({
-        address: farmToken,
+        address: BUILD_FARM,
         abi: NFT_ABI,
         functionName: 'approve',
         args: [PIG_FARMING, farmTokenId],

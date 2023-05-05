@@ -434,7 +434,6 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
-    // console.log(_userInfo3);
     const { data: _chickenEggApproved } = useContractRead({
         address: CELL_TOKEN,
         abi: TOKEN_ABI,
@@ -706,7 +705,6 @@ console.log(farmCapacity);
 
     }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_baseApprovedFarm,modal,_chickenFoodApproved,])
     // console.log(parseInt(_capacity));
-    console.log(parseFloat(_userInfo3[0] / 1e18).toFixed());
     const getEggData = async () => {
         // let _web3 = new Web3(web3Provider);
         // let _incubatorContract = new _web3.eth.Contract(CHICKEN_INCUBATOR_ABI, CHICKEN_INCUBATOR);
@@ -715,8 +713,6 @@ console.log(farmCapacity);
         setChickenEggToken(_chickenEggToken);
         setChickenEggApproved(_chickenEggApproved);
         setEggDepositFee(parseInt(_depositFee1));
-        setChickenEggBalance(parseFloat(_balance / 1e18).toFixed())
-
         // // let _capacity = await _incubatorContract.methods.capacity().call();
         setIncubCapacity(parseInt((_capacity)/1e18).toFixed(2));
 
@@ -729,13 +725,14 @@ console.log(farmCapacity);
 
         // // let _chickenEggSymbol = await _chickenEggContract.methods.symbol().call();
         setChickenEggSymbol(_chickenEggSymbol);
-        setChickenEggDeposited(parseFloat(_userInfo3[0] / 1e18).toFixed());
+
         // if (address) {
         //     // address = '0xef519A99b4921aC70387A3e1Fb6cCDeB853C0aB2' ;
 
         //     // let _balance = await _chickenEggContract.methods.balanceOf(address).call();
         //     // let _userInfo = await _incubatorContract.methods.userInfo(address).call();
-            
+            setChickenEggBalance(parseFloat(_balance / 1e18).toFixed())
+            setChickenEggDeposited(parseFloat(_userInfo3[0] / 1e18).toFixed());
 
         //     // let _chickenEggApproved = await _chickenEggContract.methods.allowance(address, CHICKEN_INCUBATOR).call();
           
@@ -2378,7 +2375,7 @@ console.log(farmCapacity);
                                                 <div className="time__list">
 
                                                     <h3 className="timer">{eggTime}</h3>
-                                                    <p>Time to Yield Solar</p>
+                                                    <p>Time to Yield </p>
 
 
                                                 </div>
@@ -2388,7 +2385,7 @@ console.log(farmCapacity);
                                                 </div>
                                                 <div className="time__list">
                                                     <h3 className="timer">{incubCapacity}</h3>
-                                                    <p>Available <br />Forginator</p>
+                                                    <p>Available <br />Incubators</p>
                                                 </div>
                                             </div>
 
