@@ -283,7 +283,6 @@ const PigFarm = () => {
         functionName: "balanceOf",
         args: [address],
     })
-    console.log(_nftBalance);
     const { data: _userInfo } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,

@@ -356,7 +356,6 @@ const ChickenFarm = () => {
         args: [address, CHICKEN_FARMING],
         watch: true,
     })
-    console.log(parseInt(_chickenApproved));
     const { data: _chickenFoodApproved } = useContractRead({
         address: FLUID_TOKEN,
         abi: TOKEN_ABI,
@@ -371,6 +370,7 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
+
     // console.log(parseInt(_nftTokenId));
     const { data: _approved } = useContractRead({
         address: HARVEST_FARM,
@@ -393,6 +393,8 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
+
+
  
     const { data: _chickenEggToken } = useContractRead({
         address: CHICKEN_INCUBATOR,
@@ -434,6 +436,8 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
+
+
     const { data: _chickenEggApproved } = useContractRead({
         address: CELL_TOKEN,
         abi: TOKEN_ABI,
@@ -442,20 +446,28 @@ const ChickenFarm = () => {
         watch: true,
     })
     
+
+
     const { data: _unlockItem } = useContractRead({
-        address: CHICKEN_FARMING,
+        address: CHICKEN_INCUBATOR,
         abi: CHICKEN_INCUBATOR_ABI,
         functionName: 'getUnlockTime',
         args: [address],
+        watch : true,
+        
     })
 
+
+    
+
     const { data: _userItens } = useContractRead({
-        address: CHICKEN_FARMING,
+        address: CHICKEN_INCUBATOR,
         abi: CHICKEN_INCUBATOR_ABI,
         functionName: 'pendingItems',
         args: [address],
         watch: true,
     })
+
     const { data: _unlockItem2 } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_INCUBATOR_ABI,
