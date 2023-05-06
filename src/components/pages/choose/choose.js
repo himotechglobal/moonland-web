@@ -60,7 +60,7 @@ class choose extends Component {
                                                 Then start selling and renting</p></div>
                                         <img className='c___img2' src={choose2} alt='' />
                                     </div>
-                                    <div><Link to="/pig-farming" className='bg___BTN'>Get started</Link></div>
+                                    <div><Link to="/build-to-trade" className='bg___BTN'>Get started</Link></div>
                                 </div>
 
 

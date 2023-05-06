@@ -1004,13 +1004,13 @@ console.log(farmCapacity);
 
 
     if (removeChickenError && modal) {
-        getData();
         setModal(modal);
-        setremoveChickenModal(!removeChickenModal
-        );
+        
     }
-    if (removeChickenSuccess && modal) {
+    if (removeChickenSuccess && modal && removeChickenModal) {
+        getData();
         setModal(false);
+        setremoveChickenModal(false);
     }
 
 
@@ -1071,13 +1071,13 @@ console.log(farmCapacity);
 
 
     if (depositMoreChickenError && modal) {
-        getData();
-
+        
         setModal(false);
-        moreChickentoggle();
     }
     if (depositMoreChickenSuccess && modal) {
+        getData();
         setModal(false);
+        moreChickentoggle();
     }
 
 
@@ -1088,11 +1088,11 @@ console.log(farmCapacity);
         // console.log("moreinfoe",parseInt(chickenFoodBalance), cdamount * dayamount * 20)
         setcDepositError(false)
         if (parseInt(chickenFoodBalance) < cdamount * dayamount * 20) {
-            setcDepositError("Error: Insufficient food Balance");
+            setcDepositError("Error: Insufficient fluid Balance");
             return false;
         }
         else if (cdamount > (farmCapacity - chickenDeposited)) {
-            setcDepositError("Error: Insufficient farm Land");
+            setcDepositError("Error: Insufficient Harvest Land");
             return false;
         }
         else {
@@ -1145,9 +1145,9 @@ console.log(farmCapacity);
         // getData();
 
         setModal(false);
-        chickentoggle();
     }
     if (depositChickenSuccess && modal) {
+        chickentoggle();
         setModal(false);
     }
 
@@ -1159,11 +1159,11 @@ console.log(farmCapacity);
         // console.log("moreinfoe",parseInt(chickenFoodBalance), solarAmount * dayamount * 20)
         
         if (chickenFoodBalance < solarAmount * dayamount * 600) {
-            setcDepositError("Error: Insufficient food Balance");
+            setcDepositError("Error: Insufficient fluid Balance");
             return false;
         }
         else if (solarAmount > (farmCapacity - chickenDeposited)) {
-            setcDepositError("Error: Insufficient farm Land");
+            setcDepositError("Error: Insufficient Harvest Land");
             return false;
         }
         else {
@@ -1210,10 +1210,10 @@ console.log(farmCapacity);
 
 
     if (approvebaseTokenFarmError && modal) {
-        getData();
         setModal(false);
     }
     if (approvebaseTokenFarmSuccess && modal) {
+        getData();
         setModal(false);
     }
 
@@ -1258,11 +1258,11 @@ console.log(farmCapacity);
 
 
     if (approvebaseTokenIncubError && modal) {
-        getEggData();
         setModal(false);
         // depositEgg()
     }
     if (approvebaseTokenIncubSuccess && modal) {
+        getEggData();
         setModal(false);
     }
 
@@ -1308,11 +1308,11 @@ console.log(farmCapacity);
 
 
     if (approvebaseTokenError && modal) {
-        getData();
         setModal(false);
-        buyAreaNFT()
     }
     if (approvebaseTokenSuccess && modal) {
+        buyAreaNFT()
+        getData();
         setModal(false);
     }
 
@@ -1408,10 +1408,10 @@ console.log(farmCapacity);
 
 
     if (claimChickenError && modal) {
-        getEggData();
         setModal(false);
     }
     if (claimChickenSuccess && modal) {
+        getEggData();
         setModal(false);
     }
 
@@ -1461,10 +1461,10 @@ console.log(farmCapacity);
 
     if (claimEggsError && modal) {
 
-        getData();
         setModal(false);
     }
     if (claimEggsSuccess && modal) {
+        getData();
         setModal(false);
     }
 
@@ -1508,10 +1508,10 @@ console.log(farmCapacity);
 
     if (approveChickenEggError && modal) {
 
-        getEggData();
         setModal(false);
     }
     if (approveChickenEggSuccess && modal) {
+        getEggData();
         setModal(false);
     }
 
@@ -1556,10 +1556,10 @@ console.log(farmCapacity);
 
     if (approveChickenError && modal) {
 
-        getEggData();
         setModal(false);
     }
     if (approveChickenSuccess && modal) {
+      
         setModal(false);
         getEggData();
         getData();
@@ -1610,11 +1610,11 @@ console.log(farmCapacity);
 
     if (addDaysError && modal) {
 
-        getData();
         setModal(false);
-        addDaysChickentoggle();
     }
     if (addDaysSuccess && modal) {
+        getData();
+        addDaysChickentoggle();
         setModal(false);
     }
 
@@ -1622,7 +1622,7 @@ console.log(farmCapacity);
         setaddDdepositError(false);
         let _maxamount = chickenFoodBalance / (20 * chickenDeposited);
         if (parseInt(_maxamount) < parseInt(addDayamount)) {
-            setaddDdepositError("Error: Insufficient Food Balance");
+            setaddDdepositError("Error: Insufficient fluid Balance");
             return false;
         }
 
@@ -1670,11 +1670,11 @@ console.log(farmCapacity);
 
     if (depositEggError && modal) {
 
-        getEggData();
         setModal(false);
-        eggtoggle();
     }
     if (depositEggSuccess && modal) {
+        getEggData();
+        eggtoggle();
         setModal(false);
     }
 
@@ -1682,7 +1682,7 @@ console.log(farmCapacity);
     const depositEgg = async () => {
         setceDepositError(false)
         if (parseInt(chickenEggBalance) < parseInt(cedamount)) {
-            setceDepositError("Error: Insufficient Egg Balance");
+            setceDepositError("Error: Insufficient cell Balance");
             return false;
         }
 
@@ -1732,9 +1732,9 @@ console.log(farmCapacity);
 
     if (sellfarmError && modal) {
         setModal(false);
-        getData();
     }
     if (sellfarmSuccess && modal) {
+        getData();
         setModal(false);
     }
 
@@ -1783,10 +1783,10 @@ console.log(farmCapacity);
 
     if (buyAreaNFTError && modal) {
         setModal(false);
-        getData();
-        buyAreaToggle();
     }
     if (buyAreaNFTSuccess && modal) {
+        getData();
+        buyAreaToggle();
         setModal(false);
     }
 
@@ -1846,10 +1846,10 @@ console.log(farmCapacity);
 
     if (addAreaNFTError && modal) {
         setModal(false);
-        getData();
-        areaToggle();
     }
     if (addAreaNFTSuccess && modal) {
+        getData();
+        areaToggle();
         setModal(false);
     }
 
@@ -2284,7 +2284,7 @@ console.log(farmCapacity);
                                                 <img src={solerimg1} alt="" width={100}/>
                                                 <Link className="bg___BTN2" to="/buy/solar">Buy Solar</Link>
                                             </div>
-                                            <div style={{display:"flex",gap:"10px",flexWrap:"wrap"}}>
+                                            <div style={{display:"flex",gap:"10px",flexWrap:"wrap",justifyContent:"center"}}>
                                                
                                             {
                                                 chickenApproved === 0 &&
@@ -2545,16 +2545,16 @@ console.log(farmCapacity);
                         </span>
                     </div>
                     <label className="mb-3"><br />Enter Solar for Harvest
-                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
 
                     </label>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
                     <input className="form-control" onChange={handlecDepositChange} type="number" value={solarAmount} />
                     <span className="info">Max: {farmCapacity - chickenDeposited} {chickenSymbol} @ (1 {chickenSymbol} per sq. m.)</span>
 
                     <label className=""><br />Enter Days to Harvest
                     </label>
 
-                    <input className="form-control" onChange={handleDayChange} type="text" value={dayamount} />
+                    <input className="form-control" onChange={handleDayChange} type="number" value={dayamount} />
                     <span className="info">Est. Fluid: {solarAmount * 600 * dayamount} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {chickenSymbol} daily)</span>
                     <span className="info mt-3"><b>Your Available SOLAR FLUID:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
                     <span className="info mt-3"><b>Your SOLAR FLUID Cost for Total SOLAR in Harvest:</b> {chickenDeposited>0 ? parseFloat((parseFloat(chickenDeposited) + parseFloat(solarAmount)) * dayamount * 600).toFixed(2):0} {chickenFoodSymbol}</span>
@@ -2605,18 +2605,18 @@ console.log(farmCapacity);
                             {farmCapacity - chickenDeposited} sq m
                         </span>
                     </div>
-                    <label className="mb-3"><br />Enter Quantity to add in Farm
-                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
+                    <label className="mb-3"><br />Enter Quantity to add in Harvest
 
                     </label>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
 
-                    <input className="form-control" onChange={handlecDepositChange} type="text" value={cdamount} />
+                    <input className="form-control" onChange={handlecDepositChange} type="number" value={cdamount} />
                     <span className="info">Max: {farmCapacity - chickenDeposited} {chickenSymbol} @ (1 {chickenSymbol} per sq. m.)</span>
 
 
                     <span className="info">Est. {chickenFoodSymbol}: {cdamount * 600 * depositedDay} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {chickenSymbol} daily)</span>
                     <span className="info mt-3"><b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
-                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} {baseSymbol} (@ {chickenDepositFee} per chicken )</span>
+                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} {baseSymbol} (@ {chickenDepositFee} per solar )</span>
 
                     {
                         cdepositError &&
@@ -2663,11 +2663,11 @@ console.log(farmCapacity);
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter Farm Area to Buy (sq m)
+                    <label className="mb-3"><br />Enter Harvest Area to Buy (sq m)
                         {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
 
                     </label>
-                    <input className="form-control" onChange={handleBuyAreaChange} type="text" value={buyareadamount} />
+                    <input className="form-control" onChange={handleBuyAreaChange} type="number" value={buyareadamount} />
                     <span className="info mt-3"><b>Cost:</b> {parseFloat(buyareadamount * farmPrice).toFixed(4)} {baseSymbol}</span>
 
                     {
@@ -2707,11 +2707,11 @@ console.log(farmCapacity);
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter Farm Area to add-on  (sq m)
+                    <label className="mb-3"><br />Enter Harvest Area to add-on  (sq m)
                         {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
 
                     </label>
-                    <input className="form-control" onChange={handleAreaChange} type="text" value={areadamount} />
+                    <input className="form-control" onChange={handleAreaChange} type="number" value={areadamount} />
                     <span className="info mt-3"><b>Cost:</b> {parseFloat(areadamount * farmPrice).toFixed(4)} {baseSymbol}</span>
 
                     {
@@ -2747,12 +2747,12 @@ console.log(farmCapacity);
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter Quantity to Incubate
-                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxceDeposit}>Max</span>
+                    <label className="mb-3">Enter Quantity to Incubate
 
                     </label>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxceDeposit}>Max</span>
                   
-                    <input className="form-control" onChange={handleeDepositChange} type="text" value={cedamount} />
+                    <input className="form-control" onChange={handleeDepositChange} type="number" value={cedamount} />
                     <span className="info mt-3"><b>Fee:</b> {cedamount * eggDepositFee} {baseSymbol} (@{eggDepositFee} {baseSymbol} per Cells)</span><br />
                     <span className="info"><b>  Maximum Per User:</b> 50 Cells</span>
 
@@ -2795,11 +2795,11 @@ console.log(farmCapacity);
 
                     </div>
                     <label className="mb-3"><br />Enter Days you want to add fluid for
-                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxDayDeposit}>Max</span>
 
                     </label>
-                    <input className="form-control" onChange={handleAddDayChange} type="text" value={addDayamount} />
-                    <span className="info mt-3"><b>Your Solar Fluid Cost for Total Solar in Harvest:</b> {parseFloat(chickenDeposited * addDayamount * 20).toFixed(2)} {chickenFoodSymbol}</span>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxDayDeposit}>Max</span>
+                    <input className="form-control" onChange={handleAddDayChange} type="number" value={addDayamount} />
+                    <span className="info mt-3"><b>Your Solar Fluid Cost for Total Solar in Harvest:</b> {addDayamount>0 ? parseFloat(chickenDeposited * addDayamount * 20).toFixed(2):0} {chickenFoodSymbol}</span>
                     <span className="info mt-3"><b>Your Available Solar Fluid:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
 
                     {
@@ -2836,11 +2836,11 @@ console.log(farmCapacity);
 
                     </div>
                     <label className="mb-3"><br />Enter Quantity to remove from Harvest
-                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcrDeposit}>Max</span>
 
                     </label>
-                    <input className="form-control" onChange={handlecrDepositChange} type="text" value={crdamount} />
-                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenRemoveFee * crdamount).toFixed(2)} {baseSymbol} (@ {chickenRemoveFee} per chicken )</span>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcrDeposit}>Max</span>
+                    <input className="form-control" onChange={handlecrDepositChange} type="number" value={crdamount} />
+                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenRemoveFee * crdamount).toFixed(2)} {baseSymbol} (@ {chickenRemoveFee} per solar )</span>
                     {
                         crdepositError &&
                         <span className="error">{crdepositError}</span>

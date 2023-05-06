@@ -731,6 +731,8 @@ console.log(_userClaimTimes1);
     }
     if (lockNFTSuccess && modal) {
         setModal(false);
+        getData()
+       
     }
     useEffect(() => {
         setProcessed(false);
@@ -1021,10 +1023,10 @@ console.log(_userClaimTimes1);
     })
 
 
-    if (removeChickenError && modal) {
+    if (removeChickenError && modal && removeChickenModal) {
        
         setModal(modal);
-        setremoveChickenModal(!removeChickenModal);
+        setremoveChickenModal(false);
     }
     if (removeChickenSuccess && modal) {
         setModal(false);
@@ -1073,7 +1075,7 @@ console.log(_userClaimTimes1);
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
         functionName: 'depositMoreMetlux',
-        args: [cdamount == "" ? 0 : ethers.utils.parseEther(cdamount).toString(), parseInt(farmTokenId)],
+        args: [cdamount == "" ? 0 : ethers.utils.parseEther(cdamount.toString()), parseInt(farmTokenId)],
         watch: true,
     })
 
@@ -1091,9 +1093,9 @@ console.log(_userClaimTimes1);
     if (depositMoreChickenError && modal) {
        
         setModal(false);
-        moreChickentoggle();
     }
     if (depositMoreChickenSuccess && modal) {
+        moreChickentoggle();
         setModal(false);
         getData();
     }
@@ -1106,17 +1108,17 @@ console.log(_userClaimTimes1);
         
         setcDepositError(false)
         if (parseInt(sowBalance) < parseInt(cdamount)) {
-            setcDepositError("Error: Insufficient Sow Balance");
+            setcDepositError("Error: Insufficient Metlux Balance");
             return false;
         }
 
         else if (parseInt(cdamount) > (parseInt(farmCapacity) - parseInt(parseInt(sowDeposited) + parseInt(boarDeposited)))) {
-            setcDepositError("Error: Insufficient farm Land");
+            setcDepositError("Error: Insufficient Harvest Land");
             return false;
         }
         else if (chickenFoodBalance < parseInt(parseInt(cdamount) * parseInt(depositedDay) * 20)) {
             // console.log("FB" ,parseInt(chickenFoodBalance) , parseInt(parseInt(cdamount) * parseInt(depositedDay) * 20))
-            setcDepositError("Error: Inssufficient food Balance");
+            setcDepositError("Error: Inssufficient fluid Balance");
             return false;
         }
         else {
@@ -1154,7 +1156,7 @@ console.log(_userClaimTimes1);
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
         functionName: 'deposit',
-        args: [parseInt(farmTokenId), ethers.utils.parseEther(parseInt(cdamount).toString()).toString(), ethers.utils.parseEther(_boar).toString(), _dayamount],
+        args: [parseInt(farmTokenId), cdamount==""?0:ethers.utils.parseEther(parseInt(cdamount).toString()).toString(), ethers.utils.parseEther(_boar).toString(), _dayamount],
         watch: true,
     })
 
@@ -1172,9 +1174,9 @@ console.log(_userClaimTimes1);
     if (depositSowError && modal) {
         
         setModal(false);
-        sowtoggle();
     }
     if (depositSowSuccess && modal) {
+        sowtoggle();
         setModal(false);
         getData();
     }
@@ -1193,15 +1195,15 @@ console.log(_userClaimTimes1);
         }
 
         if (chickenFoodBalance < cdamount * dayamount * 7 * 20) {
-            setcDepositError("Error: Insufficient food Balance");
+            setcDepositError("Error: Insufficient fluid Balance");
             return false;
         }
         else if (cdamount > (farmCapacity - sowDeposited)) {
-            setcDepositError("Error: Insufficient farm Land");
+            setcDepositError("Error: Insufficient Harvest Land");
             return false;
         }
         else if (parseInt(parseInt(cdamount) + parseInt(requiredBoar)) > (parseInt(farmCapacity) - parseInt(parseInt(sowDeposited) + parseInt(boarDeposited)))) {
-            setcDepositError("Error: Insufficient farm Land");
+            setcDepositError("Error: Insufficient Harvest Land");
             return false;
         }
         else {
@@ -1255,11 +1257,11 @@ console.log(_userClaimTimes1);
 
 
     if (approvebaseTokenFarmError && modal) {
-        getData();
         setModal(false);
         setApprovalProcessing(false);
     }
     if (approvebaseTokenFarmSuccess && modal) {
+    
         getData();
         setModal(false);
         setApprovalProcessing(false);
@@ -1566,10 +1568,10 @@ if (claimMaterialSuccess && modal) {
 
     if (claimEuleError && modal) {
 
-        getData();
         setModal(false);
     }
     if (claimEuleSuccess && modal) {
+        getData();
         setModal(false);
     }
     const  approveChickenEgg= async()=> {
@@ -1740,12 +1742,14 @@ if (claimMaterialSuccess && modal) {
 
     if (addDaysError && modal) {
 
-        getData();
+       
         setModal(false);
-        addDaysChickentoggle();
+      
     }
     if (addDaysSuccess && modal) {
         setModal(false);
+        getData();
+        addDaysChickentoggle();
     }
 
 
@@ -1810,11 +1814,11 @@ if (claimMaterialSuccess && modal) {
 
     if (depositEggError && modal) {
 
-        getEggData();
         setModal(false);
-        eggtoggle();
     }
     if (depositEggSuccess && modal) {
+        getEggData();
+        eggtoggle();
         setModal(false);
     }
 
@@ -1862,7 +1866,7 @@ if (claimMaterialSuccess && modal) {
         watch: true,
     })
 
-    console.log()
+ 
 
 
     const { data: sellfarmData, writeAsync: sellfarmWriteAsync, isError: sellfarmError } = useContractWrite(sellfarmConfig_)
@@ -1875,9 +1879,9 @@ if (claimMaterialSuccess && modal) {
     if (sellfarmError && modal) {
 
         setModal(false);
-        getData();
     }
     if (sellfarmSuccess && modal) {
+        getData();
         setModal(false);
     }
 
@@ -1934,8 +1938,7 @@ if (claimMaterialSuccess && modal) {
     if (buyAreaNFTError && modal) {
 
         setModal(false);
-        getData();
-        buyAreaToggle();
+      
     }
     if (buyAreaNFTSuccess && modal) {
         setModal(false);
@@ -2050,7 +2053,7 @@ if (claimMaterialSuccess && modal) {
         enabled: farmTokenId
     })
 
-    console.log("bd:",farmTokenId)
+
 
 
     const { data: approveNFTData, writeAsync: approveNFTWriteAsync, isError: approveNFTError } = useContractWrite(approveNFTConfig_)
@@ -2384,13 +2387,13 @@ if (claimMaterialSuccess && modal) {
                                         <div className="btn-bp btn_new">
                                       {
                                                 sowDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
-                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more {sowSymbol} in Farm</a>
+                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more {sowSymbol} in Harvest</a>
                                             }
 
                                             {
                                                 sowDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
 
-                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove {sowSymbol} From Farm</a>
+                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove {sowSymbol} From Harvest</a>
 
                                             }
 
@@ -2536,10 +2539,10 @@ if (claimMaterialSuccess && modal) {
                         </span>
                     </div>
                     <label className="mb-3"><br /><b>Enter Quantity to Build</b>
-                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
 
                     </label>
-                    <input className="form-control" onChange={handlecDepositChange} type="text" value={cdamount} />
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
+                    <input className="form-control" onChange={handlecDepositChange} type="number" value={cdamount} />
                     <span className="info"><b>Max:</b> {parseFloat(farmCapacity) - (parseFloat(sowDeposited) + parseFloat(boarDeposited))} Materials @ (1 {sowSymbol}/{boarSymbol} per 10 sq. m.)</span>
                     <span className="info"><b>Note:</b> 1 {boarSymbol} is required for 10 {sowSymbol} to build. {boarSymbol} is automatically dedcuted from your wallet and adjusted to remaining space and required {chickenFoodSymbol} is dedcuted from your wallet</span>
                     <span className="info mt-1"><b>Required {boarSymbol}:</b> {requiredBoar} {boarSymbol} (@ 1 {boarSymbol} per 10 {sowSymbol} )</span>
@@ -2547,7 +2550,7 @@ if (claimMaterialSuccess && modal) {
                     <label className=""><br /><b>Enter Weeks to Build</b>
                     </label>
 
-                    <input className="form-control" onChange={handleDayChange} type="text" value={dayamount} />
+                    <input className="form-control" onChange={handleDayChange} type="number" value={dayamount} />
                     <span className="info"><b>Note:</b> It takes One week for each {sowSymbol} to deliver one {chickenEggSymbol}</span>
                     <span className="info mt-1"><b>Est. {chickenEggSymbol}:</b> {parseFloat(parseFloat(requiredBoar) + parseFloat(cdamount)) * 20 * dayamount * 7} {chickenFoodSymbol} @ (20 {chickenFoodSymbol} per material daily)</span>
                     <span className="info mt-3"><b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
@@ -2627,18 +2630,18 @@ if (claimMaterialSuccess && modal) {
                             {farmCapacity - (parseInt(sowDeposited) + parseInt(boarDeposited))}
                         </span>
                     </div>
-                    <label className="mb-3"><br />Enter Quantity to add in Farm
-                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
+                    <label className="mb-3"><br />Enter Quantity to add in Harvest
 
                     </label>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
 
-                    <input className="form-control" onChange={handlecDepositChange} type="text" value={cdamount} />
+                    <input className="form-control" onChange={handlecDepositChange} type="number" value={cdamount} />
                     <span className="info">Max: {farmCapacity - (parseInt(sowDeposited) + parseInt(boarDeposited))} {sowSymbol} @ (1 {sowSymbol} per sq. m.)</span>
 
 
                     <span className="info">Est. {chickenFoodSymbol}: {cdamount * 20 * depositedDay} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {sowSymbol} daily)</span>
                     <span className="info mt-3"><b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
-                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} {baseSymbol} (@ {chickenDepositFee} per pig )</span>
+                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} {baseSymbol} (@ {chickenDepositFee} per MATERIAL(s) )</span>
 
                     {
                         cdepositError &&
@@ -2690,7 +2693,7 @@ if (claimMaterialSuccess && modal) {
                         {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
 
                     </label>
-                    <input className="form-control" onChange={handleBuyAreaChange} type="text" value={buyareadamount} />
+                    <input className="form-control" onChange={handleBuyAreaChange} type="number" value={buyareadamount} />
                     <span className="info mt-3"><b>Cost:</b> {buyareadamount * farmPrice * 10} {baseSymbol}</span>
                     <span className="info mt-1"><b>Area:</b> {buyareadamount * 10} sq. m.</span>
                     <span className="info mt-1"><b>Capacity:</b> {buyareadamount} MATERIAL(s)</span>
@@ -2736,7 +2739,7 @@ if (claimMaterialSuccess && modal) {
                         {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
 
                     </label>
-                    <input className="form-control" onChange={handleAreaChange} type="text" value={areadamount} />
+                    <input className="form-control" onChange={handleAreaChange} type="number" value={areadamount} />
                     <span className="info mt-3"><b>Cost:</b> {areadamount * farmPrice * 10} {baseSymbol}</span>
                     <span className="info mt-1"><b>Area:</b> {areadamount * 10} sq. m.</span>
                     <span className="info mt-1"><b>Capacity:</b> {areadamount} Material(s)</span>
@@ -2775,10 +2778,10 @@ if (claimMaterialSuccess && modal) {
 
                     </div>
                     <label className="mb-3"><br />Enter Quantity to Transform
-                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxceDeposit}>Max</span>
 
                     </label>
-                    <input className="form-control" onChange={handleeDepositChange} type="text" value={cedamount} />
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxceDeposit}>Max</span>
+                    <input className="form-control" onChange={handleeDepositChange} type="number" value={cedamount} />
                     <span className="info mt-3"><b>Fee:</b> {cedamount * eggDepositFee} {baseSymbol} (@{eggDepositFee} {baseSymbol} per Eules)</span><br />
                     <span className="info"><b>Maximum Per User:</b> 50 {chickenEggSymbol}</span>
 
@@ -2821,11 +2824,12 @@ if (claimMaterialSuccess && modal) {
 
                     </div>
                     <label className="mb-3"><br />Enter Weeks to add in Building
-                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxDayDeposit}>Max</span>
 
                     </label>
-                    <input className="form-control" onChange={handleAddDayChange} type="text" value={addDayamount} />
-                    <span className="info mt-3"><b>Your {chickenFoodSymbol} Cost for Total Material in Build:</b> {parseFloat((parseInt(sowDeposited) + parseInt(boarDeposited)) * addDayamount * 7 * 20).toFixed(2)} {chickenFoodSymbol}</span>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxDayDeposit}>Max</span>
+                    <input className="form-control" onChange={handleAddDayChange} type="number" value={addDayamount} />
+               
+                    <span className="info mt-3"><b>Your {chickenFoodSymbol} Cost for Total Material in Build:</b> {(sowDeposited &&boarDeposited&&addDayamount)>0? parseFloat((parseInt(sowDeposited) + parseInt(boarDeposited)) * addDayamount * 7 * 20).toFixed(2):0} {chickenFoodSymbol}</span>
                     <span className="info mt-3"><b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
 
                     {
@@ -2862,11 +2866,11 @@ if (claimMaterialSuccess && modal) {
 
                     </div>
                     <label className="mb-3"><br />Enter Quantity to remove from Build
-                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcrDeposit}>Max</span>
 
                     </label>
-                    <input className="form-control" onChange={handlecrDepositChange} type="text" value={crdamount} />
-                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenRemoveFee * crdamount).toFixed(2)} {baseSymbol} (@ {chickenRemoveFee} per sow )</span>
+                        <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcrDeposit}>Max</span>
+                    <input className="form-control" onChange={handlecrDepositChange} type="number" value={crdamount} />
+                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenRemoveFee * crdamount).toFixed(2)} {baseSymbol} (@ {chickenRemoveFee} per Metlux )</span>
                     {
                         crdepositError &&
                         <span className="error">{crdepositError}</span>

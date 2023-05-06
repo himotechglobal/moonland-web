@@ -26,28 +26,30 @@ const STAKING_ARRAY = [
         earn: 'Moonland',
         depositFee: 0,
         withdrawFee: 0,
+        btn:"Partcipate"
     },
     {
         address: null,
         key:null,
         name: 'Trade in moon',
         image: chickenIcon,
-        status: 3,
-        apy: 84,
-        earn: 'MyFarmPet',
-        depositFee: 5,
-        withdrawFee: 10,
+        status: 0,
+        apy: 0,
+        earn: 'Moonland',
+        depositFee: 0,
+        btn:"Coming soon",
     },
     {
         address: null,
         key:null,
         name: 'Live in Moon',
         image: boarIcon,
-        status: 3,
-        apy: 84,
-        earn: 'MyFarmPet',
-        depositFee: 5,
-        withdrawFee: 10,
+        status: 0,
+        apy: 0,
+        earn: 'Moonland',
+        depositFee: 0,
+        withdrawFee: 0,
+        btn:"Coming soon",
 
     },
 ]
@@ -422,6 +424,7 @@ const StakeCard = (props) => {
     }
     if (approveSuccess && modal) {
         setModal(false);
+        getData()
     }
 // console.log(stakeEnabled);
     const approveToken = async () => {
@@ -508,6 +511,7 @@ const StakeCard = (props) => {
     }
     if (claimRewardSuccess && modal) {
         setModal(false);
+        getData()
     }
 
 
@@ -555,6 +559,7 @@ const StakeCard = (props) => {
     if (depositTokenSuccess && modal && depositModal) {
         setModal(false);
         setDepositModal(false)
+        getData()
     }
 
 
@@ -622,6 +627,7 @@ console.log(parseFloat(withdrawAmount));
     }
     if (withdrawTokenSuccess && modal) {
         setModal(false);
+        getData()
 
     }
 
@@ -808,7 +814,7 @@ console.log(parseFloat(withdrawAmount));
                         <div className="text-center" >
                             <a className="bg___BTN3" 
                             // onClick={depositToggle}
-                            >Participate</a>
+                            >{STAKING_ARRAY[props.index].btn}</a>
                         </div>
                     }
 
@@ -853,7 +859,7 @@ console.log(parseFloat(withdrawAmount));
 
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxDeposit}>Max</span>
                     </label>
-                    <input className="form-control mb-3" onChange={handleDepositChange} type="text" value={damount} />
+                    <input className="form-control mb-3" onChange={handleDepositChange} type="number" value={damount} />
 
                     <span className="info mt-3">Fee: {parseFloat(damount * (depositFee / 100)).toFixed(3)} {stakeSymbol}</span>
 

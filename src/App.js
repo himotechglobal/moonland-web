@@ -51,7 +51,7 @@ function App() {
 				<Route path="/fslide2" element={<Fslide2 />} />
 				<Route path="/fslide3" element={<Fslide3 />} />
 				<Route path="/step" element={<Step />} />
-				<Route path="/pig-farming" element={<PigFarm />} />
+				<Route path="/build-to-trade" element={<PigFarm />} />
 				<Route path="/solar-harvesting" element={<ChickenFarm />} />
 				<Route path="/chicken-farming-data" element={<NewChickenFarm />} />
 				<Route path="/choose" element={<Choose />} />
