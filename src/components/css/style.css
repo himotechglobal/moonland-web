@@ -462,10 +462,7 @@ p {
   cursor: pointer;
   text-align: center;
 }
-.btn_new .bg___BTN2{
-  width: 100%;
 
-}
 
 .bg___BTN2:hover {
   transform: translateY(-6px);

@@ -224,7 +224,7 @@ const PigFarm = () => {
         args: [1],
     })
 
-    console.log("DF",_depositFee)
+    // console.log("DF",_depositFee)
     const { data: _removeFee } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
@@ -270,7 +270,7 @@ const PigFarm = () => {
     })
 
 
-    console.log("BA",parseInt(_baseApprovedFarm))
+    // console.log("BA",parseInt(_baseApprovedFarm))
     const { data: _baseApprovedIncub } = useContractRead({
         address: TOKEN,
         abi: TOKEN_ABI,
@@ -329,7 +329,7 @@ const PigFarm = () => {
         watch: true,
     })
 
-    // console.log(_userClaimTimes1);
+console.log(_userClaimTimes1);
 
     const { data: _chickenFoodBalance1 } = useContractRead({
         address: POSITRONS_TOKEN,
@@ -610,7 +610,7 @@ const PigFarm = () => {
         args: [address, PIG_INCUBATOR],
         watch: true,
     })
- console.log(_chickenEggApproved);
+//  console.log(_chickenEggApproved);
     const { data: _userItens } = useContractRead({
         address: PIG_INCUBATOR,
         abi: PIG_INCUBATOR_ABI,
@@ -618,7 +618,7 @@ const PigFarm = () => {
         args: [address],
         watch: true,
     })
-console.log(_userItens);
+// console.log(_userItens);
     const { data: _unlockItem } = useContractRead({
         address: PIG_INCUBATOR,
         abi: PIG_INCUBATOR_ABI,
@@ -685,7 +685,7 @@ console.log(_userItens);
             // let _chickenEggApproved = await _chickenEggContract.methods.allowance(address, PIG_INCUBATOR).call();
             setChickenEggApproved(parseInt(_chickenEggApproved));
 
-            console.log("eggunlick",parseInt(_userInfo[0]))
+            // console.log("eggunlick",parseInt(_userInfo[0]))
 
             if (parseInt(_userInfo2[0]) > 0) {
                 // let _userItens = await _incubatorContract.methods.pendingItems(address).call();
@@ -696,7 +696,7 @@ console.log(_userItens);
                 // let _unlockItem = await _incubatorContract.methods.getUnlockTime(address).call();
                 // console.log("jas",_unlockItem.toString());
                 // alert()
-                console.log("eggunlick",_userItens)
+                // console.log("eggunlick",_userItens)
                 setEggUnlockTime(_unlockItem);
                 // let _unlockItem2 = await _incubatorContract.methods.getHatchTime(address).call();
                 setEggHatchTime(_unlockItem2);
@@ -940,7 +940,7 @@ console.log(_userItens);
 
     const getEggTime = async () => {
         let _current = new Date().getTime() / 1e3;
-        console.log("eggitme",eggunlockTime);
+        // console.log("eggitme",eggunlockTime);
         if (parseInt(_current) > parseInt(eggunlockTime)) {
             seteggTime(0);
             // console.log('ended')
@@ -1022,12 +1022,13 @@ console.log(_userItens);
 
 
     if (removeChickenError && modal) {
-        getData();
+       
         setModal(modal);
         setremoveChickenModal(!removeChickenModal);
     }
     if (removeChickenSuccess && modal) {
         setModal(false);
+        getData();
     }
 
     const removeChicken = async () => {
@@ -1076,7 +1077,7 @@ console.log(_userItens);
         watch: true,
     })
 
-    console.log("DM",cdamount == "" ? 0 : ethers.utils.parseEther(cdamount).toString(), parseInt(farmTokenId));
+    // console.log("DM",cdamount == "" ? 0 : ethers.utils.parseEther(cdamount).toString(), parseInt(farmTokenId));
 
 
 
@@ -1088,19 +1089,20 @@ console.log(_userItens);
 
 
     if (depositMoreChickenError && modal) {
-        getData();
+       
         setModal(false);
         moreChickentoggle();
     }
     if (depositMoreChickenSuccess && modal) {
         setModal(false);
+        getData();
     }
 
 
     const depositMoreChicken = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        console.log("FB" ,parseInt(ethers.utils.formatEther(_chickenFoodBalance1)) , parseInt(parseInt(cdamount) * parseInt(depositedDay) * 20))
+        // console.log("FB" ,parseInt(ethers.utils.formatEther(_chickenFoodBalance1)) , parseInt(parseInt(cdamount) * parseInt(depositedDay) * 20))
         
         setcDepositError(false)
         if (parseInt(sowBalance) < parseInt(cdamount)) {
@@ -1113,7 +1115,7 @@ console.log(_userItens);
             return false;
         }
         else if (chickenFoodBalance < parseInt(parseInt(cdamount) * parseInt(depositedDay) * 20)) {
-            console.log("FB" ,parseInt(chickenFoodBalance) , parseInt(parseInt(cdamount) * parseInt(depositedDay) * 20))
+            // console.log("FB" ,parseInt(chickenFoodBalance) , parseInt(parseInt(cdamount) * parseInt(depositedDay) * 20))
             setcDepositError("Error: Inssufficient food Balance");
             return false;
         }
@@ -1156,7 +1158,7 @@ console.log(_userItens);
         watch: true,
     })
 
-    console.log("depost" ,farmTokenId, parseInt(cdamount), (_boar), _dayamount)
+    // console.log("depost" ,farmTokenId, parseInt(cdamount), (_boar), _dayamount)
 
 
 
@@ -1168,12 +1170,13 @@ console.log(_userItens);
 
 
     if (depositSowError && modal) {
-        getData();
+        
         setModal(false);
         sowtoggle();
     }
     if (depositSowSuccess && modal) {
         setModal(false);
+        getData();
     }
 
 
@@ -1456,25 +1459,44 @@ console.log(_userItens);
 
     }
 
+    const { config:claimMaterialConfig,isError:err} = usePrepareContractWrite({
+        address: "0x360E80B1C11dB9385Bb15E326F25993b6D208eCc",
+        abi: PIG_INCUBATOR_ABI,
+        functionName: 'claimMaterial',
+    
+      })
+      const {data: claimMaterialData, writeAsync:claimMaterialWriteAsync,isError: claimMaterialError } = useContractWrite(claimMaterialConfig)
 
+// const { data: claimMaterialData, writeAsync: claimMaterialWriteAsync, isError: claimMaterialError } = useContractWrite(claimMaterialConfig)
+const { isSuccess: claimMaterialSuccess } = useWaitForTransaction({
+    hash: claimMaterialData?.hash,
+})
 
+if (claimMaterialError && modal) {
+    setModal(false);
+}
+if (claimMaterialSuccess && modal) {
+    setModal(false);
+    getEggData()
 
-    async function claimChicken() {
-        let _web3 = new Web3(web3Provider);
+}
 
-        setModal(!modal);
-        const _incubatorContract = new _web3.eth.Contract(PIG_INCUBATOR_ABI, PIG_INCUBATOR);
-        _incubatorContract.methods.claimAdults().send({ from: address }).on('receipt', function (receipt) {
+   const claimMaterial= async () =>{
+        // let _web3 = new Web3(web3Provider);
+        setModal(true);
+   await claimMaterialWriteAsync?.()
+        // const _incubatorContract = new _web3.eth.Contract(PIG_INCUBATOR_ABI, PIG_INCUBATOR);
+        // _incubatorContract.methods.claimAdults().send({ from: address }).on('receipt', function (receipt) {
 
-            getEggData();
-            setModal(modal);
+        //     getEggData();
+        //     setModal(modal);
 
-        })
+        // })
 
-            .on('error', function (error, receipt) {
-                setModal(modal);
+        //     .on('error', function (error, receipt) {
+        //         setModal(modal);
 
-            });
+        //     });
     }
 
 
@@ -1497,10 +1519,10 @@ console.log(_userItens);
 
     if (claimEggsError && modal) {
 
-        getData();
         setModal(false);
     }
     if (claimEggsSuccess && modal) {
+        getData();
         setModal(false);
     }
 
@@ -1538,7 +1560,7 @@ console.log(_userItens);
     const { data: approveEule, writeAsync: claimChickenWriteAsync, isError: claimEuleError } = useContractWrite(claimEuleConfig_)
 
     const { isSuccess: claimEuleSuccess } = useWaitForTransaction({
-        hash: claimEggsData?.hash,
+        hash: approveEule?.hash,
     })
 
 
@@ -1800,7 +1822,7 @@ console.log(_userItens);
     const depositEgg = async () => {
         setceDepositError(false)
         if (parseInt(chickenEggBalance) < parseInt(cedamount)) {
-            setceDepositError("Error: Insufficient Egg Balance");
+            setceDepositError("Error: Insufficient Eule Balance");
             return false;
         }
 
@@ -2435,10 +2457,10 @@ console.log(_userItens);
                                            
                                         </div> */}
 
-<div className="build___item">
+<div className="build___item" style={{display:'flex',justifyContent:'space-between',padding:"0 20px 20px"}}>
 
-<h3 className="timer">{eggTime == 0 ? "70 days" : eggTime}</h3>
-<p>Time to Yield </p>
+<p>Time to Yield </p> 
+<h3 >{eggTime == 0 ? "70 days" : eggTime}</h3>
 
 
 </div>
@@ -2456,10 +2478,10 @@ console.log(_userItens);
                                                     chickenEggApproved > 0 && chickenEggDeposited == 0 &&
                                                     <a className="bg___BTN2" onClick={eggtoggle} >Put {chickenEggSymbol} in Factory</a>
                                             }
-    
+   
                                                 {
                                                     adult > 0 && baseApprovedIncub > 0 &&
-                                                    <a className="bg___BTN2" onClick={claimChicken} >Claim Material (Fee: {chickenClaimfee} {baseSymbol}) </a>
+                                                    <a className="bg___BTN2" onClick={claimMaterial} >Claim Material (Fee: {chickenClaimfee} {baseSymbol}) </a>
                                                 }
     
                                                 {
@@ -2757,7 +2779,7 @@ console.log(_userItens);
 
                     </label>
                     <input className="form-control" onChange={handleeDepositChange} type="text" value={cedamount} />
-                    <span className="info mt-3"><b>Fee:</b> {cedamount * eggDepositFee} {baseSymbol} (@{eggDepositFee} {baseSymbol} per Egg)</span><br />
+                    <span className="info mt-3"><b>Fee:</b> {cedamount * eggDepositFee} {baseSymbol} (@{eggDepositFee} {baseSymbol} per Eules)</span><br />
                     <span className="info"><b>Maximum Per User:</b> 50 {chickenEggSymbol}</span>
 
 

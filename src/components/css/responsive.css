@@ -551,6 +551,10 @@
    
 }
 @media(max-width: 767px){
+    .btn_new .bg___BTN2{
+        width: 100%;
+      
+      }
     .btn-bp{
         flex-direction: column;
         padding-top: 0;
