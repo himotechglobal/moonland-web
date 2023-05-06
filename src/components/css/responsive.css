@@ -552,8 +552,7 @@
 }
 @media(max-width: 767px){
     .btn_new .bg___BTN2{
-        width: 100%;
-      
+        /* width: 100%; */
       }
     .btn-bp{
         flex-direction: column;
@@ -749,7 +748,7 @@ width: 100%;
     }
     .bg___BTN2 {
         padding: 10px 15px;
-        width:100%;
+        /* width:100%; */
     }
     .alientime__accordian {
         display: grid;
@@ -798,7 +797,7 @@ width: 100%;
         align-items: center;
     }
     .bg___BTN3 {
-        padding: 10px 5px;
+        /* padding: 10px 5px; */
     }
     .para___by>p > br{
         display: none;
