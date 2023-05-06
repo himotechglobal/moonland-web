@@ -1060,7 +1060,7 @@ console.log(farmCapacity);
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
         functionName: 'depositMore',
-        args: [cdamount==""?0:ethers.utils.parseEther(cdamount).toString(), farmTokenId]
+        args: [cdamount==""? 0: ethers.utils.parseEther(cdamount).toString(), farmTokenId]
     })
 
     const { data: depositMoreChickenData, writeAsync: depositMoreChickenWriteAsync, isError: depositMoreChickenError } = useContractWrite(depositMoreChickenConfig_)
@@ -1085,8 +1085,9 @@ console.log(farmCapacity);
 
     const depositMoreChicken = async () => {
         // let _web3 = new Web3(web3Provider);
+        // console.log("moreinfoe",parseInt(chickenFoodBalance), cdamount * dayamount * 20)
         setcDepositError(false)
-        if (chickenFoodBalance < cdamount * dayamount * 20) {
+        if (parseInt(chickenFoodBalance) < cdamount * dayamount * 20) {
             setcDepositError("Error: Insufficient food Balance");
             return false;
         }
@@ -1121,13 +1122,15 @@ console.log(farmCapacity);
         }
     }
 
+    
+    console.log("moreinfoe",parseInt(farmTokenId),solarAmount==""?0: ethers.utils.parseEther(solarAmount).toString(),parseInt(dayamount))
 
 // console.log(parseInt(cdamount), parseInt(farmTokenId), parseInt(dayamount));
     const { config: depositChickenConfig_ } = usePrepareContractWrite({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
         functionName: 'deposit',
-        args: [parseInt(farmTokenId),solarAmount==""?0: ethers.utils.parseEther(solarAmount.toString()),parseInt(dayamount)]
+        args: [parseInt(farmTokenId),solarAmount==""?0: ethers.utils.parseEther(solarAmount).toString(),parseInt(dayamount)]
         // args: [1, 2,1]
     })
 
@@ -1153,7 +1156,9 @@ console.log(farmCapacity);
         // let _web3 = new Web3(web3Provider);
         setcDepositError(false)
         // con
-        if (chickenFoodBalance < solarAmount * dayamount * 20) {
+        // console.log("moreinfoe",parseInt(chickenFoodBalance), solarAmount * dayamount * 20)
+        
+        if (chickenFoodBalance < solarAmount * dayamount * 600) {
             setcDepositError("Error: Insufficient food Balance");
             return false;
         }
@@ -1905,7 +1910,7 @@ console.log(farmCapacity);
     }
     if (approveNFTSuccess) {
         setModal(false);
-        lockNFT();
+        // lockNFT();
         getData();
 
     }
@@ -2550,9 +2555,9 @@ console.log(farmCapacity);
                     </label>
 
                     <input className="form-control" onChange={handleDayChange} type="text" value={dayamount} />
-                    <span className="info">Est. Fluid: {solarAmount * 20 * dayamount} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {chickenSymbol} daily)</span>
+                    <span className="info">Est. Fluid: {solarAmount * 600 * dayamount} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {chickenSymbol} daily)</span>
                     <span className="info mt-3"><b>Your Available SOLAR FLUID:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
-                    <span className="info mt-3"><b>Your SOLAR FLUID Cost for Total SOLAR in Harvest:</b> {chickenDeposited>0 ? parseFloat((parseFloat(chickenDeposited) + parseFloat(solarAmount)) * dayamount * 20).toFixed(2):0} {chickenFoodSymbol}</span>
+                    <span className="info mt-3"><b>Your SOLAR FLUID Cost for Total SOLAR in Harvest:</b> {chickenDeposited>0 ? parseFloat((parseFloat(chickenDeposited) + parseFloat(solarAmount)) * dayamount * 600).toFixed(2):0} {chickenFoodSymbol}</span>
                     <span className="info mt-1"><b>Fee:</b> {chickenDepositFee>0? parseFloat(chickenDepositFee * solarAmount).toFixed(2):0} {baseSymbol} (@ {chickenDepositFee} per chicken )</span>
 
 
@@ -2609,8 +2614,8 @@ console.log(farmCapacity);
                     <span className="info">Max: {farmCapacity - chickenDeposited} {chickenSymbol} @ (1 {chickenSymbol} per sq. m.)</span>
 
 
-                    <span className="info">Est. Food: {cdamount * 20 * depositedDay} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {chickenSymbol} daily)</span>
-                    <span className="info mt-3"><b>Your Available Chicken Food:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
+                    <span className="info">Est. {chickenFoodSymbol}: {cdamount * 600 * depositedDay} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {chickenSymbol} daily)</span>
+                    <span className="info mt-3"><b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
                     <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} {baseSymbol} (@ {chickenDepositFee} per chicken )</span>
 
                     {
