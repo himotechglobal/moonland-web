@@ -448,7 +448,7 @@ const PigFarm = () => {
             setBaseApprovedFarm(parseInt(_baseApprovedFarm));
             //  console.log(_baseApprovedFarm);
             // let _baseApprovedIncub = await _baseTokenContract.methods.allowance(address, PIG_INCUBATOR).call();
-            setBaseApprovedIncub(_baseApprovedIncub);
+            setBaseApprovedIncub(parseInt(_baseApprovedIncub));
             //   console.log(_baseApprovedIncub);    
             // let _baseBalance = await _baseTokenContract.methods.balanceOf(address).call();
 
@@ -578,6 +578,7 @@ const PigFarm = () => {
         args: [1],
         watch: true,
     })
+  
     const { data: _chickenEggSymbol } = useContractRead({
         address: EULE_TOKEN,
         abi: TOKEN_ABI,
@@ -658,7 +659,7 @@ console.log(_userItens);
         // console.log(parseFloat(_capacity));
 
         // let _depositFee = await _incubatorContract.methods.getDepositFee(1).call();
-        setEggDepositFee(_depositFee1);
+        setEggDepositFee(parseInt(_depositFee1));
         // let _chickenEggContract = new _web3.eth.Contract(TOKEN_ABI, _chickenpigletToken);
 
         // let _chickenEggSymbol = await _chickenEggContract.methods.symbol().call();
@@ -671,7 +672,7 @@ console.log(_userItens);
             setChickenEggDeposited(parseFloat(_userInfo2[0] / 1e18).toFixed());
 
             // let _chickenEggApproved = await _chickenEggContract.methods.allowance(address, PIG_INCUBATOR).call();
-            setChickenEggApproved(_chickenEggApproved);
+            setChickenEggApproved(parseInt(_chickenEggApproved));
 
 
             if (parseInt(_userInfo[0]) > 0) {
@@ -691,6 +692,7 @@ console.log(_userItens);
 
 
     }
+
 
     // const _amount = ethers.utils.parseEther('10000000000000').toString()
 
@@ -988,8 +990,9 @@ console.log(_userItens);
     const { config: removeChickenConfig_ } = usePrepareContractWrite({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
-        functionName: 'removeSow',
-        args: [parseInt(crdamount)],
+        functionName: 'removeMetlux',
+
+        args: [crdamount==""?0:ethers.utils.parseEther?.(crdamount.toString()).toString()],
         watch: true,
     })
 
@@ -1293,7 +1296,6 @@ console.log(_userItens);
     if (approvebaseTokenIncubError && modal) {
         getEggData();
         setModal(false);
-        depositEgg()
     }
     if (approvebaseTokenIncubSuccess && modal) {
         setModal(false);
@@ -1754,7 +1756,7 @@ console.log(_userItens);
         address: PIG_INCUBATOR,
         abi: PIG_INCUBATOR_ABI,
         functionName: 'deposit',
-        args: [parseFloat(cedamount).toString()],
+        args: [cedamount==""?0:ethers.utils.parseEther?.(cedamount.toString()).toString()],
         watch: true,
     })
 
@@ -2395,25 +2397,26 @@ console.log(_userItens);
                                             </div>
                                         <div className="pig-value-wrp mrt">
                                             <div className="build___item">
-                                                <h3>0 {chickenEggSymbol}</h3>
+                                                <h3>  {chickenEggBalance} {chickenEggSymbol}</h3>
                                                 <p>Balance</p>
                                             </div>
                                             <div className="build___item">
-                                                <h3>0 {chickenEggSymbol}</h3>
+                                                <h3>{chickenEggDeposited} {chickenEggSymbol}</h3>
                                                 <p>Deposited</p>
                                             </div>
-                                           
-                                            <div className="build___item">
-                                                <h3><span className='dollar__text'>$</span>0.00</h3>
-                                                <p>Earned Value</p>
-                                            </div>
-                                        </div>
-                                        <div className="pig-value-wrp2 mrt">
                                             <div className="build___item bi__one">
                                                 <h3>{incubCapacity}</h3>
                                                 <p>Available Slot</p>
                                             </div>
+                                           
+                                            {/* <div className="build___item">
+                                                <h3><span className='dollar__text'>$</span>0.00</h3>
+                                                <p>Earned Value</p>
+                                            </div> */}
                                         </div>
+                                        {/* <div className="pig-value-wrp2 mrt">
+                                           
+                                        </div> */}
                                         <div className="btn-bp">
                                             <div style={{display:"flex",gap:"10px",flexWrap:"wrap",justifyContent:"center"}}>
                                             <a href="/marketplace" className="bg___BTN2">Buy {chickenEggSymbol}</a>
