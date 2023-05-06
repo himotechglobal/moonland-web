@@ -1460,7 +1460,7 @@ console.log(_userClaimTimes1);
     }
 
     const { config:claimMaterialConfig,isError:err} = usePrepareContractWrite({
-        address: "0x360E80B1C11dB9385Bb15E326F25993b6D208eCc",
+        address: PIG_INCUBATOR,
         abi: PIG_INCUBATOR_ABI,
         functionName: 'claimMaterial',
     
@@ -2481,7 +2481,7 @@ if (claimMaterialSuccess && modal) {
    
                                                 {
                                                     adult > 0 && baseApprovedIncub > 0 &&
-                                                    <a className="bg___BTN2" onClick={claimMaterial} >Claim Material (Fee: {chickenClaimfee} {baseSymbol}) </a>
+                                                    <a className="bg___BTN2" onClick={() => claimMaterial()} >Claim Material (Fee: {chickenClaimfee} {baseSymbol}) </a>
                                                 }
     
                                                 {
