@@ -24,6 +24,7 @@ import { ethers } from 'ethers';
 import land from '../../images/land.svg';
 import { Link } from 'react-router-dom';
 const PigFarm = () => {
+    const [chickenClaimfee, setChickenClaimfee] = useState(0);
 
     const [farmArea, setFarmArea] = useState(0);
     const [farmCapacity, setFarmCapacity] = useState(0);
@@ -629,6 +630,15 @@ console.log(_userItens);
         //    enabled:true
     })
 
+
+    let _amt = ethers.utils.parseEther('1').toString();
+    const { data: _claimChickenFee } = useContractRead({
+        address: PIG_INCUBATOR,
+        abi: PIG_INCUBATOR_ABI,
+        functionName: 'getClaimFee',
+        args: [_amt],
+        watch: true,
+    })
     // console.log("jasim",_unlockItem?.toString())
 
 
@@ -643,6 +653,7 @@ console.log(_userItens);
 
 
     const getEggData = async () => {
+        
         // let _web3 = new Web3(web3Provider);
         // let _incubatorContract = new _web3.eth.Contract(PIG_INCUBATOR_ABI, PIG_INCUBATOR);
         // let _chickenpigletToken = await _incubatorContract.methods.pigletToken().call();
@@ -674,18 +685,23 @@ console.log(_userItens);
             // let _chickenEggApproved = await _chickenEggContract.methods.allowance(address, PIG_INCUBATOR).call();
             setChickenEggApproved(parseInt(_chickenEggApproved));
 
+            console.log("eggunlick",parseInt(_userInfo[0]))
 
-            if (parseInt(_userInfo[0]) > 0) {
+            if (parseInt(_userInfo2[0]) > 0) {
                 // let _userItens = await _incubatorContract.methods.pendingItems(address).call();
                 //   console.log(_userEggs);
+
                 // setHatched(parseFloat(parseFloat(_userItens[0] )/ 1e18).toFixed());
                 setAdult(parseFloat(parseFloat(_userItens) / 1e18).toFixed());
                 // let _unlockItem = await _incubatorContract.methods.getUnlockTime(address).call();
                 // console.log("jas",_unlockItem.toString());
                 // alert()
+                console.log("eggunlick",_userItens)
                 setEggUnlockTime(_unlockItem);
                 // let _unlockItem2 = await _incubatorContract.methods.getHatchTime(address).call();
                 setEggHatchTime(_unlockItem2);
+                setChickenClaimfee(parseInt(_claimChickenFee)/1e18);
+
             }
 
         }
@@ -744,12 +760,12 @@ console.log(_userItens);
             }, 1000);
 
         }
-
+        // console.log("eggitme",eggunlockTime)
         if (eggunlockTime > 0) {
             clearInterval(timeInterval2);
             timeInterval2 = setInterval(() => {
 
-                // getEggTime() ;
+                getEggTime() ;
             }, 1000);
 
         }
@@ -763,7 +779,7 @@ console.log(_userItens);
 
         }
 
-    }, [farmTokenId,_nftTokenId,_userEggs,eggsearned,layEndTime,eggHatchTime,eggunlockTime,unlockTime,_userInfo,_userItens])
+    }, [farmTokenId,_nftTokenId,_userEggs,eggsearned,layEndTime,eggHatchTime,eggunlockTime,unlockTime,_userInfo,_userItens,_userInfo2])
 
 
 
@@ -924,7 +940,7 @@ console.log(_userItens);
 
     const getEggTime = async () => {
         let _current = new Date().getTime() / 1e3;
-        // console.log(eggunlockTime);
+        console.log("eggitme",eggunlockTime);
         if (parseInt(_current) > parseInt(eggunlockTime)) {
             seteggTime(0);
             // console.log('ended')
@@ -1294,11 +1310,12 @@ console.log(_userItens);
 
 
     if (approvebaseTokenIncubError && modal) {
-        getEggData();
         setModal(false);
     }
     if (approvebaseTokenIncubSuccess && modal) {
         setModal(false);
+        getEggData();
+
     }
 
     const approvebaseTokenIncub = async () => {
@@ -1756,7 +1773,7 @@ console.log(_userItens);
         address: PIG_INCUBATOR,
         abi: PIG_INCUBATOR_ABI,
         functionName: 'deposit',
-        args: [cedamount==""?0:ethers.utils.parseEther?.(cedamount.toString()).toString()],
+        args: [cedamount==""?0:ethers.utils.parseEther?.(cedamount).toString()],
         watch: true,
     })
 
@@ -2417,6 +2434,14 @@ console.log(_userItens);
                                         {/* <div className="pig-value-wrp2 mrt">
                                            
                                         </div> */}
+
+<div className="build___item">
+
+<h3 className="timer">{eggTime == 0 ? "70 days" : eggTime}</h3>
+<p>Time to Yield </p>
+
+
+</div>
                                         <div className="btn-bp">
                                             <div style={{display:"flex",gap:"10px",flexWrap:"wrap",justifyContent:"center"}}>
                                             <a href="/marketplace" className="bg___BTN2">Buy {chickenEggSymbol}</a>
@@ -2432,10 +2457,10 @@ console.log(_userItens);
                                                     <a className="bg___BTN2" onClick={eggtoggle} >Put {chickenEggSymbol} in Factory</a>
                                             }
     
-                                                {/* {
+                                                {
                                                     adult > 0 && baseApprovedIncub > 0 &&
-                                                    <a className="bg___BTN2" onClick={claimChicken} >Claim Solar (Fee: {chickenClaimfee} {baseSymbol}) </a>
-                                                } */}
+                                                    <a className="bg___BTN2" onClick={claimChicken} >Claim Material (Fee: {chickenClaimfee} {baseSymbol}) </a>
+                                                }
     
                                                 {
                                                     adult > 0 && baseApprovedIncub == 0 &&
