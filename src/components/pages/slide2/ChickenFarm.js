@@ -2068,11 +2068,30 @@ console.log(farmCapacity);
                                                     <h3>{farmCapacity ?? 0}</h3>
                                                     <p>Solar Capacity</p>
                                                 </div>
+                                                {
+                                                        !farmLocked && farmBalance > 0 && farmApprove &&
+                                                        <a className="bg___BTN2" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
+                                                    }
+                                                    {
+                                                        farmBalance > 0 && !farmApprove &&
+                                                        <a className="bg___BTN2" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
+                                                    }
+                                                    {
+                                                        farmLocked &&
+                                                        <a className="bg___BTN2" onClick={areaToggle}>Buy More Harvest Area</a>
+                                                    }
+                                                    {
+                                                        !farmLocked && farmBalance == 0 &&
+                                                        <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Harvest Area</a>
+                                                    }
+                                                    {
+                                                        landIsfree &&
+                                                        <a className="bg___BTN2 ml-2" onClick={sellfarm}>Sell Harvest Area</a>
+                                                    }
+                                               
                                             </div>
-                                            <div className="alienbtns">
-                                                {/* <div className="pool-btns">
-                                   <p style={{color: '#fff'}}>Chicken Farming is being upgraded to a newer version with enhanced features between 8:30 hours UTC to 12:30 hours UTC. During this time you won't be able to perform any actions. </p>
-                                   </div> */}
+                                            {/* <div className="alienbtns">
+                                                
 
                                                 <div className="pool-btns" style={{ justifyContent: 'end' }}>
 
@@ -2099,7 +2118,7 @@ console.log(farmCapacity);
                                                     }
 
                                                 </div>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
 
@@ -2214,9 +2233,10 @@ console.log(farmCapacity);
 
 
                                                 </div>
-                                            </div>
 
-                                            <div className='acc__arrow'>
+                                            <div
+                                            //  className='acc__arrow'
+                                            >
                                                 <div className='acc__arrow___icon' onClick={() => setShow(prev => !prev)} >
 
                                                     {show ?
@@ -2226,6 +2246,8 @@ console.log(farmCapacity);
                                                     }
                                                 </div>
                                             </div>
+                                            </div>
+
                                         </div>
                                     </div>
 
@@ -2257,7 +2279,7 @@ console.log(farmCapacity);
                                                 <img src={solerimg1} alt="" width={100}/>
                                                 <Link className="bg___BTN2" to="/buy/solar">Buy Solar</Link>
                                             </div>
-                                            <div>
+                                            <div style={{display:"flex",gap:"10px",flexWrap:"wrap"}}>
                                                
                                             {
                                                 chickenApproved === 0 &&
@@ -2388,9 +2410,9 @@ console.log(farmCapacity);
                                                     <h3 className="timer">{incubCapacity}</h3>
                                                     <p>Available <br />Incubators</p>
                                                 </div>
-                                            </div>
-
-                                            <div className='acc__arrow'>
+                                                <div 
+                                                // className='acc__arrow'
+                                                >
                                                 <div className='acc__arrow___icon' onClick={() => setShow1(prev => !prev)} >
 
                                                     {show1 ?
@@ -2400,6 +2422,9 @@ console.log(farmCapacity);
                                                     }
                                                 </div>
                                             </div>
+                                            </div>
+
+                                           
                                         </div>
                                     </div>
 
@@ -2430,8 +2455,9 @@ console.log(farmCapacity);
                                                 <img src={bysine} alt="" width={100}/>
                                                 <a className="bg___BTN2" href="/buy/chickenegg">Buy Cells</a>
                                             </div>
-                                            
-                                            {
+                                          <div style={{display:"flex",gap:"10px",flexWrap:"wrap"}}>
+                                              
+                                          {
                                                 chickenEggApproved == 0 &&
                                                 <a className="bg___BTN2" onClick={approveChickenEgg} >
                                                      <img className='sine' src={chickSine} alt=""/>
@@ -2451,6 +2477,7 @@ console.log(farmCapacity);
                                                 adult > 0 && baseApprovedIncub == 0 &&
                                                 <a className="bg___BTN2" onClick={approvebaseTokenIncub} >Approve Moonland to claim Solar</a>
                                             }
+                                          </div>
 
                                         </div>
 

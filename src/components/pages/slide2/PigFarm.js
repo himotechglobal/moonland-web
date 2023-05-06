@@ -294,6 +294,7 @@ const PigFarm = () => {
         functionName: "userInfo",
         args: [address],
     })
+  
     const { data: _userSow } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
@@ -312,6 +313,7 @@ const PigFarm = () => {
         functionName: "pendingEules",
         args: [address],
     })
+   
     const { data: _userChickenDie } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
@@ -334,6 +336,7 @@ const PigFarm = () => {
         functionName: "balanceOf",
         args: [address],
     })
+
     const { data: _sowBalance1 } = useContractRead({
         address: METLUX_TOKEN,
         abi: TOKEN_ABI,
@@ -552,6 +555,165 @@ const PigFarm = () => {
 
 
     }
+  
+   
+
+    // const { data: _chickenpigletToken } = useContractRead({
+    //     address: PIG_INCUBATOR,
+    //     abi: PIG_INCUBATOR_ABI,
+    //     functionName: "pigletToken",
+    //     watch: true,
+    // })
+    const { data: _capacity } = useContractRead({
+        address: PIG_INCUBATOR,
+        abi: PIG_INCUBATOR_ABI,
+        functionName: "capacity",
+        watch: true,
+    })
+    // console.log(parseInt(_capacity)/1e18);
+    const { data: _depositFee1 } = useContractRead({
+        address: PIG_INCUBATOR,
+        abi: PIG_INCUBATOR_ABI,
+        functionName: "getDepositFee",
+        args: [1],
+        watch: true,
+    })
+    const { data: _chickenEggSymbol } = useContractRead({
+        address: EULE_TOKEN,
+        abi: TOKEN_ABI,
+        functionName: "symbol",
+        watch: true,
+    })
+
+    // console.log("ES",_chickenEggSymbol)
+
+    const { data: _balance } = useContractRead({
+        address: EULE_TOKEN,
+        abi: TOKEN_ABI,
+        functionName: "balanceOf",
+        args: [address],
+        watch: true,
+    })
+    const { data: _userInfo2 } = useContractRead({
+        address: PIG_INCUBATOR,
+        abi: PIG_INCUBATOR_ABI,
+        functionName: "userInfo",
+        args: [address],
+        watch: true,
+    })
+    const { data: _chickenEggApproved } = useContractRead({
+        address: EULE_TOKEN,
+        abi: TOKEN_ABI,
+        functionName: "allowance",
+        args: [address, PIG_INCUBATOR],
+        watch: true,
+    })
+ console.log(_chickenEggApproved);
+    const { data: _userItens } = useContractRead({
+        address: PIG_INCUBATOR,
+        abi: PIG_INCUBATOR_ABI,
+        functionName: "pendingItems",
+        args: [address],
+        watch: true,
+    })
+console.log(_userItens);
+    const { data: _unlockItem } = useContractRead({
+        address: PIG_INCUBATOR,
+        abi: PIG_INCUBATOR_ABI,
+        functionName: "getUnlockTime",
+        args: [address],
+        // onSuccess:(data)=>{
+        //     console.log(data?.toString());
+        // }
+        //    enabled:true
+    })
+
+    // console.log("jasim",_unlockItem?.toString())
+
+
+    const { data: _unlockItem2 } = useContractRead({
+        address: PIG_INCUBATOR,
+        abi: PIG_INCUBATOR_ABI,
+        functionName: "getUnlockTime",
+        args: [address],
+        watch: true,
+    })
+
+
+
+    const getEggData = async () => {
+        // let _web3 = new Web3(web3Provider);
+        // let _incubatorContract = new _web3.eth.Contract(PIG_INCUBATOR_ABI, PIG_INCUBATOR);
+        // let _chickenpigletToken = await _incubatorContract.methods.pigletToken().call();
+
+        // setChickenpigletToken(_chickenpigletToken);
+
+        // console.log(_chickenpigletToken);
+
+        // let _capacity = await _incubatorContract.methods.capacity().call();
+        // console.log(_capacity);
+        setIncubCapacity(parseInt(_capacity)/1e18);
+
+        setChickenEggSymbol(_chickenEggSymbol);
+        // console.log(parseFloat(_capacity));
+
+        // let _depositFee = await _incubatorContract.methods.getDepositFee(1).call();
+        setEggDepositFee(_depositFee1);
+        // let _chickenEggContract = new _web3.eth.Contract(TOKEN_ABI, _chickenpigletToken);
+
+        // let _chickenEggSymbol = await _chickenEggContract.methods.symbol().call();
+
+        if (address) {
+
+            // let _balance = await _chickenEggContract.methods.balanceOf(address).call();
+            // let _userInfo = await _incubatorContract.methods.userInfo(address).call();
+            setChickenEggBalance(parseFloat(_balance / 1e18).toFixed())
+            setChickenEggDeposited(parseFloat(_userInfo2[0] / 1e18).toFixed());
+
+            // let _chickenEggApproved = await _chickenEggContract.methods.allowance(address, PIG_INCUBATOR).call();
+            setChickenEggApproved(_chickenEggApproved);
+
+
+            if (parseInt(_userInfo[0]) > 0) {
+                // let _userItens = await _incubatorContract.methods.pendingItems(address).call();
+                //   console.log(_userEggs);
+                // setHatched(parseFloat(parseFloat(_userItens[0] )/ 1e18).toFixed());
+                setAdult(parseFloat(parseFloat(_userItens) / 1e18).toFixed());
+                // let _unlockItem = await _incubatorContract.methods.getUnlockTime(address).call();
+                // console.log("jas",_unlockItem.toString());
+                // alert()
+                setEggUnlockTime(_unlockItem);
+                // let _unlockItem2 = await _incubatorContract.methods.getHatchTime(address).call();
+                setEggHatchTime(_unlockItem2);
+            }
+
+        }
+
+
+    }
+
+    // const _amount = ethers.utils.parseEther('10000000000000').toString()
+
+    const { config: lockNFTConfig_ } = usePrepareContractWrite({
+        address: PIG_FARMING,
+        abi: PIG_FARMING_ABI,
+        functionName: 'checkAndTransferLand',
+        args: [address, farmTokenId]
+    })
+
+    const { data: lockNFTData, writeAsync: lockNFTWriteAsync, isError: lockNFTError } = useContractWrite(lockNFTConfig_)
+
+    const { isSuccess: lockNFTSuccess } = useWaitForTransaction({
+        hash: lockNFTData?.hash,
+    })
+
+
+    if (lockNFTError && modal) {
+        setModal(false);
+    }
+    if (lockNFTSuccess && modal) {
+        setModal(false);
+    }
     useEffect(() => {
         setProcessed(false);
 
@@ -599,164 +761,7 @@ const PigFarm = () => {
 
         }
 
-    }, [farmTokenId,_nftTokenId,_userEggs,eggsearned,layEndTime,eggHatchTime,eggunlockTime,unlockTime])
-
-   
-
-    const { data: _chickenpigletToken } = useContractRead({
-        address: PIG_INCUBATOR,
-        abi: PIG_INCUBATOR_ABI,
-        functionName: "pigletToken",
-        watch: true,
-    })
-    const { data: _capacity } = useContractRead({
-        address: PIG_INCUBATOR,
-        abi: PIG_INCUBATOR_ABI,
-        functionName: "capacity",
-        watch: true,
-    })
-    const { data: _depositFee1 } = useContractRead({
-        address: PIG_INCUBATOR,
-        abi: PIG_INCUBATOR_ABI,
-        functionName: "getDepositFee",
-        args: [1],
-        watch: true,
-    })
-    const { data: _chickenEggSymbol } = useContractRead({
-        address: EULE_TOKEN,
-        abi: TOKEN_ABI,
-        functionName: "symbol",
-        watch: true,
-    })
-
-    // console.log("ES",_chickenEggSymbol)
-
-    const { data: _balance } = useContractRead({
-        address: EULE_TOKEN,
-        abi: TOKEN_ABI,
-        functionName: "balanceOf",
-        args: [address],
-        watch: true,
-    })
-    const { data: _userInfo2 } = useContractRead({
-        address: PIG_INCUBATOR,
-        abi: PIG_INCUBATOR_ABI,
-        functionName: "userInfo",
-        args: [address],
-        watch: true,
-    })
-    const { data: _chickenEggApproved } = useContractRead({
-        address: _chickenpigletToken,
-        abi: TOKEN_ABI,
-        functionName: "allowance",
-        args: [address, PIG_INCUBATOR],
-        watch: true,
-    })
-    const { data: _userItens } = useContractRead({
-        address: PIG_INCUBATOR,
-        abi: PIG_INCUBATOR_ABI,
-        functionName: "pendingItems",
-        args: [address],
-        watch: true,
-    })
-    const { data: _unlockItem } = useContractRead({
-        address: PIG_INCUBATOR,
-        abi: PIG_INCUBATOR_ABI,
-        functionName: "getUnlockTime",
-        args: [address],
-        // onSuccess:(data)=>{
-        //     console.log(data?.toString());
-        // }
-        //    enabled:true
-    })
-
-    // console.log("jasim",_unlockItem?.toString())
-
-
-    const { data: _unlockItem2 } = useContractRead({
-        address: PIG_INCUBATOR,
-        abi: PIG_INCUBATOR_ABI,
-        functionName: "getUnlockTime",
-        args: [address],
-        watch: true,
-    })
-
-
-
-    const getEggData = async () => {
-        // let _web3 = new Web3(web3Provider);
-        // let _incubatorContract = new _web3.eth.Contract(PIG_INCUBATOR_ABI, PIG_INCUBATOR);
-        // let _chickenpigletToken = await _incubatorContract.methods.pigletToken().call();
-
-        setChickenpigletToken(_chickenpigletToken);
-
-        // console.log(_chickenpigletToken);
-
-        // let _capacity = await _incubatorContract.methods.capacity().call();
-        // console.log(_capacity);
-        setIncubCapacity(parseInt(_capacity));
-
-        setChickenEggSymbol(_chickenEggSymbol);
-        // console.log(parseFloat(_capacity));
-
-        // let _depositFee = await _incubatorContract.methods.getDepositFee(1).call();
-        setEggDepositFee(_depositFee1);
-        // let _chickenEggContract = new _web3.eth.Contract(TOKEN_ABI, _chickenpigletToken);
-
-        // let _chickenEggSymbol = await _chickenEggContract.methods.symbol().call();
-
-        if (address) {
-
-            // let _balance = await _chickenEggContract.methods.balanceOf(address).call();
-            // let _userInfo = await _incubatorContract.methods.userInfo(address).call();
-            setChickenEggBalance(parseFloat(_balance / 1e18).toFixed())
-            setChickenEggDeposited(parseFloat(_userInfo2[0] / 1e18).toFixed());
-
-            // let _chickenEggApproved = await _chickenEggContract.methods.allowance(address, PIG_INCUBATOR).call();
-            setChickenEggApproved(_chickenEggApproved);
-
-
-            if (_userInfo[0] > 0) {
-                // let _userItens = await _incubatorContract.methods.pendingItems(address).call();
-                //   console.log(_userEggs);
-                setHatched(parseFloat(_userItens[0] / 1e18).toFixed());
-                setAdult(parseFloat(_userItens[1] / 1e18).toFixed());
-                // let _unlockItem = await _incubatorContract.methods.getUnlockTime(address).call();
-                // console.log("jas",_unlockItem.toString());
-                // alert()
-                setEggUnlockTime(_unlockItem);
-                // let _unlockItem2 = await _incubatorContract.methods.getHatchTime(address).call();
-                setEggHatchTime(_unlockItem2);
-            }
-
-        }
-
-
-    }
-
-
-    // const _amount = ethers.utils.parseEther('10000000000000').toString()
-
-    const { config: lockNFTConfig_ } = usePrepareContractWrite({
-        address: PIG_FARMING,
-        abi: PIG_FARMING_ABI,
-        functionName: 'checkAndTransferLand',
-        args: [address, farmTokenId]
-    })
-
-    const { data: lockNFTData, writeAsync: lockNFTWriteAsync, isError: lockNFTError } = useContractWrite(lockNFTConfig_)
-
-    const { isSuccess: lockNFTSuccess } = useWaitForTransaction({
-        hash: lockNFTData?.hash,
-    })
-
-
-    if (lockNFTError && modal) {
-        setModal(false);
-    }
-    if (lockNFTSuccess && modal) {
-        setModal(false);
-    }
+    }, [farmTokenId,_nftTokenId,_userEggs,eggsearned,layEndTime,eggHatchTime,eggunlockTime,unlockTime,_userInfo,_userItens])
 
 
 
@@ -1500,26 +1505,51 @@ const PigFarm = () => {
 
         //     });
     }
+    let euleAmount = ethers.utils.parseEther('5000000000000000000').toString()
+    const { config: claimEuleConfig_ } = usePrepareContractWrite({
+        address: EULE_TOKEN,
+        abi: TOKEN_ABI,
+        functionName: 'approve',
+        args:[PIG_INCUBATOR,euleAmount],
+        watch: true,
+    })
 
 
-    async function approveChickenEgg() {
-        let _web3 = new Web3(web3Provider);
+
+    const { data: approveEule, writeAsync: claimChickenWriteAsync, isError: claimEuleError } = useContractWrite(claimEuleConfig_)
+
+    const { isSuccess: claimEuleSuccess } = useWaitForTransaction({
+        hash: claimEggsData?.hash,
+    })
+
+
+    if (claimEuleError && modal) {
+
+        getData();
+        setModal(false);
+    }
+    if (claimEuleSuccess && modal) {
+        setModal(false);
+    }
+    const  approveChickenEgg= async()=> {
+        // let _web3 = new Web3(web3Provider);
 
         setModal(!modal);
+        await claimChickenWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
-        const _chickenEggContract = new _web3.eth.Contract(TOKEN_ABI, chickenpigletToken);
-        let _amount = _web3.utils.toWei('5000000000000000000')
-        _chickenEggContract.methods.approve(PIG_INCUBATOR, _amount).send({ from: address }).on('receipt', function (receipt) {
+        // const _chickenEggContract = new _web3.eth.Contract(TOKEN_ABI, chickenpigletToken);
+        
+        // _chickenEggContract.methods.approve(PIG_INCUBATOR, _amount).send({ from: address }).on('receipt', function (receipt) {
 
-            getEggData();
-            setModal(modal);
+        //     getEggData();
+        //     setModal(modal);
 
-        })
+        // })
 
-            .on('error', function (error, receipt) {
-                setModal(modal);
+        //     .on('error', function (error, receipt) {
+        //         setModal(modal);
 
-            });
+        //     });
 
     }
 
@@ -2161,36 +2191,37 @@ const PigFarm = () => {
                                                         <h3>{farmCapacity}</h3>
                                                         <p>Material Capacity</p>
                                                     </div>
+                                                    <div className="pool-btns" style={{ justifyContent: 'end' }}>
+
+{
+    !farmLocked && farmBalance > 0 && farmApprove && processed &&
+    <a  className="bg___BTN2" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
+}
+{
+    farmBalance > 0 && !farmApprove && processed &&
+    <a className="bg___BTN2" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
+}
+{
+    farmLocked && processed &&
+    <a className="bg___BTN2 "  onClick={areaToggle}>Buy More Build Area</a>
+}
+{
+    !farmLocked && farmBalance == 0 && processed &&
+    <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Build Area</a>
+}
+{
+    landIsfree && farmBalance > 0 &&
+    <a className="bg___BTN2" onClick={() => sellfarm()}>Sell Build Area</a>
+}
+
+</div>
                                                 </div>
                                                 <div className="alienbtns">
                                                     {/* <div className="pool-btns">
                                    <p style={{color: '#fff'}}>Chicken Farming is being upgraded to a newer version with enhanced features between 8:30 hours UTC to 12:30 hours UTC. During this time you won't be able to perform any actions. </p>
                                    </div> */}
 
-                                                    <div className="pool-btns" style={{ justifyContent: 'end' }}>
-
-                                                        {
-                                                            !farmLocked && farmBalance > 0 && farmApprove && processed &&
-                                                            <a  className="bg___BTN2" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
-                                                        }
-                                                        {
-                                                            farmBalance > 0 && !farmApprove && processed &&
-                                                            <a className="bg___BTN2" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
-                                                        }
-                                                        {
-                                                            farmLocked && processed &&
-                                                            <a className="bg___BTN2 mr-3"  onClick={areaToggle}>Buy More Build Area</a>
-                                                        }
-                                                        {
-                                                            !farmLocked && farmBalance == 0 && processed &&
-                                                            <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Build Area</a>
-                                                        }
-                                                        {
-                                                            landIsfree && farmBalance > 0 &&
-                                                            <a className="bg___BTN2" onClick={() => sellfarm()}>Sell Build Area</a>
-                                                        }
-
-                                                    </div>
+                                               
                                                 </div>
                                             </div>
                                         </div>
@@ -2292,10 +2323,10 @@ const PigFarm = () => {
                                         </div>
 
 
-                                        <div className="btn-bp">
+                                        <div className="btn-bp btn_new">
                                         
 
-                                            <a href="/marketplace" className="bg___BTN2 mr-3">Buy Material</a>
+                                            <a href="/marketplace" className="bg___BTN2 ">Buy Material</a>
 
                                             {
                                                 eggsearned > 0 &&
@@ -2309,7 +2340,7 @@ const PigFarm = () => {
                                         </div>
 
 
-                                        <div className="btn-bp">
+                                        <div className="btn-bp btn_new">
                                       {
                                                 sowDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
                                                 <a href="javacript:void" className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more {sowSymbol} in Farm</a>
@@ -2384,7 +2415,30 @@ const PigFarm = () => {
                                             </div>
                                         </div>
                                         <div className="btn-bp">
+                                            <div style={{display:"flex",gap:"10px",flexWrap:"wrap",justifyContent:"center"}}>
                                             <a href="/marketplace" className="bg___BTN2">Buy {chickenEggSymbol}</a>
+                                              
+                                              {
+                                                    chickenEggApproved == 0 &&
+                                                    <a className="bg___BTN2" onClick={approveChickenEgg} >
+                                               
+                                                        Approve {chickenEggSymbol} for Factory</a>
+                                                }
+                                                {
+                                                    chickenEggApproved > 0 && chickenEggDeposited == 0 &&
+                                                    <a className="bg___BTN2" onClick={eggtoggle} >Put {chickenEggSymbol} in Factory</a>
+                                            }
+    
+                                                {/* {
+                                                    adult > 0 && baseApprovedIncub > 0 &&
+                                                    <a className="bg___BTN2" onClick={claimChicken} >Claim Solar (Fee: {chickenClaimfee} {baseSymbol}) </a>
+                                                } */}
+    
+                                                {
+                                                    adult > 0 && baseApprovedIncub == 0 &&
+                                                    <a className="bg___BTN2" onClick={approvebaseTokenIncub} >Approve {baseSymbol} to claim Solar</a>
+                                                }
+                                              </div>
 
                                         </div>
                                     </div>

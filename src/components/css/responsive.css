@@ -159,7 +159,7 @@
         width: 100%;
     }
     .alienbtns {
-        width: 60%;
+        width: 100%;
         padding-bottom: 2rem;
     }
     .chooseTop{
@@ -340,7 +340,7 @@
     padding: 2rem 1.2rem;
     }
     .alien___rightBox {
-        padding-right: 0rem;
+        /* padding-right: 0rem; */
     }
     .pool-btns > button{
         margin-left: auto;
@@ -551,6 +551,20 @@
    
 }
 @media(max-width: 767px){
+    .btn-bp{
+        flex-direction: column;
+        padding-top: 0;
+    }
+    .alientime {
+        display: grid;
+        row-gap: 15px;
+        justify-content: center;
+    }
+    .alientime__accordian {
+        display: grid;
+        row-gap: 15px;
+        justify-content: center;
+    }
     .btm___arrow3>a>img {
         padding-top: 4rem;
     }
@@ -587,6 +601,11 @@
    
 }
 @media(max-width: 580px){
+    .pool-btns {
+       flex-direction: column;
+       justify-content: center;
+        gap: 20px;
+      }
     .imgdesk{
         display: none;
     }
@@ -600,7 +619,7 @@
         font-size: 2rem;
     }
     .js__ac{
-        margin-bottom: 1rem;
+        /* margin-bottom: 1rem; */
     }
     .sine{
         margin-right: 10px;
@@ -710,16 +729,12 @@ width: 100%;
     .build__value {
         width: 100%;
     }
-    .alientime {
-        display: grid;
-        row-gap: 15px;
-        justify-content: center;
-    }
+   
     .acc__summery {
         margin: -0.1rem 1rem 0rem 1rem;
     }
     .pool-btns {
-        display: inherit;
+        /* display: inherit; */
         text-align: center;
     }
     .acc__summery__in {
@@ -730,6 +745,7 @@ width: 100%;
     }
     .bg___BTN2 {
         padding: 10px 15px;
+        width:100%;
     }
     .alientime__accordian {
         display: grid;
@@ -737,10 +753,10 @@ width: 100%;
         justify-content: center;
     }
     .acc__arrow {
-        width: 58%;
+        /* width: 58%; */
     }
     .alienbtns {
-        width: 74%;
+        width: 100%;
     }
     .slide-heads>h1 {
         font-size: 20px;

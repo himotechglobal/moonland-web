@@ -460,6 +460,11 @@ p {
   border-radius: 30px;
   transition: 0.5s;
   cursor: pointer;
+  text-align: center;
+}
+.btn_new .bg___BTN2{
+  width: 100%;
+
 }
 
 .bg___BTN2:hover {
@@ -1970,7 +1975,7 @@ body.smr-open .slide-menu-right {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 27%;
+  width: 35%;
   background: linear-gradient(45deg, #020021, #AE00C5);
   border-radius: 27px;
   padding: 1rem;
@@ -1981,7 +1986,7 @@ body.smr-open .slide-menu-right {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 27%;
+  width: 35%;
   background: linear-gradient(45deg, #020021, #AE00C5);
   border-radius: 27px;
   padding: 1rem;
@@ -2031,6 +2036,8 @@ a.conbutton:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .acc__arrow {
@@ -2061,20 +2068,25 @@ a.conbutton:hover {
 
 .alientime {
   display: flex;
-  width: 80%;
+  /* width: 100%; */
   justify-content: space-between;
-  padding: 0rem 1.2rem;
+  /* padding: 0rem 1.2rem; */
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
 }
 
 .alientime__accordian {
   display: flex;
-  width: 92%;
+  width: 100%;
   justify-content: space-between;
-  padding: 0rem 1.2rem;
+  /* padding: 0rem 1.2rem; */
+  align-items: center;
 }
 
 .alienbtns {
-  width: 20%;
+  /* width: 20%; */
+  text-align: center;
 }
 
 .time-child1:first-child {
@@ -2172,10 +2184,13 @@ a.conbutton:hover {
 }
 
 .alien___rightBox {
-  display: flex;
-  justify-content: space-between;
-  width: 73%;
-  padding-right: 1.5rem;
+  /* display: flex;
+  justify-content: space-between; */
+  width: 100%;
+  /* padding-right: 1.5rem; */
+  padding: 0 15px;
+  gap:20px;
+  flex-wrap: wrap;
 }
 
 .alienpool-content>h3 {
@@ -4497,7 +4512,7 @@ min-height: 100vh;
 .build___item>h3 {
   text-transform: uppercase;
   font-family: 'Panton-Trial';
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #fff;
 }
@@ -4505,13 +4520,13 @@ min-height: 100vh;
 .build___item>p {
   font-weight: 500;
   color: #CBB2D4;
-  font-size: 16px;
+  font-size: 15px;
   font-family: 'MADE TOMMY';
 }
 
 .build__value {
   background-color: #0701259c;
-  padding: 1rem 2rem;
+  padding: 1rem;
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
@@ -4525,7 +4540,7 @@ min-height: 100vh;
 .build__value>h3 {
   text-transform: uppercase;
   font-family: 'Panton-Trial';
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #fff;
 }
@@ -4533,7 +4548,7 @@ min-height: 100vh;
 .build__value>p {
   font-weight: 500;
   color: #C5BCCD;
-  font-size: 16px;
+  font-size: 15px;
   font-family: 'MADE TOMMY';
 }
 
@@ -4574,8 +4589,8 @@ min-height: 100vh;
 }
 
 .pigvalue-child1>h3 {
-  font-family: 'Patrick Hand', cursive;
-  font-size: 22px;
+  /* font-family: 'Patrick Hand', cursive; */
+  font-size: 16px;
   color: #fff;
 }
 
@@ -4585,8 +4600,8 @@ min-height: 100vh;
 
 .pigvalue-child1>p {
   margin: 0px;
-  font-family: 'Patrick Hand', cursive;
-  font-size: 17px;
+  /* font-family: 'Patrick Hand', cursive; */
+  font-size: 15px;
   color: #fff;
 }
 
@@ -4612,6 +4627,7 @@ min-height: 100vh;
   padding: 10px 20px 15px 20px;
   display: flex;
   justify-content: center;
+  gap:10px;
 }
 
 
