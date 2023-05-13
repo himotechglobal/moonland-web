@@ -57,7 +57,7 @@ const bscTest = {
 };
 
 
-const CustomAvatar: AvatarComponent = ({ address, ensImage, size }) => {
+const CustomAvatar = ({ address, ensImage, size }) => {
   return ensImage ? (
     <img
       src={ensImage}
@@ -130,7 +130,7 @@ const myCustomTheme = {
 
 
 const { chains,provider,webSocketProvider } = configureChains([
-  bsc,bscTest
+  bscTest,bsc
 ], [
   publicProvider(),
    jsonRpcProvider({

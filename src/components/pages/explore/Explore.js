@@ -4,8 +4,8 @@ import { Row, Col, Container,Button,ModalHeader,ModalFooter, Modal, ModalBody } 
 
 import Header from '../../pages/header.js';
 import Footer from '../../pages/footer.js';
-import Config, { MARKETPLACE } from '../../../Config2/index.js';
-import MARKETPLACE_ABI from '../../../Config2/MARKETPLACE_ABI.json';
+import Config, { NFT_MARKETPLACE } from '../../../Config/index.js';
+import NFT_MARKETPLACE_ABI from '../../../Config/MARKETPLACE_ABI.json';
 import NFT_ABI from '../../../Config2/NFT_ABI.json';
 import Web3 from "web3"
 import { useState , useEffect} from 'react';
@@ -13,7 +13,7 @@ import ExploreSingle from './ExploreSingle.js';
 // import useWallet from '@binance-chain/bsc-use-wallet'
 import NftSingle from './NftSingle'
 import axios from "axios";  
-import { useAccount } from 'wagmi';
+import { useAccount, useContractRead } from 'wagmi';
 
 const Explore = () => {
     let web3Provider  = window.ethereum ; 
@@ -97,14 +97,31 @@ const Explore = () => {
       getAllStatus();
 
   },[])
-
+  const {data:_count} =useContractRead({
+    address:NFT_MARKETPLACE,
+    abi:NFT_MARKETPLACE_ABI,
+    functionName:"getTradeCount",
+      })
+  const {data:_userBids} =useContractRead({
+    address:NFT_MARKETPLACE,
+    abi:NFT_MARKETPLACE_ABI,
+    functionName:"getAuctionsOfUser",
+    args:[address]
+      })
+      // const {data:_userBalance} =useContractRead({
+      //   address:_fullTrade[5],
+      //   abi:NFT_ABI,
+      //   functionName:"balanceOf",
+      //   args:[address,]
+      //     })
+    
     const init = async () => {
         let _web3 = new Web3(web3Provider);
-         let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI,MARKETPLACE);
-         let _count =  await _marketPlaceContract.methods.getTradeCount().call() ;
+         let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI,NFT_MARKETPLACE);
+        //  let _count =  await _marketPlaceContract.methods.getTradeCount().call() ;
          console.log(_count);
           let rows = [];
-         for (let i = 0; i < _count; i++) {
+         for (let i = 0; i < parseInt(_count); i++) {
           rows.push({count : 1}) ;
          }
         //  alert(rows);
@@ -112,7 +129,7 @@ const Explore = () => {
 
 
          if(address){
-           let _userBids = await _marketPlaceContract.methods.getAuctionsOfUser(address).call() ;
+          //  let _userBids = await _marketPlaceContract.methods.getAuctionsOfUser(address).call() ;
            setUserBids(_userBids);           
          }
 
@@ -170,7 +187,7 @@ const Explore = () => {
 
     const getCollection = async () => {
       let _web3 = new Web3(web3Provider);
-       let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI,MARKETPLACE);
+       let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI,NFT_MARKETPLACE);
        let _nftAddress =  await _marketPlaceContract.methods.nftAddress().call() ;
        let _nftContract = new _web3.eth.Contract(NFT_ABI,_nftAddress);
  
@@ -194,7 +211,7 @@ const Explore = () => {
 
     const getStatus =  async (tradeid) => {
       let _web3 = new Web3(web3Provider);
-       let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI,MARKETPLACE);
+       let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI,NFT_MARKETPLACE);
         let _status =  await _marketPlaceContract.methods.getAuctionStatus(tradeid).call() ;
       // let _status = 1 ;
       console.log(_status);

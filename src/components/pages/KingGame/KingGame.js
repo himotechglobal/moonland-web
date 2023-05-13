@@ -7,6 +7,7 @@ import flower from '../../images/flower.png';
 import { KINGGAME, TX_LINK,TOKEN } from '../../../Config/index.js';
 import KINGGAME_ABI from '../../../Config/KINGGAME_ABI.json';
 import arrow from '../../images/round_arrow.svg';
+import modal_earth from '../../images/modal_earth.png'
 
 import Web3 from "web3"
 // import {useWallet} from '@binance-chain/bsc-use-wallet'
@@ -530,10 +531,8 @@ const KingGame = () => {
 						<div className="container">
 							<div className="finance-king_game">
 								<h1>Moon Emperor</h1>
-								<h4>Lorem ipsum is placeholder text commonly used Lorem </h4>
-								<p>Lorem ipsum is placeholder text commonly used Lorem ipsum is placeholder text <br />
-									commonly used Lorem ipsum is placeholder text commonly used Lorem ipsum is <br />
-									placeholder text commonly used</p>
+								{/* <h4>Lorem ipsum is placeholder text commonly used Lorem </h4> */}
+								<p>Moon Emperor is a fun and exciting game of chance and speed. Anyone can participate in this game by connecting their wallet and bidding $MOON tokens. The last one standing when the timer runs out, takes the treasure.</p>
 							</div>
 						</div>
 					</div>
@@ -580,7 +579,7 @@ const KingGame = () => {
 										}
 
 
-										<p>Bug Treasure:{potBalance > 0 ? potBalance : "0"} {tokenSymbol}</p>
+										<p>Moon Treasure:{potBalance > 0 ? potBalance : "0"} {tokenSymbol}</p>
 
 
 										{gameOn &&
@@ -631,7 +630,7 @@ const KingGame = () => {
 							<div className="col-lg-6">
 								<div className="bid-box2">
 									<div className="bit-c-img2">
-										<h3>Current King</h3>
+										<h3>Current Emperor</h3>
 										{
 											lastBidder != null &&
 											<p>Last bidder: <span><a style={{ color: '#fff' }} href={`https://bscscan.com/address/${lastBidder.substring(0, 6) + "...." + lastBidder.substring(lastBidder.length - 6)}`} target={'_blank'}>{lastBidder.substring(0, 6) + "...." + lastBidder.substring(lastBidder.length - 6)}</a></span></p>
@@ -696,24 +695,23 @@ const KingGame = () => {
 									<div className='marketplace-box-wrap7'>
 									<div className="dex-box-g">
 										<div className="den-box">
-											<h3>The Chicken King</h3>
-											<p>Compete against other farmers to battle the pest and strike the killing blow to be Crowned the Chicken king.</p>
+											<h3>Moon Emperor</h3>
+											<p>Compete with other bidders to win the Moon Treasure filled with $MOON rewards.</p>
 											<h4>How to Play?</h4>
-											<p>The chicken king has a 90 seconds countdown timer which resets on each bid.</p>
-											<p>Use your chickens to place a bid that goes into the Pest Treasure balance, allowing you to become eligible to be crowned the chicken king for 24hours.</p>
-											<p>When the timer reaches zero, the last bid wins the game along with the chicken loot that comes with it.</p>
-											<p>Anyone can restart or the winner can claim and restart.</p>
-											<h4>Winning’s distribution?</h4>
-											<p>The contract resets after claim and sets the countdown before a new round begins.</p>
-											<h4>Chicken Loot distribution?</h4>
-											<p>The pest treasure balance will be distributed as follows:</p>
-											<p>-70% credited instantly to the winners address</p>
-											<p>-20% carried over to the next round</p>
-											<p>-10% distributed to charity.</p>
-											<p>Note:</p>
-											<p>-Winners are crowned Chicken King for 24hours before a new battle.</p>
-											<p>-Anyone can bid but the last bidder wins the game.</p>
-											<p>-All bids are final. Your chickens cannot be returned after bids.</p>
+											<p>The Moon Emperor game has a 50 seconds countdown timer which resets on each bid.</p>
+											<p> Use your $MOON tokens to bid, they go directly into the Moon Treasure, </p>
+											<p>allowing you to become the Current Emperor (most recent bidder).</p>
+											<p> When the timer reaches zero, the Current Emperor wins the game.</p>
+											{/* <h4>Winning’s distribution?</h4>
+											<p>The contract resets after claim and sets the countdown before a new round begins.</p> */}
+											<h4>Moon Treasury distribution?</h4>
+											<p>At the end of each round, Moon Treasure balance is distributed as follows:</p>
+											<p>60% to the winner</p>
+											<p>30% carried over to the next round</p>
+											<p>10% to $MOON LP</p>
+										<p>Anyone can click on the claim button at the end of the round </p>
+										<p> but the winning share will go to the winner only and all the bids are final,</p>
+										<p> your $MOON can not be returned after bidding.</p>
 										</div>
 									</div>
 									</div>
@@ -727,11 +725,12 @@ const KingGame = () => {
 			</div>
 
 
-			<Modal isOpen={modal} toggle={modalToggle} className="connect-box" centered={true}>
+			<Modal isOpen={modal} toggle={modalToggle} className="connect-box earth_img_box" style={{backdropFilter:"blur(60px)"}} centered={true}>
 
 				<ModalBody>
+				<div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"150px"} style={{opacity:"65%"}}/></div>
 					<div className="mt-3 mb-3 text-center">
-						<p className="txfont">Transaction is Processing...</p>
+						<p className="txfont">Processing your Request....</p>
 
 					</div>
 				</ModalBody>

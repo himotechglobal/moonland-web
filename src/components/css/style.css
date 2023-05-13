@@ -161,9 +161,19 @@ p {
 }
 
 .depositButton {
-  background: #d27526;
-  border: none;
+  font-size: 14px !important;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
+  border-radius: 50em;
+  font-weight: bold;
+  border: 5px solid transparent !important;
+  /* width: 172px; */
+  /* height: 39px; */
+  padding: 10px 20px !important;
   cursor: pointer;
+  transition: 0.5s;
+}
+.depositButton :hover{
+  transform: translateY(-6px) !important;
 }
 
 .maxbtn {
@@ -445,7 +455,16 @@ p {
   color: #fff;
   transform: translateY(-6px);
 }
-
+.thermix_btn{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.thermix_sub_btn{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 .bg___BTN2 {
   font-family: 'poppins';
   color: #fff;
@@ -565,10 +584,21 @@ p {
 .border-b {
   position: absolute;
   width: 100%;
-  z-index: 10000;
+  z-index: 1;
   /* background-color: #62b828; */
 }
-
+.modal_img_div{
+  margin-bottom: 15px;
+  text-align: center;
+  margin-top: -36%;
+  border-radius: 27px;
+}
+.modal_img_div1{
+  margin-bottom: 15px;
+  text-align: center;
+  margin-top: -26%;
+  border-radius: 27px;
+}
 #faq-sec {
   padding: 80px 0px 80px 0px;
   background-image: url(../images/roadmap.png);
@@ -734,7 +764,7 @@ p {
 
 .box-features {
   width: 100%;
-  background-color: #62b828;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
   height: 230px;
   padding: 10px;
   border-radius: 32px;
@@ -903,7 +933,7 @@ p {
 
 .tokenomic-content {
   width: 32.3%;
-  background-color: #62b828;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
   border-radius: 32px;
   border: 1px solid #fff;
   -webkit-box-shadow: 0 0 12px 4px #ffffff4a;
@@ -915,7 +945,7 @@ p {
 
 .tokenomic-content2 {
   width: 32.3%;
-  background-color: #62b828;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
   border-radius: 32px;
   border: 1px solid #fff;
   -webkit-box-shadow: 0 0 12px 4px #ffffff4a;
@@ -1059,7 +1089,7 @@ p {
 
 .ex-box {
   width: 97%;
-  background-color: #49c927;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
   border-radius: 32px;
   border: 1px solid #fff;
   -webkit-box-shadow: 0 0 12px 4px #60cedcb8;
@@ -1072,25 +1102,25 @@ p {
 }
 
 .bg1 {
-  background-color: #81b441 ! important;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box ! important;
 }
 
 .bg2 {
-  background-color: #b7cc33 ! important;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box ! important;
 }
 
 .bg3 {
-  background-color: #399845 ! important;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box ! important;
 }
 
 .bg4 {
-  background-color: #6b988c ! important;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box! important;
 }
 
 .road-c-box {
   width: 97%;
   margin-top: 10px;
-  background-color: #49c927;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
   padding: 10px 15px;
   border-radius: 32px;
   text-align: center;
@@ -2070,7 +2100,7 @@ a.conbutton:hover {
   /* padding: 0rem 1.2rem; */
   flex-wrap: wrap;
   gap: 10px;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .alientime__accordian {
@@ -2078,7 +2108,7 @@ a.conbutton:hover {
   width: 100%;
   justify-content: space-between;
   /* padding: 0rem 1.2rem; */
-  align-items: center;
+  /* align-items: center; */
 }
 
 .alienbtns {
@@ -2155,7 +2185,9 @@ a.conbutton:hover {
   margin-top: 0px;
 
 }
-
+.modal-open .modal{
+  backdrop-filter: blur(35px);
+}
 .time-child1>h3 {
   font-weight: 700;
   font-size: 26px;
@@ -2566,7 +2598,6 @@ p.marquee {
 
 p.marquee span {
   line-height: 20px;
-
   line-height: 20px;
   width: 185%;
   -moz-animation: scroll-left 4s linear infinite;
@@ -2745,9 +2776,16 @@ p.marquee span {
 
 /* Modal Content */
 .modal-content {
-  background: linear-gradient(45deg, #020021, #AE00C5)padding-box, 
-  linear-gradient(179deg, transparent, transparent, #0a719740, #0A7197, #0A7197, #0A7197) border-box;
+  background: linear-gradient(45deg, #020021, #440060)padding-box, 
+  linear-gradient(180deg, transparent, transparent, rgba(2, 0, 33, 0.8), #0A7197, #0A7197, #0A7197) border-box;
+
+
+
+  /* background: linear-gradient(328.16deg, rgba(235, 0, 255, 0.176) -33.98%, rgba(2, 0, 33, 0.8) 121.87%) ; */
   border-radius: 30px;
+  /* background: linear-gradient(328.16deg, rgba(235, 0, 255, 0.176) -33.98%, rgba(2, 0, 33, 0.8) 121.87%); */
+backdrop-filter: blur(54.5px);
+
   margin: auto;
   padding: 20px;
   color: #fff;
@@ -4512,6 +4550,7 @@ min-height: 100vh;
   font-size: 18px;
   font-weight: 700;
   color: #fff;
+  text-align: center;
 }
 
 .build___item>p {
@@ -6292,7 +6331,8 @@ a {
 /* craete page css open here */
 #create-sec-pop {
   width: 100%;
-  background: #8bc53f;
+  /* background: #8bc53f; */
+  /* color: #fff; */
   background-size: cover;
   background-position: center center;
 }
@@ -6529,21 +6569,21 @@ a {
 .sales-l-c-child>h4 {
   margin: 0px;
   font-size: 18px;
-  color: #000;
+  color: #fff;
   font-weight: 700;
 }
 
 .sales-l-c-child>p {
   margin-top: 20px;
   font-size: 14px;
-  color: #000;
+  color: #fff;
 }
 
 .switch {
   appearance: none;
   width: 66px;
   height: 33px;
-  background-color: var(--secondary);
+  background-color: #450168;
   cursor: pointer;
   border-radius: 32px;
   position: relative;
@@ -6554,7 +6594,7 @@ a {
   content: "";
   height: 100%;
   width: 50%;
-  background-color: #62b828;
+ background-color: #450168;
   position: absolute;
   border-radius: 50%;
   border: var(--secondary) solid 0.2em;
@@ -6562,7 +6602,7 @@ a {
 }
 
 .switch:checked {
-  background-color: #03ebfa;
+  background:radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
 }
 
 .switch:checked::before {
@@ -6723,9 +6763,10 @@ a {
   outline: none;
   color: #fff;
   border-radius: 10px;
-  background-color: #61b828;
+  background: linear-gradient(45deg, #020021, #AE00C5)padding-box, linear-gradient(302deg, transparent, transparent, #0a719740, #0A7197, #0A7197, #0A7197) border-box;
   box-shadow: 0 0 10px 0 rgb(0 0 0 / 3%);
   width: 100%;
+  border: 1px solid #ced4da52 !important;
   height: 53px;
   box-sizing: border-box;
   border: none;
@@ -6754,7 +6795,7 @@ a {
 .royalities-child>label {
   display: block;
   font-size: 14px;
-  color: #000;
+  color: #fff;
   font-weight: 700;
   line-height: 1.643;
   margin-bottom: 7px;
@@ -6768,10 +6809,11 @@ a {
   outline: none;
   color: #fff;
   border-radius: 10px;
-  background-color: #62b828;
+  background: linear-gradient(45deg, #020021, #AE00C5)padding-box, linear-gradient(302deg, transparent, transparent, #0a719740, #0A7197, #0A7197, #0A7197) border-box;
   box-shadow: 0 0 10px 0 rgb(0 0 0 / 3%);
   width: 100%;
   height: 53px;
+  border:1px solid #ced4da52 !important;
   box-sizing: border-box;
   border: none;
   padding: 0 13px;
@@ -6831,9 +6873,15 @@ a {
 
 .crate-items>button {
   border-radius: 19px;
-  background: #d27526;
-  width: 172px;
-  height: 39px;
+  /* background: #d27526; */
+  font-weight: bold;
+  font-size: 14px !important;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
+  border-radius: 50em;
+  border: 5px solid transparent !important;
+  /* width: 172px; */
+  /* height: 39px; */
+  padding: 10px 20px !important;
   font-size: 14px;
   border: none;
   color: #fff;
@@ -6842,6 +6890,10 @@ a {
   padding: 0px;
   text-transform: capitalize;
   margin-top: 30px;
+  transition: 0.5s;
+}
+.crate-items>button :hover{
+  transform: translateY(-6px) !important;
 }
 
 .create-box-wrp {

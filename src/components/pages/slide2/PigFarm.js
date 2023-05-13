@@ -23,6 +23,10 @@ import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite,
 import { ethers } from 'ethers';
 import land from '../../images/land.svg';
 import { Link } from 'react-router-dom';
+import thermix from "../../images/thermix.png"
+import metlux from "../../images/metlux.png"
+import modal_earth from '../../images/modal_earth.png'
+
 const PigFarm = () => {
     const [chickenClaimfee, setChickenClaimfee] = useState(0);
 
@@ -571,7 +575,6 @@ console.log(_userClaimTimes1);
         functionName: "capacity",
         watch: true,
     })
-    // console.log(parseInt(_capacity)/1e18);
     const { data: _depositFee1 } = useContractRead({
         address: PIG_INCUBATOR,
         abi: PIG_INCUBATOR_ABI,
@@ -788,7 +791,7 @@ console.log(_userClaimTimes1);
     const lockNFT = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await lockNFTWriteAsync()
 
         // document.getElementById("exampleModalCenter").modal('show')
@@ -1025,7 +1028,7 @@ console.log(_userClaimTimes1);
 
     if (removeChickenError && modal && removeChickenModal) {
        
-        setModal(modal);
+        setModal(false);
         setremoveChickenModal(false);
     }
     if (removeChickenSuccess && modal) {
@@ -1043,7 +1046,7 @@ console.log(_userClaimTimes1);
 
         else {
 
-            setModal(!modal);
+            setModal(true);
             await removeChickenWriteAsync()
 
             document.getElementById("exampleModalCenter").modal('show')
@@ -1123,7 +1126,7 @@ console.log(_userClaimTimes1);
         }
         else {
 
-            setModal(!modal);
+            setModal(true);
             await depositMoreChickenWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _famringContract = new _web3.eth.Contract(PIG_FARMING_ABI, PIG_FARMING);
@@ -1208,7 +1211,7 @@ console.log(_userClaimTimes1);
         }
         else {
 
-            setModal(!modal);
+            setModal(true);
             await depositSowWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _famringContract = new _web3.eth.Contract(PIG_FARMING_ABI, PIG_FARMING);
@@ -1273,7 +1276,7 @@ console.log(_userClaimTimes1);
         // let _web3 = new Web3(web3Provider);
         setApprovalProcessing(true);
 
-        setModal(!modal);
+        setModal(true);
         await approvebaseTokenFarmWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _baseTokenContract = new _web3.eth.Contract(TOKEN_ABI, baseToken);
@@ -1326,7 +1329,7 @@ console.log(_userClaimTimes1);
     const approvebaseTokenIncub = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await approvebaseTokenIncubWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _baseTokenContract = new _web3.eth.Contract(TOKEN_ABI, baseToken);
@@ -1380,7 +1383,7 @@ console.log(_userClaimTimes1);
     const approvebaseToken = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await approvebaseTokenWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _baseTokenContract = new _web3.eth.Contract(TOKEN_ABI, baseToken);
@@ -1438,7 +1441,7 @@ console.log(_userClaimTimes1);
         // let _web3 = new Web3(web3Provider);
         setApprovalProcessing(true);
 
-        setModal(!modal);
+        setModal(true);
         await approveChickenFoodWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _chickenFoodContract = new _web3.eth.Contract(TOKEN_ABI, chickenFoodToken);
@@ -1533,7 +1536,7 @@ if (claimMaterialSuccess && modal) {
     const claimEggs = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await claimEggsWriteAsync()
         // const _farmingContract = new _web3.eth.Contract(PIG_FARMING_ABI, PIG_FARMING);
         // _farmingContract.methods.claimPiglets().send({ from: address }).on('receipt', function (receipt) {
@@ -1577,7 +1580,7 @@ if (claimMaterialSuccess && modal) {
     const  approveChickenEgg= async()=> {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await claimChickenWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _chickenEggContract = new _web3.eth.Contract(TOKEN_ABI, chickenpigletToken);
@@ -1644,7 +1647,7 @@ if (claimMaterialSuccess && modal) {
         // let _web3 = new Web3(web3Provider);
         setApprovalProcessing(true);
 
-        setModal(!modal);
+        setModal(true);
         await approveBoarWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _boarContract = new _web3.eth.Contract(TOKEN_ABI, boarToken);
@@ -1701,7 +1704,7 @@ if (claimMaterialSuccess && modal) {
     const approveSow = async () => {
         // let _web3 = new Web3(web3Provider);
         setApprovalProcessing(true);
-        setModal(!modal);
+        setModal(true);
         await approveSowWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _sowContract = new _web3.eth.Contract(TOKEN_ABI, sowToken);
@@ -1770,7 +1773,7 @@ if (claimMaterialSuccess && modal) {
         // else {
             // let _web3 = new Web3(web3Provider);
 
-            setModal(!modal);
+            setModal(true);
             await addDaysWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _farmingContract = new _web3.eth.Contract(PIG_FARMING_ABI, PIG_FARMING);
@@ -1833,7 +1836,7 @@ if (claimMaterialSuccess && modal) {
         else {
             // let _web3 = new Web3(web3Provider);
 
-            setModal(!modal);
+            setModal(true);
             await depositEggWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _incubatorContract = new _web3.eth.Contract(PIG_INCUBATOR_ABI, PIG_INCUBATOR);
@@ -1893,7 +1896,7 @@ if (claimMaterialSuccess && modal) {
     const sellfarm = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await sellfarmWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
@@ -1955,7 +1958,7 @@ if (claimMaterialSuccess && modal) {
         }
         else {
 
-            setModal(!modal);
+            setModal(true);
             await buyAreaNFTWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
@@ -2019,7 +2022,7 @@ if (claimMaterialSuccess && modal) {
         }
         else {
 
-            setModal(!modal);
+            setModal(true);
             await addAreaNFTWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
@@ -2078,7 +2081,7 @@ if (claimMaterialSuccess && modal) {
     const approveNFT = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await approveNFTWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _nftContract = new _web3.eth.Contract(NFT_ABI, farmToken);
@@ -2102,12 +2105,12 @@ if (claimMaterialSuccess && modal) {
         let _damount = chickenEggBalance;
         if (chickenEggBalance > 50) {
             _damount = 50;
+            setcedAmount((_damount))
         }
-        setcedAmount(parseFloat(_damount))
 
+      
     }
-
-
+console.log(chickenEggBalance);
 
     const setMaxDayDeposit = async () => {
         let _damount = chickenFoodBalance / (20 * (parseInt(boarDeposited) + parseInt(sowDeposited)));
@@ -2185,8 +2188,8 @@ if (claimMaterialSuccess && modal) {
                 <section id="pigs-sec1">
                     <div className="container">
                         <div className="slide-heads">
-                            <h1>BUY MOON LAND,BUILD <span className='dollar__text2'>&</span> TRADE</h1>
-                            <p>Combine Solor cells and Fluids Harvest</p>
+                            <h1>MOONSCAPE</h1>
+                            {/* <p>Combine Solor cells and Fluids Harvest</p> */}
                         </div>
                         {/* <div className="pig-head">
                         
@@ -2219,21 +2222,25 @@ if (claimMaterialSuccess && modal) {
                                             <div className='alien___rightBox'>
                                                 <div className="alientime">
                                                     <div className="time__list">
-                                                        <h3>{farmBalance ?? 0} {farmSymbol}</h3>
+                                                        <h3>{farmBalance ?farmBalance: 0} {farmSymbol}</h3>
                                                         <p>Your Balance</p>
                                                     </div>
                                                     <div className="time__list">
-                                                        <h3>{farmArea ?? 0} sq m</h3>
+                                                        <h3>{farmArea ?? 0} sq yards</h3>
                                                         <p>Your Locked Build Area</p>
                                                     </div>
                                                     <div className="time__list">
-                                                        <h3><span className='dollar__text'>$</span>{farmArea * 1}</h3>
+                                                        <h3><span className='dollar__text'>$ </span>{farmArea * 1}</h3>
                                                         <p>Market Value</p>
 
                                                     </div>
                                                     <div className="time__list">
                                                         <h3>{farmCapacity}</h3>
-                                                        <p>Material Capacity</p>
+                                                        <p>SoPods Capacity</p>
+                                                    </div>
+                                                    <div className="time__list">
+                                                        <h3>0</h3>
+                                                        <p>DuoPods Capacity</p>
                                                     </div>
                                                     <div className="pool-btns" style={{ justifyContent: 'end' }}>
 
@@ -2280,25 +2287,46 @@ if (claimMaterialSuccess && modal) {
                                     <div className="small-pigfarm-box">
                                         <div className='marketplace-box-wrap4'>
                                             <div className='mbuild__TopBox'>
-                                                <div className="mbuild___box">
+                                                <div className="mbuild___box" style={{width:"auto"}}>
                                                     <div>
                                                         <img src={mbuild} alt="" />
                                                     </div>
-                                                    <div className="uses-box-child1">
-                                                        <h3>moonpod <br />Builder</h3>
+                                                    <div className="uses-box-child1" style={{marginLeft:"20px"}}>
+                                                        <h3>SoPod</h3>
                                                     </div>
 
                                                 </div>
 
                                                 <div className='build___left'>
                                                     <div className="build___item">
-                                                        <h3>{eggsearned} EULE</h3>
-                                                        <p>Earned</p>
+                                                        <h3>{eggsearned>0? eggsearned:0} </h3>
+                                                        <p> EULE Earned</p>
                                                     </div>
-                                                    <div className="build___item">
+                                                    {/* <div className="build___item">
                                                         <h3><span className='dollar__text'>$</span>{eggsearned * 10}</h3>
                                                         <p>Earned Value</p>
-                                                    </div>
+                                                    </div> */}
+                                                    <div className="pigvalue-child1">
+                                                {/* {layunlockTime}
+                                            {layEndTime} */}
+                                               
+                                                    <>
+                                                    {
+                                                    (sowDeposited > 0 && unlockTime) > new Date().getTime() / 1e3 ? <h3 style={{paddingTop:"5px"}}>{endTime}</h3>:<h3 style={{paddingTop:"5px"}}>0d : 0h : 0m</h3>}
+                                                        <p className="marquee"><span><i className="fa fa-warning yellow" ></i>
+                                                         {/* Time remaining for {chickenFoodSymbol} to end. */}
+                                                         Time until the next SoPod is built
+                                                         </span></p>
+                                                    </>
+                                               
+                                                {
+                                                    sowDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
+                                                    <>
+                                                        <h3 style={{paddingTop:"5px"}}>{chickenFoodSymbol} Exhausted</h3>
+                                                        {/* <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Chicken feed to end.</span></p> */}
+                                                    </>
+                                                }
+                                            </div>
 
                                                 </div>
                                             </div>
@@ -2306,12 +2334,16 @@ if (claimMaterialSuccess && modal) {
 
                                         <div className="pig-value-wrp">
                                             <div className="build__value mrt">
-                                                <p>Deposited</p>
-                                                <h3 className='text-right'>{isNaN(sowDeposited)?0:sowDeposited} {sowSymbol}</h3>
+                                                <p>SoPods Built</p>
+                                                <h3 className='text-right'>{isNaN(sowDeposited)?0:sowDeposited} {" "}
+                                                {/* {sowSymbol} */}
+                                                </h3>
                                             </div>
                                             <div className="build__value mrt">
-                                            <p>Deposited</p>
-                                                <h3 className='text-right'>{isNaN(boarDeposited)?0:boarDeposited} {boarSymbol}</h3>
+                                            <p>SoPods Rented</p>
+                                                <h3 className='text-right'>{isNaN(boarDeposited)?0:boarDeposited}{" "}
+                                                 {/* {boarSymbol} */}
+                                                 </h3>
                                             </div>
 
 
@@ -2319,36 +2351,42 @@ if (claimMaterialSuccess && modal) {
 
                                         <div className="pig-value-wrp">
                                             <div className="build__value">
-                                                <h3>{sowBalance} {sowSymbol}</h3>
-                                                <p>Balance</p>
+                                                <h3>{sowBalance}
+                                                 {/* {sowSymbol} */}
+                                                 </h3>
+                                                <p>Metlux Balance</p>
                                             </div>
                                             <div className="build__value pigmr">
-                                                <h3>{boarBalance} {boarSymbol}</h3>
-                                                <p>Balance</p>
+                                                <h3>{boarBalance} 
+                                                {/* {boarSymbol} */}
+                                                </h3>
+                                                <p>Thermix Balance</p>
                                             </div>
                                         </div>
-                                        <div className="pig-value-wrp">
+                                        {/* <div className="pig-value-wrp">
                                             <div className="pigvalue-child1">
-                                                {/* {layunlockTime}
-                                            {layEndTime} */}
+                                          
                                                 {
                                                     sowDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
                                                     <>
                                                         <h3 className="timer">{endTime}</h3>
-                                                        <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for {chickenFoodSymbol} to end.</span></p>
+                                                        <p className="marquee"><span><i className="fa fa-warning yellow" ></i>
+                                                    
+                                                         Time until the next SoPod is built
+                                                         </span></p>
                                                     </>
                                                 }
                                                 {
                                                     sowDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
                                                     <>
                                                         <h3 className="timer">{chickenFoodSymbol} Exhausted</h3>
-                                                        {/* <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Chicken feed to end.</span></p> */}
+                                                      
                                                     </>
                                                 }
                                             </div>
 
                                             <div className="pigvalue-child1  text-right">
-                                                {/* {layEndTime} */}
+                                            
                                                 {
                                                     sowDeposited > 0 && layEndTime > new Date().getTime() / 1e3 &&
                                                     <>
@@ -2364,13 +2402,22 @@ if (claimMaterialSuccess && modal) {
                                                     </>
                                                 }
                                             </div>
-                                        </div>
+                                        </div> */}
 
-
+<div className='thermix_btn'>
+<div className='thermix_sub_btn'>
+<div style={{textAlign:'center'}}><img src={thermix} alt="thermix" style={{height:"109px",paddingLeft:"12px"}}/></div>
+<a href="/marketplace" className="bg___BTN2" >Buy Thermix</a>
+</div>
+<div style={{display:"flex",flexDirection:"column",gap:"10px",justifyContent:"center"}}>
+<div style={{textAlign:'center'}}><img src={metlux} alt="metlux" /></div>
+<a href="/marketplace" className="bg___BTN2" >Buy Metlux</a>
+</div>
+</div>
                                         <div className="btn-bp btn_new">
                                         
 
-                                            <a href="/marketplace" className="bg___BTN2 ">Buy Material</a>
+                                          
 
                                             {
                                                 eggsearned > 0 &&
@@ -2387,7 +2434,7 @@ if (claimMaterialSuccess && modal) {
                                         <div className="btn-bp btn_new">
                                       {
                                                 sowDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
-                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more {sowSymbol} in Harvest</a>
+                                                <a href="javacript:void" className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Build</a>
                                             }
 
                                             {
@@ -2414,22 +2461,22 @@ if (claimMaterialSuccess && modal) {
                                     <div className="small-pigfarm-box">
                                         <div className='marketplace-box-wrap4'>
                                     <div className='mbuild__TopBox'>
-                                                <div className="mbuild___box2">
+                                                <div className="mbuild___box2" style={{width:"0"}} >
                                                     <div>
                                                         <img className='mrb' src={childe} alt="" />
                                                     </div>
                                                     <div className="uses-box-child1">
-                                                        <h3 className='ml-3'>FACTORY <br />(Coming Soon)</h3>
+                                                        <h3 className='ml-3'>FORGINATOR</h3>
                                                     </div>
 
                                                 </div>
                                                 <div className='build___left'>
                                                     <div className="build___item">
                                                         <h3>{adult} Material</h3>
-                                                        <p>Earned</p>
+                                                        <p>Forged By You</p>
                                                     </div>
                                                     <div className="build___item">
-                                                        <h3><span className='dollar__text'>$</span>{adult * 10}</h3>
+                                                        <h3><span className='dollar__text'>$ </span>{adult * 10}</h3>
                                                         <p>Earned Value</p>
                                                     </div>
 
@@ -2439,15 +2486,15 @@ if (claimMaterialSuccess && modal) {
                                             </div>
                                         <div className="pig-value-wrp mrt">
                                             <div className="build___item">
-                                                <h3>  {chickenEggBalance} {chickenEggSymbol}</h3>
-                                                <p>Balance</p>
+                                                <h3>  {chickenEggBalance}</h3>
+                                                <p>Your Eule</p>
                                             </div>
                                             <div className="build___item">
                                                 <h3>{chickenEggDeposited} {chickenEggSymbol}</h3>
-                                                <p>Deposited</p>
+                                                <p> Forged in Total</p>
                                             </div>
                                             <div className="build___item bi__one">
-                                                <h3>{incubCapacity}</h3>
+                                                <h3>{incubCapacity?incubCapacity:0}</h3>
                                                 <p>Available Slot</p>
                                             </div>
                                            
@@ -2463,23 +2510,23 @@ if (claimMaterialSuccess && modal) {
 <div className="build___item" style={{display:'flex',justifyContent:'space-between',padding:"0 20px 20px"}}>
 
 <p>Time to Yield </p> 
-<h3 >{eggTime == 0 ? "70 days" : eggTime}</h3>
+<h3 >{eggTime == 0 ? "98 days" : eggTime}</h3>
 
 
 </div>
                                         <div className="btn-bp">
                                             <div style={{display:"flex",gap:"10px",flexWrap:"wrap",justifyContent:"center"}}>
-                                            <a href="/marketplace" className="bg___BTN2">Buy {chickenEggSymbol}</a>
+                                            <a href="/marketplace" className="bg___BTN2">Buy Eule</a>
                                               
                                               {
                                                     chickenEggApproved == 0 &&
                                                     <a className="bg___BTN2" onClick={approveChickenEgg} >
                                                
-                                                        Approve {chickenEggSymbol} for Factory</a>
+                                                        Approve {chickenEggSymbol} Forge</a>
                                                 }
                                                 {
                                                     chickenEggApproved > 0 && chickenEggDeposited == 0 &&
-                                                    <a className="bg___BTN2" onClick={eggtoggle} >Put {chickenEggSymbol} in Factory</a>
+                                                    <a className="bg___BTN2" onClick={eggtoggle} >Put {chickenEggSymbol} in Forge</a>
                                             }
    
                                                 {
@@ -2515,7 +2562,8 @@ if (claimMaterialSuccess && modal) {
 
 
                 <ModalBody>
-                    <div className="modaltext text-center mt-4" >Transaction is Processing...</div>
+                <div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"150px"} style={{opacity:"65%"}}/></div>
+                    <div className="modaltext text-center mt-4" >Processing your Request....</div>
 
                 </ModalBody>
                 <Button className="bg___BTN2 mr-auto ml-auto mb-5" onClick={toggle}>Close</Button>
@@ -2533,7 +2581,7 @@ if (claimMaterialSuccess && modal) {
                             <b>Your {sowSymbol} Balance</b><br />
                             {sowBalance}
                         </span>
-                        <span className="pull-right text-right">
+                        <span className="pull-right ">
                             <b>Your available Capacity</b><br />
                             {parseFloat(farmCapacity) - (parseFloat(sowDeposited) + parseFloat(boarDeposited))} Material
                         </span>
@@ -2625,7 +2673,7 @@ if (claimMaterialSuccess && modal) {
                             Your {sowSymbol} Balance<br />
                             {sowBalance}
                         </span>
-                        <span className="pull-right text-right">
+                        <span className="pull-right ">
                             Your available {farmSymbol} Capacity<br />
                             {farmCapacity - (parseInt(sowDeposited) + parseInt(boarDeposited))}
                         </span>
@@ -2682,14 +2730,14 @@ if (claimMaterialSuccess && modal) {
                             Your {baseSymbol} Balance<br />
                             {baseBalance}
                         </span>
-                        <span className="pull-right text-right">
+                        <span className="pull-right ">
                             Your available {farmSymbol}<br />
                             
-                            {farmCapacity - sowDeposited} sq m
+                            {farmCapacity - sowDeposited} sq yards
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter in Multiple of ten for Build Area to Buy (sq m)
+                    <label className="mb-3"><br />Enter in Multiple of ten for Build Area to Buy (sq yards)
                         {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
 
                     </label>
@@ -2726,22 +2774,24 @@ if (claimMaterialSuccess && modal) {
 
                     <div className="moveRight">
                         <span className="pull-left">
-                            Your {baseSymbol} Balance<br />
+                            Your ${baseSymbol} Balance<br />
                             {baseBalance}
                         </span>
-                        <span className="pull-right text-right">
-                            Your available {farmSymbol}<br />
-                            {farmCapacity*10} sq m
+                        <span className="pull-right ">
+                            {/* Your available {farmSymbol} */}
+                            Your Land Area
+                            <br />
+                            {farmCapacity*10} sq yards
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter in Multiple of ten for Build Area to add-on  (sq m)
+                    <label className="mb-3"><br />Enter area you want to add (sq yards)
                         {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
 
                     </label>
                     <input className="form-control" onChange={handleAreaChange} type="number" value={areadamount} />
-                    <span className="info mt-3"><b>Cost:</b> {areadamount * farmPrice * 10} {baseSymbol}</span>
-                    <span className="info mt-1"><b>Area:</b> {areadamount * 10} sq. m.</span>
+                    <span className="info mt-3"><b>Cost:</b> {areadamount * farmPrice * 10} ${baseSymbol}</span>
+                    <span className="info mt-1"><b>Area:</b> {areadamount * 10} sq. yards</span>
                     <span className="info mt-1"><b>Capacity:</b> {areadamount} Material(s)</span>
 
                     {

@@ -67,9 +67,9 @@
 }
 /* stake page responsive */
 
-    .modal-content{
+    /* .modal-content{
         width: 50%;
-    }
+    } */
     .c-price {
         position: absolute;
         top: 0;
@@ -237,9 +237,9 @@
     #team-sec{
         height: auto;
     }
-    .modal-content {
+    /* .modal-content {
         width: 70%;
-    }
+    } */
     .chicken-box-m > p {
         font-size: 18px;
         line-height: 22px;
@@ -551,6 +551,15 @@
    
 }
 @media(max-width: 767px){
+    .modal-footer{
+        justify-content: center;
+    }
+    .moveRight{
+        display: flex;
+        flex-direction: column;
+     
+        justify-content: center;
+      }
     .btn_new .bg___BTN2{
         /* width: 100%; */
       }
@@ -604,6 +613,21 @@
    
 }
 @media(max-width: 580px){
+    .thermix_btn{
+        display: flex;
+       flex-direction: column;
+       gap: 20px;
+  
+      }
+      .modal_img_div1{
+        margin-bottom: 15px;
+        text-align: center;
+        margin-top: -40%;
+        border-radius: 27px;
+      }
+      .modal_img_div{
+        margin-top: -20px;
+      }
     .pool-btns {
        flex-direction: column;
        justify-content: center;

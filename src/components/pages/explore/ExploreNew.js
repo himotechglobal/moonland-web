@@ -4,8 +4,10 @@ import { Row, Col, Container, Button, ModalHeader, ModalFooter, Modal, ModalBody
 
 import Header from '../header.js';
 import Footer from '../footer.js';
-import Config, { API_URL, MARKETPLACE } from '../../../Config2/index.js';
-import MARKETPLACE_ABI from '../../../Config2/MARKETPLACE_ABI.json';
+// import Config, { API_URL, MARKETPLACE } from '../../../Config2/index.js';
+// import MARKETPLACE_ABI from '../../../Config2/MARKETPLACE_ABI.json';
+import {HARVEST_FARM, NFT, NFT_MARKETPLACE} from "../../../Config/index"
+import NFT_MARKETPLACE_ABI from "../../../Config/NFT_MARKETPLACE_ABI.json"
 import NFT_ABI from '../../../Config2/NFT_ABI.json';
 import Web3 from "web3"
 
@@ -14,14 +16,16 @@ import ExploreSingle from './ExploreSingle.js';
 // import useWallet from '@binance-chain/bsc-use-wallet'
 import NftSingle from './NftSingle'
 import axios from "axios";
-import { useAccount } from 'wagmi';
+import { useAccount, useContractRead } from 'wagmi';
 import { Link } from 'react-router-dom';
 
 const ExploreNew = () => {
   let web3Provider = window.ethereum;
   // const wallet = useWallet();
-  const { address, isConnected } = useAccount
+  const { address, isConnected } = useAccount()
   const [counter, setCounter] = useState([]);
+  
+  const [index2, setIndex2] = useState([]);
   const [olimit, setolimit] = useState(20);
   const [oloading, setoLoading] = useState(false);
   const [slimit, setslimit] = useState(20);
@@ -58,9 +62,6 @@ const ExploreNew = () => {
   const [soldArray, setSoldArray] = useState([]);
   const [instantArray, setInstantArray] = useState([]);
 
-
-
-
   useEffect(() => {
 
     $('.tabs6').on('click', 'a', function (e) {
@@ -73,14 +74,12 @@ const ExploreNew = () => {
     });
 
 
-    if (window.ethereum) {
-      web3Provider = window.ethereum;
-    }
-    else {
-      web3Provider = new Web3.providers.HttpProvider(Config.RPC_URL)
-
-    }
-
+    // if (window.ethereum) {
+    //   web3Provider = window.ethereum;
+    // }
+    // else {
+    //   web3Provider = new Web3.providers.HttpProvider(Config.RPC_URL)
+    // }
     init();
     if (address) {
       getCollection();
@@ -90,7 +89,6 @@ const ExploreNew = () => {
   }, [address])
 
   useEffect(() => {
-    console.log(counter);
     _acounter = 0;
     _bcounter = 0;
     _ccounter = 0;
@@ -100,59 +98,69 @@ const ExploreNew = () => {
 
   }, [])
 
+  const {data:_count} =useContractRead({
+address:NFT_MARKETPLACE,
+abi:NFT_MARKETPLACE_ABI,
+functionName:"getTradeCount",
+watch:true
+  })
+
+  const {data:_userBids} = useContractRead({
+address:NFT_MARKETPLACE,
+abi:NFT_MARKETPLACE_ABI,
+functionName:"getAuctionsOfUser",
+args:[address],
+watch:true
+  })
+
+
   const init = async () => {
-    let _web3 = new Web3(web3Provider);
-    let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-    let _count = await _marketPlaceContract.methods.getTradeCount().call();
-    console.log(_count);
+    // let _web3 = new Web3(web3Provider);
+    // let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, NFT_MARKETPLACE);
+    // let _count = await _marketPlaceContract.methods.getTradeCount().call();
+    // console.log(_count);
     let rows = [];
-    for (let i = 0; i < _count; i++) {
+    for (let i = 0; i < parseInt(_count); i++) {
       rows.push({ count: 1 });
     }
-    //  alert(rows);
-    console.log(rows);
+   
     setCounter(rows);
 
 
     if (address) {
-      let _userBids = await _marketPlaceContract.methods.getAuctionsOfUser(address).call();
+      // let _userBids = await _marketPlaceContract.methods.getAuctionsOfUser(address).call();
       setUserBids(_userBids);
     }
 
   }
 
-
   const getImportedCollection = async () => {
-    // let _user = "0x4D1294c48EaCF4D5242e68509D2703117B6440B4"
-    let _user = address;
-    let _web3 = new Web3(web3Provider);
+  
+    // let _user = address;
+    // let _web3 = new Web3(web3Provider);
+    // let _getURI = API_URL + "/getnftuser/" + _user;
+    // let _imported = await fetch(_getURI);
+    // _imported = await _imported.json();
+    // if (_imported.result == "success") {
+    //   let userTokens = [];
+    //   console.log(_imported.data)
+    //   _imported.data.map(async (v, i) => {
+    //     let _nftContract = new _web3.eth.Contract(NFT_ABI, v.nft);
+    //     let _userBalance = await _nftContract.methods.balanceOf(_user).call();
+    //     console.log(_userBalance);
+    //     for (let j = 0; j < _userBalance; j++) {
+    //       let _userToken = await _nftContract.methods.tokenOfOwnerByIndex(_user, j).call();
+    //       userTokens.push({ "nft": v.nft, "nftId": _userToken });
+    //     }
+    //     console.log(userTokens)
+    //     if (i == (_imported.data.length - 1)) {
+    //       setImportedNfts(userTokens);
 
-    let _getURI = API_URL + "/getnftuser/" + _user;
-    let _imported = await fetch(_getURI);
-    _imported = await _imported.json();
-    if (_imported.result == "success") {
-      let userTokens = [];
-      console.log(_imported.data)
+    //     }
 
-      _imported.data.map(async (v, i) => {
-        let _nftContract = new _web3.eth.Contract(NFT_ABI, v.nft);
-        let _userBalance = await _nftContract.methods.balanceOf(_user).call();
-        console.log(_userBalance);
-        for (let j = 0; j < _userBalance; j++) {
-          let _userToken = await _nftContract.methods.tokenOfOwnerByIndex(_user, j).call();
-          userTokens.push({ "nft": v.nft, "nftId": _userToken });
+    //   });
 
-
-        }
-        console.log(userTokens)
-        if (i == (_imported.data.length - 1)) {
-          setImportedNfts(userTokens);
-
-        }
-
-      });
-
-
+    // }
     }
 
 
@@ -160,32 +168,50 @@ const ExploreNew = () => {
 
 
 
-    //  let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI,MARKETPLACE);
-    //  let _nftAddress =  await _marketPlaceContract.methods.nftAddress().call() ;
-    //  let _nftContract = new _web3.eth.Contract(NFT_ABI,_nftAddress);
+  //   //  let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI,MARKETPLACE);
+  //   //  let _nftAddress =  await _marketPlaceContract.methods.nftAddress().call() ;
+  //   //  let _nftContract = new _web3.eth.Contract(NFT_ABI,_nftAddress);
 
-    //  setnftAddress(_nftAddress)
-    //  if(address){
+  //   //  setnftAddress(_nftAddress)
+  //   //  if(address){
 
-    //  }
+  //   //  }
 
-  }
+  // }
+//   const {data:_nftAddress} =useContractRead({
+//     address:NFT_MARKETPLACE,
+//     abi:NFT_MARKETPLACE_ABI,
+//     functionName:"nftAddress",
+//     watch:true
+//       })
+//  console.log(_nftAddress);
 
+  const {data:_userBalance} =useContractRead({
+    address:NFT,
+    abi:NFT_ABI,
+    functionName:"balanceOf",
+    args:[address],
+    watch:true
+      })
+
+ 
+    
   const getCollection = async () => {
-    let _web3 = new Web3(web3Provider);
-    let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-    let _nftAddress = await _marketPlaceContract.methods.nftAddress().call();
-    let _nftContract = new _web3.eth.Contract(NFT_ABI, _nftAddress);
+    // let _web3 = new Web3(web3Provider);
+    // let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
+    // let _nftAddress = await _marketPlaceContract.methods.nftAddress().call();
+    // let _nftContract = new _web3.eth.Contract(NFT_ABI, _nftAddress);
 
-    setnftAddress(_nftAddress)
+    setnftAddress(NFT)
     if (address) {
-      let _userBalance = await _nftContract.methods.balanceOf(address).call();
+      // let _userBalance = await _nftContract.methods.balanceOf(address).call();
       let userTokens = [];
 
-      for (let i = 0; i < _userBalance; i++) {
-        let _userToken = await _nftContract.methods.tokenOfOwnerByIndex(address, i).call();
-        userTokens.push(_userToken);
-        if (i == (_userBalance - 1)) {
+      for (let i = 0; i < parseInt(_userBalance); i++) {
+       
+        // let _userToken = await _nftContract.methods.tokenOfOwnerByIndex(address, i).call();
+        userTokens.push({id: i});
+        if (i == (parseInt(_userBalance) - 1)) {
           setUserNfts(userTokens);
         }
 
@@ -195,79 +221,105 @@ const ExploreNew = () => {
   }
 
 
+  // const {data:_status} =useContractRead({
+  //   address:NFT_MARKETPLACE,
+  //   abi:NFT_MARKETPLACE_ABI,
+  //   functionName:"getAuctionStatus",
+  //   args:[0],
+  //     })
+
   const getStatus = async (tradeid) => {
     let _web3 = new Web3(web3Provider);
-    let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+    let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
     let _status = await _marketPlaceContract.methods.getAuctionStatus(tradeid).call();
     // let _status = 1 ;
     console.log(_status);
     return _status;
-
-
   }
+const {data:_count1} =useContractRead({
+    address:NFT_MARKETPLACE,
+    abi:NFT_MARKETPLACE_ABI,
+    functionName:"getTradeCount",
+    watch:true
+      })
 
+
+   
+      const {data:_statusF} =useContractRead({
+        address:NFT_MARKETPLACE,
+        abi:NFT_MARKETPLACE_ABI,
+        functionName:"getFullTrade",
+        args:[index2],
+        watch:true
+          })
+      const {data:_status} =useContractRead({
+        address:NFT_MARKETPLACE,
+        abi:NFT_MARKETPLACE_ABI,
+        functionName:"getAuctionStatus",
+        args:[index2],
+        watch:true
+          })
 
   const getAllStatus = async () => {
     // let _web3 = new Web3(web3Provider);
     //  let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI,MARKETPLACE);
     //  let _count =  await _marketPlaceContract.methods.getTradeCount().call() ;
 
-    //  let onsale = [];
-    //  let sold = [];
-    //  let instant = [];
-    // //  let c = 0 ;
-    // for(let i = 0 ; i < _count ; i++ ) {
+    //  let c = 0 ;
+    for(let i = 0 ; i < parseInt(_count1) ; i++ ) {
+      setIndex2(i)
+      let onsale = [];
+      let sold = [];
+      let instant = [];
+      // let _statusF =  await _marketPlaceContract.methods.getFullTrade(i).call() ;
+      // console.log(_statusF)
+      // if(_statusF[8]){
+      //   let _status =  await _marketPlaceContract.methods.getAuctionStatus(i).call() ;
+      //   if(_status == 1){
+      //     onsale.push(i);
+      //   }
+      //   else{
+      //     if(_statusF.lister != _statusF.buyer){
+      //       sold.push(i);
+      //     }
+      //   }
 
-    //   let _statusF =  await _marketPlaceContract.methods.getFullTrade(i).call() ;
-    //   console.log(_statusF)
-    //   if(_statusF[8]){
-    //     let _status =  await _marketPlaceContract.methods.getAuctionStatus(i).call() ;
-    //     if(_status == 1){
-    //       onsale.push(i);
-    //     }
-    //     else{
-    //       if(_statusF.lister != _statusF.buyer){
-    //         sold.push(i);
-    //       }
-    //     }
-    //     // console.log(i);
+      // }
+      // else if(_statusF[6] == '0x0000000000000000000000000000000000000000' ){
 
-    //   }
-    //   else if(_statusF[6] == '0x0000000000000000000000000000000000000000' ){
+      //   instant.push(i)
+      // }
+      if(i == (parseInt(_count1)-1)){
+        console.log(onsale);
+        // console.log(sold);
+        setSaleArray(onsale);
+        setSoldArray(sold);
+        setInstantArray(instant);
+        // console.log(soldArray);
+        // console.log(saleArray);
+      }
+     }
 
-    //     instant.push(i)
-    //   }
-    //   if(i == (_count-1)){
-    //     console.log(onsale);
-    //     // console.log(sold);
-    //     setSaleArray(onsale);
-    //     setSoldArray(sold);
-    //     setInstantArray(instant);
-    //     // console.log(soldArray);
-    //     // console.log(saleArray);
-    //   }
-    //  }
+    // let _getURI = API_URL + "/marketplace/myfarmpet";
+    // let _imported = await fetch(_getURI);
+    // _imported = await _imported.json();
+    // _imported = _imported[0];
+    // console.log(_imported.onsale)
+    // if (_imported.onsale && _imported.onsale != "") {
+    //   setSaleArray(_imported.onsale.split(','));
+    // }
+    // if (_imported.sold && _imported.sold != "") {
+    //   setSoldArray(_imported.sold.split(','));
+    //   // console.log(soldArray);
+    // }
+    // if (_imported.instant && _imported.instant != "") {
+    //   setInstantArray(_imported.instant.split(','));
 
-    let _getURI = API_URL + "/marketplace/myfarmpet";
-    let _imported = await fetch(_getURI);
-    _imported = await _imported.json();
-    _imported = _imported[0];
-    console.log(_imported.onsale)
-    if (_imported.onsale && _imported.onsale != "") {
-      setSaleArray(_imported.onsale.split(','));
-    }
-    if (_imported.sold && _imported.sold != "") {
-      setSoldArray(_imported.sold.split(','));
-      // console.log(soldArray);
-    }
-    if (_imported.instant && _imported.instant != "") {
-      setInstantArray(_imported.instant.split(','));
-
-    }
+    // }
 
 
   }
-
+console.log(index2);
 
   useEffect(() => {
 
@@ -378,26 +430,26 @@ const ExploreNew = () => {
   }
 
   const importTokens = () => {
-    var formData = new FormData();
-    formData.append("user", address);
-    formData.append("nft", importnftAddress);
-    setApiModal(true);
-    axios
-      .post(API_URL + "/addnftuser", formData
-      )
-      .then((response) => {
-        if (response.data.result == "success") {
-          setImportModal(false)
-          setApiModal(false);
-          getImportedCollection();
+    // var formData = new FormData();
+    // formData.append("user", address);
+    // formData.append("nft", importnftAddress);
+    // setApiModal(true);
+    // axios
+    //   .post(API_URL + "/addnftuser", formData
+    //   )
+    //   .then((response) => {
+    //     if (response.data.result == "success") {
+    //       setImportModal(false)
+    //       setApiModal(false);
+    //       getImportedCollection();
 
-        }
-        else {
-          setApiModal(false);
-          setImportError("Error: " + response.data.message);
-        }
+    //     }
+    //     else {
+    //       setApiModal(false);
+    //       setImportError("Error: " + response.data.message);
+    //     }
 
-      })
+    //   })
   }
 
 
@@ -408,11 +460,11 @@ const ExploreNew = () => {
       <div className="container">
         <div className='nft___mark'>
           <h1>NFT Marketplace</h1>
-          <p>
+          {/* <p>
           Lorem ipsum is placeholder text commonly used Lorem ipsum is placeholder <br/>
           text commonly used Lorem ipsum is placeholder text commonly used Lorem <br/>
           ipsum is placeholder text commonly used
-          </p>
+          </p> */}
         </div>
         <div className="row">
           <div className="col-lg-12">
@@ -627,7 +679,7 @@ const ExploreNew = () => {
                         userNfts.length > 0 && userNfts.map((v, i) => {
                           if (i < climit) {
                             return (
-                              <NftSingle nftid={v} nftAddress={nftAddress} imported={false} />
+                              <NftSingle nftindex={v.id} nftAddress={nftAddress} imported={false}/>
                             )
                           }
                           else {

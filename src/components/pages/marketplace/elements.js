@@ -8,6 +8,9 @@ import cb1 from '../../images/cb1.png';
 import cb2 from '../../images/cb2.png';
 import cb3 from '../../images/cb3.png';
 import arrow from '../../images/round_arrow.svg';
+import moon_img from '../../images/moon_img.png';
+import modal_earth from '../../images/modal_earth.png';
+import bg_img from '../../images/bg_img.png';
 import cb4 from '../../images/cb4.png';
 import cb5 from '../../images/cb5.png';
 import cb6 from '../../images/cb6.png';
@@ -42,7 +45,7 @@ import b7 from '../../images/b7.svg'
 
 const ELEMENTS = {
     'solar': {
-        'name': 'SOLAR',
+        'name': 'SOLAR CELL',
         'price': '10',
         'image': solor,
         'img': b1,
@@ -858,7 +861,7 @@ const elements = (props) => {
 
                                             </div>
                                             <div className='moon___buy__btm '>
-                                                <p>Total sold value</p>
+                                                <p>Available sold value</p>
                                                 <p className='amount___p'>{soldValue > 0 ? soldValue : '0'} {symbol}</p>
 
                                             </div>
@@ -866,13 +869,12 @@ const elements = (props) => {
 
                                     </div>
                                     <div className='para___by'>
-                                        <p>Lorem ipsum is placeholder text commonly used in the <br />
-                                            graphic, print, and publishing industries for previewing <br />
-                                            layouts and visual mockups.</p>
+                                        <p>Update the descriptions of materials according to what is mentioned in gitbook.</p>
                                     </div>
 
                                     <div className='buy___btn__box'>
                                         <div className="wrp-btn-back">
+                                            
                                             {
                                                 available === 0 ?
                                                     <a href="#" className="bg___BTN3" >Sold Out</a>
@@ -882,11 +884,11 @@ const elements = (props) => {
                                             <a href="#" className="bg___BTN3" onClick={sellToggle} >Sell</a>
 
                                         </div>
-                                        <div className="wrp-btn-back">
+                                        {/* <div className="wrp-btn-back">
                                             <a href="/marketplace" className="bg___BTN3">Marketplace</a>
                                             <a href="/choose" className="bg___BTN3">Invest</a>
 
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -903,7 +905,7 @@ const elements = (props) => {
 
 
                     <ModalBody>
-
+<div  className="modal_img_div"><img src={moon_img} alt="moonland" width={"250px"} style={{backgroundImage:`url(${bg_img})`,backgroundSize:"contain",backgroundPosition:"center",backgroundRepeat:"no-repeat",padding:"14px",borderRadius:"27px",}}/></div>
                         <div className="moveRight">
                             <span className="pull-left">
                                 Your {ELEMENTS[key].name} Balance<br />
@@ -914,7 +916,7 @@ const elements = (props) => {
                                 {balance > 0 ? balance : "0.00"} {symbol}
                             </span>
                         </div>
-                        <label className="mb-3"><br />
+                        <label ><br />
                             {
                                 (key === 'fluid' || key === 'positron') &&
 
@@ -996,7 +998,7 @@ const elements = (props) => {
 
 
                     <ModalBody>
-
+                    <div  className="modal_img_div"><img src={moon_img} alt="moonland" width={"250px"} style={{backgroundImage:`url(${bg_img})`,backgroundSize:"contain",backgroundPosition:"center",backgroundRepeat:"no-repeat",padding:"14px",borderRadius:"27px",}}/></div>
                         <div className="moveRight">
                             <span className="pull-left">
                                 Your {ELEMENTS[key].name} Balance<br />
@@ -1007,7 +1009,7 @@ const elements = (props) => {
                                 {balance} {symbol}
                             </span>
                         </div>
-                        <label className="mb-3"><br />
+                        <label ><br />
                             {/* {key} */}
                             {
                                 (key === 'fluid' || key === 'positron') &&
@@ -1060,7 +1062,8 @@ const elements = (props) => {
 
 
                     <ModalBody>
-                        <div className="modaltext text-center mt-4" >Transaction is Processing...</div>
+                    <div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"200px"}/></div>
+                        <div className="modaltext text-center mt-4" >Processing your Request...</div>
 
                     </ModalBody>
                     <Button className="bg___BTN2 mr-auto ml-auto mb-5" onClick={toggle}>Close</Button>

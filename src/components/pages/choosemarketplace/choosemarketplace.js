@@ -45,11 +45,11 @@ class choosemarketplace extends Component {
                                     <h1>MOON
                                         <br />
                                         MARKETPLACE</h1>
-                                    <p>Turn as you need</p>
+                                    <p>Trade Materials & Resources</p>
                                     </div>
                                     
                                     <div className='choosemplace___botm'>
-                                    <a href="/marketplace" className="bg___BTN4"    >Participate</a>
+                                    <a href="/marketplace" className="bg___BTN4"    >Open</a>
                                     </div>
                                 </div>
 
@@ -71,11 +71,11 @@ class choosemarketplace extends Component {
                                     <h1>NFT
                                         <br />
                                         MARKETPLACE</h1>
-                                    <p className='cmplace'>Protect from sun</p>
+                                    <p className='cmplace'>Trade Land NFTs</p>
                                     </div>
                                      
                                     <div className='choosemplace___botm'>
-                                    <a href="/nft/marketplace" className="bg___BTN4"    >Participate</a>
+                                    <a href="/nft/marketplace" className="bg___BTN4"    >Open</a>
                                     </div>
                                 </div>
                             </div>

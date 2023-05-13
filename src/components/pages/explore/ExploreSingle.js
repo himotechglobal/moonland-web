@@ -3,23 +3,25 @@ import $, { inArray } from "jquery";
 import { Row, Col, Container, Button, ModalHeader, ModalFooter, Modal, ModalBody } from "reactstrap";
 
 
-import Config, { MARKETPLACE } from '../../../Config2/index.js';
-import MARKETPLACE_ABI from '../../../Config2/MARKETPLACE_ABI.json';
-import TOKEN_ABI from '../../../Config2/TOKEN_ABI.json';
+import Config, { NFT_MARKETPLACE } from '../../../Config/index.js';
+import NFT_MARKETPLACE_ABI from '../../../Config/NFT_MARKETPLACE_ABI.json';
+import TOKEN_ABI from '../../../Config/TOKEN_ABI.json';
 import NFT_ABI from '../../../Config2/NFT_ABI.json';
 import Web3 from "web3"
 import { useState, useEffect } from 'react';
 // import useWallet from '@binance-chain/bsc-use-wallet'
 
 
-import { useAccount } from 'wagmi';
+import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { ConnectWalletBtn } from '../ConnectWalletBtn.js';
+import { TOKEN } from '../../../Config/index.js';
+import { ethers } from 'ethers';
 
 const ExploreSingle = (props) => {
   
   let web3Provider = window.ethereum;
   // const wallet = useWallet();
-  const { address, isConnected } = useAccount
+  const { address, isConnected } = useAccount()
   const [name, setName] = useState(0);
   const [price, setPrice] = useState(0);
   const [media, setMedia] = useState(null);
@@ -75,22 +77,116 @@ const ExploreSingle = (props) => {
       }, 1000);
     }
   }, [bidStatus]);
-
+  const {data:_trade} =useContractRead({
+    address:NFT_MARKETPLACE,
+    abi:NFT_MARKETPLACE_ABI,
+    functionName:"getTrade",
+    args:[props.tradeid],
+    watch:true
+      })
+  const {data:_fullTrade} =useContractRead({
+    address:NFT_MARKETPLACE,
+    abi:NFT_MARKETPLACE_ABI,
+    functionName:"getFullTrade",
+    args:[props.tradeid],
+    watch:true
+      })
+  const {data:_symbol} =useContractRead({
+    address:TOKEN,
+    abi:TOKEN_ABI,
+    functionName:"symbol",
+    watch:true
+      })
+  const {data:_mediaURI} =useContractRead({
+    address:TOKEN,
+    abi:TOKEN_ABI,
+    functionName:"tokenURI",
+    args:[_trade.nftid],
+    watch:true
+      })
+      const {data:_statusF} =useContractRead({
+        address:NFT_MARKETPLACE,
+        abi:NFT_MARKETPLACE_ABI,
+        functionName:"getFullTrade",
+        args:[props.tradeid],
+        watch:true
+          })
+      const {data:_status} =useContractRead({
+        address:NFT_MARKETPLACE,
+        abi:NFT_MARKETPLACE_ABI,
+        functionName:"getAuctionStatus",
+        args:[props.tradeid],
+        watch:true
+          })
+      const {data:_bidIncreasePercentage} =useContractRead({
+        address:NFT_MARKETPLACE,
+        abi:NFT_MARKETPLACE_ABI,
+        functionName:"bidIncreasePercentage",
+        watch:true
+          })
+      const {data:_likes} =useContractRead({
+        address:NFT_MARKETPLACE,
+        abi:NFT_MARKETPLACE_ABI,
+        functionName:"likes",
+        args:[props.tradeid],
+        watch:true
+          })
+      const {data:_decimals} =useContractRead({
+        address:_fullTrade[5],
+        abi:TOKEN_ABI,
+        functionName:"decimals",
+        watch:true
+          })
+      const {data:_balance1} =useContractRead({
+        address:_fullTrade[5],
+        abi:TOKEN_ABI,
+        functionName:"balanceOf",
+        args:[address],
+        watch:true
+          })
+      const {data:_approval} =useContractRead({
+        address:_fullTrade[5],
+        abi:TOKEN_ABI,
+        functionName:"allowance",
+        args:[address, NFT_MARKETPLACE],
+        watch:true
+          })
+      const {data:_liked} =useContractRead({
+        address:NFT_MARKETPLACE,
+        abi:NFT_MARKETPLACE_ABI,
+        functionName:"likesMap",
+        args:[props.tradeid, address],
+        watch:true
+          })
+      const {data:_canClaim} =useContractRead({
+        address:NFT_MARKETPLACE,
+        abi:NFT_MARKETPLACE_ABI,
+        functionName:"claim",
+        args:[props.tradeid, address],
+        watch:true
+          })
+      const {data:_userBid} =useContractRead({
+        address:NFT_MARKETPLACE,
+        abi:NFT_MARKETPLACE_ABI,
+        functionName:"getBid",
+        args:[props.tradeid, address],
+        watch:true
+          })
 
   const init = async () => {
     let _web3 = new Web3(web3Provider);
-    let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-    let _trade = await _marketPlaceContract.methods.getTrade(props.tradeid).call();
-    let _fullTrade = await _marketPlaceContract.methods.getFullTrade(props.tradeid).call();
+    let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
+    // let _trade = await _marketPlaceContract.methods.getTrade(props.tradeid).call();
+    // let _fullTrade = await _marketPlaceContract.methods.getFullTrade(props.tradeid).call();
     let _token = _fullTrade[5];
     settokenAddress(_token);
     let _tokenContract = new _web3.eth.Contract(TOKEN_ABI, _token);
-    let _symbol = await _tokenContract.methods.symbol().call();
+    // let _symbol = await _tokenContract.methods.symbol().call();
     setSymbol(_symbol);
     let _nftToken = _trade.nftadd;
     let _nftTokenId = _trade.nftid;
     let _nftContract = new _web3.eth.Contract(NFT_ABI, _nftToken);
-    let _mediaURI = await _nftContract.methods.tokenURI(_nftTokenId).call();
+    // let _mediaURI = await _nftContract.methods.tokenURI(_nftTokenId).call();
     try {
       _mediaURI = await fetch(_mediaURI);
       _mediaURI = await _mediaURI.json();
@@ -102,12 +198,13 @@ const ExploreSingle = (props) => {
 
     //  alert(encodeURI(_mediaURI.image))
     //  let _media = await getBase64FromUrl(_mediaURI)  ;
+  
     setHighestBidder(_trade.highestBidder);
 
-    let _statusF = await _marketPlaceContract.methods.getFullTrade(props.tradeid).call();
+    // let _statusF = await _marketPlaceContract.methods.getFullTrade(props.tradeid).call();
     if (_statusF[8]) {
 
-      let _status = await _marketPlaceContract.methods.getAuctionStatus(props.tradeid).call();
+      // let _status = await _marketPlaceContract.methods.getAuctionStatus(props.tradeid).call();
       setBidStatus(_status)
     }
     else {
@@ -115,10 +212,10 @@ const ExploreSingle = (props) => {
 
     }
     setLister(_statusF.lister)
-    let _bidIncreasePercentage = await _marketPlaceContract.methods.bidIncreasePercentage().call();
+    // let _bidIncreasePercentage = await _marketPlaceContract.methods.bidIncreasePercentage().call();
     setBidIncreasePercentage(_bidIncreasePercentage);
 
-    let _likes = await _marketPlaceContract.methods.likes(props.tradeid).call();
+    // let _likes = await _marketPlaceContract.methods.likes(props.tradeid).call();
     setLikes(_likes);
 
 
@@ -129,7 +226,7 @@ const ExploreSingle = (props) => {
     let _name = _trade.title;
     setName(_name);
 
-    let _decimals = await _tokenContract.methods.decimals().call();
+    // let _decimals = await _tokenContract.methods.decimals().call();
     setDecimals(_decimals);
     setPrice(_trade.startingPrice / 1e1 ** _decimals);
 
@@ -142,21 +239,21 @@ const ExploreSingle = (props) => {
 
     if (address) {
 
-      let _liked = await _marketPlaceContract.methods.likesMap(props.tradeid, address).call();
+      // let _liked = await _marketPlaceContract.methods.likesMap(props.tradeid, address).call();
       console.log(props.tradeid);
       console.log(_liked);
       setLiked(_liked);
 
-      let _balance = await _tokenContract.methods.balanceOf(address).call();
-      _balance = parseFloat(_balance / 1e1 ** _decimals).toFixed(2);
+      // let _balance = await _tokenContract.methods.balanceOf(address).call();
+      let _balance = parseFloat(_balance1 / 1e1 ** _decimals).toFixed(2);
       setBalance(_balance)
 
-      let _approval = await _tokenContract.methods.allowance(address, MARKETPLACE).call();
+      // let _approval = await _tokenContract.methods.allowance(address, NFT_MARKETPLACE).call();
       setApproval(_approval)
 
-      let _canClaim = await _marketPlaceContract.methods.claim(props.tradeid, address).call();
+      // let _canClaim = await _marketPlaceContract.methods.claim(props.tradeid, address).call();
       setCanClaim(_canClaim)
-      let _userBid = await _marketPlaceContract.methods.getBid(props.tradeid, address).call();
+      // let _userBid = await _marketPlaceContract.methods.getBid(props.tradeid, address).call();
       _userBid = parseFloat(_userBid / 1e1 ** _decimals).toFixed(2);
       setUserbid(_userBid)
 
@@ -177,8 +274,87 @@ const ExploreSingle = (props) => {
     setDepositAmount(balance * 0.99)
   }
 
+  const { config: placeBidConfig } = usePrepareContractWrite({
+    address: NFT_MARKETPLACE,
+    abi: NFT_MARKETPLACE_ABI,
+    functionName: 'placeBid',
+    args: [props.tradeid, parseFloat(depositAmount)>0 ? ethers.utils.parseEther(parseFloat(depositAmount).toString()):0],
+    
+})
+// console.log("amount",farmTokenId);
+
+const { data: placeBidData, writeAsync: placeBidWriteAsync, isError: placeBidError } = useContractWrite(placeBidConfig)
+
+const { isSuccess: placeBidSuccess } = useWaitForTransaction({
+    hash: placeBidData?.hash,
+})
+
+if (placeBidError && modal) {
+  setModal(false);
+ 
+}
+if (placeBidSuccess && modal) {
+  setModal(false);
+
+    init();
+    bidToggle();
+
+}
 
 
+  const { config: buyNftConfig } = usePrepareContractWrite({
+    address: NFT_MARKETPLACE,
+    abi: NFT_MARKETPLACE_ABI,
+    functionName: 'buyNft',
+    args: [props.tradeid],
+    
+
+})
+// console.log("amount",farmTokenId);
+
+const { data: buyNftData, writeAsync: buyNftWriteAsync, isError: buyNftError } = useContractWrite(buyNftConfig)
+
+const { isSuccess: buyNftSuccess } = useWaitForTransaction({
+    hash: buyNftData?.hash,
+})
+
+if (buyNftError && modal) {
+  setModal(false);
+ 
+}
+if (buyNftSuccess && modal) {
+  setModal(false);
+
+    init();
+
+}
+
+
+  const { config: withdrawConfig } = usePrepareContractWrite({
+    address: NFT_MARKETPLACE,
+    abi: NFT_MARKETPLACE_ABI,
+    functionName: 'withdraw',
+    args: [props.tradeid],
+
+})
+// console.log("amount",farmTokenId);
+
+const { data: withdrawData, writeAsync: withdrawWriteAsync, isError: withdrawError } = useContractWrite(withdrawConfig)
+
+const { isSuccess: withdrawSuccess } = useWaitForTransaction({
+    hash: withdrawData?.hash,
+})
+
+if (withdrawError && modal) {
+  setModal(false);
+ 
+}
+if (withdrawSuccess && modal) {
+  setModal(false);
+
+    init();
+
+}
   async function placeBid() {
     setDepositError(false);
     let _amount = parseFloat(depositAmount);
@@ -209,23 +385,25 @@ const ExploreSingle = (props) => {
 
 
 
-    let _web3 = new Web3(web3Provider);
-    const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+    // let _web3 = new Web3(web3Provider);
+    // const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
 
 
-    _amount = _web3.utils.toWei(_amount.toString());
+    // _amount = _web3.utils.toWei(_amount.toString());
 
     setModal(!modal);
-    _marketPlaceContract.methods.placeBid(props.tradeid, _amount).send({
-      from: address
-    }).on('receipt', function (receipt) {
-      setModal(modal);
-      init();
-      bidToggle();
-    }).on('error', function (receipt) {
-      setModal(modal);
+    await placeBidWriteAsync()
+    // _marketPlaceContract.methods.placeBid(props.tradeid, _amount).send({
+    //   from: address
+    // }).on('receipt', function (receipt) {
+    //   setModal(modal);
+    //   init();
+    //   bidToggle();
+    // }).on('error', function (receipt) {
+    //   setModal(modal);
 
-    })
+    // })
+
 
   }
 
@@ -235,42 +413,45 @@ const ExploreSingle = (props) => {
   async function buyNft() {
 
     let _web3 = new Web3(web3Provider);
-    const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+    const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
 
+    // setModal(!modal);
+    // _marketPlaceContract.methods.buyNft(props.tradeid).send({
+    //   from: address
+    // }).on('receipt', function (receipt) {
+    //   setModal(modal);
+    //   init();
+    // }).on('error', function (receipt) {
+    //   setModal(modal);
+
+    // })
     setModal(!modal);
-    _marketPlaceContract.methods.buyNft(props.tradeid).send({
-      from: address
-    }).on('receipt', function (receipt) {
-      setModal(modal);
-      init();
-    }).on('error', function (receipt) {
-      setModal(modal);
-
-    })
+    await buyNftWriteAsync()
 
   }
   async function claimBid() {
 
     let _web3 = new Web3(web3Provider);
-    const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+    const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
 
     setModal(!modal);
-    _marketPlaceContract.methods.withdraw(props.tradeid).send({
-      from: address
-    }).on('receipt', function (receipt) {
-      setModal(modal);
-      init();
-    }).on('error', function (receipt) {
-      setModal(modal);
+    await withdrawWriteAsync?.()
+    // _marketPlaceContract.methods.withdraw(props.tradeid).send({
+    //   from: address
+    // }).on('receipt', function (receipt) {
+    //   setModal(modal);
+    //   init();
+    // }).on('error', function (receipt) {
+    //   setModal(modal);
 
-    })
+    // })
 
   }
 
 
   const getTimer = async () => {
     let _web3 = new Web3(web3Provider);
-    let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+    let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
     let _tradeTime = await _marketPlaceContract.methods.getAuctionTime(props.tradeid).call();
     let _now = new Date().getTime() / 1e3;
 
@@ -308,64 +489,139 @@ const ExploreSingle = (props) => {
 
 
 
+  const { config: unLikeTradeConfig } = usePrepareContractWrite({
+    address: NFT_MARKETPLACE,
+    abi: NFT_MARKETPLACE_ABI,
+    functionName: 'unLike',
+    args: [props.tradeid],
 
+})
+// console.log("amount",farmTokenId);
+
+const { data: unLikeTradeData, writeAsync: unLikeTradeWriteAsync, isError: unLikeTradeError } = useContractWrite(unLikeTradeConfig)
+
+const { isSuccess: unLikeTradeSuccess } = useWaitForTransaction({
+    hash: unLikeTradeData?.hash,
+})
+
+if (unLikeTradeError && modal) {
+  setModal(false);
+ 
+}
+if (unLikeTradeSuccess && modal) {
+  setModal(false);
+
+    init();
+
+}
   async function unLikeTrade() {
     let _web3 = new Web3(web3Provider);
 
     setModal(!modal);
 
-    const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+    // const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
 
-    _marketPlaceContract.methods.unLike(props.tradeid).send({ from: address }).on('receipt', function (receipt) {
-      init();
-      setModal(modal);
+    // _marketPlaceContract.methods.unLike(props.tradeid).send({ from: address }).on('receipt', function (receipt) {
+    //   init();
+    //   setModal(modal);
 
-    })
+    // })
 
-      .on('error', function (error, receipt) {
-        setModal(modal);
+    //   .on('error', function (error, receipt) {
+    //     setModal(modal);
 
-      });
+    await unLikeTradeWriteAsync?.()
 
   }
 
+  const { config: likeTradeConfig } = usePrepareContractWrite({
+    address: NFT_MARKETPLACE,
+    abi: NFT_MARKETPLACE_ABI,
+    functionName: 'unLike',
+    args: [props.tradeid],
+
+})
+// console.log("amount",farmTokenId);
+
+const { data: likeTradeData, writeAsync: likeTradeWriteAsync, isError: likeTradeError } = useContractWrite(likeTradeConfig)
+
+const { isSuccess: likeTradeSuccess } = useWaitForTransaction({
+    hash: likeTradeData?.hash,
+})
+
+if (likeTradeError && modal) {
+  setModal(false);
+ 
+}
+if (likeTradeSuccess && modal) {
+  setModal(false);
+
+    init();
+
+}
   async function likeTrade() {
     let _web3 = new Web3(web3Provider);
 
     setModal(!modal);
+    await likeTradeWriteAsync?.()
 
-    const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+    // const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
 
-    _marketPlaceContract.methods.like(props.tradeid).send({ from: address }).on('receipt', function (receipt) {
-      init();
-      setModal(modal);
+    // _marketPlaceContract.methods.like(props.tradeid).send({ from: address }).on('receipt', function (receipt) {
+    //   init();
+    //   setModal(modal);
 
-    })
+    // })
 
-      .on('error', function (error, receipt) {
-        setModal(modal);
+    //   .on('error', function (error, receipt) {
+    //     setModal(modal);
 
-      });
+    //   });
 
   }
+  const _amountApprove = ethers.utils.parseEther('10000000000000000000000').toString();
+  const { config: approveTokenConfig } = usePrepareContractWrite({
+    address: tokenAddress,
+    abi: TOKEN_ABI,
+    functionName: 'approve',
+    args: [NFT_MARKETPLACE,_amountApprove],
 
+})
+// console.log("amount",farmTokenId);
+
+const { data: approveTokenData, writeAsync: approveTokenWriteAsync, isError: approveTokenError } = useContractWrite(approveTokenConfig)
+
+const { isSuccess: approveTokenSuccess } = useWaitForTransaction({
+    hash: approveTokenData?.hash,
+})
+
+if (approveTokenError && modal) {
+  setModal(false);
+ 
+}
+if (approveTokenSuccess && modal) {
+  setModal(false);
+  init()
+
+}
   async function approveToken() {
     let _web3 = new Web3(web3Provider);
 
     setModal(!modal);
+    await approveTokenWriteAsync?.()
 
-    const _tokenContract = new _web3.eth.Contract(TOKEN_ABI, tokenAddress);
-    const _amount = _web3.utils.toWei('10000000000000000000000');
-    _tokenContract.methods.approve(MARKETPLACE, _amount).send({ from: address }).on('receipt', function (receipt) {
-      init();
-      setModal(modal);
+    // const _tokenContract = new _web3.eth.Contract(TOKEN_ABI, tokenAddress);
+    // const _amount = _web3.utils.toWei('10000000000000000000000');
+    // _tokenContract.methods.approve(NFT_MARKETPLACE, _amount).send({ from: address }).on('receipt', function (receipt) {
+    //   init();
+    //   setModal(modal);
 
-    })
+    // })
 
-      .on('error', function (error, receipt) {
-        setModal(modal);
+    //   .on('error', function (error, receipt) {
+    //     setModal(modal);
 
-      });
+    //   });
 
   }
 

@@ -14,7 +14,7 @@ import { useAccount } from 'wagmi';
 const TopPicks = () => {
     let web3Provider  = window.ethereum ; 
     // const wallet = useWallet();
-    const {address, isConnected} = useAccount
+    const {address, isConnected} = useAccount()
     const [counter,setCounter] = useState([]) ; 
     const [olimit,setolimit] = useState(20) ;
     const [oloading,setoLoading] = useState(false) ;

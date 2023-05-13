@@ -17,6 +17,7 @@ import arrow from '../../images/round_arrow.svg';
 import chicken1 from '../../images/chicken10.png';
 import chicken100 from '../../images/chicken100.png';
 import acc__arrow_revse from '../../images/acc__arrow_revse.svg'
+import modal_earth from '../../images/modal_earth.png'
 import chicken1000 from '../../images/chicken1000.png';
 import chickSine from '../../images/chickSine.svg'
 import eggs1 from '../../images/eggs1.png';
@@ -93,7 +94,7 @@ const ChickenFarm = () => {
     const [endTime, setendTime] = useState(null);
     const [layTime, setlayTime] = useState(null);
 
-    const [eggTime, seteggTime] = useState('70 days');
+    const [eggTime, seteggTime] = useState('45 days');
     const [eggTime2, seteggTime2] = useState('40 days');
     const [areadepositError, setareadepositError] = useState(null);
     const [buyareadepositError, setbuyareadepositError] = useState(null);
@@ -781,10 +782,10 @@ console.log(farmCapacity);
     })
 
 
-    if (lockNFTError) {
+    if (lockNFTError && modal) {
         setModal(false);
     }
-    if (lockNFTSuccess ) {
+    if (lockNFTSuccess && modal) {
         setModal(false);
         getData();
 
@@ -795,7 +796,7 @@ console.log(farmCapacity);
     const lockNFT = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await lockNFTWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _farmingContract = new _web3.eth.Contract(CHICKEN_FARMING_ABI, CHICKEN_FARMING);
@@ -1004,7 +1005,7 @@ console.log(farmCapacity);
 
 
     if (removeChickenError && modal) {
-        setModal(modal);
+        setModal(false);
         
     }
     if (removeChickenSuccess && modal && removeChickenModal) {
@@ -1026,7 +1027,7 @@ console.log(farmCapacity);
 
         else {
 
-            setModal(!modal);
+            setModal(true);
             await removeChickenWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _famringContract = new _web3.eth.Contract(CHICKEN_FARMING_ABI, CHICKEN_FARMING);
@@ -1088,7 +1089,7 @@ console.log(farmCapacity);
         // console.log("moreinfoe",parseInt(chickenFoodBalance), cdamount * dayamount * 20)
         setcDepositError(false)
         if (parseInt(chickenFoodBalance) < cdamount * dayamount * 20) {
-            setcDepositError("Error: Insufficient fluid Balance");
+            setcDepositError("Error: Insufficient fluid amount");
             return false;
         }
         else if (cdamount > (farmCapacity - chickenDeposited)) {
@@ -1097,7 +1098,7 @@ console.log(farmCapacity);
         }
         else {
 
-            setModal(!modal);
+            setModal(true);
             await depositMoreChickenWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _famringContract = new _web3.eth.Contract(CHICKEN_FARMING_ABI, CHICKEN_FARMING);
@@ -1168,7 +1169,7 @@ console.log(farmCapacity);
         }
         else {
 
-            setModal(!modal);
+            setModal(true);
             await depositChickenWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _famringContract = new _web3.eth.Contract(CHICKEN_FARMING_ABI, CHICKEN_FARMING);
@@ -1270,7 +1271,7 @@ console.log(farmCapacity);
     const approvebaseTokenIncub = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await approvebaseTokenIncubWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _baseTokenContract = new _web3.eth.Contract(TOKEN_ABI, baseToken);
@@ -1320,7 +1321,7 @@ console.log(farmCapacity);
     const approvebaseToken = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await approvebaseTokenWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _baseTokenContract = new _web3.eth.Contract(TOKEN_ABI, baseToken);
@@ -1423,7 +1424,7 @@ console.log(farmCapacity);
             return false
         }
         else {
-            setModal(!modal);
+            setModal(true);
             await claimChickenWriteAsync()
             // const _incubatorContract = new _web3.eth.Contract(CHICKEN_INCUBATOR_ABI, CHICKEN_INCUBATOR);
             // _incubatorContract.methods.claimAdults().send({ from: address }).on('receipt', function (receipt) {
@@ -1474,7 +1475,7 @@ console.log(farmCapacity);
     const claimEggs = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await claimEggsWriteAsync()
         // const _farmingContract = new _web3.eth.Contract(CHICKEN_FARMING_ABI, CHICKEN_FARMING);
         // _farmingContract.methods.claimEggs().send({ from: address }).on('receipt', function (receipt) {
@@ -1519,7 +1520,7 @@ console.log(farmCapacity);
     const approveChickenEgg = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await approveChickenEggWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _chickenEggContract = new _web3.eth.Contract(TOKEN_ABI, chickenEggToken);
@@ -1570,7 +1571,7 @@ console.log(farmCapacity);
     const approveChicken = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await approveChickenWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _chickenContract = new _web3.eth.Contract(TOKEN_ABI, chickenToken);
@@ -1629,7 +1630,7 @@ console.log(farmCapacity);
         else {
             // let _web3 = new Web3(web3Provider);
 
-            setModal(!modal);
+            setModal(true);
             await addDaysWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _farmingContract = new _web3.eth.Contract(CHICKEN_FARMING_ABI, CHICKEN_FARMING);
@@ -1682,14 +1683,14 @@ console.log(farmCapacity);
     const depositEgg = async () => {
         setceDepositError(false)
         if (parseInt(chickenEggBalance) < parseInt(cedamount)) {
-            setceDepositError("Error: Insufficient cell Balance");
+            setceDepositError("Error: Insufficient Energy Packets");
             return false;
         }
 
         else {
             // let _web3 = new Web3(web3Provider);
 
-            setModal(!modal);
+            setModal(true);
             await depositEggWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _incubatorContract = new _web3.eth.Contract(CHICKEN_INCUBATOR_ABI, CHICKEN_INCUBATOR);
@@ -1742,7 +1743,7 @@ console.log(farmCapacity);
     const sellfarm = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await sellfarmWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
@@ -1803,7 +1804,7 @@ console.log(farmCapacity);
         }
         else {
 
-            setModal(!modal);
+            setModal(true);
             await buyAreaNFTWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
@@ -1863,7 +1864,7 @@ console.log(farmCapacity);
         }
         else {
 
-            setModal(!modal);
+            setModal(true);
             await addAreaNFTWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
@@ -1908,7 +1909,7 @@ console.log(farmCapacity);
         setModal(false);
        
     }
-    if (approveNFTSuccess) {
+    if (approveNFTSuccess && modal) {
         setModal(false);
         // lockNFT();
         getData();
@@ -1918,7 +1919,7 @@ console.log(farmCapacity);
     const approveNFT = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await approveNFTWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _nftContract = new _web3.eth.Contract(NFT_ABI, farmToken);
@@ -2006,6 +2007,7 @@ console.log(farmCapacity);
 
     const [show, setShow] = useState(false);
     const [show1, setShow1] = useState(false);
+    const [show3, setShow3] = useState(false);
 
 
 
@@ -2019,8 +2021,8 @@ console.log(farmCapacity);
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="slide-heads">
-                                <h1>BUY MOON LAND <span className='dollar__text2'>&</span> SOLAR HARVESTER</h1>
-                                <p>Combine Solor cells and Fluids Harvest</p>
+                                <h1>SOLAR HARVESTING</h1>
+                                {/* <p>Combine Solar cells and Fluids Harvest</p> */}
                             </div>
                             {/* <div className="wrp-slide">
                                     <div className="slide-prev">
@@ -2056,45 +2058,33 @@ console.log(farmCapacity);
                                        </div> */}
                                         <div className='alien___rightBox'>
                                             <div className="alientime">
-                                                <div className="time__list">
-                                                    {/* {farmBalance} */}
+                                                {/* <div className="time__list">
                                                     <h3>{isNaN(farmBalance)? 0.00 :farmBalance} {farmSymbol}</h3>
                                                     <p>Your Balance</p>
-                                                </div>
+                                                </div> */}
                                                 <div className="time__list">
-                                                    <h3>{farmArea} sq m</h3>
-                                                    <p>Your Locked Harvest Area</p>
+                                                    <h3>{farmArea} sq Yards</h3>
+                                                    <p>Your Land’s Area</p>
                                                 </div>
-                                                <div className="time__list">
+                                                {/* <div className="time__list">
                                                     <h3><span className='dollar__text'>${" "}</span>{farmArea * 1}</h3>
                                                     <p>Market Value</p>
-                                                </div>
+                                                </div> */}
                                                 <div className="time__list">
                                                     <h3>{farmCapacity ?? 0}</h3>
-                                                    <p>Solar Capacity</p>
+                                                    <p>Harvesters Capacity</p>
                                                 </div>
-                                                {
-                                                        !farmLocked && farmBalance > 0 && farmApprove &&
-                                                        <a className="bg___BTN2" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
-                                                    }
-                                                    {
-                                                        farmBalance > 0 && !farmApprove &&
-                                                        <a className="bg___BTN2" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
-                                                    }
-                                                    {
-                                                        farmLocked &&
-                                                        <a className="bg___BTN2" onClick={areaToggle}>Buy More Harvest Area</a>
-                                                    }
-                                                    {
-                                                        !farmLocked && farmBalance == 0 &&
-                                                        <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Harvest Area</a>
-                                                    }
-                                                    {
-                                                        landIsfree &&
-                                                        <a className="bg___BTN2 ml-2" onClick={sellfarm}>Sell Harvest Area</a>
-                                                    }
-                                               
+                                             
+                                            <div className='acc__arrow___icon' onClick={() => setShow3(prev => !prev)} >
+
+{show3 ?
+    <img src={acc__arrow_revse} alt='' />
+    :
+    <img src={acc__arrow} alt='' />
+}
+</div>
                                             </div>
+
                                             {/* <div className="alienbtns">
                                                 
 
@@ -2129,6 +2119,50 @@ console.log(farmCapacity);
 
                                 </div>
                             </div>
+                            {show3 &&
+                                <div className='acc__summery'>
+                                    <div className='acc__summery__in'
+                                    
+                                    >
+
+
+
+
+                                        {/* <div className="pool-btns">
+                                                        <p style={{color: '#fff'}}>Chicken Farming is being upgraded to a newer version with enhanced features between 8:30 hours UTC to 12:30 hours UTC. During this time you won't be able to perform any actions. </p>
+                                               </div> */}
+
+                                        <div className="pool-btns">
+                                        <div className="alientime">
+                                               
+                                                {
+                                                        !farmLocked && farmBalance > 0 && farmApprove &&
+                                                        <a className="bg___BTN2" onClick={lockNFT} >Lock {farmSymbol} NFT</a>
+                                                    }
+                                                    {
+                                                        farmBalance > 0 && !farmApprove &&
+                                                        <a className="bg___BTN2" onClick={approveNFT}>Approve & Lock {farmSymbol} NFT</a>
+                                                    }
+                                               
+                                                    {
+                                                        farmLocked &&
+                                                        <a className="bg___BTN2" onClick={areaToggle}>Buy More Harvest Area</a>
+                                                    }
+                                                    {
+                                                        !farmLocked && farmBalance == 0 &&
+                                                        <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Harvest Area</a>
+                                                    }
+                                                    {
+                                                        landIsfree &&
+                                                        <a className="bg___BTN2 ml-2" onClick={sellfarm}>Sell Harvest Area</a>
+                                                    }
+                                               
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
 
 
                             <div className='marketplace-box-wrap4'>
@@ -2164,7 +2198,7 @@ console.log(farmCapacity);
                                                     </h3>
                                                     <p>Balance</p>
                                                 </div>
-                                                <div className="time__list"><h3>{isNaN(chickenDeposited)? 0.00:chickenDeposited} {chickenSymbol}
+                                                {/* <div className="time__list"><h3>{isNaN(chickenDeposited)? 0.00:chickenDeposited} {chickenSymbol} */}
 
                                                     {/* {
                                                         chickenDeposited > 0 && chickenDeposited <= 10 &&
@@ -2179,10 +2213,10 @@ console.log(farmCapacity);
                                                         <img src={chicken1000} width="60px" alt="" />
                                                     } */}
 
-                                                </h3><p>Deposited</p></div>
+                                                {/* </h3><p>Deposited</p></div> */}
                                                 <div className="time__list">
                                                     <h3>
-                                                        {parseFloat(eggsearned).toFixed()}
+                                                        {eggsearned>0?parseFloat(eggsearned).toFixed():0}
                                                         {/* {
                                                             eggsearned > 0 && eggsearned <= 10 &&
                                                             <img src={eggs1} className="ml-2" width="60px" alt="" />
@@ -2196,7 +2230,7 @@ console.log(farmCapacity);
                                                             <img src={eggs1000} className="ml-2" width="60px" alt='' />
                                                         } */}
                                                     </h3>
-                                                    <p>Cells Earned</p>
+                                                    <p>Energy Packets Earned</p>
                                                     {/* {
                                                         chickenDeposited > 0 && layEndTime > new Date().getTime() / 1e3 &&
                                                         <>
@@ -2214,12 +2248,12 @@ console.log(farmCapacity);
 
 
                                                 </div>
-                                                <div className="time__list">
-                                                    <h3><span className='dollar__text'>${" "}</span>{parseFloat(eggsearned * 0.12).toFixed(2)}</h3>
+                                                {/* <div className="time__list">
+                                                    <h3><span className='dollar__text'>${" "}</span>{eggsearned>0 ?parseFloat(eggsearned * 0.12).toFixed(2):0}</h3>
                                                     <p>Earned Value</p>
-                                                </div>
+                                                </div> */}
                                                 <div className="time__list">
-                                                    <h3>{chickenDeposited * 365}</h3>
+                                                    <h3>{chickenDeposited>0?(chickenDeposited * 365):0}</h3>
                                                     <p>Cells per Year</p>
                                                     {
                                                         chickenDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
@@ -2282,7 +2316,7 @@ console.log(farmCapacity);
                                         <div className="pool-btns">
                                             <div >
                                                 <img src={solerimg1} alt="" width={100}/>
-                                                <Link className="bg___BTN2" to="/buy/solar">Buy Solar</Link>
+                                                <Link className="bg___BTN2" to="/buy/solar">Buy Cells</Link>
                                             </div>
                                             <div style={{display:"flex",gap:"10px",flexWrap:"wrap",justifyContent:"center"}}>
                                                
@@ -2295,13 +2329,13 @@ console.log(farmCapacity);
 
                                             {
                                                 chickenApproved > 0 && chickenDeposited == 0 &&
-                                                <a className="bg___BTN2" onClick={() => setChickenModal(!chickenModal)} >Put Solar for Harvest</a>
+                                                <a className="bg___BTN2" onClick={() => setChickenModal(!chickenModal)} >Assemble Solar Cells</a>
                                             }
 
 
                                             {
                                                 chickenApproved > 0 && chickenDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
-                                                <a className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Put more Solar in Harvest</a>
+                                                <a className="bg___BTN2" onClick={() => setMoreChickenModal(!moreChickenModal)} >Assemble More Solar Cells</a>
                                             }
 
 
@@ -2309,12 +2343,12 @@ console.log(farmCapacity);
                                             {
                                                 chickenDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
 
-                                                <a className="bg___BTN2" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove Solar From Harvest</a>
+                                                <a className="bg___BTN2" onClick={removeChickentoggle}>Remove Solar From Harvest</a>
 
                                             }
                                             {
                                                 eggsearned > 0 &&
-                                                <a className="bg___BTN2" onClick={claimEggs} >Claim Cells</a>
+                                                <a className="bg___BTN2" onClick={claimEggs} >Claim Energy Packets</a>
                                             }
                                             {
                                                 chickenDeposited > 0 &&
@@ -2347,7 +2381,7 @@ console.log(farmCapacity);
                                         <div className='alien___rightBox'>
                                             <div className="alientime__accordian">
                                                 <div class="time__list">
-                                                    <h3>{chickenEggBalance} {chickenEggSymbol}
+                                                    <h3>{chickenEggBalance>0 ?chickenEggBalance:0} {chickenEggSymbol}
 
                                                         {/* {
                                                             chickenEggBalance > 0 && chickenEggBalance <= 10 &&
@@ -2361,7 +2395,7 @@ console.log(farmCapacity);
                                                             chickenEggBalance > 100 && chickenEggBalance <= 1000 &&
                                                             <img src={eggs1000} className="ml-2" width="60px" alt='' />
                                                         } */}
-                                                    </h3><p>Your Balance</p>
+                                                    </h3><p>Your Energy Packets</p>
                                                 </div>
                                                 <div className="time__list"><h3>{chickenEggDeposited} {chickenEggSymbol}
 
@@ -2378,7 +2412,7 @@ console.log(farmCapacity);
                                                         <img src={eggs1000} className="ml-2" width="60px" alt='' />
                                                     } */}
 
-                                                </h3><p>Deposited</p></div>
+                                                </h3><p>Forged By You</p></div>
                                                 <div className="time__list">
                                                     <h3>
 
@@ -2397,7 +2431,7 @@ console.log(farmCapacity);
                                                         } */}
 
                                                     </h3>
-                                                    <p>Solar</p>
+                                                    <p>Forged Total</p>
                                                 </div>
 
                                                 <div className="time__list">
@@ -2407,13 +2441,13 @@ console.log(farmCapacity);
 
 
                                                 </div>
-                                                <div className="time__list">
+                                                {/* <div className="time__list">
                                                     <h3><span className='dollar__text'>${" "}</span>{adult * 10}</h3> 
                                                     <p>Market Value</p>
-                                                </div>
+                                                </div> */}
                                                 <div className="time__list">
-                                                    <h3 className="timer">{incubCapacity}</h3>
-                                                    <p>Available <br />Incubators</p>
+                                                    <h3 className="timer">{incubCapacity>0?incubCapacity:0}</h3>
+                                                    <p>Available <br />Slots</p>
                                                 </div>
                                                 <div 
                                                 // className='acc__arrow'
@@ -2458,7 +2492,7 @@ console.log(farmCapacity);
                                         <div className="pool-btns">
                                         <div className='js__ac'>
                                                 <img src={bysine} alt="" width={100}/>
-                                                <a className="bg___BTN2" href="/buy/chickenegg">Buy Cells</a>
+                                                <a className="bg___BTN2" href="/buy/chickenegg">Buy Energy Packets</a>
                                             </div>
                                           <div style={{display:"flex",gap:"10px",flexWrap:"wrap"}}>
                                               
@@ -2470,17 +2504,17 @@ console.log(farmCapacity);
                                             }
                                             {
                                                 chickenEggApproved > 0 && chickenEggDeposited == 0 &&
-                                                <a className="bg___BTN2" onClick={eggtoggle} >Put Cells in Incubator</a>
+                                                <a className="bg___BTN2" onClick={eggtoggle} >Forge Solar Cells</a>
                                             }
 
                                             {
                                                 adult > 0 && baseApprovedIncub > 0 &&
-                                                <a className="bg___BTN2" onClick={claimChicken} >Claim Solar (Fee: {chickenClaimfee} {baseSymbol}) </a>
+                                                <a className="bg___BTN2" onClick={claimChicken} >Claim Solar Cells (Fee: {chickenClaimfee} ${baseSymbol}) </a>
                                             }
 
                                             {
                                                 adult > 0 && baseApprovedIncub == 0 &&
-                                                <a className="bg___BTN2" onClick={approvebaseTokenIncub} >Approve Moonland to claim Solar</a>
+                                                <a className="bg___BTN2" onClick={approvebaseTokenIncub} >Approve {baseSymbol} to claim Solar</a>
                                             }
                                           </div>
 
@@ -2517,16 +2551,19 @@ console.log(farmCapacity);
 
 
 
+            <div className="new_modal">
             <Modal isOpen={modal} toggle={toggle} centered={true}>
 
 
-                <ModalBody>
-                    <div className="modaltext text-center mt-4" >Transaction is Processing...</div>
+<ModalBody>
+<div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"150px"} style={{opacity:"65%"}}/></div>
+    <div className="modaltext text-center mt-4" >Processing your Request...</div>
 
-                </ModalBody>
-                <Button className="bg___BTN2  mr-auto ml-auto mb-5" onClick={toggle}>Close</Button>
+</ModalBody>
+<Button className="bg___BTN2  mr-auto ml-auto mb-5" onClick={toggle}>Close</Button>
 
-            </Modal>
+</Modal>
+            </div>
 
 
             <Modal isOpen={chickenModal} toggle={chickentoggle} centered={true}>
@@ -2539,9 +2576,9 @@ console.log(farmCapacity);
                             Your {chickenSymbol} Balance<br />
                             {chickenBalance}
                         </span>
-                        <span className="pull-right text-right">
+                        <span className="pull-right ">
                             Your available {farmSymbol}<br />
-                            {farmCapacity - chickenDeposited} sq m
+                            {farmCapacity - chickenDeposited} sq yards
                         </span>
                     </div>
                     <label className="mb-3"><br />Enter Solar for Harvest
@@ -2597,26 +2634,30 @@ console.log(farmCapacity);
 
                     <div className="moveRight">
                         <span className="pull-left">
-                            Your {chickenSymbol} Balance<br />
+                            {/* Your {chickenSymbol} Balance  */}
+                            Your Solar Cells
+                            <br />
                             {chickenBalance}
                         </span>
-                        <span className="pull-right text-right">
-                            Your available {farmSymbol}<br />
-                            {farmCapacity - chickenDeposited} sq m
+                        <span className="pull-right ">
+                            {/* Your available {farmSymbol} */}
+                            Available Area
+                            <br />
+                            {farmCapacity - chickenDeposited} sq yards
                         </span>
                     </div>
-                    <label className="mb-3"><br />Enter Quantity to add in Harvest
+                    <label className="mb-3"><br />Enter number of Solar Cells to assemble
 
                     </label>
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>Max</span>
 
                     <input className="form-control" onChange={handlecDepositChange} type="number" value={cdamount} />
-                    <span className="info">Max: {farmCapacity - chickenDeposited} {chickenSymbol} @ (1 {chickenSymbol} per sq. m.)</span>
+                    <span className="info">Max: {farmCapacity - chickenDeposited} {chickenSymbol} @ (1 {chickenSymbol} per sq. yards)</span>
 
 
                     <span className="info">Est. {chickenFoodSymbol}: {cdamount * 600 * depositedDay} {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {chickenSymbol} daily)</span>
-                    <span className="info mt-3"><b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
-                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} {baseSymbol} (@ {chickenDepositFee} per solar )</span>
+                    <span className="info mt-3"><b>Available {chickenFoodSymbol}:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
+                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)} ${baseSymbol} (@ {chickenDepositFee} per solar )</span>
 
                     {
                         cdepositError &&
@@ -2636,7 +2677,7 @@ console.log(farmCapacity);
                     }
                     {
                         chickenApproved > 0 && chickenFoodApproved > 0 && baseApprovedFarm > 0 &&
-                        <Button className="bg___BTN2 mr-3" onClick={depositMoreChicken}>Deposit</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={depositMoreChicken}>Assemble</Button>
                     }
                     <Button className="bg___BTN2" onClick={moreChickentoggle}>Cancel</Button>
                 </ModalFooter>
@@ -2657,13 +2698,13 @@ console.log(farmCapacity);
                             Your {baseSymbol} Balance<br />
                             {baseBalance}
                         </span>
-                        <span className="pull-right text-right">
+                        <span className="pull-right ">
                             Your available {farmSymbol}<br />
-                            {farmCapacity - chickenDeposited} sq m
+                            {farmCapacity - chickenDeposited} sq yards
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter Harvest Area to Buy (sq m)
+                    <label className="mb-3"><br />Enter Harvest Area to Buy (sq yards)
                         {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
 
                     </label>
@@ -2698,21 +2739,23 @@ console.log(farmCapacity);
 
                     <div className="moveRight">
                         <span className="pull-left">
-                            Your {baseSymbol} Balance<br />
+                            Your ${baseSymbol} Balance<br />
                             {baseBalance}
                         </span>
-                        <span className="pull-right text-right">
-                            Your available {farmSymbol}<br />
-                            {farmCapacity - chickenDeposited} sq m
+                        <span className="pull-right ">
+                            {/* Your available {farmSymbol} */}
+                            Your Land Area
+                            <br />
+                            {farmCapacity - chickenDeposited} sq yards
                         </span>
 
                     </div>
-                    <label className="mb-3"><br />Enter Harvest Area to add-on  (sq m)
+                    <label className="mb-3"><br />Enter Harvest Area to add-on  (sq yards)
                         {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
 
                     </label>
                     <input className="form-control" onChange={handleAreaChange} type="number" value={areadamount} />
-                    <span className="info mt-3"><b>Cost:</b> {parseFloat(areadamount * farmPrice).toFixed(4)} {baseSymbol}</span>
+                    <span className="info mt-3"><b>Cost:</b> { areadamount>0 ? parseFloat(areadamount * farmPrice).toFixed(4):0} ${baseSymbol}</span>
 
                     {
                         areadepositError &&
@@ -2742,19 +2785,22 @@ console.log(farmCapacity);
 
                     <div className="moveRight">
                         <span className="pull-left">
-                            Your {chickenEggSymbol} Balance<br />
+                            {/* Your {chickenEggSymbol} Balance */}
+                            Energy Packets
+                            
+                            <br />
                             {chickenEggBalance}
                         </span>
 
                     </div>
-                    <label className="mb-3">Enter Quantity to Incubate
+                    <label className="mb-3">Enter Quantity
 
                     </label>
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxceDeposit}>Max</span>
                   
                     <input className="form-control" onChange={handleeDepositChange} type="number" value={cedamount} />
-                    <span className="info mt-3"><b>Fee:</b> {cedamount * eggDepositFee} {baseSymbol} (@{eggDepositFee} {baseSymbol} per Cells)</span><br />
-                    <span className="info"><b>  Maximum Per User:</b> 50 Cells</span>
+                    <span className="info mt-3"><b>Fee:</b> {cedamount * eggDepositFee} ${baseSymbol} (@{eggDepositFee} ${baseSymbol} Energy Packets)</span><br />
+                    <span className="info"><b>  Maximum Per User:</b> 50 Energy Packets</span>
 
 
 
@@ -2772,7 +2818,7 @@ console.log(farmCapacity);
                     }
                     {
                         chickenEggApproved > 0 && baseApprovedIncub > 0 &&
-                        <Button className="bg___BTN2 mr-3" onClick={depositEgg}>Deposit</Button>
+                        <Button className="bg___BTN2 mr-3" onClick={depositEgg}>Forge</Button>
                     }
                     <Button className="bg___BTN2" onClick={eggtoggle}>Cancel</Button>
                 </ModalFooter>
@@ -2789,7 +2835,9 @@ console.log(farmCapacity);
 
                     <div className="moveRight">
                         <span className="pull-left">
-                            Your {chickenSymbol} Deposited<br />
+                            {/* Your {chickenSymbol} Deposited */}
+                            Solar Cells Assembled By You
+                            <br />
                             {chickenDeposited}
                         </span>
 
@@ -2800,14 +2848,12 @@ console.log(farmCapacity);
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxDayDeposit}>Max</span>
                     <input className="form-control" onChange={handleAddDayChange} type="number" value={addDayamount} />
                     <span className="info mt-3"><b>Your Solar Fluid Cost for Total Solar in Harvest:</b> {addDayamount>0 ? parseFloat(chickenDeposited * addDayamount * 20).toFixed(2):0} {chickenFoodSymbol}</span>
-                    <span className="info mt-3"><b>Your Available Solar Fluid:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
+                    <span className="info mt-3"><b>Available Super Conductor Fluid:</b> {chickenFoodBalance} {chickenFoodSymbol}</span>
 
                     {
                         addDdepositError &&
                         <span className="error">{addDdepositError}</span>
                     }
-
-
                 </ModalBody>
                 <ModalFooter>
                     {

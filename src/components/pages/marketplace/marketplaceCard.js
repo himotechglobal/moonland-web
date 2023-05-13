@@ -26,23 +26,23 @@ import { ethers } from 'ethers';
 const ELEMENTS = [
   {
       'slug': 'solar',
-      'name': 'SOLAR',
+      'name': 'SOLAR CELL',
       'price': '10',
       'image': solor,
       'address': '0x57f450240b7a9eAEDfb6FE8DfA83087b4f312109'
   },
   {
       'slug': 'solarCell',
-      'name': 'SOLAR CELL',
+      'name': 'ENERGY PACKET',
       'price': '0.12',
       'image': energy,
       'address': '0xD5DF9651c2731dA0d47978A79f4F6594034038eC'
   },
   {
       'slug': 'fluid',
-      'name': 'FLUID',
+      'name': 'SUPER CONDUCTOR FLUID',
       'price': '1',
-      'image': fluds,
+      'image': "https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2FJoILLv3a235XSXVrabq4%2FFluid%202.png?alt=media&token=bd0b3667-8570-4920-9991-3f8f939a1d85",
       'address': '0xd6e52657A95248f51cAB46065f314711a4cd1cdc'
   },
   {
@@ -70,7 +70,7 @@ const ELEMENTS = [
       'slug': 'positron',
       'name': 'POSITRON',
       'price': '5',
-      'image': mooon,
+      'image': "https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2F7iSB07jCKP8ic0IlDVhX%2FFluid.png?alt=media&token=cacea51a-d2be-42d2-9e41-ff401cbf5367",
       'address': '0x16775217Bab1C67D0b60104B52b3504B37E7FB89'
   }
 ];
@@ -451,7 +451,7 @@ const MarketplaceCard = (props) => {
         <div className='marketplace-box-wrap'>
           <div className="marketplace-box">
             <div className="img-cb">
-              <img src={boxArray?.image} alt="" />
+              <img src={boxArray?.image} alt="" style={{width:"100px",height:"100px"}} />
               <div className='title_head'>
                 <p className='card-title'>{boxArray?.name}</p>
                 {/* <p className='card-content'>Lorem7 demo checkc content</p> */}
@@ -477,14 +477,14 @@ const MarketplaceCard = (props) => {
                   </div>
                 </li>
                 <li>
-                  <div className="wrp-rate">
+                  {/* <div className="wrp-rate">
                     <div className="rate">Total Sold Value</div>
                     <div className="total-r">{soldValue > 0 ? soldValue : '0'} {symbol}</div>
-                  </div>
+                  </div> */}
                 </li>
                 <li>
                   <div className="wrp-rate">
-                    <div className="rate">Total Available</div>
+                    <div className="rate">Available</div>
                     <div className="total-r">{available === 0 ? "Sold Out" : available > 0 ? available : '0'}</div>
 
                   </div>

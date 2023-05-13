@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 const ELEMENTS = [
     {
         'slug': 'solar',
-        'name': 'SOLAR',
+        'name': 'SOLAR CELL',
         'price': '10',
         'image': cb1,
         'address': '0x57f450240b7a9eAEDfb6FE8DfA83087b4f312109'

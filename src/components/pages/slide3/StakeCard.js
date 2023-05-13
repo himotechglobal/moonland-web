@@ -8,8 +8,10 @@ import STAKING_ABI from '../../../Config/STAKING_ABI.json'
 import TOKEN_ABI from '../../../Config/TOKEN_ABI.json'
 import logo from '../../images/MyFarmPet.png';
 import boarIcon from '../../images/boarIcon.svg';
+import modal_earth from '../../images/modal_earth.png'
 import chickenIcon from '../../images/chickenIcon.svg';
 import moon from '../../images/moon.svg';
+import eules from '../../images/eules.svg';
 import Web3 from "web3"
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { ConnectWalletBtn } from '../ConnectWalletBtn.js';
@@ -21,9 +23,10 @@ const STAKING_ARRAY = [
         key:"0xa24Bc69743Ec68053B6E9fe31be60eFDd8f29f2a",
         name: 'Moonland',
         image: moon,
+        // image: eules,
         status: 1,
         apy: 0,
-        earn: 'Moonland',
+        earn: 'Eules',
         depositFee: 0,
         withdrawFee: 0,
         btn:"Partcipate"
@@ -257,7 +260,7 @@ const StakeCard = (props) => {
             // let _rewardTokenContract = new _web3.eth.Contract(TOKEN_ABI, _rewardToken);
 
             // let _rewardSymbol = await _rewardTokenContract.methods.symbol().call();
-            setEarnSymbol(_rewardSymbol);
+            setEarnSymbol(_rewardSymbol?_rewardSymbol:"Moonland");
 
 
             // let _apy = await _stakeContract.methods.rewardRate().call();
@@ -676,12 +679,12 @@ console.log(parseFloat(withdrawAmount));
                         <div className="wrp-stake2">
                             <div className="left-stake">
                                 <div className="stake-img">
-                                    <img src={STAKING_ARRAY[props.index].image} alt="" />
+                                    <img src={STAKING_ARRAY[props.index].image} alt="" style={{borderRadius:"50%"}}/>
                                 </div>
                             </div>
                             <div className="right-stake">
                                 <div className="content-arena">
-                                    <h3>{STAKING_ARRAY[props.index].name}</h3>
+                                    <h3 style={{textAlign:"start"}}>{STAKING_ARRAY[props.index].name}</h3>
                                     <div className="wrp-tick">
                                         <div className="tick-content"><img src={tick} alt="" /> Verified</div>
                                         {/* <div className="tick-c-r"><span>64X</span></div> */}
@@ -831,7 +834,8 @@ console.log(parseFloat(withdrawAmount));
 
 
                 <ModalBody>
-                    <div className="modaltext text-center mt-4" >Transaction is Processing...</div>
+                <div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"150px"} style={{opacity:"80%"}}/></div>
+                    <div className="modaltext text-center mt-4" >Processing your Request...</div>
 
                 </ModalBody>
                 <Button className="bg___BTN2 mr-auto ml-auto mb-5" onClick={toggle}>Close</Button>
@@ -847,9 +851,9 @@ console.log(parseFloat(withdrawAmount));
 
                     <div className="moveRight">
 
-                        <span className="pull-right">
+                        <span className="pull-left">
                             Your Token Balance<br />
-                            {balance} {stakeSymbol}
+                            {balance} ${stakeSymbol}
                         </span>
                     </div>
                     <label className="mb-3"><br />
@@ -889,7 +893,7 @@ console.log(parseFloat(withdrawAmount));
 
                     <div className="moveRight">
 
-                        <span className="pull-right">
+                        <span className="pull-left">
                             Your Deposited Balance<br />
                             {userStaked} {stakeSymbol}
                         </span>

@@ -7,6 +7,7 @@ import NFT_ABI from "../../../Config2/NFT_ABI.json"
 import axios from "axios";
 import Web3 from "web3"
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
+import { NFT, NFT_MARKETPLACE } from '../../../Config';
 
 // import useWallet from '@binance-chain/bsc-use-wallet'
 
@@ -324,11 +325,8 @@ const SinglePop = (props) => {
 
         }
         else {
-
-
             _marketPlaceContract.methods.openAuction(auctionToken, id, _sPrice, _sTime, _eTime, _title).send({
                 from: address
-
             }).on('receipt', function (receipt) {
                 setOnSaleModal(false);
                 setSuccessModal(true);
@@ -473,11 +471,12 @@ const SinglePop = (props) => {
         abi: MARKETPLACE_ABI,
         functionName: "nftAddress",
     })
+
     const { data: _approevd } = useContractRead({
-        address: _nft,
+        address: NFT,
         abi: NFT_ABI,
         functionName: "isApprovedForAll",
-        args: [address, MARKETPLACE],
+        args: [address, NFT_MARKETPLACE],
     })
 
 
@@ -497,10 +496,10 @@ const SinglePop = (props) => {
 
 
     const { config: approveTokenConfig_ } = usePrepareContractWrite({
-        address: _nft,
+        address: NFT,
         abi: NFT_ABI,
         functionName: 'setApprovalForAll',
-        args: [MARKETPLACE, true]
+        args: [NFT_MARKETPLACE, true]
     })
 
     const { data: approveTokenData, writeAsync: approveTokenWriteAsync, isError: approveTokenError } = useContractWrite(approveTokenConfig_)

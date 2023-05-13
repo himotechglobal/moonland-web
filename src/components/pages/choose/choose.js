@@ -43,24 +43,25 @@ class choose extends Component {
                             <div className="col-lg-4">
                                 <div className="choose-content">
                                     <div className="choose___Box">
-                                        <div className='chooseBox____cont'><h1>Solar <br />harvester</h1>
-                                            <p>Turn your land into harvester <br />
-                                                & start earning energy</p></div>
+                                        <div className='chooseBox____cont'><h1>Solar <br />Harvesting</h1>
+                                            <p>Assemble Solar Harvester on your land to start earning Energy Packets</p></div>
                                         <img className='c___img' src={choose1} alt='' />
                                     </div>
-                                    <div><Link to="/solar-harvesting" className='bg___BTN'>Get started</Link></div>
+                                    <div><Link to="/solar-harvesting" className='bg___BTN'>Start Harvesting</Link></div>
                                 </div>
                             </div>
                             <div className="col-lg-4">
                                 <div className="choose-content">
                                     <div className="choose___Box">
-                                        <div className='chooseBox____cont'><h1>Build <br />
-                                            To Trade</h1>
-                                            <p>Buy & Build in your land. <br />
-                                                Then start selling and renting</p></div>
+                                        <div className='chooseBox____cont'><h1>Moonscape <br />
+                                            {/* To Trade */}
+                                           
+                                            </h1>
+                                            <p>Build Moonpods on your land, rent them, earn Eule</p></div>
+                                            <div style={{height:"70px"}}/>
                                         <img className='c___img2' src={choose2} alt='' />
                                     </div>
-                                    <div><Link to="/build-to-trade" className='bg___BTN'>Get started</Link></div>
+                                    <div><Link to="/build-to-trade" className='bg___BTN'>Start Building</Link></div>
                                 </div>
 
 
