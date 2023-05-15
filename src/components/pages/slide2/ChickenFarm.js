@@ -2492,7 +2492,7 @@ console.log(farmCapacity);
                                         <div className="pool-btns">
                                         <div className='js__ac'>
                                                 <img src={bysine} alt="" width={100}/>
-                                                <a className="bg___BTN2" href="/buy/chickenegg">Buy Energy Packets</a>
+                                                <a className="bg___BTN2" href="/buy/solarCell">Buy Energy Packets</a>
                                             </div>
                                           <div style={{display:"flex",gap:"10px",flexWrap:"wrap"}}>
                                               

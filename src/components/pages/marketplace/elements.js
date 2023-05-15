@@ -869,7 +869,7 @@ const elements = (props) => {
 
                                     </div>
                                     <div className='para___by'>
-                                        <p>Update the descriptions of materials according to what is mentioned in gitbook.</p>
+                                        <p>A solar cell is a device that converts light energy from the sun into electrical energy. It is a valuable resource for generating renewable energy on Moon. Solar cells can be placed on the land for solar harvesting, through which they generate energy packets. These energy packets are valuable resources that can be used to power equipment, habitats, and other infrastructure on Moon. Solar cells are highly efficient in converting sunlight into electrical energy, making them an ideal solution for generating sustainable energy.</p>
                                     </div>
 
                                     <div className='buy___btn__box'>
