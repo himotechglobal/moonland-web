@@ -104,7 +104,7 @@ abi:NFT_MARKETPLACE_ABI,
 functionName:"getTradeCount",
 watch:true
   })
-
+console.log(_count);
   const {data:_userBids} = useContractRead({
 address:NFT_MARKETPLACE,
 abi:NFT_MARKETPLACE_ABI,

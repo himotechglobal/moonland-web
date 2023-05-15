@@ -49,7 +49,7 @@ const ChickenFarm = () => {
     const [chickenSymbol, setChickenSymbol] = useState(null);
     const [chickenEggSymbol, setChickenEggSymbol] = useState(null);
     const [chickenFoodSymbol, setChickenFoodSymbol] = useState(null);
-    const [areadamount, setareadamount] = useState(0);
+    const [areadamount, setareadamount] = useState("");
     const [buyareadamount, setbuyareadamount] = useState(0);
     const [eggDepositFee, setEggDepositFee] = useState(0);
     const [chickenClaimfee, setChickenClaimfee] = useState(0);
@@ -994,9 +994,9 @@ console.log(farmCapacity);
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
         functionName: 'removeSolar',
-        args: [parseFloat(crdamount)]
+        args: [(isNaN(crdamount)|| crdamount=="")?0:ethers.utils.parseEther(crdamount.toString())]
     })
-
+// console.log(crdamount==""?0:ethers.utils.parseEther(crdamount.toString()));
     const { data: removeChickenData, writeAsync: removeChickenWriteAsync, isError: removeChickenError } = useContractWrite(removeChickenConfig_)
 
     const { isSuccess: removeChickenSuccess } = useWaitForTransaction({
@@ -1766,12 +1766,12 @@ console.log(farmCapacity);
     }
 
     let _area = buyareadamount.toString();
-    // console.log("area",_area);
+
     const { config: buyAreaNFTConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
         functionName: 'buyMoonLand',
-        args: [_area],
+        args: [buyareadamount=="" ? 0:ethers.utils.parseEther(_area)],
         watch: true,
     })
 
@@ -2146,15 +2146,15 @@ console.log(farmCapacity);
                                                
                                                     {
                                                         farmLocked &&
-                                                        <a className="bg___BTN2" onClick={areaToggle}>Buy More Harvest Area</a>
+                                                        <a className="bg___BTN2" onClick={areaToggle}>Buy Area</a>
                                                     }
                                                     {
                                                         !farmLocked && farmBalance == 0 &&
-                                                        <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Harvest Area</a>
+                                                        <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Area</a>
                                                     }
                                                     {
                                                         landIsfree &&
-                                                        <a className="bg___BTN2 ml-2" onClick={sellfarm}>Sell Harvest Area</a>
+                                                        <a className="bg___BTN2 ml-2" onClick={sellfarm}>Sell Area</a>
                                                     }
                                                
                                             </div>
@@ -2695,7 +2695,9 @@ console.log(farmCapacity);
 
                     <div className="moveRight">
                         <span className="pull-left">
-                            Your {baseSymbol} Balance<br />
+                            {/* Your {baseSymbol} Balance */}
+                            Your Land Area
+                            <br />
                             {baseBalance}
                         </span>
                         <span className="pull-right ">
@@ -2886,7 +2888,7 @@ console.log(farmCapacity);
                     </label>
                         <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcrDeposit}>Max</span>
                     <input className="form-control" onChange={handlecrDepositChange} type="number" value={crdamount} />
-                    <span className="info mt-1"><b>Fee:</b> {parseFloat(chickenRemoveFee * crdamount).toFixed(2)} {baseSymbol} (@ {chickenRemoveFee} per solar )</span>
+                    <span className="info mt-1"><b>Fee:</b> {crdamount>0?parseFloat(chickenRemoveFee * crdamount).toFixed(2):0} {baseSymbol} (@ {chickenRemoveFee} per solar )</span>
                     {
                         crdepositError &&
                         <span className="error">{crdepositError}</span>
