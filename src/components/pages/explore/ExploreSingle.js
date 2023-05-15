@@ -18,7 +18,7 @@ import { TOKEN } from '../../../Config/index.js';
 import { ethers } from 'ethers';
 
 const ExploreSingle = (props) => {
-  
+  console.log(props);
   let web3Provider = window.ethereum;
   // const wallet = useWallet();
   const { address, isConnected } = useAccount()

@@ -8,7 +8,7 @@ import Footer from '../footer.js';
 // import MARKETPLACE_ABI from '../../../Config2/MARKETPLACE_ABI.json';
 import {HARVEST_FARM, NFT, NFT_MARKETPLACE} from "../../../Config/index"
 import NFT_MARKETPLACE_ABI from "../../../Config/NFT_MARKETPLACE_ABI.json"
-import NFT_ABI from '../../../Config2/NFT_ABI.json';
+import NFT_ABI from '../../../Config/NFT_ABI.json';
 import Web3 from "web3"
 
 import { useState, useEffect } from 'react';
@@ -24,8 +24,9 @@ const ExploreNew = () => {
   // const wallet = useWallet();
   const { address, isConnected } = useAccount()
   const [counter, setCounter] = useState([]);
+  const [userCount, setUserCount] = useState([]);
   
-  const [index2, setIndex2] = useState([]);
+ 
   const [olimit, setolimit] = useState(20);
   const [oloading, setoLoading] = useState(false);
   const [slimit, setslimit] = useState(20);
@@ -104,7 +105,7 @@ abi:NFT_MARKETPLACE_ABI,
 functionName:"getTradeCount",
 watch:true
   })
-console.log(_count);
+
   const {data:_userBids} = useContractRead({
 address:NFT_MARKETPLACE,
 abi:NFT_MARKETPLACE_ABI,
@@ -112,7 +113,7 @@ functionName:"getAuctionsOfUser",
 args:[address],
 watch:true
   })
-
+  console.log(_userBids);
 
   const init = async () => {
     // let _web3 = new Web3(web3Provider);
@@ -123,15 +124,11 @@ watch:true
     for (let i = 0; i < parseInt(_count); i++) {
       rows.push({ count: 1 });
     }
-   
     setCounter(rows);
-
-
     if (address) {
       // let _userBids = await _marketPlaceContract.methods.getAuctionsOfUser(address).call();
       setUserBids(_userBids);
     }
-
   }
 
   const getImportedCollection = async () => {
@@ -184,17 +181,16 @@ watch:true
 //     functionName:"nftAddress",
 //     watch:true
 //       })
-//  console.log(_nftAddress);
 
   const {data:_userBalance} =useContractRead({
     address:NFT,
     abi:NFT_ABI,
     functionName:"balanceOf",
     args:[address],
-    watch:true
+    // watch:true
       })
 
- 
+console.log(_userBalance);
     
   const getCollection = async () => {
     // let _web3 = new Web3(web3Provider);
@@ -208,9 +204,9 @@ watch:true
       let userTokens = [];
 
       for (let i = 0; i < parseInt(_userBalance); i++) {
-       
         // let _userToken = await _nftContract.methods.tokenOfOwnerByIndex(address, i).call();
         userTokens.push({id: i});
+     
         if (i == (parseInt(_userBalance) - 1)) {
           setUserNfts(userTokens);
         }
@@ -245,20 +241,21 @@ const {data:_count1} =useContractRead({
 
 
    
-      const {data:_statusF} =useContractRead({
-        address:NFT_MARKETPLACE,
-        abi:NFT_MARKETPLACE_ABI,
-        functionName:"getFullTrade",
-        args:[index2],
-        watch:true
-          })
-      const {data:_status} =useContractRead({
-        address:NFT_MARKETPLACE,
-        abi:NFT_MARKETPLACE_ABI,
-        functionName:"getAuctionStatus",
-        args:[index2],
-        watch:true
-          })
+      // const {data:_statusF} =useContractRead({
+      //   address:NFT_MARKETPLACE,
+      //   abi:NFT_MARKETPLACE_ABI,
+      //   functionName:"getFullTrade",
+      //   // args:[index2],
+      //   watch:true
+      //     })
+      //     console.log(_statusF);
+      // const {data:_status} =useContractRead({
+      //   address:NFT_MARKETPLACE,
+      //   abi:NFT_MARKETPLACE_ABI,
+      //   functionName:"getAuctionStatus",
+      //   // args:[index2],
+      //   watch:true
+      //     })
 
   const getAllStatus = async () => {
     // let _web3 = new Web3(web3Provider);
@@ -266,8 +263,10 @@ const {data:_count1} =useContractRead({
     //  let _count =  await _marketPlaceContract.methods.getTradeCount().call() ;
 
     //  let c = 0 ;
+    let userCounter=[]
     for(let i = 0 ; i < parseInt(_count1) ; i++ ) {
-      setIndex2(i)
+      userCounter.push({id: i});
+      setUserCount(userCounter)
       let onsale = [];
       let sold = [];
       let instant = [];
@@ -290,11 +289,12 @@ const {data:_count1} =useContractRead({
       //   instant.push(i)
       // }
       if(i == (parseInt(_count1)-1)){
-        console.log(onsale);
+     
         // console.log(sold);
-        setSaleArray(onsale);
-        setSoldArray(sold);
-        setInstantArray(instant);
+        // setSaleArray(onsale);
+        // setSoldArray(sold);
+        // setInstantArray(instant);
+// setUserCount(userCounter)
         // console.log(soldArray);
         // console.log(saleArray);
       }
@@ -319,11 +319,11 @@ const {data:_count1} =useContractRead({
 
 
   }
-console.log(index2);
+
 
   useEffect(() => {
-
-  }, [saleArray])
+getAllStatus()
+  }, [saleArray,_count1])
 
 
   const oloadmore = () => {
@@ -356,7 +356,6 @@ console.log(index2);
     setclimit(climit + 20)
     setTimeout(() => {
       setcLoading(false);
-
     }, 3000);
   }
   const iloadmore = () => {
@@ -452,7 +451,7 @@ console.log(index2);
     //   })
   }
 
-
+console.log(userCount);
   return (
     <div className="main-bg-explore">
 
@@ -504,15 +503,20 @@ console.log(index2);
                       {/* {counter.length} */}
 
                       {
-                        counter.length > 0 && saleArray.length > 0 && counter.map((v, i) => {
-                          if (_acounter < olimit && $.inArray((counter.length - (i + 1)).toString(), saleArray) >= 0) {
+                        // counter.length > 0 && saleArray.length > 0 && counter
+                        userCount.length>0 &&  userCount.map((v, i) => {
+                          if (_acounter < olimit 
+                            // && $.inArray((counter.length - (i + 1)).toString(), saleArray) >= 0
+                          ) {
                             _acounter++;
+                         
                             return (
-                              <ExploreSingle tradeid={(counter.length - (i + 1))} />
+                              <ExploreSingle tradeid={v.id} />
+                              // <ExploreSingle tradeid={(userCount.length - (i + 1))} />
                             )
                           }
                           else {
-                            if (saleArray.length == 0 && _acounter == 0 && (i == counter.length - 1))
+                            if (userCount.length == 0 && _acounter == 0 )
                               return (
                                 <div className='marketplace-box-wrap8'>
                                   <div className="text-center w-100 m-0 p-5  card cards2">
@@ -525,7 +529,7 @@ console.log(index2);
 
 
                       {
-                        saleArray.length == 0 &&
+                        userCount.length == 0 &&
 <div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2" >
                           <h3>No Auction Available</h3>

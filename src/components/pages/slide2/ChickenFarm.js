@@ -705,7 +705,7 @@ console.log(farmCapacity);
 
         // alert(farmBalance)
 
-    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_baseApprovedFarm,modal,_chickenFoodApproved,_userInfo3])
+    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_baseApprovedFarm,modal,_chickenFoodApproved,_userInfo3,eggTime,eggunlockTime,unlockTime])
     // console.log(parseInt(_capacity));
     const getEggData = async () => {
         // let _web3 = new Web3(web3Provider);
@@ -863,7 +863,7 @@ console.log(farmCapacity);
     }
     const getTime = async () => {
         let _current = new Date().getTime() / 1e3;
-        console.log(unlockTime);
+        // console.log(unlockTime);
 
         if (parseInt(_current) > parseInt(unlockTime)) {
             setendTime(null);
@@ -949,7 +949,7 @@ console.log(farmCapacity);
 
     const getEggTime = async () => {
         let _current = new Date().getTime() / 1e3;
-        console.log(eggunlockTime);
+        // console.log(eggunlockTime);
         if (parseInt(_current) > parseInt(eggunlockTime)) {
             seteggTime("Yielded");
             // console.log('ended')
@@ -1658,7 +1658,7 @@ console.log(farmCapacity);
         address: CHICKEN_INCUBATOR,
         abi: CHICKEN_INCUBATOR_ABI,
         functionName: 'deposit',
-        args: [cedamount==""?0:ethers.utils.parseEther?.(cedamount.toString()).toString()],
+        args: [cedamount==""?0:ethers.utils.parseEther?.(cedamount.toString())],
         watch: true,
     })
 
@@ -2556,7 +2556,7 @@ console.log(farmCapacity);
 
 
 <ModalBody>
-<div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"150px"} style={{opacity:"65%"}}/></div>
+<div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"150px"} style={{opacity:"51%"}}/></div>
     <div className="modaltext text-center mt-4" >Processing your Request...</div>
 
 </ModalBody>
