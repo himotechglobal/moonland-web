@@ -2695,13 +2695,12 @@ console.log(farmCapacity);
 
                     <div className="moveRight">
                         <span className="pull-left">
-                            {/* Your {baseSymbol} Balance */}
-                            Your Land Area
-                            <br />
+                            Your ${baseSymbol} Balance<br />
                             {baseBalance}
                         </span>
                         <span className="pull-right ">
-                            Your available {farmSymbol}<br />
+                            {/* Your available {farmSymbol} */}
+                            Your Land Area<br />
                             {farmCapacity - chickenDeposited} sq yards
                         </span>
 
