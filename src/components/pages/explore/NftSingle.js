@@ -17,7 +17,7 @@ import Config, {
 } from "../../../Config/index.js";
 import NFT_MARKETPLACE_ABI from "../../../Config/NFT_MARKETPLACE_ABI.json";
 import TOKEN_ABI from "../../../Config2/TOKEN_ABI.json";
-import NFT_ABI from "../../../Config2/NFT_ABI.json";
+import NFT_ABI from "../../../Config/NFT_ABI.json";
 import Web3 from "web3";
 import { useState, useEffect } from "react";
 // import useWallet from '@binance-chain/bsc-use-wallet'
@@ -26,6 +26,7 @@ import SinglePop from "../../pages/single/SinglePop";
 import { useAccount, useContractRead } from "wagmi";
 
 const NftSingle = (props) => {
+
   let web3Provider = window.ethereum;
   // const wallet = useWallet();
   const { address, isConnected } = useAccount();
@@ -58,43 +59,43 @@ const NftSingle = (props) => {
   const toggle = () => setModal(!modal);
   const saleToggle = () => setSalemodal(!saleModal);
 
-  useEffect(() => {
-    if (window.ethereum) {
-      web3Provider = window.ethereum;
-    } else {
-      web3Provider = new Web3.providers.HttpProvider(Config.RPC_URL);
-    }
 
-    init();
-  }, [address]);
 
-  const { data: _userToken } = useContractRead({
-    address: NFT,
-    abi: NFT_ABI,
-    functionName: "tokenOfOwnerByIndex",
-    args: [address, props.nftindex],
-    watch: true,
-  });
-  console.log(_userToken);
-  // const {data:_media} =useContractRead({
-  //   address:props.nftAddress,
-  //   abi:NFT_ABI,
-  //   functionName:"tokenURI",
-  //   args:[_userToken],
-  //     })
+  // const { data: _userToken } = useContractRead({
+  //   address: NFT,
+  //   abi: NFT_ABI,
+  //   functionName: "tokenOfOwnerByIndex",
+  //   args: [address, props.nftindex],
+  //   watch: true,
+  // });
+  // console.log(_userToken);
+  const {data:_media} =useContractRead({
+    address:NFT,
+    abi:NFT_ABI,
+    functionName:"tokenURI",
+    args:[props.nftindex],
+      })
+
   const init = async () => {
+
     let _web3 = new Web3(web3Provider);
     let _nftContract = new _web3.eth.Contract(NFT_ABI, props.nftAddress);
-    let _media = await _nftContract.methods.tokenURI(props.nftid).call();
-    _media = await fetch(_media);
-    _media = await _media.json();
+    // let _media = await _nftContract.methods.tokenURI(props.nftindex).call();
+    let originalUrl = _media;
+    let replacedUrl = originalUrl.replace("ipfs://", "https://ipfs.io/ipfs/");
+// console.log(replacedUrl);
+setMedia(replacedUrl);
+    // let response = await fetch(replacedUrl);
+    // let responseData = await response.json();
     //  setMedia(_media.preview);
-    setMedia(encodeURI(_media.image));
+
+    // setMedia(encodeURI(replacedUrl));
 
     setName(_media.name);
     //  _media = await getBase64FromUrl(_media);
     //  setMedia(_media);
   };
+ 
   const taketo = async (taketo) => {
     window.open(NFT_LINK + taketo, "_blank");
   };
@@ -111,13 +112,22 @@ const NftSingle = (props) => {
       };
     });
   };
+  useEffect(() => {
+    // if (window.ethereum) {
+    //   web3Provider = window.ethereum;
+    // } else {
+    //   web3Provider = new Web3.providers.HttpProvider(Config.RPC_URL);
+    // }
+
+    init();
+  }, [address,_media]);
 
   return (
     <div className="col-lg-3">
       <div class="product-list">
         {/* <a href={"/product/"+props.tradeid}> */}
 
-        {media == null || media.includes("data:text/html;") ? (
+        {media == null ? (
           <div class="product-img">{/* <img src={media} /> */}</div>
         ) : (
           <div
@@ -129,7 +139,7 @@ const NftSingle = (props) => {
         )}
         <div className="more-detail">
           <ul className="mt-3 p-0">
-            <li className="d-flex justify-content-between">
+            {/* <li className="d-flex justify-content-between">
               <p className="title font-weight-bold">Name</p>{" "}
               <p
                 className="value clickable"
@@ -137,7 +147,7 @@ const NftSingle = (props) => {
               >
                 {name}{" "}
               </p>{" "}
-            </li>
+            </li> */}
             <li className="d-flex justify-content-between">
               <p className="title font-weight-bold">NFT Adress</p>{" "}
               <p
@@ -151,7 +161,7 @@ const NftSingle = (props) => {
             </li>
             <li className="d-flex justify-content-between">
               <p className="title font-weight-bold">Token ID</p>{" "}
-              <p className="value  clickable">{props.nftid} </p>{" "}
+              <p className="value  clickable">{props.nftindex} </p>{" "}
             </li>
           </ul>
         </div>
@@ -165,9 +175,9 @@ const NftSingle = (props) => {
         <ModalBody style={{ padding: "0px" }}>
           <SinglePop
             name={name}
-            imported={props.imported}
+            // imported={props.imported}
             address={props.nftAddress}
-            id={props.nftid}
+            id={props.nftindex}
             saleToggle={saleToggle}
           />
         </ModalBody>

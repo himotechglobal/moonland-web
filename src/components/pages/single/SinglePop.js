@@ -3,11 +3,14 @@ import $ from "jquery";
 import { Button, Modal, ModalBody } from "reactstrap";
 import Config, { MARKETPLACE } from "../../../Config2"
 import MARKETPLACE_ABI from "../../../Config2/MARKETPLACE_ABI.json"
-import NFT_ABI from "../../../Config2/NFT_ABI.json"
+import NFT_MARKETPLACE_ABI from "../../../Config/NFT_MARKETPLACE_ABI.json"
+import NFT_ABI from "../../../Config/NFT_ABI.json"
 import axios from "axios";
 import Web3 from "web3"
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { NFT, NFT_MARKETPLACE } from '../../../Config';
+import Options from './Options';
+import { ethers } from 'ethers';
 
 // import useWallet from '@binance-chain/bsc-use-wallet'
 
@@ -15,6 +18,7 @@ import { NFT, NFT_MARKETPLACE } from '../../../Config';
 
 
 const SinglePop = (props) => {
+
     let web3Provider = window.ethereum;
     // const wallet = useWallet();
     const { address, isConnected } = useAccount()
@@ -23,8 +27,8 @@ const SinglePop = (props) => {
     const [fileType, setFileType] = useState(null);
 
     const [saleon, setSaleon] = useState(true);
-    const [instantsale, setInstantsale] = useState(null);
-    const [price, setPrice] = useState(null);
+    const [instantsale, setInstantsale] = useState(false);
+    const [price, setPrice] = useState("");
     const [name, setName] = useState(null);
     const [description, setDescription] = useState(null);
     const [artist, setArtist] = useState(null);
@@ -40,6 +44,7 @@ const SinglePop = (props) => {
     const [endTime, setEndTime] = useState(null);
     const [auctionToken, setAuctionToken] = useState(null);
     const [auctionTokenArray, setAuctionTokenArray] = useState([]);
+    const [tokenCount, setTokenCount] = useState([]);
 
     const [modal, setModal] = useState(false);
     const [apiModal, setApiModal] = useState(false);
@@ -64,11 +69,7 @@ const SinglePop = (props) => {
         web3Provider = new Web3.providers.HttpProvider(Config.RPC_URL)
 
     }
-    useEffect(() => {
-        if (address) {
-            getApproval();
-        }
-    }, [address])
+  
 
 
     useEffect(() => {
@@ -143,7 +144,6 @@ const SinglePop = (props) => {
     }
 
     const handleInstantSale = (e) => {
-        console.log(e.target.checked);
         setInstantsale(e.target.checked);
     }
 
@@ -219,30 +219,30 @@ const SinglePop = (props) => {
     }
 
     const { data: _length } = useContractRead({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: 'gettokenCount',
         watch: true,
     })
 
-
-
     const getTokenList = async () => {
-        let _web3 = new Web3(web3Provider);
-        let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+        // let _web3 = new Web3(web3Provider);
+        // let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
         // let _length = await _marketPlaceContract.methods.gettokenCount().call();
         let temp = [];
         let tokens = [];
-
-        for (let i = 0; i < _length; i++) {
-            let _token = await _marketPlaceContract.methods.getApprovedToken(i).call();
-            if (!tokens.includes(_token[2])) {
-                temp.push(_token);
-                tokens.push(_token[2]);
-            }
-            if ((_length - 1) === i) {
-                setAuctionTokenArray(temp);
-            }
+        let count=[]
+        for (let i = 0; i < parseInt(_length); i++) {
+            count.push({id:i})
+            setTokenCount(count)
+            // let _token = await _marketPlaceContract.methods.getApprovedToken(i).call();
+            // if (!tokens.includes(_token[2])) {
+            //     temp.push(_token);
+            //     tokens.push(_token[2]);
+            // }
+            // if ((parseInt(_length) - 1) === i) {
+            //     setAuctionTokenArray(temp);
+            // }
         }
 
     }
@@ -291,53 +291,121 @@ const SinglePop = (props) => {
     // if (putauctionSuccess && modal) {
     //     setModal(false);
     // }
+    let id = props.id;
+    // let _web3 = new Web3(web3Provider);
+    // let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+    let _sPrice = price==""?0:ethers.utils.parseEther(price).toString();
+    let _sTime = new Date(startTime).getTime() / 1000;
+
+    let _eTime = new Date(endTime).getTime() / 1000;
+    let _title = "moonland";
+    // let _title = props.name;
+    const { config: putauctionConfig_ } = usePrepareContractWrite({
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
+        functionName: 'openInstantSellAuction',
+       args:[id, _sPrice, auctionToken, _title]
+     
+    
+      
+    })
+
+    const { data: putauctionData, writeAsync: putauctionWriteAsync, isError: putauctionError } = useContractWrite(putauctionConfig_)
+
+    const { isSuccess: putauctionSuccess } = useWaitForTransaction({
+        hash: putauctionData?.hash,
+       
+    })
 
 
+    if (putauctionError && onSaleModal) {
+        setOnSaleModal(false);
+    }
+    if (putauctionSuccess && successModal) {
+        setOnSaleModal(false);
+            setSuccessModal(true);
+            reset();
+            props.saleToggle();
+    }
+
+    const { config: openAuctionConfig_ } = usePrepareContractWrite({
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
+        functionName: 'openAuction',
+       args:[auctionToken, id, _sPrice, _sTime, _eTime, _title]
+     
+    
+      
+    })
+    const { data: openAuctionData, writeAsync: openAuctionWriteAsync, isError: openAuctionError } = useContractWrite(openAuctionConfig_)
+
+    const { isSuccess: openAuctionSuccess } = useWaitForTransaction({
+        hash: openAuctionData?.hash,
+       
+    })
+
+
+    if (openAuctionError && onSaleModal) {
+        setOnSaleModal(false);
+    }
+    if (openAuctionSuccess && successModal) {
+        setOnSaleModal(false);
+                setSuccessModal(true);
+                reset();
+                props.saleToggle();
+    }
 
     const putauction = async () => {
         let id = props.id;
-        let _web3 = new Web3(web3Provider);
-        let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-        let _sPrice = _web3.utils.toWei(price);
-        let _sTime = new Date(startTime).getTime() / 1000;
-        let _eTime = new Date(endTime).getTime() / 1000;
-        let _title = props.name;
-        setOnSaleModal(true);
-
-        if (instantsale) {
-
-
-            _marketPlaceContract.methods.openInstantSellAuction(id, _sPrice, auctionToken, _title).send({
-                from: address
-
-            }).on('receipt', function (receipt) {
-                setOnSaleModal(false);
-                setSuccessModal(true);
-                reset();
-                props.saleToggle();
+        // let _web3 = new Web3(web3Provider);
+        // let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+        // let _sPrice = _web3.utils.toWei(price);
+        // let _sTime = new Date(startTime).getTime() / 1000;
+        // let _eTime = new Date(endTime).getTime() / 1000;
+        // let _title = props.name;
+        
+        if (instantsale=="false") {
+            setOnSaleModal(true);
 
 
-            }).on('error', function (receipt) {
-                setOnSaleModal(false);
+            await putauctionWriteAsync()
 
 
-            });
+            // _marketPlaceContract.methods.openInstantSellAuction(id, _sPrice, auctionToken, _title).send({
+            //     from: address
+
+            // }).on('receipt', function (receipt) {
+            //     setOnSaleModal(false);
+            //     setSuccessModal(true);
+            //     reset();
+            //     props.saleToggle();
+
+
+            // }).on('error', function (receipt) {
+            //     setOnSaleModal(false);
+
+
+            // });
 
         }
         else {
-            _marketPlaceContract.methods.openAuction(auctionToken, id, _sPrice, _sTime, _eTime, _title).send({
-                from: address
-            }).on('receipt', function (receipt) {
-                setOnSaleModal(false);
-                setSuccessModal(true);
-                reset();
-                props.saleToggle();
+            // _marketPlaceContract.methods.openAuction(auctionToken, id, _sPrice, _sTime, _eTime, _title).send({
+            //     from: address
+            // }).on('receipt', function (receipt) {
+            //     setOnSaleModal(false);
+            //     setSuccessModal(true);
+            //     reset();
+            //     props.saleToggle();
 
-            }).on('error', function (receipt) {
-                setOnSaleModal(false);
+            // }).on('error', function (receipt) {
+            //     setOnSaleModal(false);
 
 
-            });
+            // });
+            setOnSaleModal(true);
+
+
+            await openAuctionWriteAsync()
 
         }
     }
@@ -435,10 +503,10 @@ const SinglePop = (props) => {
                     }).on('receipt', function (receipt) {
                         setMintModal(false);
                         if (saleon && !mined) {
-                            console.log(response.data.id);
+                      
                             setMinded(true);
                             if (props.imported) {
-                                putauctionImported(response.data.id)
+                                // putauctionImported(response.data.id)
                             }
                             else {
                                 putauction(response.data.id);
@@ -467,13 +535,13 @@ const SinglePop = (props) => {
 
 
     const { data: _nft } = useContractRead({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: "nftAddress",
     })
 
     const { data: _approevd } = useContractRead({
-        address: NFT,
+        address: _nft,
         abi: NFT_ABI,
         functionName: "isApprovedForAll",
         args: [address, NFT_MARKETPLACE],
@@ -492,20 +560,29 @@ const SinglePop = (props) => {
         setApproved(_approevd);
     }
 
-
+    useEffect(() => {
+        if (address) {
+            getApproval();
+        }
+    }, [address,_approevd])
 
 
     const { config: approveTokenConfig_ } = usePrepareContractWrite({
         address: NFT,
         abi: NFT_ABI,
         functionName: 'setApprovalForAll',
-        args: [NFT_MARKETPLACE, true]
+        args: [NFT_MARKETPLACE, true],
+        enabled:address ? true : false,
+     
+    
+      
     })
 
     const { data: approveTokenData, writeAsync: approveTokenWriteAsync, isError: approveTokenError } = useContractWrite(approveTokenConfig_)
 
     const { isSuccess: approveTokenSuccess } = useWaitForTransaction({
         hash: approveTokenData?.hash,
+       
     })
 
 
@@ -513,6 +590,7 @@ const SinglePop = (props) => {
         setModal(false);
     }
     if (approveTokenSuccess && modal) {
+        getApproval();
         setModal(false);
     }
 
@@ -530,7 +608,7 @@ const SinglePop = (props) => {
         // }
         // let _nftContract = new _web3.eth.Contract(NFT_ABI, _nft);
         setModal(true);
-        await approveTokenWriteAsync()
+        await approveTokenWriteAsync?.()
         // _nftContract.methods.setApprovalForAll(MARKETPLACE, true).send({
         //     from: address
         // }).on('receipt', function (receipt) {
@@ -592,15 +670,17 @@ const SinglePop = (props) => {
                                         <div class="royalities-child martb-top">
                                             <label>Token</label>
                                             <select
-
                                                 onChange={handleAuctionToken}
                                                 value={auctionToken} >
-                                                <option value="" >---Select---</option>
+                                                <option style={{background:"#ae00c5"}} value="" >---Select---</option>
+                                             
 
                                                 {
-                                                    auctionTokenArray.length > 0 && auctionTokenArray.map((v, i) => {
+                                                    tokenCount.length > 0 && tokenCount.map((v, i) => {
+
                                                         return (
-                                                            <option value={v[2]} >{v[0]} (Fee: {parseFloat(v[1] / 100)}%)</option>
+                                                            // <option value={v[2]} >{v[0]} (Fee: {parseFloat(v[1] / 100)}%)</option>
+                                                            <Options tokenIndex={v.id}/>
                                                         )
                                                     })
                                                 }
@@ -634,9 +714,9 @@ const SinglePop = (props) => {
                                 <div class="crate-items d-flex justify-content-center">
                                     {
                                         approved ?
-                                            props.imported ?
-                                                <button onClick={putauctionImported}>Put On Sale</button>
-                                                :
+                                            // props.imported ?
+                                            //     <button onClick={putauctionImported}>Put On Sale</button>
+                                                
                                                 <button onClick={putauction}>Put On Sale</button>
                                             :
                                             <button onClick={approveToken}>Approve to Create</button>

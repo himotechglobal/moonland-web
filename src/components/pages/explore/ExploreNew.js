@@ -113,7 +113,7 @@ functionName:"getAuctionsOfUser",
 args:[address],
 watch:true
   })
-  console.log(_userBids);
+
 
   const init = async () => {
     // let _web3 = new Web3(web3Provider);
@@ -127,7 +127,7 @@ watch:true
     setCounter(rows);
     if (address) {
       // let _userBids = await _marketPlaceContract.methods.getAuctionsOfUser(address).call();
-      setUserBids(_userBids);
+      setUserBids(parseInt(_userBids));
     }
   }
 
@@ -190,7 +190,7 @@ watch:true
     // watch:true
       })
 
-console.log(_userBalance);
+
     
   const getCollection = async () => {
     // let _web3 = new Web3(web3Provider);
@@ -213,6 +213,7 @@ console.log(_userBalance);
 
       }
     }
+    
 
   }
 
@@ -229,7 +230,7 @@ console.log(_userBalance);
     let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
     let _status = await _marketPlaceContract.methods.getAuctionStatus(tradeid).call();
     // let _status = 1 ;
-    console.log(_status);
+    // console.log(_status);
     return _status;
   }
 const {data:_count1} =useContractRead({
@@ -451,7 +452,7 @@ getAllStatus()
     //   })
   }
 
-console.log(userCount);
+
   return (
     <div className="main-bg-explore">
 
@@ -636,7 +637,6 @@ console.log(userCount);
                   </div>
                   <div class="tab-panel" id="mybids">
                     <div className="row">
-
                       {
                         userBids.length > 0 && userBids.map((v, i) => {
                           if (_ccounter < mlimit) {
@@ -682,6 +682,7 @@ console.log(userCount);
                       {
                         userNfts.length > 0 && userNfts.map((v, i) => {
                           if (i < climit) {
+                      
                             return (
                               <NftSingle nftindex={v.id} nftAddress={nftAddress} imported={false}/>
                             )

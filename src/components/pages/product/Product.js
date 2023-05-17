@@ -5,12 +5,14 @@ import Header from '../../pages/header.js';
 import Footer from '../../pages/footer.js';
 
 import check from '../../images/check.png';
-import Config, { MARKETPLACE } from '../../../Config2/index.js';
+import Config, { NFT_MARKETPLACE, TOKEN } from '../../../Config/index.js';
 import MARKETPLACE_ABI from '../../../Config2/MARKETPLACE_ABI.json';
-import TOKEN_ABI from '../../../Config2/TOKEN_ABI.json';
-import NFT_ABI from '../../../Config2/NFT_ABI.json';
+import NFT_MARKETPLACE_ABI from '../../../Config/NFT_MARKETPLACE_ABI.json';
+import TOKEN_ABI from '../../../Config/TOKEN_ABI.json';
+import NFT_ABI from '../../../Config/NFT_ABI.json';
 import Web3 from "web3"
 import { useState, useEffect } from 'react';
+import nft_item from "../../images/nft_item.svg"
 
 import {
     FacebookShareButton,
@@ -50,13 +52,13 @@ const Product = (props) => {
     // const wallet = useWallet();
 
     const bidStatusName = ['Inactive', 'Open', 'Paused', 'Closed']
-    const [name, setName] = useState(0);
+    const [name, setName] = useState("Moon");
     const [balance, setBalance] = useState(0);
     const [depositAmount, setDepositAmount] = useState(0);
     const [buyPrice, setBuyPrice] = useState(0);
 
     const [bidStatus, setBidStatus] = useState(null);
-    const [lister, setLister] = useState(null);
+    const [lister, setLister] = useState("");
 
     const [userbid, setUserbid] = useState(0);
 
@@ -81,7 +83,7 @@ const Product = (props) => {
     const [decimals, setDecimals] = useState(0);
     const [damount, setdAmount] = useState(0);
     const [endTime, setEndTime] = useState(0);
-    const [nftAddress, setNftAddress] = useState(0);
+    const [nftAddress, setNftAddress] = useState("");
     const [canClaim, setCanClaim] = useState(false);
     let timeInterval;
     let timeInterval2;
@@ -90,13 +92,14 @@ const Product = (props) => {
     const { address } = useAccount()
 
     useEffect(() => {
-        clearInterval(timeInterval);
-        if (bidStatus === 1) {
-            timeInterval = setInterval(() => {
-                getTimer();
+        // clearInterval(timeInterval);
+        // if (bidStatus === 1) {
+        //     timeInterval = setInterval(() => {
+        //         getTimer();
 
-            }, 1000);
-        }
+        //     }, 1000);
+        // }
+        getTimer();
     }, [bidStatus]);
 
     useEffect(() => {
@@ -121,8 +124,8 @@ const Product = (props) => {
 
 
     const { data: _tradeTime } = useContractRead({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: "getAuctionTime",
         args: [tradeid],
     })
@@ -167,11 +170,20 @@ const Product = (props) => {
             }
         }
     }
+    useEffect(() => {
+        // clearInterval(timeInterval);
+        // if (bidStatus === 1) {
+        //     timeInterval = setInterval(() => {
+        //         getTimer();
 
+        //     }, 1000);
+        // }
+        getTimer();
+    }, [bidStatus,_tradeTime]);
 
     const { config: unLikeTradeConfig_ } = usePrepareContractWrite({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: 'unLike',
         args: [tradeid]
     })
@@ -212,8 +224,8 @@ const Product = (props) => {
     }
 
     const { config: likeTradeConfig_ } = usePrepareContractWrite({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: 'like',
         args: [tradeid]
     })
@@ -257,104 +269,102 @@ const Product = (props) => {
 
 
     const { data: _trade } = useContractRead({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: "getTrade",
         args: [tradeid],
     })
 
     const { data: _fullTrade } = useContractRead({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: "getFullTrade",
         args: [tradeid],
-        enabled: tradeid,
-        onSuccess: (data) => {
-            console.log(data);
-        }
+       
     })
 
     const { data: _bidIncreasePercentage } = useContractRead({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: "bidIncreasePercentage",
         watch: true,
     })
 
-    let _token = _fullTrade?.[5];
+    
     const { data: _symbol } = useContractRead({
-        address: _token,
+        address: TOKEN,
+        // address: _fullTrade?.[5],
         abi: TOKEN_ABI,
         functionName: "symbol",
         watch: true,
     })
     const { data: _decimals } = useContractRead({
-        address: _token,
+           address: _fullTrade?.[5],
         abi: TOKEN_ABI,
         functionName: "decimals",
         watch: true,
     })
     const { data: _status } = useContractRead({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: "getAuctionStatus",
         args: [tradeid],
         watch: true,
     })
     const { data: _canClaim } = useContractRead({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: "claim",
         args: [tradeid, address],
         watch: true,
     })
     const { data: _balance2 } = useContractRead({
-        address: _token,
+        address: _fullTrade?.[5],
         abi: TOKEN_ABI,
         functionName: "balanceOf",
         args: [address],
         watch: true,
     })
     const { data: _approval } = useContractRead({
-        address: _token,
+        address: _fullTrade?.[5],
         abi: TOKEN_ABI,
         functionName: "allowance",
-        args: [address, MARKETPLACE],
+        args: [address, NFT_MARKETPLACE],
         watch: true,
     })
     const { data: _userBid1 } = useContractRead({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: "getBid",
-        args: [address, tradeid],
+        args: [tradeid,address],
         watch: true,
     })
-    let _nftTokenId = _trade?.nftid;
-    let _nftToken = _trade?.nftadd;
+    // let _nftTokenId = _trade?.nftid;
+    // let _nftToken = _trade?.nftadd;
     const { data: _mediaURI_One } = useContractRead({
-        address: _nftToken,
-        abi: TOKEN_ABI,
+        address: _trade?.nftadd,
+        abi: NFT_ABI,
         functionName: "tokenURI",
-        args: [_nftTokenId],
+        args: [0],
         watch: true,
     })
     const { data: _owner } = useContractRead({
-        address: _nftToken,
-        abi: TOKEN_ABI,
+        address: _trade?.nftadd,
+        abi: NFT_ABI,
         functionName: "ownerOf",
-        args: [_nftTokenId],
+        args: [0],
         watch: true,
     })
     const { data: _liked } = useContractRead({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: "likesMap",
         args: [tradeid, address],
         watch: true,
     })
     const { data: _likes } = useContractRead({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: "likes",
         args: [tradeid],
         watch: true,
@@ -387,7 +397,7 @@ const Product = (props) => {
 
 
         // let _bidIncreasePercentage = await _marketPlaceContract.methods.bidIncreasePercentage().call();
-        setBidIncreasePercentage(_bidIncreasePercentage);
+        setBidIncreasePercentage(parseInt(_bidIncreasePercentage));
 
         // let _tokenContract = new _web3.eth.Contract(TOKEN_ABI, _token);
         // let _symbol = await _tokenContract.methods.symbol().call();
@@ -414,7 +424,7 @@ const Product = (props) => {
             setBalance(_balance)
 
             // let _approval = await _tokenContract.methods.allowance(address, MARKETPLACE).call();
-            setApproval(_approval);
+            setApproval(parseInt(_approval));
 
             // let _userBid = await _marketPlaceContract.methods.getBid(tradeid, address).call();
             let _userBid = parseFloat(_userBid1 / 1e1 ** _decimals).toFixed(2);
@@ -453,15 +463,18 @@ const Product = (props) => {
 
 
         // let _likes = await _marketPlaceContract.methods.likes(tradeid).call();
-        setLikes(_likes);
+        setLikes(parseInt(_likes));
         //  setEndTime(_trade.)
 
         setHighestBid(_highestBid);
+        let originalUrl = _mediaURI_One;
+      let replacedUrl = originalUrl.replace("ipfs://", "https://ipfs.io/ipfs/");
+  setMedia(replacedUrl);
         //  alert(_mediaURI)
         //  let _media = await getBase64FromUrl(_mediaURI)  ; 
         //  setMedia(_media.toDataURL());
-        let _mediaURI = await fetch(_mediaURI_One);
-        _mediaURI = await _mediaURI.json();
+        // let _mediaURI = await fetch(_mediaURI_One);
+        // _mediaURI = await _mediaURI.json();
         //  console.log(_mediaURI);
         // if(_media.includes('data:text/html;')){
         //  setMedia(WIZARDGIF);
@@ -469,7 +482,7 @@ const Product = (props) => {
         // else{
         // console.log(_mediaURI);
 
-        setMedia(encodeURI(_mediaURI.image));
+        // setMedia(encodeURI(_mediaURI.image));
         // alert(encodeURI(_mediaURI.image))
 
         // }
@@ -482,8 +495,8 @@ const Product = (props) => {
 
     const _amount = ethers.utils.parseEther('1').toString()
     const { config: placeBidConfig_ } = usePrepareContractWrite({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: 'placeBid',
         args: [tradeid, _amount]
     })
@@ -609,10 +622,10 @@ const Product = (props) => {
     // let _newPrice = ethers.utils.parseEther(newPrice.toString());
 
     const { config: renewSaleConfig_ } = usePrepareContractWrite({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: 'renewInstantSellAuction',
-        args: [tradeid, ethers.utils.parseEther(parseFloat(newPrice)).toString()],
+        args: [tradeid,newPrice>0? ethers.utils.parseEther(parseFloat(newPrice)).toString():0],
     })
 
     const { data: renewSaleData, writeAsync: renewSaleWriteAsync, isError: renewSaleError } = useContractWrite(renewSaleConfig_)
@@ -655,8 +668,8 @@ const Product = (props) => {
 
 
     const { config: cancelSaleConfig_ } = usePrepareContractWrite({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: 'cancelInstantSellAuction',
         args: [tradeid],
     })
@@ -696,8 +709,8 @@ const Product = (props) => {
     }
 
     const { config: cancelAuctionConfig_ } = usePrepareContractWrite({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: 'endAuction',
         args: [tradeid],
     })
@@ -740,10 +753,10 @@ const Product = (props) => {
     let _newEndTime = new Date(newEndTime).getTime() / 1e3;
 
     const { config: renewAuctionConfig_ } = usePrepareContractWrite({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: 'renewAuction',
-        args: [tradeid, ethers.utils.parseEther(parseFloat(newPrice)).toString(), _newStartTime, _newEndTime],
+        args: [tradeid,newPrice>0? ethers.utils.parseEther(parseFloat(newPrice)).toString():0, _newStartTime, _newEndTime],
     })
 
     const { data: renewAuctionData, writeAsync: renewAuctionWriteAsync, isError: renewAuctionError } = useContractWrite(renewAuctionConfig_)
@@ -784,8 +797,8 @@ const Product = (props) => {
 
 
     const { config: claimBidConfig_ } = usePrepareContractWrite({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: 'withdraw',
         args: [tradeid]
     })
@@ -827,8 +840,8 @@ const Product = (props) => {
 
 
     const { config: buyNftConfig_ } = usePrepareContractWrite({
-        address: MARKETPLACE,
-        abi: MARKETPLACE_ABI,
+        address: NFT_MARKETPLACE,
+        abi: NFT_MARKETPLACE_ABI,
         functionName: 'buyNft',
         args: [tradeid]
     })
@@ -875,7 +888,7 @@ const Product = (props) => {
         address: tokenAddress,
         abi: TOKEN_ABI,
         functionName: 'approve',
-        args: [MARKETPLACE, _amount2]
+        args: [NFT_MARKETPLACE, _amount2]
     })
 
     const { data: approveTokenData, writeAsync: approveTokenWriteAsync, isError: approveTokenError } = useContractWrite(approveTokenConfig_)
@@ -929,12 +942,12 @@ const Product = (props) => {
                                     <div class="col-lg-6">
                                         <div class="product-contents">
                                             {
-                                                media != null &&
-                                                <div class="main-product-img_single" style={{ backgroundImage: 'url(' + media + ')' }}>
-                                                    {/* <img src={media} /> */}
-                                                    {/* {window.location.href} */}
+                                                media != null ?
+                                                    <img src={media} style={{width:"100%",borderRadius:"25px"}}/>
+                                                    :
+                                                     <img src={nft_item} style={{width:"100%"}}/>
+                                                 
 
-                                                </div>
                                             }
                                             {/* <div class="heart-wrp">
                         <div class="heart-child1">
@@ -951,7 +964,8 @@ const Product = (props) => {
                                     <div class="col-lg-6">
                                         <div class="product-right-content">
 
-                                            <h1 className="text-white">{name}  <span className="p-1">
+                                            <h1 className="text-white" style={{fontSize:"35px",textTransform:"capitalize"}}>{name}
+                                              {/* <span className="p-1">
 
                                                 {
                                                     liked ?
@@ -960,7 +974,8 @@ const Product = (props) => {
                                                         <i className="fa fa-heart clickable" onClick={likeTrade} ></i>
                                                 }
                                                 {likes}
-                                            </span></h1>
+                                            </span> */}
+                                            </h1>
                                             {
                                                 buyer === lister ?
                                                     <p className="text-white" id="bidding">Cancelled</p>
@@ -975,7 +990,7 @@ const Product = (props) => {
                                                 !address &&
                                                 <span className="text-white" id="connect">Please connect Metamask to buy item.</span>
                                             }
-                                            <div className="d-flex mt-2 socialcontainer">
+                                            <div className="d-flex mt-3 socialcontainer">
                                                 <FacebookShareButton url={window.location.href} quote={name} >
                                                     <FacebookIcon size={32} round />
                                                 </FacebookShareButton>
@@ -1019,7 +1034,7 @@ const Product = (props) => {
                          <a href="#">Read more</a>
                         </p>
                       </div> */}
-                                            <div className=" mt-2 mb-2">
+                                            <div className="mt-4 mb-2">
                                                 {/* <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked /> */}
                                                 {/* <label for="tab-btn-1">Info</label> */}
                                                 {/* <input type="radio" name="tab-btn" id="tab-btn-2" value="" />
@@ -1047,7 +1062,10 @@ const Product = (props) => {
                                                                     </div>
                                                                     <div class="p-list-content-c2">
                                                                         <div class="x-font-normal-blue">Owner</div>
-                                                                        <div class="x-font-normal-white" ><a className="" href={"/profile/view/" + lister}>{lister}</a></div>
+                                                                        <div class="x-font-normal-white" >
+                                                                            <a className="" href={"/profile/view/"+lister}>{lister.substring(0, 8) +
+                  "...." +
+                  lister.substring(lister.length - 6)}</a></div>
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -1065,7 +1083,9 @@ const Product = (props) => {
                                                                     </div>
                                                                     <div class="p-list-content-c2">
                                                                         <div class="x-font-normal-blue">NFT Address</div>
-                                                                        <div class="x-font-normal-white"><a href={Config.EX_LINK + nftAddress}>{nftAddress}</a></div>
+                                                                        <div class="x-font-normal-white"><a href={Config.EX_LINK + nftAddress}>{nftAddress.substring(0, 8) +
+                  "...." +
+                  nftAddress.substring(nftAddress.length - 6)}</a></div>
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -1358,7 +1378,7 @@ const Product = (props) => {
                 </ModalFooter>
             </Modal>
 
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 

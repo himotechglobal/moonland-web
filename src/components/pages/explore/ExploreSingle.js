@@ -6,7 +6,7 @@ import { Row, Col, Container, Button, ModalHeader, ModalFooter, Modal, ModalBody
 import Config, { NFT_MARKETPLACE } from '../../../Config/index.js';
 import NFT_MARKETPLACE_ABI from '../../../Config/NFT_MARKETPLACE_ABI.json';
 import TOKEN_ABI from '../../../Config/TOKEN_ABI.json';
-import NFT_ABI from '../../../Config2/NFT_ABI.json';
+import NFT_ABI from '../../../Config/NFT_ABI.json';
 import Web3 from "web3"
 import { useState, useEffect } from 'react';
 // import useWallet from '@binance-chain/bsc-use-wallet'
@@ -18,7 +18,7 @@ import { TOKEN } from '../../../Config/index.js';
 import { ethers } from 'ethers';
 
 const ExploreSingle = (props) => {
-  console.log(props);
+  // console.log(props);
   let web3Provider = window.ethereum;
   // const wallet = useWallet();
   const { address, isConnected } = useAccount()
@@ -62,21 +62,12 @@ const ExploreSingle = (props) => {
     }
     else {
       web3Provider = new Web3.providers.HttpProvider(Config.RPC_URL)
-
     }
 
     init();
 
   }, [address])
-  useEffect(() => {
-    clearInterval(timeInterval);
-    if (bidStatus == 1) {
-      timeInterval = setInterval(() => {
-        getTimer();
-
-      }, 1000);
-    }
-  }, [bidStatus]);
+  
   const {data:_trade} =useContractRead({
     address:NFT_MARKETPLACE,
     abi:NFT_MARKETPLACE_ABI,
@@ -84,6 +75,7 @@ const ExploreSingle = (props) => {
     args:[props.tradeid],
     watch:true
       })
+
   const {data:_fullTrade} =useContractRead({
     address:NFT_MARKETPLACE,
     abi:NFT_MARKETPLACE_ABI,
@@ -91,19 +83,22 @@ const ExploreSingle = (props) => {
     args:[props.tradeid],
     watch:true
       })
+
   const {data:_symbol} =useContractRead({
     address:TOKEN,
     abi:TOKEN_ABI,
     functionName:"symbol",
     watch:true
       })
+     
   const {data:_mediaURI} =useContractRead({
-    address:TOKEN,
-    abi:TOKEN_ABI,
+    address:_trade.nftadd,
+    abi:NFT_ABI,
     functionName:"tokenURI",
-    args:[_trade.nftid],
+    args:[parseInt(_trade.nftid)],
     watch:true
       })
+    
       const {data:_statusF} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -111,6 +106,7 @@ const ExploreSingle = (props) => {
         args:[props.tradeid],
         watch:true
           })
+        // console.log(_statusF);
       const {data:_status} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -118,12 +114,14 @@ const ExploreSingle = (props) => {
         args:[props.tradeid],
         watch:true
           })
+         
       const {data:_bidIncreasePercentage} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
         functionName:"bidIncreasePercentage",
         watch:true
           })
+       
       const {data:_likes} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -131,12 +129,14 @@ const ExploreSingle = (props) => {
         args:[props.tradeid],
         watch:true
           })
+
       const {data:_decimals} =useContractRead({
         address:_fullTrade[5],
         abi:TOKEN_ABI,
         functionName:"decimals",
         watch:true
           })
+         
       const {data:_balance1} =useContractRead({
         address:_fullTrade[5],
         abi:TOKEN_ABI,
@@ -151,6 +151,7 @@ const ExploreSingle = (props) => {
         args:[address, NFT_MARKETPLACE],
         watch:true
           })
+       
       const {data:_liked} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -158,6 +159,7 @@ const ExploreSingle = (props) => {
         args:[props.tradeid, address],
         watch:true
           })
+      
       const {data:_canClaim} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -165,6 +167,7 @@ const ExploreSingle = (props) => {
         args:[props.tradeid, address],
         watch:true
           })
+      
       const {data:_userBid} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -187,10 +190,14 @@ const ExploreSingle = (props) => {
     let _nftTokenId = _trade.nftid;
     let _nftContract = new _web3.eth.Contract(NFT_ABI, _nftToken);
     // let _mediaURI = await _nftContract.methods.tokenURI(_nftTokenId).call();
+
     try {
-      _mediaURI = await fetch(_mediaURI);
-      _mediaURI = await _mediaURI.json();
-      setMedia(encodeURI(_mediaURI.image));
+      let originalUrl = _mediaURI;
+      let replacedUrl = originalUrl.replace("ipfs://", "https://ipfs.io/ipfs/");
+  setMedia(replacedUrl);
+      // _mediaURI = await fetch(_mediaURI);
+      // _mediaURI = await _mediaURI.json();
+      // setMedia(encodeURI(_mediaURI.image));
     }
     catch {
 
@@ -211,12 +218,13 @@ const ExploreSingle = (props) => {
       setBidStatus(4)
 
     }
+    
     setLister(_statusF.lister)
     // let _bidIncreasePercentage = await _marketPlaceContract.methods.bidIncreasePercentage().call();
-    setBidIncreasePercentage(_bidIncreasePercentage);
+    setBidIncreasePercentage(parseInt(_bidIncreasePercentage));
 
     // let _likes = await _marketPlaceContract.methods.likes(props.tradeid).call();
-    setLikes(_likes);
+    setLikes(parseInt(_likes));
 
 
 
@@ -224,13 +232,16 @@ const ExploreSingle = (props) => {
     //  setMedia(_media.toDataURL());
     //  setMedia(_media);
     let _name = _trade.title;
+
+
     setName(_name);
 
     // let _decimals = await _tokenContract.methods.decimals().call();
     setDecimals(_decimals);
     setPrice(_trade.startingPrice / 1e1 ** _decimals);
-
+    
     let _highestBid = parseFloat(_trade.maxbid / 1e1 ** _decimals).toFixed(2);
+   
     setHighestBid(_highestBid);
 
     setBuyer(_trade.buyer)
@@ -240,8 +251,6 @@ const ExploreSingle = (props) => {
     if (address) {
 
       // let _liked = await _marketPlaceContract.methods.likesMap(props.tradeid, address).call();
-      console.log(props.tradeid);
-      console.log(_liked);
       setLiked(_liked);
 
       // let _balance = await _tokenContract.methods.balanceOf(address).call();
@@ -249,13 +258,13 @@ const ExploreSingle = (props) => {
       setBalance(_balance)
 
       // let _approval = await _tokenContract.methods.allowance(address, NFT_MARKETPLACE).call();
-      setApproval(_approval)
+      setApproval(parseInt(_approval))
 
       // let _canClaim = await _marketPlaceContract.methods.claim(props.tradeid, address).call();
       setCanClaim(_canClaim)
       // let _userBid = await _marketPlaceContract.methods.getBid(props.tradeid, address).call();
-      _userBid = parseFloat(_userBid / 1e1 ** _decimals).toFixed(2);
-      setUserbid(_userBid)
+      // let _userBid = parseFloat(_userBid / 1e1 ** _decimals).toFixed(2);
+      setUserbid(parseFloat(_userBid / 1e1 ** _decimals).toFixed(2))
 
 
     }
@@ -391,7 +400,7 @@ if (withdrawSuccess && modal) {
 
     // _amount = _web3.utils.toWei(_amount.toString());
 
-    setModal(!modal);
+    setModal(true);
     await placeBidWriteAsync()
     // _marketPlaceContract.methods.placeBid(props.tradeid, _amount).send({
     //   from: address
@@ -425,16 +434,19 @@ if (withdrawSuccess && modal) {
     //   setModal(modal);
 
     // })
-    setModal(!modal);
+    setModal(true);
     await buyNftWriteAsync()
 
   }
+
+
+
   async function claimBid() {
 
     let _web3 = new Web3(web3Provider);
     const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
 
-    setModal(!modal);
+    setModal(true);
     await withdrawWriteAsync?.()
     // _marketPlaceContract.methods.withdraw(props.tradeid).send({
     //   from: address
@@ -448,11 +460,15 @@ if (withdrawSuccess && modal) {
 
   }
 
+  const { data: _tradeTime } = useContractRead({
+    address: NFT_MARKETPLACE,
+    abi: NFT_MARKETPLACE_ABI,
+    functionName: "getAuctionTime",
+    args: [props.tradeid],
+})
 
-  const getTimer = async () => {
-    let _web3 = new Web3(web3Provider);
-    let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
-    let _tradeTime = await _marketPlaceContract.methods.getAuctionTime(props.tradeid).call();
+  const getTimer =() => {
+   
     let _now = new Date().getTime() / 1e3;
 
     if (_tradeTime._endtime > _now) {
@@ -469,25 +485,34 @@ if (withdrawSuccess && modal) {
         (remainingSeconds % (60 * 60)) / 60
       );
       let remainingSec = Math.floor(remainingSeconds % 60);
-      let _endTime;
+     
       if (remainingSeconds <= 0) {
-        _endTime = "Ended";
+      let _endTime = "Ended";
         setEndTime(_endTime);
 
       }
       else if (remainingDay > 0) {
-        _endTime = remainingDay + "d : " + remainingHour + "h : " + remainingMinutes + "m";
+      let _endTime = remainingDay + "d : " + remainingHour + "h : " + remainingMinutes + "m";
         setEndTime(_endTime);
 
       }
       else {
-        _endTime = remainingHour + "h : " + remainingMinutes + "m : " + remainingSec + "s";
+       let _endTime = remainingHour + "h : " + remainingMinutes + "m : " + remainingSec + "s";
         setEndTime(_endTime);
       }
     }
   }
 
+useEffect(() => {
+    // clearInterval(timeInterval);
+    // if (bidStatus == 1) {
+    //   timeInterval = setInterval(() => {
+    //     getTimer();
 
+    //   }, 1000);
+    // }
+    getTimer();
+  }, [bidStatus,_tradeTime]);
 
   const { config: unLikeTradeConfig } = usePrepareContractWrite({
     address: NFT_MARKETPLACE,
@@ -495,8 +520,10 @@ if (withdrawSuccess && modal) {
     functionName: 'unLike',
     args: [props.tradeid],
 
+
+
 })
-// console.log("amount",farmTokenId);
+
 
 const { data: unLikeTradeData, writeAsync: unLikeTradeWriteAsync, isError: unLikeTradeError } = useContractWrite(unLikeTradeConfig)
 
@@ -510,14 +537,13 @@ if (unLikeTradeError && modal) {
 }
 if (unLikeTradeSuccess && modal) {
   setModal(false);
-
     init();
 
 }
   async function unLikeTrade() {
     let _web3 = new Web3(web3Provider);
 
-    setModal(!modal);
+    setModal(true);
 
     // const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
 
@@ -530,15 +556,15 @@ if (unLikeTradeSuccess && modal) {
     //   .on('error', function (error, receipt) {
     //     setModal(modal);
 
-    await unLikeTradeWriteAsync?.()
+    await unLikeTradeWriteAsync()
 
   }
 
   const { config: likeTradeConfig } = usePrepareContractWrite({
     address: NFT_MARKETPLACE,
     abi: NFT_MARKETPLACE_ABI,
-    functionName: 'unLike',
-    args: [props.tradeid],
+    functionName: 'likes',
+    args: [0],
 
 })
 // console.log("amount",farmTokenId);
@@ -562,7 +588,7 @@ if (likeTradeSuccess && modal) {
   async function likeTrade() {
     let _web3 = new Web3(web3Provider);
 
-    setModal(!modal);
+    setModal(true);
     await likeTradeWriteAsync?.()
 
     // const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
@@ -607,7 +633,7 @@ if (approveTokenSuccess && modal) {
   async function approveToken() {
     let _web3 = new Web3(web3Provider);
 
-    setModal(!modal);
+    setModal(true);
     await approveTokenWriteAsync?.()
 
     // const _tokenContract = new _web3.eth.Contract(TOKEN_ABI, tokenAddress);
@@ -646,7 +672,7 @@ if (approveTokenSuccess && modal) {
         <a href={"/product/" + props.tradeid}>
 
           {
-            media == null || media.includes('data:text/html;') ?
+            media == null ?
               <div class="product-img" >
                 {/* <img src={media} /> */}
               </div>
@@ -660,7 +686,8 @@ if (approveTokenSuccess && modal) {
         <div class="product-content">
           <div className="d-flex w-100 justify-content-between">
             <h4 className=""><a href={"/product/" + props.tradeid}>{name}</a></h4>
-            <span className="p-1">
+            {/* <span className="p-1">
+              
               {
                 liked ?
                   <i className="fa fa-heart liked clickable" onClick={unLikeTrade} ></i>
@@ -668,11 +695,11 @@ if (approveTokenSuccess && modal) {
                   <i className="fa fa-heart clickable" onClick={likeTrade} ></i>
               }
               {likes}
-            </span>
+            </span> */}
 
           </div>
           <div className="wrp-busd">
-            <div className="busd-child1 pb-1">
+            <div className="busd-child1">
               <h5>{price} {symbol}</h5>
             </div>
             <div className="busd-child2">
@@ -683,17 +710,17 @@ if (approveTokenSuccess && modal) {
             {
               bidStatus != 4 &&
               <ul className="m-0">
-                <li className="d-flex justify-content-between"><p className="title font-weight-bold">Highest Bid</p> <p className="value  ">{highestBid} {symbol}</p> </li>
-                <li className="d-flex justify-content-between"><p className="title font-weight-bold">Your Bid</p> <p className="value  ">{userbid} {symbol}</p> </li>
+                <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Highest Bid</p> <p className="value p_new">{highestBid} {symbol}</p> </li>
+                <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Your Bid</p> <p className="value p_new">{userbid} {symbol}</p> </li>
                 {
 
                   endTime != 0 ?
-                    <li className="d-flex justify-content-between"><p className="title font-weight-bold">Ends In</p> <p className="value  ">{endTime}</p> </li>
+                    <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Ends In</p> <p className="value p_new">{endTime}</p> </li>
                     :
                     highestBidder == lister ?
-                      <li className="d-flex justify-content-between"><p className="title font-weight-bold">Expired</p> </li>
+                      <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Expired</p> </li>
                       :
-                      <li className="d-flex justify-content-between"><p className="title font-weight-bold">Sold Out</p> </li>
+                      <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Sold Out</p> </li>
 
                 }
 

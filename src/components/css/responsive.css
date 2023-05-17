@@ -613,6 +613,9 @@
    
 }
 @media(max-width: 580px){
+    .product-contents{
+        margin-bottom: 25px;
+    }
     .thermix_btn{
         display: flex;
        flex-direction: column;
@@ -949,7 +952,7 @@ width: 100%;
         background-position: center;
     }
     #product-sec {
-        padding: 40px 0px 60px 0px;
+        padding: 120px 0px 60px 0px;
     }
     #stake-sec {
         padding: 40px 0px;
