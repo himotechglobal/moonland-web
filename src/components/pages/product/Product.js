@@ -140,8 +140,8 @@ const Product = (props) => {
 
         let _now = new Date().getTime() / 1e3;
 
-        if (_tradeTime._endtime > _now) {
-            let remainingSeconds = _tradeTime._endtime - _now;
+        if (_tradeTime?._endtime > _now) {
+            let remainingSeconds = _tradeTime?._endtime - _now;
 
             let remainingDay = Math.floor(
                 remainingSeconds / (60 * 60 * 24)
@@ -403,14 +403,14 @@ const Product = (props) => {
         // let _tokenContract = new _web3.eth.Contract(TOKEN_ABI, _token);
         // let _symbol = await _tokenContract.methods.symbol().call();
         // let _decimals = await _tokenContract.methods.decimals().call();
-        if (_fullTrade[8]) {
+        if (_fullTrade?.[8]) {
 
             // let _status = await _marketPlaceContract.methods.getAuctionStatus(tradeid).call();
             setBidStatus(_status)
         }
         else {
             setBidStatus(4)
-            let _buyPrice = parseFloat(_fullTrade.nftTokenPrice / 1e1 ** _decimals).toFixed(2)
+            let _buyPrice = parseFloat(_fullTrade?.nftTokenPrice / 1e1 ** _decimals).toFixed(2)
             setBuyPrice(_buyPrice)
         }
 
@@ -433,7 +433,7 @@ const Product = (props) => {
 
         }
 
-        let _nftToken = _trade.nftadd;
+        let _nftToken = _trade?.nftadd;
         setNftAddress(_nftToken);
 
         // let _nftTokenId = _trade.nftid;
@@ -442,14 +442,14 @@ const Product = (props) => {
 
         // let _owner = await _nftContract.methods.ownerOf(_nftTokenId).call();
         setOwner(_owner);
-        if (_trade.buyer !== '0x0000000000000000000000000000000000000000') {
-            setBuyer(_trade.buyer);
+        if (_trade?.buyer !== '0x0000000000000000000000000000000000000000') {
+            setBuyer(_trade?.buyer);
         }
         //  let _hs = await _nftContract.methods.tokenURI(_nftTokenId).call() ;
-        setHighestBidder(_trade.highestBidder);
+        setHighestBidder(_trade?.highestBidder);
         setLister(_fullTrade.lister);
 
-        let _highestBid = parseFloat(_trade.maxbid / 1e1 ** _decimals).toFixed(2);
+        let _highestBid = parseFloat(_trade?.maxbid / 1e1 ** _decimals).toFixed(2);
 
         let _minimumBid = parseFloat(parseFloat(_highestBid) + parseFloat(_highestBid * _bidIncreasePercentage / 100)).toFixed(2);
 
@@ -487,9 +487,9 @@ const Product = (props) => {
         // alert(encodeURI(_mediaURI.image))
 
         // }
-        let _name = _trade.title;
+        let _name = _trade?.title;
         setName(_name);
-        let _price = parseFloat(_trade.startingPrice / 1e1 ** _decimals).toFixed(2);
+        let _price = parseFloat(_trade?.startingPrice / 1e1 ** _decimals).toFixed(2);
         setPrice(_price);
 
     }

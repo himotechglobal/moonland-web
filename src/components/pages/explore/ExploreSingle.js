@@ -98,12 +98,12 @@ const ExploreSingle = (props) => {
     args:[_trade?.nftid],
     watch:true
       })
-    console.log(_mediaURI);
+  
       const {data:_statusF} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
         functionName:"getFullTrade",
-        args:[props.tradeid],
+        args:[props?.tradeid],
         watch:true
           })
         // console.log(_statusF);
@@ -111,7 +111,7 @@ const ExploreSingle = (props) => {
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
         functionName:"getAuctionStatus",
-        args:[props.tradeid],
+        args:[props?.tradeid],
         watch:true
           })
          
@@ -126,26 +126,26 @@ const ExploreSingle = (props) => {
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
         functionName:"likes",
-        args:[props.tradeid],
+        args:[props?.tradeid],
         watch:true
           })
 
       const {data:_decimals} =useContractRead({
-        address:_fullTrade[5],
+        address:_fullTrade?.[5],
         abi:TOKEN_ABI,
         functionName:"decimals",
         watch:true
           })
          
       const {data:_balance1} =useContractRead({
-        address:_fullTrade[5],
+        address:_fullTrade?.[5],
         abi:TOKEN_ABI,
         functionName:"balanceOf",
         args:[address],
         watch:true
           })
       const {data:_approval} =useContractRead({
-        address:_fullTrade[5],
+        address:_fullTrade?.[5],
         abi:TOKEN_ABI,
         functionName:"allowance",
         args:[address, NFT_MARKETPLACE],
@@ -156,7 +156,7 @@ const ExploreSingle = (props) => {
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
         functionName:"likesMap",
-        args:[props.tradeid, address],
+        args:[props?.tradeid, address],
         watch:true
           })
       
@@ -172,7 +172,7 @@ const ExploreSingle = (props) => {
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
         functionName:"getBid",
-        args:[props.tradeid, address],
+        args:[props?.tradeid, address],
         watch:true
           })
 
@@ -181,7 +181,7 @@ const ExploreSingle = (props) => {
     let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
     // let _trade = await _marketPlaceContract.methods.getTrade(props.tradeid).call();
     // let _fullTrade = await _marketPlaceContract.methods.getFullTrade(props.tradeid).call();
-    let _token = _fullTrade[5];
+    let _token = _fullTrade?.[5];
     settokenAddress(_token);
     let _tokenContract = new _web3.eth.Contract(TOKEN_ABI, _token);
     // let _symbol = await _tokenContract.methods.symbol().call();
@@ -206,10 +206,10 @@ const ExploreSingle = (props) => {
     //  alert(encodeURI(_mediaURI.image))
     //  let _media = await getBase64FromUrl(_mediaURI)  ;
   
-    setHighestBidder(_trade.highestBidder);
+    setHighestBidder(_trade?.highestBidder);
 
     // let _statusF = await _marketPlaceContract.methods.getFullTrade(props.tradeid).call();
-    if (_statusF[8]) {
+    if (_statusF?.[8]) {
 
       // let _status = await _marketPlaceContract.methods.getAuctionStatus(props.tradeid).call();
       setBidStatus(_status)
@@ -219,7 +219,7 @@ const ExploreSingle = (props) => {
 
     }
     
-    setLister(_statusF.lister)
+    setLister(_statusF?.lister)
     // let _bidIncreasePercentage = await _marketPlaceContract.methods.bidIncreasePercentage().call();
     setBidIncreasePercentage(parseInt(_bidIncreasePercentage));
 
@@ -231,16 +231,16 @@ const ExploreSingle = (props) => {
 
     //  setMedia(_media.toDataURL());
     //  setMedia(_media);
-    let _name = _trade.title;
+    let _name = _trade?.title;
 
 
     setName(_name);
 
     // let _decimals = await _tokenContract.methods.decimals().call();
     setDecimals(_decimals);
-    setPrice(_trade.startingPrice / 1e1 ** _decimals);
+    setPrice(_trade?.startingPrice / 1e1 ** _decimals);
     
-    let _highestBid = parseFloat(_trade.maxbid / 1e1 ** _decimals).toFixed(2);
+    let _highestBid = parseFloat(_trade?.maxbid / 1e1 ** _decimals).toFixed(2);
    
     setHighestBid(_highestBid);
 
@@ -287,7 +287,7 @@ const ExploreSingle = (props) => {
     address: NFT_MARKETPLACE,
     abi: NFT_MARKETPLACE_ABI,
     functionName: 'placeBid',
-    args: [props.tradeid, parseFloat(depositAmount)>0 ? ethers.utils.parseEther(parseFloat(depositAmount).toString()):0],
+    args: [props?.tradeid, parseFloat(depositAmount)>0 ? ethers.utils.parseEther(parseFloat(depositAmount).toString()):0],
     
 })
 // console.log("amount",farmTokenId);
@@ -315,7 +315,7 @@ if (placeBidSuccess && modal) {
     address: NFT_MARKETPLACE,
     abi: NFT_MARKETPLACE_ABI,
     functionName: 'buyNft',
-    args: [props.tradeid],
+    args: [props?.tradeid],
     
 
 })
@@ -343,7 +343,7 @@ if (buyNftSuccess && modal) {
     address: NFT_MARKETPLACE,
     abi: NFT_MARKETPLACE_ABI,
     functionName: 'withdraw',
-    args: [props.tradeid],
+    args: [props?.tradeid],
 
 })
 // console.log("amount",farmTokenId);
@@ -471,8 +471,8 @@ if (withdrawSuccess && modal) {
    
     let _now = new Date().getTime() / 1e3;
 
-    if (_tradeTime._endtime > _now) {
-      let remainingSeconds = _tradeTime._endtime - _now;
+    if (_tradeTime?._endtime > _now) {
+      let remainingSeconds = _tradeTime?._endtime - _now;
       // console.log("Remaining Sec" , remainingSeconds);
 
       let remainingDay = Math.floor(
@@ -518,7 +518,7 @@ useEffect(() => {
     address: NFT_MARKETPLACE,
     abi: NFT_MARKETPLACE_ABI,
     functionName: 'unLike',
-    args: [props.tradeid],
+    args: [props?.tradeid],
 
 
 
@@ -703,7 +703,7 @@ if (approveTokenSuccess && modal) {
               <h5>{price} {symbol}</h5>
             </div>
             <div className="busd-child2">
-              <p>{bidStatusName[bidStatus]}</p>
+              <p>{bidStatusName?.[bidStatus]}</p>
             </div>
           </div>
           <div className="more-detail">
