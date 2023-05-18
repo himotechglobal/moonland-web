@@ -206,7 +206,7 @@ const Product = (props) => {
 
     const unLikeTrade = async () => {
         // let _web3 = new Web3(web3Provider);
-        setModal(!modal);
+        setModal(true);
         await unLikeTradeWriteAsync();
         // const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
 
@@ -249,7 +249,7 @@ const Product = (props) => {
     const likeTrade = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await likeTradeWriteAsync()
 
         // const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
@@ -311,6 +311,7 @@ const Product = (props) => {
         args: [tradeid],
         watch: true,
     })
+
     const { data: _canClaim } = useContractRead({
         address: NFT_MARKETPLACE,
         abi: NFT_MARKETPLACE_ABI,
@@ -510,11 +511,11 @@ const Product = (props) => {
 
     if (placeBidError && modal) {
         setModal(false);
-        init();
-        bidToggle();
     }
     if (placeBidSuccess && modal) {
         setModal(false);
+        init();
+        bidToggle();
     }
 
 
@@ -557,7 +558,7 @@ const Product = (props) => {
 
         // _amount = _web3.utils.toWei(_amount.toString());
 
-        setModal(!modal);
+        setModal(true);
         await placeBidWriteAsync()
         // _marketPlaceContract.methods.placeBid(tradeid, _amount).send({
         //     from: address
@@ -637,11 +638,11 @@ const Product = (props) => {
 
     if (renewSaleError && modal) {
         setModal(false);
-        setRenewSaleModal(!renewSaleModal)
-        init();
     }
     if (renewSaleSuccess && modal) {
         setModal(false);
+        setRenewSaleModal(!renewSaleModal)
+        init();
     }
 
 
@@ -651,7 +652,7 @@ const Product = (props) => {
         // let _web3 = new Web3(web3Provider);
         // const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
         // let _newPrice = _web3.utils.toWei(newPrice.toString());
-        setModal(!modal);
+        setModal(true);
         await renewSaleWriteAsync()
         // _marketPlaceContract.methods.renewInstantSellAuction(tradeid, _newPrice).send({
         //     from: address
@@ -683,10 +684,10 @@ const Product = (props) => {
 
     if (cancelSaleError && modal) {
         setModal(false);
-        init();
     }
     if (cancelSaleSuccess && modal) {
         setModal(false);
+        init();
     }
 
     const cancelSale = async () => {
@@ -694,7 +695,7 @@ const Product = (props) => {
         // let _web3 = new Web3(web3Provider);
         // const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
 
-        setModal(!modal);
+        setModal(true);
         await cancelSaleWriteAsync()
         // _marketPlaceContract.methods.cancelInstantSellAuction(tradeid).send({
         //     from: address
@@ -724,9 +725,9 @@ const Product = (props) => {
 
     if (cancelAuctionError && modal) {
         setModal(false);
-        init();
     }
     if (cancelAuctionSuccess && modal) {
+        init();
         setModal(false);
     }
 
@@ -735,7 +736,7 @@ const Product = (props) => {
         // let _web3 = new Web3(web3Provider);
         // const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
 
-        setModal(!modal);
+        setModal(true);
         await cancelAuctionWriteAsync()
         // _marketPlaceContract.methods.endAuction(tradeid).send({
         //     from: address
@@ -768,10 +769,10 @@ const Product = (props) => {
 
     if (renewAuctionError && modal) {
         setModal(false);
-        init();
     }
     if (renewAuctionSuccess && modal) {
         setModal(false);
+        init();
     }
 
     const renewAuction = async () => {
@@ -780,7 +781,7 @@ const Product = (props) => {
         // const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
         // let _newPrice = _web3.utils.toWei(newPrice.toString());
 
-        setModal(!modal);
+        setModal(true);
         await renewAuctionWriteAsync()
         // _marketPlaceContract.methods.renewAuction(tradeid, _newPrice, _newStartTime, _newEndTime).send({
         //     from: address
@@ -812,10 +813,10 @@ const Product = (props) => {
 
     if (claimBidError && modal) {
         setModal(false);
-        init();
     }
     if (claimBidSuccess && modal) {
         setModal(false);
+        init();
     }
 
 
@@ -824,7 +825,7 @@ const Product = (props) => {
         // let _web3 = new Web3(web3Provider);
         // const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
 
-        setModal(!modal);
+        setModal(true);
         await claimBidWriteAsync()
         // _marketPlaceContract.methods.withdraw(tradeid).send({
         //     from: address
@@ -855,10 +856,10 @@ const Product = (props) => {
 
     if (buyNftError && modal) {
         setModal(false);
-        init();
     }
     if (buyNftSuccess && modal) {
         setModal(false);
+        init();
     }
 
     const buyNft = async () => {
@@ -866,7 +867,7 @@ const Product = (props) => {
         // let _web3 = new Web3(web3Provider);
         // const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
 
-        setModal(!modal);
+        setModal(true);
         await buyNftWriteAsync()
         // _marketPlaceContract.methods.buyNft(tradeid).send({
         //     from: address
@@ -900,18 +901,18 @@ const Product = (props) => {
 
     if (approveTokenError && modal) {
         setModal(false);
-        init();
-        bidToggle();
     }
     if (approveTokenSuccess && modal) {
         setModal(false);
+        init();
+        bidToggle();
     }
 
 
     const approveToken = async () => {
         // let _web3 = new Web3(web3Provider);
 
-        setModal(!modal);
+        setModal(true);
         await approveTokenWriteAsync?.()
         // const _tokenContract = new _web3.eth.Contract(TOKEN_ABI, tokenAddress); 
         // const _amount = _web3.utils.toWei('10000000000000000000000');

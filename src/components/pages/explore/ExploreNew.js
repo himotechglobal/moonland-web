@@ -113,7 +113,7 @@ functionName:"getAuctionsOfUser",
 args:[address],
 watch:true
   })
-
+console.log(_userBids);
 
   const init = async () => {
     // let _web3 = new Web3(web3Provider);
@@ -122,12 +122,12 @@ watch:true
     // console.log(_count);
     let rows = [];
     for (let i = 0; i < parseInt(_count); i++) {
-      rows.push({ count: 1 });
+      rows.push({ id: i });
     }
     setCounter(rows);
     if (address) {
       // let _userBids = await _marketPlaceContract.methods.getAuctionsOfUser(address).call();
-      setUserBids(parseInt(_userBids));
+      setUserBids(_userBids);
     }
   }
 

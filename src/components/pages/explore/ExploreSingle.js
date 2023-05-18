@@ -92,13 +92,13 @@ const ExploreSingle = (props) => {
       })
      
   const {data:_mediaURI} =useContractRead({
-    address:_trade.nftadd,
+    address:_trade?.nftadd,
     abi:NFT_ABI,
     functionName:"tokenURI",
-    args:[parseInt(_trade.nftid)],
+    args:[_trade?.nftid],
     watch:true
       })
-    
+    console.log(_mediaURI);
       const {data:_statusF} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -186,9 +186,9 @@ const ExploreSingle = (props) => {
     let _tokenContract = new _web3.eth.Contract(TOKEN_ABI, _token);
     // let _symbol = await _tokenContract.methods.symbol().call();
     setSymbol(_symbol);
-    let _nftToken = _trade.nftadd;
-    let _nftTokenId = _trade.nftid;
-    let _nftContract = new _web3.eth.Contract(NFT_ABI, _nftToken);
+    // let _nftToken = _trade.nftadd;
+    // let _nftTokenId = _trade.nftid;
+    // let _nftContract = new _web3.eth.Contract(NFT_ABI, _nftToken);
     // let _mediaURI = await _nftContract.methods.tokenURI(_nftTokenId).call();
 
     try {
