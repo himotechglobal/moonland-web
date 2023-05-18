@@ -275,6 +275,7 @@ const ChickenFarm = () => {
         args: [address, MARKETPLACE],
         watch: true,
     })
+ 
     const { data: _baseApprovedFarm } = useContractRead({
         address: TOKEN,
         abi: TOKEN_ABI,
@@ -372,7 +373,7 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
-    // console.log(parseInt(_nftTokenId));
+    
     const { data: _approved } = useContractRead({
         address: HARVEST_FARM,
         abi: NFT_ABI,
@@ -473,14 +474,14 @@ const ChickenFarm = () => {
         args: [_amt],
         watch: true,
     })
-    const { data: _userClaimTimesOne } = useContractRead({
-        address: CHICKEN_FARMING,
-        abi: CHICKEN_FARMING_ABI,
-        functionName: 'getNextClaim',
-        args: [address],
-        watch: true,
-    })
-   
+    // const { data: _userClaimTimesOne } = useContractRead({
+    //     address: CHICKEN_FARMING,
+    //     abi: CHICKEN_FARMING_ABI,
+    //     functionName: 'getNextClaim',
+    //     args: [address],
+    //     watch: true,
+    // })
+
  
  
     const getData = async () => {
@@ -507,8 +508,8 @@ const ChickenFarm = () => {
             setChickenDeposited(parseFloat(_userChickens / 1e18).toFixed(2));
 
          setFarmSymbol(_symbol);
-         setBaseApproved(_baseApproved);
-         setBaseApprovedIncub(_baseApprovedIncub);
+         setBaseApproved(parseInt(_baseApproved));
+         setBaseApprovedIncub(parseInt(_baseApprovedIncub));
 
          setBaseBalance(parseFloat(_baseBalance / 1e18).toFixed(2));
 
@@ -537,18 +538,18 @@ const ChickenFarm = () => {
                     if (_approved === CHICKEN_FARMING) {
                         setFarmApprove(true);
                     }
-                    if (_userInfo2[4]) {
-                        setFarmTokenId(_userInfo2[1]);
+                    if (_userInfo2?.[4]) {
+                        setFarmTokenId(_userInfo2?.[1]);
     
-                        setFarmArea(parseFloat(_userInfo2[2] / 1e18).toFixed(2));
-                        setFarmCapacity(parseFloat(_userInfo2[3] / 1e18).toFixed(2));
+                        setFarmArea(parseFloat(_userInfo2?.[2] / 1e18).toFixed(2));
+                        setFarmCapacity(parseFloat(_userInfo2?.[3] / 1e18).toFixed(2));
     
                     }
                     // let _landIsfree = await _farmingContract.methods.landIsfree(_nftTokenId, address).call();
                     setLandIsfree(_landIsfree);
             //         // let _userInfo2 = await _farmingContract.methods.getUserToken(address).call();
     
-                    setFarmLocked(_userInfo2[4]);
+                    setFarmLocked(_userInfo2?.[4]);
     
     
             //         // console.log(_userInfo[4]);
@@ -733,7 +734,7 @@ const ChickenFarm = () => {
         //     // let _balance = await _chickenEggContract.methods.balanceOf(address).call();
         //     // let _userInfo = await _incubatorContract.methods.userInfo(address).call();
             setChickenEggBalance(parseFloat(_balance / 1e18).toFixed())
-            setChickenEggDeposited(parseFloat(_userInfo3[0] / 1e18).toFixed());
+            setChickenEggDeposited(parseFloat(_userInfo3?.[0] / 1e18).toFixed());
 
         //     // let _chickenEggApproved = await _chickenEggContract.methods.allowance(address, CHICKEN_INCUBATOR).call();
           
@@ -742,8 +743,8 @@ const ChickenFarm = () => {
         //     if (_userInfo3[0] > 0) {
         //         // let _userItens = await _incubatorContract.methods.pendingItems(address).call();
         //         //   console.log(_userItens);
-                setHatched(parseFloat(_userItens[0] / 1e18).toFixed());
-                let _adults = parseFloat(_userItens[1] / 1e18).toFixed();
+                setHatched(parseFloat(_userItens?.[0] / 1e18).toFixed());
+                let _adults = parseFloat(_userItens?.[1] / 1e18).toFixed();
                 setAdult(_adults);
                 
         //         // let _unlockItem = await _incubatorContract.methods.getUnlockTime(address).call();
@@ -1312,7 +1313,7 @@ const ChickenFarm = () => {
         setModal(false);
     }
     if (approvebaseTokenSuccess && modal) {
-        buyAreaNFT()
+      
         getData();
         setModal(false);
     }
@@ -1629,7 +1630,6 @@ const ChickenFarm = () => {
 
         else {
             // let _web3 = new Web3(web3Provider);
-
             setModal(true);
             await addDaysWriteAsync()
             // document.getElementById("exampleModalCenter").modal('show')
@@ -1765,16 +1765,16 @@ const ChickenFarm = () => {
 
     }
 
-    let _area = buyareadamount.toString();
+    let _area = parseFloat(buyareadamount)
 
     const { config: buyAreaNFTConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
         functionName: 'buyMoonLand',
-        args: [buyareadamount=="" ? 0:ethers.utils.parseEther(_area)],
+        args: [_area],
      
     })
-
+ 
     const { data: buyAreaNFTData, writeAsync: buyAreaNFTWriteAsync, isError: buyAreaNFTError } = useContractWrite(buyAreaNFTConfig_)
 
     const { isSuccess: buyAreaNFTSuccess } = useWaitForTransaction({
@@ -1802,7 +1802,7 @@ const ChickenFarm = () => {
         else {
 
             setModal(true);
-            await buyAreaNFTWriteAsync()
+            await buyAreaNFTWriteAsync?.()
             // document.getElementById("exampleModalCenter").modal('show')
             // const _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
             // let _area = _web3.utils.toWei(buyareadamount.toString()) ;
@@ -2145,6 +2145,7 @@ const ChickenFarm = () => {
                                                         farmLocked &&
                                                         <a className="bg___BTN2" onClick={areaToggle}>Buy Area</a>
                                                     }
+                                                    
                                                     {
                                                         !farmLocked && farmBalance == 0 &&
                                                         <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Area</a>

@@ -69,13 +69,32 @@
 		"anonymous": false,
 		"inputs": [
 			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "baseURI",
+				"type": "string"
+			}
+		],
+		"name": "BaseURIChange",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
 				"indexed": true,
 				"internalType": "address",
 				"name": "owner",
 				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
 			}
 		],
-		"name": "Owner",
+		"name": "ItemCreated",
 		"type": "event"
 	},
 	{
@@ -123,40 +142,29 @@
 		"type": "event"
 	},
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "_INTERFACE_ID_ERC721_VERIFY_FINGERPRINT",
+		"outputs": [
 			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_artWorkUri",
-				"type": "string"
+				"internalType": "bytes4",
+				"name": "",
+				"type": "bytes4"
 			}
 		],
-		"name": "_Mint",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "",
+				"name": "_auth",
 				"type": "address"
 			}
 		],
-		"name": "_minters",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
+		"name": "_setAuthorized",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -175,6 +183,19 @@
 		"name": "approve",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "authorized",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -197,13 +218,57 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "baseURI",
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_metaDataURI",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_metaData",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_moreData",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			}
+		],
+		"name": "create",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "extraInfoMap",
 		"outputs": [
 			{
 				"internalType": "string",
-				"name": "",
+				"name": "metaDataURI",
 				"type": "string"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "metaDataHash",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "uint256",
+				"name": "moreData",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -223,6 +288,63 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_metaData",
+				"type": "string"
+			}
+		],
+		"name": "getMetaDataHash",
+		"outputs": [
+			{
+				"internalType": "bytes32",
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "gettokenMetaData",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "gettokenURI",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -292,6 +414,25 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "ownerTokens",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -376,12 +517,17 @@
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "baseURI",
-				"type": "string"
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "data",
+				"type": "uint256"
 			}
 		],
-		"name": "setURIPrefix",
+		"name": "setArea",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -422,35 +568,11 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "index",
+				"name": "tokenId",
 				"type": "uint256"
 			}
 		],
-		"name": "tokenByIndex",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "index",
-				"type": "uint256"
-			}
-		],
-		"name": "tokenOfOwnerByIndex",
+		"name": "tokenMoreDatas",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -527,6 +649,30 @@
 		"name": "transferOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "_fingerprint",
+				"type": "bytes32"
+			}
+		],
+		"name": "verifyFingerprint",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]

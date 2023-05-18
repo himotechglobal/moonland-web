@@ -1060,8 +1060,8 @@ const Product = (props) => {
                                                                 <div class="p-list-content-wrp">
                                                                     <div class="p-list-content-c">
                                                                         <div class="p-l-img">
-                                                                            <img src="../assets/images/avatar.png" alt="" />
-                                                                            <img alt="" />
+                                                                            {/* <img src="../assets/images/avatar.png" alt="" />
+                                                                            <img alt="" /> */}
                                                                         </div>
                                                                         <div class="check-img2" >
                                                                             <img src={check} alt="" />
@@ -1081,8 +1081,8 @@ const Product = (props) => {
                                                                 <div class="p-list-content-wrp">
                                                                     <div class="p-list-content-c">
                                                                         <div class="p-l-img">
-                                                                            <img src="../assets/images/avatar.png" alt="" />
-                                                                            <img alt="" />
+                                                                            {/* <img src="../assets/images/avatar.png" alt="" />
+                                                                            <img alt="" /> */}
                                                                         </div>
                                                                         <div class="check-img2" >
                                                                             <img src={check} alt="" />

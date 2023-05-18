@@ -599,7 +599,7 @@ const StakeCard = (props) => {
 
         setwAmount(userStaked)
         setWithdrawAmount(userStaked)
-        console.log(userStaked);
+        // console.log(userStaked);
     }
 
     const handleWithdrawChange = (e) => {
@@ -608,7 +608,7 @@ const StakeCard = (props) => {
 
     }
 
-console.log(parseFloat(withdrawAmount));
+// console.log(parseFloat(withdrawAmount));
 
     const _amount2 = parseFloat(withdrawAmount) ? ethers.utils.parseEther((withdrawAmount).toString()) : 0
 

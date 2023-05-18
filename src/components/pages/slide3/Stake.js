@@ -21,7 +21,7 @@ const stake = () => {
                             <h1>STAKING</h1>
                         </div>
                             <div className="row">
-                            {numbers.map((number) =>        
+                            {numbers?.map((number) =>        
                                     <StakeCard index={number} />
 
                                  )}
