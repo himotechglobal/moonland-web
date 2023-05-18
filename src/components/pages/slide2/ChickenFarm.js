@@ -314,6 +314,7 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
+    
     const { data: _userChickens } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
@@ -373,7 +374,7 @@ const ChickenFarm = () => {
         args: [address],
         watch: true,
     })
-    
+  
     const { data: _approved } = useContractRead({
         address: HARVEST_FARM,
         abi: NFT_ABI,
@@ -705,7 +706,7 @@ const ChickenFarm = () => {
 
         // alert(farmBalance)
 
-    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_baseApprovedFarm,modal,_chickenFoodApproved,_userInfo3,eggTime,eggunlockTime,unlockTime,_userChickenDie])
+    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_userInfo,_baseApprovedFarm,modal,_chickenFoodApproved,_userInfo3,eggTime,eggunlockTime,unlockTime,_userChickenDie,_approved,_landIsfree,_nftTokenId])
     // console.log(parseInt(_capacity));
     const getEggData = async () => {
         // let _web3 = new Web3(web3Provider);
@@ -1720,8 +1721,8 @@ const ChickenFarm = () => {
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
         functionName: 'sellMoonLand',
-        args: [farmTokenId],
-        enabled:farmTokenId
+        args: [_nftTokenId],
+       
     })
 
     const { data: sellfarmData, writeAsync: sellfarmWriteAsync, isError: sellfarmError } = useContractWrite(sellfarmConfig_)
@@ -1744,7 +1745,7 @@ const ChickenFarm = () => {
         // let _web3 = new Web3(web3Provider);
 
         setModal(true);
-        await sellfarmWriteAsync()
+        await sellfarmWriteAsync?.()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
         // //   alert(farmTokenId);
