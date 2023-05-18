@@ -253,7 +253,7 @@ const ChickenFarm = () => {
         functionName: 'symbol',
         watch: true,
     })
-    console.log(_symbol);
+    // console.log(_symbol);
     const { data: _chickenSymbol } = useContractRead({
         address: SOLAR_TOKEN,
         abi: TOKEN_ABI,
@@ -267,7 +267,7 @@ const ChickenFarm = () => {
         functionName: 'symbol',
         watch: true,
     })
-    console.log(_baseSymbol)
+    // console.log(_baseSymbol)
     const { data: _baseApproved } = useContractRead({
         address: TOKEN,
         abi: TOKEN_ABI,
@@ -357,7 +357,7 @@ const ChickenFarm = () => {
         args: [address, CHICKEN_FARMING],
         watch: true,
     })
-    console.log(parseInt(_chickenApproved));
+    // console.log(parseInt(_chickenApproved));
     const { data: _chickenFoodApproved } = useContractRead({
         address: FLUID_TOKEN,
         abi: TOKEN_ABI,
@@ -485,7 +485,7 @@ const ChickenFarm = () => {
  
     const getData = async () => {
         // console.log(parseInt(_nftBalance));
-    console.log("njh")
+    // console.log("njh")
         
         setFarmBalance(parseInt(_nftBalance));
 
@@ -519,7 +519,7 @@ const ChickenFarm = () => {
         setEggsearned(parseFloat(_userEggs / 1e18).toFixed());
 
         setUnlockTime(_userChickenDie);
-        console.log("hnjj")
+
 
         // let _userClaimTimes = Object.keys(_userClaimTimesOne).map((key) => _userClaimTimes[key]);
         // console.log("claimeTimes", _userClaimTimes[1]);
@@ -532,7 +532,7 @@ const ChickenFarm = () => {
         if (_nftBalance > 0 || _userInfo?.landlocked) {
 
             setFarmTokenId(parseInt(_nftTokenId));
-            console.log("hhh")
+            // console.log("hhh")
 
                     if (_approved === CHICKEN_FARMING) {
                         setFarmApprove(true);
@@ -654,8 +654,7 @@ const ChickenFarm = () => {
 
 
     }
-// console.log(chickenApproved);
-console.log(farmCapacity);
+
     useEffect(() => {
         // if (window.ethereum) {
         //     web3Provider = window.ethereum;
@@ -705,7 +704,7 @@ console.log(farmCapacity);
 
         // alert(farmBalance)
 
-    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_baseApprovedFarm,modal,_chickenFoodApproved,_userInfo3,eggTime,eggunlockTime,unlockTime])
+    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_baseApprovedFarm,modal,_chickenFoodApproved,_userInfo3,eggTime,eggunlockTime,unlockTime,_userChickenDie])
     // console.log(parseInt(_capacity));
     const getEggData = async () => {
         // let _web3 = new Web3(web3Provider);
@@ -818,9 +817,9 @@ console.log(farmCapacity);
 
     const getlayTime = async () => {
         let _current = new Date().getTime() / 1e3;
-        console.log(unlockTime);
+        // console.log(unlockTime);
 
-        console.log("Next Time", layunlockTime)
+        // console.log("Next Time", layunlockTime)
         if (parseInt(_current) > parseInt(layEndTime)) {
             setlayTime(null);
 
@@ -831,7 +830,7 @@ console.log(farmCapacity);
             }
             else {
                 let remainingSecondsLay = layunlockTime - _current;
-                console.log("Remaining Sec", remainingSecondsLay);
+                // console.log("Remaining Sec", remainingSecondsLay);
 
                 let remainingDayLay = Math.floor(
                     remainingSecondsLay / (60 * 60 * 24)
@@ -861,18 +860,19 @@ console.log(farmCapacity);
 
         }
     }
+
     const getTime = async () => {
         let _current = new Date().getTime() / 1e3;
         // console.log(unlockTime);
 
-        if (parseInt(_current) > parseInt(unlockTime)) {
+        if ((_current) > parseInt(unlockTime)) {
             setendTime(null);
             // console.log('ended')
             // console.log('Current', _current)
         }
         else {
 
-            let remainingSeconds = unlockTime - _current;
+            let remainingSeconds = parseInt(unlockTime) - _current;
             // console.log("Remaining Sec", remainingSeconds);
 
             let remainingDay = Math.floor(
@@ -911,7 +911,7 @@ console.log(farmCapacity);
 
     const getEggHatchTime = async () => {
         let _current = new Date().getTime() / 1e3;
-        console.log(eggHatchTime);
+        // console.log(eggHatchTime);
         if (parseInt(_current) > parseInt(eggHatchTime)) {
             seteggTime2(0);
             // console.log('ended')
@@ -1124,7 +1124,7 @@ console.log(farmCapacity);
     }
 
     
-    console.log("moreinfoe",parseInt(farmTokenId),solarAmount==""?0: ethers.utils.parseEther(solarAmount).toString(),parseInt(dayamount))
+    // console.log("moreinfoe",parseInt(farmTokenId),solarAmount==""?0: ethers.utils.parseEther(solarAmount).toString(),parseInt(dayamount))
 
 // console.log(parseInt(cdamount), parseInt(farmTokenId), parseInt(dayamount));
     const { config: depositChickenConfig_ } = usePrepareContractWrite({
@@ -1772,7 +1772,7 @@ console.log(farmCapacity);
         abi: MARKETPLACE_ABI,
         functionName: 'buyMoonLand',
         args: [buyareadamount=="" ? 0:ethers.utils.parseEther(_area)],
-        watch: true,
+     
     })
 
     const { data: buyAreaNFTData, writeAsync: buyAreaNFTWriteAsync, isError: buyAreaNFTError } = useContractWrite(buyAreaNFTConfig_)
@@ -1790,9 +1790,6 @@ console.log(farmCapacity);
         buyAreaToggle();
         setModal(false);
     }
-
-
-
 
     const buyAreaNFT = async () => {
         // let _web3 = new Web3(web3Provider);
@@ -2256,7 +2253,7 @@ console.log(farmCapacity);
                                                     <h3>{chickenDeposited>0?(chickenDeposited * 365):0}</h3>
                                                     <p>Cells per Year</p>
                                                     {
-                                                        chickenDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
+                                                        chickenDeposited > 0 && parseInt(unlockTime) > new Date().getTime() / 1e3 &&
                                                         <>
                                                             <h3 className="timer">{endTime}</h3>
                                                             <p className="marquee"><span><i className="fa fa-warning yellow" ></i> Time remaining for Solar Fluid.</span></p>

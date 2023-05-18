@@ -71,7 +71,7 @@ const Product = (props) => {
     const [media, setMedia] = useState(null);
     const [symbol, setSymbol] = useState(null);
     const [highestBidder, setHighestBidder] = useState(null);
-    const [highestBid, setHighestBid] = useState(null);
+    const [highestBid, setHighestBid] = useState(0);
     const [tokenAddress, setTokenAddress] = useState(null);
     const [approval, setApproval] = useState(0);
     const [owner, setOwner] = useState(null);
@@ -87,8 +87,6 @@ const Product = (props) => {
     const [canClaim, setCanClaim] = useState(false);
     let timeInterval;
     let timeInterval2;
-
-
     const { address } = useAccount()
 
     useEffect(() => {
@@ -140,8 +138,8 @@ const Product = (props) => {
 
         let _now = new Date().getTime() / 1e3;
 
-        if (_tradeTime?._endtime > _now) {
-            let remainingSeconds = _tradeTime?._endtime - _now;
+        if (parseInt(_tradeTime?._endtime) > _now) {
+            let remainingSeconds = parseInt(_tradeTime?._endtime) - _now;
 
             let remainingDay = Math.floor(
                 remainingSeconds / (60 * 60 * 24)
@@ -178,8 +176,11 @@ const Product = (props) => {
 
         //     }, 1000);
         // }
-        getTimer();
+       setInterval(() => {
+            getTimer();
+          }, 1000);
     }, [bidStatus,_tradeTime]);
+    
 
     const { config: unLikeTradeConfig_ } = usePrepareContractWrite({
         address: NFT_MARKETPLACE,
@@ -965,7 +966,7 @@ const Product = (props) => {
                                     <div class="col-lg-6">
                                         <div class="product-right-content">
 
-                                            <h1 className="text-white" style={{fontSize:"35px",textTransform:"capitalize"}}>{name}
+                                            <h1 className="text-white" style={{fontSize:"35px",textTransform:"capitalize",marginBottom:"0"}}>{name}
                                               {/* <span className="p-1">
 
                                                 {
@@ -977,21 +978,22 @@ const Product = (props) => {
                                                 {likes}
                                             </span> */}
                                             </h1>
+                                         
                                             {
                                                 buyer === lister ?
-                                                    <p className="text-white" id="bidding">Cancelled</p>
+                                                    <p className="text-white mb-1" id="bidding">Cancelled</p>
                                                     :
                                                     bidStatus === 4 ?
-                                                        <p className="text-white" id="bidding">Buy Now</p>
+                                                        <p className="text-white mb-1" id="bidding">Buy Now</p>
                                                         :
-                                                        <p className="text-white" id="bidding">Bidding {bidStatusName[bidStatus]}</p>
+                                                        <p className="text-white mb-1" id="bidding">Bidding {bidStatusName[bidStatus]}</p>
 
                                             }
                                             {
                                                 !address &&
                                                 <span className="text-white" id="connect">Please connect Metamask to buy item.</span>
                                             }
-                                            <div className="d-flex mt-3 socialcontainer">
+                                            <div className="d-flex my-3 socialcontainer">
                                                 <FacebookShareButton url={window.location.href} quote={name} >
                                                     <FacebookIcon size={32} round />
                                                 </FacebookShareButton>
@@ -1010,7 +1012,11 @@ const Product = (props) => {
                                             </div>
                                             {
                                                 bidStatus === 1 &&
-                                                <span>Ends in {endTime}</span>
+                                                <span>Ends In: {endTime}</span>
+                                            }
+                                            {
+                                                bidStatus === 0 &&
+                                                <span>Start In: {endTime}</span>
                                             }
                                             {/* <div class="icons-p-wrp">
                           <a href="#">
@@ -1235,14 +1241,14 @@ const Product = (props) => {
                             </div>
                         </div> */}
                                             </div>
-                                            {address && bidStatus === 1 && buyer !== lister &&
-                                                <button class="x-product-place-bid-button" onClick={bidToggle} >Place Bid</button>
+                                            {address && bidStatus === 1 && address!== lister &&
+                                                <button className="bg___BTN_J" onClick={bidToggle} >Place Bid</button>
                                             }
                                             {address && bidStatus === 4 && approval > 0 && buyer !== lister &&
-                                                <button class="x-product-place-bid-button" onClick={buyNft} >Buy Now</button>
+                                                <button className="bg___BTN_J" onClick={buyNft} >Buy Now</button>
                                             }
                                             {address && bidStatus === 4 && approval === 0 && buyer !== lister &&
-                                                <button class="x-product-place-bid-button" onClick={approveToken} >Approve Now</button>
+                                                <button className="bg___BTN_J" onClick={approveToken} >Approve Now</button>
                                             }
                                             {!address &&
                                                 <div className="mt-3 text-center"  >
@@ -1250,25 +1256,25 @@ const Product = (props) => {
                                                 </div>
                                             }
                                             {address && !canClaim && bidStatus === 3 && highestBidder === address && address !== lister && buyer == null &&
-                                                <button class="x-product-place-bid-button" onClick={claimBid} >Claim</button>
+                                                <button className="bg___BTN_J" onClick={claimBid} >Claim</button>
 
                                             }
                                             {address && !canClaim && userbid > 0 && bidStatus === 3 && highestBidder !== address &&
-                                                <button class="x-product-place-bid-button" onClick={claimBid} >Withdraw</button>
+                                                <button className="bg___BTN_J" onClick={claimBid} >Withdraw</button>
 
                                             }
                                             {address && buyer == null && bidStatus === 4 && lister === address &&
                                                 <>
-                                                    <button class="x-product-place-bid-button" onClick={cancelSale} >Cancel Sale</button>
-                                                    <button class="x-product-place-bid-button" onClick={renewSaleToggle} >Renew Sale</button>
+                                                    <button className="bg___BTN_J" onClick={cancelSale} >Cancel Sale</button>
+                                                    <button className="bg___BTN_J" onClick={renewSaleToggle} >Renew Sale</button>
 
                                                 </>
                                             }
                                             {
                                                 address && bidStatus === 3 && lister === address && buyer == null &&
                                                 <>
-                                                    <button class="x-product-place-bid-button" onClick={cancelAuction} >Cancel Auction</button>
-                                                    <button class="x-product-place-bid-button" onClick={renewAuctionToggle} >Renew Auction</button>
+                                                    <button className="bg___BTN_J" onClick={cancelAuction} >Cancel Auction</button>
+                                                    <button className="bg___BTN_J" onClick={renewAuctionToggle} >Renew Auction</button>
                                                 </>
 
                                             }
@@ -1307,11 +1313,11 @@ const Product = (props) => {
                             {balance} {symbol}
                         </span>
                     </div>
-                    <label><br />Enter Deposit Amount <span className="maxButton ml-2 p-2" onClick={setMaxDeposit}>Max</span></label>
+                    <label><br />Enter Deposit Amount <span className="bg___BTN2 ml-2" style={{padding:"8px 12px"}} onClick={setMaxDeposit}>Max</span></label>
                     <input className="form-control" onChange={handleDepositChange} type="text" value={damount} />
                     {
                         parseFloat(damount) > userbid &&
-                        <h5 className="info font-size-large" >Your Deduction: {damount - userbid}</h5>
+                        <h6 className="info pt-3" >Your Deduction: {damount - userbid}</h6>
                     }
                     {
                         depositError &&

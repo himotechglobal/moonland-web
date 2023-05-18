@@ -98,7 +98,7 @@ const ExploreSingle = (props) => {
     args:[_trade?.nftid],
     watch:true
       })
-  
+
       const {data:_statusF} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -106,7 +106,7 @@ const ExploreSingle = (props) => {
         args:[props?.tradeid],
         watch:true
           })
-        // console.log(_statusF);
+   
       const {data:_status} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -244,7 +244,7 @@ const ExploreSingle = (props) => {
    
     setHighestBid(_highestBid);
 
-    setBuyer(_trade.buyer)
+    setBuyer(_trade?.buyer)
     let _minimumBid = parseFloat(parseFloat(_highestBid) + parseFloat(_highestBid * _bidIncreasePercentage / 100)).toFixed(2);
     setMinimumBid(_minimumBid)
 
@@ -421,8 +421,8 @@ if (withdrawSuccess && modal) {
 
   async function buyNft() {
 
-    let _web3 = new Web3(web3Provider);
-    const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
+    // let _web3 = new Web3(web3Provider);
+    // const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
 
     // setModal(!modal);
     // _marketPlaceContract.methods.buyNft(props.tradeid).send({
@@ -443,8 +443,8 @@ if (withdrawSuccess && modal) {
 
   async function claimBid() {
 
-    let _web3 = new Web3(web3Provider);
-    const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
+    // let _web3 = new Web3(web3Provider);
+    // const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
 
     setModal(true);
     await withdrawWriteAsync?.()
@@ -467,12 +467,12 @@ if (withdrawSuccess && modal) {
     args: [props.tradeid],
 })
 
-  const getTimer =() => {
-   
+const getTimer =() => {
     let _now = new Date().getTime() / 1e3;
+   
 
-    if (_tradeTime?._endtime > _now) {
-      let remainingSeconds = _tradeTime?._endtime - _now;
+    if (parseInt(_tradeTime?._endtime) > _now) {
+      let remainingSeconds = parseInt(_tradeTime?._endtime) - _now;
       // console.log("Remaining Sec" , remainingSeconds);
 
       let remainingDay = Math.floor(
@@ -503,16 +503,19 @@ if (withdrawSuccess && modal) {
     }
   }
 
-useEffect(() => {
+  useEffect(() => {
     // clearInterval(timeInterval);
-    // if (bidStatus == 1) {
-    //   timeInterval = setInterval(() => {
-    //     getTimer();
+    // if (bidStatus === 1) {
+    //     timeInterval = setInterval(() => {
+    //         getTimer();
 
-    //   }, 1000);
+    //     }, 1000);
     // }
-    getTimer();
-  }, [bidStatus,_tradeTime]);
+    init()
+   setInterval(() => {
+        getTimer();
+      }, 1000);
+}, [bidStatus,_tradeTime,_approval]);
 
   const { config: unLikeTradeConfig } = usePrepareContractWrite({
     address: NFT_MARKETPLACE,
@@ -713,6 +716,10 @@ if (approveTokenSuccess && modal) {
                 <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Highest Bid</p> <p className="value p_new">{highestBid} {symbol}</p> </li>
                 <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Your Bid</p> <p className="value p_new">{userbid} {symbol}</p> </li>
                 {
+                                                bidStatus === 0 &&
+                                                <span>Start In: {endTime}</span>
+                                            }
+                {
 
                   endTime != 0 ?
                     <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Ends In</p> <p className="value p_new">{endTime}</p> </li>
@@ -729,14 +736,14 @@ if (approveTokenSuccess && modal) {
           </div>
 
 
-          {address && bidStatus == 1 &&
-            <button class="x-product-place-bid-button" onClick={bidToggle} >Place Bid</button>
+          {address && bidStatus == 1  && address!== lister &&
+            <button className="bg___BTN_J" onClick={bidToggle} >Place Bid</button>
           }
           {address && bidStatus == 4 && approval > 0 &&
-            <button class="x-product-place-bid-button" onClick={buyNft} >Buy Now</button>
+            <button className="bg___BTN_J" onClick={buyNft} >Buy Now</button>
           }
           {address && bidStatus == 4 && approval == 0 &&
-            <button class="x-product-place-bid-button" onClick={approveToken} >Approve to Buy</button>
+            <button className="bg___BTN_J" onClick={approveToken} >Approve to Buy</button>
           }
           {!address &&
             <div className="mt-3 text-center"  >
@@ -744,13 +751,14 @@ if (approveTokenSuccess && modal) {
             </div>
           }
           {address && !canClaim && bidStatus == 3 && highestBidder == address && buyer == null &&
-            <button class="x-product-place-bid-button" onClick={claimBid} >Claim</button>
+            <button className="bg___BTN_J" onClick={claimBid} >Claim</button>
 
           }
           {address && !canClaim && userbid > 0 && bidStatus == 3 && highestBidder != address &&
-            <button class="x-product-place-bid-button" onClick={claimBid} >Withdraw</button>
+            <button className="bg___BTN_J" onClick={claimBid} >Withdraw</button>
 
           }
+          
         </div>
       </div>
      </div>
@@ -779,12 +787,12 @@ if (approveTokenSuccess && modal) {
               {balance} {symbol}
             </span>
           </div>
-          <label><br />Enter Bid Amount <span className="maxButton ml-2 p-2" onClick={setMaxDeposit}>Max</span></label>
+          <label><br />Enter Bid Amount <span className="bg___BTN2 ml-2" style={{padding:"8px 12px"}} onClick={setMaxDeposit}>Max</span></label>
           <input className="form-control" onChange={handleDepositChange} type="text" value={damount} />
 
           {
             parseFloat(damount) > userbid &&
-            <h5 className="info font-size-large" >Your Deduction: {damount - userbid}</h5>
+            <h6 className="info pt-3" >Your Deduction: {damount - userbid}</h6>
           }
 
           {

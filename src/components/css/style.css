@@ -399,8 +399,31 @@ p {
   display: block;
   text-align: center;
 }
+.bg___BTN_J {
+  font-family: 'poppins';
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  font-size: 14px;
+  width: 100%;
+  margin-top: 20px;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
+  border-radius: 50em;
+  border: 5px solid transparent;
+  text-transform: capitalize !important;
+  border-radius: 30px;
+  transition: 0.5s;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+}
 
 .bg___BTN:hover {
+  color: #fff;
+  transform: translateY(-6px);
+}
+.bg___BTN_J:hover {
   color: #fff;
   transform: translateY(-6px);
 }
@@ -7091,7 +7114,9 @@ a {
   display: inline-block;
   font-weight: 500;
   font-size: 20px;
-  margin: 15px 0px;
+  /* margin: 15px 0px 0; */
+  color: #fff;
+
 }
 
 .v3img {
@@ -7347,7 +7372,7 @@ a {
   padding: 10px;
   border: 2px solid transparent;
   border-radius: 12px;
-  margin-bottom: 40px;
+  /* margin-bottom: 25px; */
 
 }
 

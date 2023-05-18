@@ -113,7 +113,7 @@ functionName:"getAuctionsOfUser",
 args:[address],
 watch:true
   })
-console.log(_userBids);
+
 
   const init = async () => {
     // let _web3 = new Web3(web3Provider);
@@ -321,7 +321,6 @@ const {data:_count1} =useContractRead({
 
   }
 
-
   useEffect(() => {
 getAllStatus()
   }, [saleArray,_count1])
@@ -505,7 +504,7 @@ getAllStatus()
 
                       {
                         // counter.length > 0 && saleArray.length > 0 && counter
-                        userCount.length>0 &&  userCount.map((v, i) => {
+                        userCount?.length>0 &&  userCount?.map((v, i) => {
                           if (_acounter < olimit 
                             // && $.inArray((counter.length - (i + 1)).toString(), saleArray) >= 0
                           ) {
@@ -517,7 +516,7 @@ getAllStatus()
                             )
                           }
                           else {
-                            if (userCount.length == 0 && _acounter == 0 )
+                            if (userCount?.length == 0 && _acounter == 0 )
                               return (
                                 <div className='marketplace-box-wrap8'>
                                   <div className="text-center w-100 m-0 p-5  card cards2">
@@ -530,7 +529,7 @@ getAllStatus()
 
 
                       {
-                        userCount.length == 0 &&
+                        userCount?.length == 0 &&
 <div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2" >
                           <h3>No Auction Available</h3>
@@ -542,7 +541,7 @@ getAllStatus()
                     </div>
 
                     {
-                      saleArray.length > olimit && counter.length > 0 &&
+                      saleArray?.length > olimit && counter?.length > 0 &&
                       <div className="loadmore-btn">
                         < button type="button" className={oloading ? "loading action-btn" : "action-btn"} onClick={oloadmore} id="login-btn">Load more</button>
                       </div>
@@ -551,7 +550,7 @@ getAllStatus()
                   <div class="tab-panel row" id="onbuy">
                     <div className="row">
                       {
-                        counter.length > 0 && instantArray.length > 0 && counter.map((v, i) => {
+                        counter?.length > 0 && instantArray?.length > 0 && counter?.map((v, i) => {
                           // console.log(inArray(i,saleArray))
                           if (_dcounter < dlimit && $.inArray((counter.length - (i + 1)).toString(), instantArray) >= 0) {
                             _dcounter++;
@@ -560,7 +559,7 @@ getAllStatus()
                             )
                           }
                           else {
-                            if (instantArray.length == 0 && _dcounter == 0 && (i == counter.length - 1))
+                            if (instantArray?.length == 0 && _dcounter == 0 && (i == counter?.length - 1))
                               return (
                                 <div className='marketplace-box-wrap8'>
                                 <div className="text-center w-100 m-0 p-5  card cards2">
@@ -573,7 +572,7 @@ getAllStatus()
 
 
                       {
-                        instantArray.length == 0 &&
+                        instantArray?.length == 0 &&
 <div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2" >
                           <h3>No Auction Available</h3>
@@ -584,7 +583,7 @@ getAllStatus()
 
                     </div>
                     {
-                      instantArray.length > dlimit &&
+                      instantArray?.length > dlimit &&
                       <div className="loadmore-btn">
                         < button type="button" className={dloading ? "loading action-btn" : "action-btn"} onClick={dloadmore} id="login-btn">Load more</button>
                       </div>
@@ -595,13 +594,17 @@ getAllStatus()
                       {
 
 
-                        counter.length > 0 && soldArray.length > 0 && counter.map((v, i) => {
+                        counter?.length > 0 && soldArray?.length > 0 && counter?.map((v, i) => {
                           // console.log(soldArray);
 
-                          if (_bcounter < slimit && $.inArray((counter.length - (i + 1)).toString(), soldArray) >= 0) {
+                          if (_bcounter < slimit 
+                            // && 
+                            // $.inArray((counter?.length - (i + 1)).toString(), soldArray
+                            // ) >= 0
+                            ) {
                             _bcounter++;
                             return (
-                              <ExploreSingle tradeid={(counter.length - (i + 1))} />
+                              <ExploreSingle tradeid={(counter?.length - (i + 1))} />
                             )
                           }
                           else {
@@ -618,7 +621,7 @@ getAllStatus()
                         })}
 
                       {
-                        soldArray.length == 0 &&
+                        soldArray?.length == 0 &&
 <div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2">
                           <h3>No Auction Available</h3>
@@ -629,7 +632,7 @@ getAllStatus()
                     </div>
 
                     {
-                      soldArray.length > slimit &&
+                      soldArray?.length > slimit &&
                       <div className="loadmore-btn">
                         < button type="button" className={sloading ? "loading action-btn" : "action-btn"} onClick={sloadmore} id="login-btn">Load more</button>
                       </div>
@@ -638,7 +641,8 @@ getAllStatus()
                   <div class="tab-panel" id="mybids">
                     <div className="row">
                       {
-                        userBids.length > 0 && userBids.map((v, i) => {
+                        userBids?.length > 0 && userBids?.map((v, i) => {
+            
                           if (_ccounter < mlimit) {
                             _ccounter++;
                             return (
@@ -656,7 +660,7 @@ getAllStatus()
                           }
                         })}
                       {
-                        userBids.length == 0 &&
+                        userBids?.length === 0 &&
 <div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2">
                           <h3>No Bids Available</h3>
@@ -667,7 +671,7 @@ getAllStatus()
                     </div>
 
                     {
-                      userBids.length > mlimit &&
+                      userBids?.length > mlimit &&
                       <div className="loadmore-btn">
                         < button type="button" className={mloading ? "loading action-btn" : "action-btn"} onClick={mloadmore} id="login-btn">Load more</button>
                       </div>
@@ -680,7 +684,7 @@ getAllStatus()
 
 
                       {
-                        userNfts.length > 0 && userNfts.map((v, i) => {
+                        userNfts?.length > 0 && userNfts?.map((v, i) => {
                           if (i < climit) {
                       
                             return (
@@ -699,7 +703,7 @@ getAllStatus()
                           }
                         })}
                       {
-                        userNfts.length == 0 &&
+                        userNfts?.length == 0 &&
 <div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2">
                           <h3>No Collection Available</h3>
@@ -708,14 +712,14 @@ getAllStatus()
                       }
                     </div>
                     {
-                      userNfts.length > climit &&
+                      userNfts?.length > climit &&
                       <div className="loadmore-btn">
                         < button type="button" className={cloading ? "loading action-btn" : "action-btn"} onClick={cloadmore} id="login-btn">Load more</button>
                       </div>
                     }
                   </div>
 
-                  <div class="tab-panel" id="imported">
+                  {/* <div class="tab-panel" id="imported">
                     <div className="row">
                       <div className="col-lg-12">
                         <div className="d-flex justify-content-end">
@@ -726,7 +730,7 @@ getAllStatus()
                     <div className="row">
 
                       {
-                        importedNfts.length > 0 && importedNfts.map((v, i) => {
+                        importedNfts?.length > 0 && importedNfts?.map((v, i) => {
                           if (i < ilimit) {
                             return (
                               <NftSingle nftid={v.nftId} nftAddress={v.nft} imported={true} />
@@ -735,7 +739,7 @@ getAllStatus()
 
                         })}
                       {
-                        importedNfts.length == 0 &&
+                        importedNfts?.length == 0 &&
 <div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2">
                           <h3>No Imported Collection Available</h3>
@@ -745,12 +749,12 @@ getAllStatus()
                     </div>
 
                     {
-                      importedNfts.length > ilimit &&
+                      importedNfts?.length > ilimit &&
                       <div className="loadmore-btn">
                         < button type="button" className={iloading ? "loading action-btn" : "action-btn"} onClick={iloadmore} id="login-btn">Load more</button>
                       </div>
                     }
-                  </div>
+                  </div> */}
 
 
                 </div>
