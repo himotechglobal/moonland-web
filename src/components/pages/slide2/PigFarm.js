@@ -333,7 +333,7 @@ const PigFarm = () => {
         watch: true,
     })
 
-console.log(_userClaimTimes1);
+
 
     const { data: _chickenFoodBalance1 } = useContractRead({
         address: POSITRONS_TOKEN,
@@ -391,8 +391,7 @@ console.log(_userClaimTimes1);
         functionName: "landIsfree",
         args: [farmTokenId, address],
     })
-    console.log("fee 1",parseInt(farmTokenId))
-    console.log("fee",_landIsfree);
+
     const { data: _userInfo1 } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
@@ -490,7 +489,7 @@ console.log(_userClaimTimes1);
 
                 //   console.log(parseInt(unlockTime));
             }
-
+            
             let _current = new Date().getTime() / 1e3;
             if (unlockTime > _current) {
 
@@ -529,7 +528,7 @@ console.log(_userClaimTimes1);
             // console.log(_boarApproved);
 
             // console.log(_userInfo);
-            if (_nftBalance > 0 || _userInfo.landlocked) {
+            if (_nftBalance > 0 || _userInfo?.landlocked) {
                 // let _nftTokenId = await _nftContract.methods.ownerTokens(address).call();
                 // console.log(_nftTokenId);
                 // let _approved = await _nftContract.methods.getApproved(_nftTokenId).call();
@@ -541,14 +540,14 @@ console.log(_userClaimTimes1);
                 setLandIsfree(_landIsfree);
 
                 // let _userInfo = await _farmingContract.methods.getUserToken(address).call();
-                setFarmLocked(_userInfo1[4]);
+                setFarmLocked(_userInfo1?.[4]);
 
                 //   console.log(_userInfo[4]);
-                if (_userInfo1[4]) {
-                    setFarmTokenId(_userInfo1[1]);
+                if (_userInfo1?.[4]) {
+                    setFarmTokenId(_userInfo1?.[1]);
 
-                    setFarmArea(parseFloat(_userInfo1[2] / 1e18).toFixed());
-                    setFarmCapacity(parseFloat(_userInfo1[3] / 1e18).toFixed());
+                    setFarmArea(parseFloat(_userInfo1?.[2] / 1e18).toFixed());
+                    setFarmCapacity(parseFloat(_userInfo1?.[3] / 1e18).toFixed());
 
                 }
             }
@@ -677,20 +676,20 @@ console.log(_userClaimTimes1);
         // let _chickenEggContract = new _web3.eth.Contract(TOKEN_ABI, _chickenpigletToken);
 
         // let _chickenEggSymbol = await _chickenEggContract.methods.symbol().call();
-
+       
         if (address) {
 
             // let _balance = await _chickenEggContract.methods.balanceOf(address).call();
             // let _userInfo = await _incubatorContract.methods.userInfo(address).call();
             setChickenEggBalance(parseFloat(_balance / 1e18).toFixed())
-            setChickenEggDeposited(parseFloat(_userInfo2[0] / 1e18).toFixed());
+            setChickenEggDeposited(parseFloat(_userInfo2?.[0] / 1e18).toFixed());
 
             // let _chickenEggApproved = await _chickenEggContract.methods.allowance(address, PIG_INCUBATOR).call();
             setChickenEggApproved(parseInt(_chickenEggApproved));
 
             // console.log("eggunlick",parseInt(_userInfo[0]))
 
-            if (parseInt(_userInfo2[0]) > 0) {
+            if (parseInt(_userInfo2?.[0]) > 0) {
                 // let _userItens = await _incubatorContract.methods.pendingItems(address).call();
                 //   console.log(_userEggs);
 
@@ -784,7 +783,8 @@ console.log(_userClaimTimes1);
 
         }
 
-    }, [farmTokenId,_nftTokenId,_userEggs,eggsearned,layEndTime,eggHatchTime,eggunlockTime,unlockTime,_userInfo,_userItens,_userInfo2])
+    }, [farmTokenId,_nftTokenId,_userEggs,eggsearned,layEndTime,eggHatchTime,eggunlockTime,unlockTime,_userInfo,_userItens,_userInfo2,_baseApprovedIncub,_userBoar,
+        _userSow,_userChickenDie,unlockTime,_userClaimTimes1,_chickenFoodBalance1, _capacity,_depositFee1,_balance,_chickenEggApproved,_claimChickenFee,_unlockItem2])
 
 
 
@@ -2238,10 +2238,10 @@ console.log(chickenEggBalance);
                                                         <h3>{farmCapacity}</h3>
                                                         <p>SoPods Capacity</p>
                                                     </div>
-                                                    <div className="time__list">
+                                                    {/* <div className="time__list">
                                                         <h3>0</h3>
                                                         <p>DuoPods Capacity</p>
-                                                    </div>
+                                                    </div> */}
                                                     <div className="pool-btns" style={{ justifyContent: 'end' }}>
 
 {

@@ -323,7 +323,8 @@ const {data:_count1} =useContractRead({
 
   useEffect(() => {
 getAllStatus()
-  }, [saleArray,_count1])
+init()
+  }, [saleArray,_count1,_userBids])
 
 
   const oloadmore = () => {
@@ -660,7 +661,7 @@ getAllStatus()
                           }
                         })}
                       {
-                        userBids?.length === 0 &&
+                        userBids?.length == 0 &&
 <div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2">
                           <h3>No Bids Available</h3>

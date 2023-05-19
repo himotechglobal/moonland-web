@@ -309,7 +309,7 @@ const StakeCard = (props) => {
             if (address) {
                 // address = '0xbe7c30E0945d019F3aDc84AeEC55Ee2eCEb4247d' ;
                 // let _depositedTokens = await _stakeContract.methods.depositedTokens(address).call();
-                let _depositedTokens = parseFloat(_depositedTokens1 / 1e18).toFixed(4);
+                let _depositedTokens = parseFloat(_depositedTokens1 / 1e18).toFixed(5);
                 setUserStaked(_depositedTokens);
                 // let _earnedTokens = await _stakeContract.methods.getPendingReward(address).call();
                 let _earnedTokens = parseFloat(_earnedTokens1 / 1e1 ** _decimals).toFixed(4);
@@ -324,7 +324,7 @@ const StakeCard = (props) => {
                 // console.log(_approved);
 
                 // let _balance = await _stakeTokenContract.methods.balanceOf(address).call();
-                let _balance = parseFloat(_balance1 / 1e1 ** _decimals).toFixed(2);
+                let _balance = parseFloat(_balance1 / 1e1 ** _decimals).toFixed(4);
                 setBalance(_balance);
                 // console.log(_balance);
             }
@@ -365,7 +365,7 @@ const StakeCard = (props) => {
         //     }, 5000);
         // }
 
-    }, [address,_totalStaked1,])
+    }, [address,_totalStaked1,_approved])
 
 
     const getEarned = async () => {
@@ -434,7 +434,7 @@ const StakeCard = (props) => {
         // let _web3 = new Web3(web3Provider);
         // let v = STAKING_ARRAY[props.index];
 
-        setModal(!modal);
+        setModal(true);
         await approveWriteAsync()
         // document.getElementById("exampleModalCenter").modal('show')
         // const _tokenContract = new _web3.eth.Contract(TOKEN_ABI, stakeStoken);
@@ -573,7 +573,7 @@ const StakeCard = (props) => {
 
         // let _stakingContract = new _web3.eth.Contract(STAKING_ABI, v.address);
 
-        setModal(!modal);
+        setModal(true);
         await depositTokenWriteAsync()
         // let _amount = parseFloat(depositAmount);
         // _amount = _web3.utils.toWei(_amount.toString());
@@ -642,7 +642,7 @@ const StakeCard = (props) => {
 
         // let _stakingContract = new _web3.eth.Contract(STAKING_ABI, v.address);
 
-        setModal(!modal);
+        setModal(true);
         await withdrawTokenWriteAsync()
 
         // let _amount = parseFloat(withdrawAmount);
@@ -799,7 +799,7 @@ const StakeCard = (props) => {
                                         <ConnectWalletBtn />
                                          
                                    }
-                                    {address && approved === 0 &&
+                                    {address && approved == 0 &&
                                         <a className="bg___BTN3" onClick={approveToken} >Approve</a>
 
                                     }

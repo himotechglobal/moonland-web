@@ -389,6 +389,7 @@ const ChickenFarm = () => {
         args: [_nftTokenId, address],
         watch: true,
     })
+    
     const { data: _userInfo2 } = useContractRead({
         address: CHICKEN_FARMING,
         abi: CHICKEN_FARMING_ABI,
@@ -657,64 +658,14 @@ const ChickenFarm = () => {
 
     }
 
-    useEffect(() => {
-        // if (window.ethereum) {
-        //     web3Provider = window.ethereum;
-        // }
-        // else {
-        //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
-
-        // }
-        // getEggData();
-        getData();
-        getEggData()
-        if (unlockTime > 0) {
-            clearInterval(timeInterval);
-            timeInterval = setInterval(() => {
-                getTime();
-
-            }, 1000);
-
-        }
-
-        if (layEndTime > 0) {
-            clearInterval(timeInterval1);
-            timeInterval1 = setInterval(() => {
-                getlayTime();
-
-            }, 1000);
-
-        }
-
-        if (eggunlockTime > 0) {
-            clearInterval(timeInterval2);
-            timeInterval2 = setInterval(() => {
-
-                getEggTime();
-            }, 1000);
-
-        }
-
-        if (eggHatchTime > 0) {
-            clearInterval(timeInterval3);
-            timeInterval3 = setInterval(() => {
-                // getEggHatchTime() ;
-
-            }, 1000);
-
-        }
-
-        // alert(farmBalance)
-
-    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_userInfo,_baseApprovedFarm,modal,_chickenFoodApproved,_userInfo3,eggTime,eggunlockTime,unlockTime,_userChickenDie,_approved,_landIsfree,_nftTokenId])
-    // console.log(parseInt(_capacity));
+  
     const getEggData = async () => {
         // let _web3 = new Web3(web3Provider);
         // let _incubatorContract = new _web3.eth.Contract(CHICKEN_INCUBATOR_ABI, CHICKEN_INCUBATOR);
         // // let _chickenEggToken = await _incubatorContract.methods.eggToken().call();
         // // console.log(_chickenEggToken)
         setChickenEggToken(_chickenEggToken);
-        setChickenEggApproved(_chickenEggApproved);
+        setChickenEggApproved(parseInt(_chickenEggApproved));
         setEggDepositFee(parseInt(_depositFee1));
         // // let _capacity = await _incubatorContract.methods.capacity().call();
         setIncubCapacity(parseInt((_capacity)/1e18).toFixed(2));
@@ -767,7 +718,56 @@ const ChickenFarm = () => {
 
     }
 
+    useEffect(() => {
+        // if (window.ethereum) {
+        //     web3Provider = window.ethereum;
+        // }
+        // else {
+        //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
 
+        // }
+        // getEggData();
+        getData();
+        getEggData()
+        if (unlockTime > 0) {
+            clearInterval(timeInterval);
+            timeInterval = setInterval(() => {
+                getTime();
+
+            }, 1000);
+
+        }
+
+        if (layEndTime > 0) {
+            clearInterval(timeInterval1);
+            timeInterval1 = setInterval(() => {
+                getlayTime();
+
+            }, 1000);
+
+        }
+
+        if (eggunlockTime > 0) {
+            clearInterval(timeInterval2);
+            timeInterval2 = setInterval(() => {
+
+                getEggTime();
+            }, 1000);
+
+        }
+
+        if (eggHatchTime > 0) {
+            clearInterval(timeInterval3);
+            timeInterval3 = setInterval(() => {
+                // getEggHatchTime() ;
+
+            }, 1000);
+
+        }
+
+        // alert(farmBalance)
+
+    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_userInfo,_baseApprovedFarm,modal,_chickenFoodApproved,_userInfo3,eggTime,eggunlockTime,unlockTime,_userChickenDie,_approved,_landIsfree,_nftTokenId,_chickenEggApproved,_chickenEggToken,_depositFee1,_balance,_userItens,_claimChickenFee1,_capacity])
 
     const { config: lockNFTConfig_ } = usePrepareContractWrite({
         address: CHICKEN_FARMING,
@@ -1717,52 +1717,34 @@ const ChickenFarm = () => {
 
 
 
-    const { config: sellfarmConfig_ } = usePrepareContractWrite({
+    const { config: sellAreaConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
         functionName: 'sellMoonLand',
-        args: [_nftTokenId],
+        args: [farmTokenId],
        
     })
 
-    const { data: sellfarmData, writeAsync: sellfarmWriteAsync, isError: sellfarmError } = useContractWrite(sellfarmConfig_)
+    const { data: sellAreaData, writeAsync: sellAreaWriteAsync, isError: sellAreaError } = useContractWrite(sellAreaConfig_)
 
-    const { isSuccess: sellfarmSuccess } = useWaitForTransaction({
-        hash: sellfarmData?.hash,
+    const { isSuccess: sellAreaSuccess } = useWaitForTransaction({
+        hash: sellAreaData?.hash,
     })
 
 
-    if (sellfarmError && modal) {
+    if (sellAreaError && modal) {
         setModal(false);
     }
-    if (sellfarmSuccess && modal) {
+    if (sellAreaSuccess && modal) {
         getData();
         setModal(false);
     }
 
 
-    const sellfarm = async () => {
-        // let _web3 = new Web3(web3Provider);
-
+    const sellArea = async () => {
         setModal(true);
-        await sellfarmWriteAsync?.()
-        // document.getElementById("exampleModalCenter").modal('show')
-        // const _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-        // //   alert(farmTokenId);
-        // _marketContract.methods.sellFarmLand(farmTokenId).send({ from: address }).on('receipt', function (receipt) {
-        //     setModal(modal);
-        //     getData();
-
-
-
-        // })
-
-        //     .on('error', function (error, receipt) {
-        //         setModal(modal);
-
-        //     });
-
-
+        await sellAreaWriteAsync?.()
+     
 
     }
 
@@ -2153,7 +2135,7 @@ const ChickenFarm = () => {
                                                     }
                                                     {
                                                         landIsfree &&
-                                                        <a className="bg___BTN2 ml-2" onClick={sellfarm}>Sell Area</a>
+                                                        <a className="bg___BTN2 ml-2" onClick={sellArea}>Sell Area</a>
                                                     }
                                                
                                             </div>
