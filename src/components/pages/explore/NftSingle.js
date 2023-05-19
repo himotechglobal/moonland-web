@@ -123,7 +123,7 @@ setMedia(replacedUrl);
   }, [address,_media]);
 
   return (
-    <div className="col-lg-3">
+    <div className="col-lg-4 col-md-6 pb-4">
       <div class="product-list">
         {/* <a href={"/product/"+props.tradeid}> */}
 
@@ -166,7 +166,7 @@ setMedia(replacedUrl);
           </ul>
         </div>
 
-        <button class="bg___BTN2" onClick={saleToggle}>
+        <button class="bg___BTN_J" onClick={saleToggle}>
           Put On Sale
         </button>
       </div>

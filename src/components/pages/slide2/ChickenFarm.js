@@ -41,7 +41,10 @@ import { Link } from 'react-router-dom';
 
 
 const ChickenFarm = () => {
-
+    const [modal, setModal] = useState(false);
+    const toggle = () => {
+        setModal(!modal);
+    }
     const [farmArea, setFarmArea] = useState(0);
     const [farmCapacity, setFarmCapacity] = useState(0);
     const [farmBalance, setFarmBalance] = useState(0);
@@ -149,8 +152,7 @@ const ChickenFarm = () => {
 
     const [cedepositError, setceDepositError] = useState(false);
 
-    const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
+  
 
     const [chickenModal, setChickenModal] = useState(false);
     const chickentoggle = () => setChickenModal(!chickenModal);
@@ -536,8 +538,8 @@ const ChickenFarm = () => {
 
             setFarmTokenId(parseInt(_nftTokenId));
             // console.log("hhh")
-
-                    if (_approved === CHICKEN_FARMING) {
+// alert(_landIsfree)
+            if (_approved === CHICKEN_FARMING) {
                         setFarmApprove(true);
                     }
                     if (_userInfo2?.[4]) {
@@ -548,8 +550,8 @@ const ChickenFarm = () => {
     
                     }
                     // let _landIsfree = await _farmingContract.methods.landIsfree(_nftTokenId, address).call();
-                    setLandIsfree(_landIsfree);
             //         // let _userInfo2 = await _farmingContract.methods.getUserToken(address).call();
+            setLandIsfree(_landIsfree);
     
                     setFarmLocked(_userInfo2?.[4]);
     
@@ -2038,10 +2040,10 @@ const ChickenFarm = () => {
                                        </div> */}
                                         <div className='alien___rightBox'>
                                             <div className="alientime">
-                                                {/* <div className="time__list">
+                                                <div className="time__list">
                                                     <h3>{isNaN(farmBalance)? 0.00 :farmBalance} {farmSymbol}</h3>
                                                     <p>Your Balance</p>
-                                                </div> */}
+                                                </div>
                                                 <div className="time__list">
                                                     <h3>{farmArea} sq Yards</h3>
                                                     <p>Your Land’s Area</p>
@@ -2131,7 +2133,7 @@ const ChickenFarm = () => {
                                                     
                                                     {
                                                         !farmLocked && farmBalance == 0 &&
-                                                        <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Area</a>
+                                                        <a className="bg___BTN2" onClick={buyAreaToggle}>Buy Land</a>
                                                     }
                                                     {
                                                         landIsfree &&

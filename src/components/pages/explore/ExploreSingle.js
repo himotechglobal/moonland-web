@@ -15,6 +15,7 @@ import { useState, useEffect } from 'react';
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { ConnectWalletBtn } from '../ConnectWalletBtn.js';
 import { TOKEN } from '../../../Config/index.js';
+import modal_earth from "../../images/modal_earth.png"
 import { ethers } from 'ethers';
 
 const ExploreSingle = (props) => {
@@ -151,7 +152,7 @@ const ExploreSingle = (props) => {
         args:[address, NFT_MARKETPLACE],
         watch:true
           })
-       
+      
       const {data:_liked} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -515,34 +516,34 @@ const getTimer =() => {
    setInterval(() => {
         getTimer();
       }, 1000);
-}, [bidStatus,_tradeTime,_approval]);
+}, [bidStatus,_tradeTime,_approval,_statusF]);
 
-  const { config: unLikeTradeConfig } = usePrepareContractWrite({
-    address: NFT_MARKETPLACE,
-    abi: NFT_MARKETPLACE_ABI,
-    functionName: 'unLike',
-    args: [props?.tradeid],
-
-
-
-})
+//   const { config: unLikeTradeConfig } = usePrepareContractWrite({
+//     address: NFT_MARKETPLACE,
+//     abi: NFT_MARKETPLACE_ABI,
+//     functionName: 'unLike',
+//     args: [props?.tradeid],
 
 
-const { data: unLikeTradeData, writeAsync: unLikeTradeWriteAsync, isError: unLikeTradeError } = useContractWrite(unLikeTradeConfig)
 
-const { isSuccess: unLikeTradeSuccess } = useWaitForTransaction({
-    hash: unLikeTradeData?.hash,
-})
+// })
 
-if (unLikeTradeError && modal) {
-  setModal(false);
+
+// const { data: unLikeTradeData, writeAsync: unLikeTradeWriteAsync, isError: unLikeTradeError } = useContractWrite(unLikeTradeConfig)
+
+// const { isSuccess: unLikeTradeSuccess } = useWaitForTransaction({
+//     hash: unLikeTradeData?.hash,
+// })
+
+// if (unLikeTradeError && modal) {
+//   setModal(false);
  
-}
-if (unLikeTradeSuccess && modal) {
-  setModal(false);
-    init();
+// }
+// if (unLikeTradeSuccess && modal) {
+//   setModal(false);
+//     init();
 
-}
+// }
   async function unLikeTrade() {
     let _web3 = new Web3(web3Provider);
 
@@ -559,55 +560,44 @@ if (unLikeTradeSuccess && modal) {
     //   .on('error', function (error, receipt) {
     //     setModal(modal);
 
-    await unLikeTradeWriteAsync()
+    // await unLikeTradeWriteAsync()
 
   }
 
-  const { config: likeTradeConfig } = usePrepareContractWrite({
-    address: NFT_MARKETPLACE,
-    abi: NFT_MARKETPLACE_ABI,
-    functionName: 'likes',
-    args: [0],
+//   const { config: likeTradeConfig } = usePrepareContractWrite({
+//     address: NFT_MARKETPLACE,
+//     abi: NFT_MARKETPLACE_ABI,
+//     functionName: 'likes',
+//     args: [0],
 
-})
-// console.log("amount",farmTokenId);
+// })
 
-const { data: likeTradeData, writeAsync: likeTradeWriteAsync, isError: likeTradeError } = useContractWrite(likeTradeConfig)
 
-const { isSuccess: likeTradeSuccess } = useWaitForTransaction({
-    hash: likeTradeData?.hash,
-})
+// const { data: likeTradeData, writeAsync: likeTradeWriteAsync, isError: likeTradeError } = useContractWrite(likeTradeConfig)
 
-if (likeTradeError && modal) {
-  setModal(false);
+// const { isSuccess: likeTradeSuccess } = useWaitForTransaction({
+//     hash: likeTradeData?.hash,
+// })
+
+// if (likeTradeError && modal) {
+//   setModal(false);
  
-}
-if (likeTradeSuccess && modal) {
-  setModal(false);
+// }
+// if (likeTradeSuccess && modal) {
+//   setModal(false);
 
-    init();
+//     init();
 
-}
-  async function likeTrade() {
-    let _web3 = new Web3(web3Provider);
+// }
+//   async function likeTrade() {
+//     let _web3 = new Web3(web3Provider);
 
-    setModal(true);
-    await likeTradeWriteAsync?.()
+//     setModal(true);
+//     await likeTradeWriteAsync?.()
 
-    // const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
+  
 
-    // _marketPlaceContract.methods.like(props.tradeid).send({ from: address }).on('receipt', function (receipt) {
-    //   init();
-    //   setModal(modal);
-
-    // })
-
-    //   .on('error', function (error, receipt) {
-    //     setModal(modal);
-
-    //   });
-
-  }
+//   }
   const _amountApprove = ethers.utils.parseEther('10000000000000000000000').toString();
   const { config: approveTokenConfig } = usePrepareContractWrite({
     address: tokenAddress,
@@ -669,7 +659,7 @@ if (approveTokenSuccess && modal) {
   }
   return (
 
-    <div className="col-lg-3">
+    <div className="col-lg-4 col-md-6 pb-4">
      <div className='marketplace-box-wrap3'>
      <div class="product-list">
         <a href={"/product/" + props.tradeid}>
@@ -714,11 +704,8 @@ if (approveTokenSuccess && modal) {
               bidStatus != 4 &&
               <ul className="m-0">
                 <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Highest Bid</p> <p className="value p_new">{highestBid} {symbol}</p> </li>
-                <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Your Bid</p> <p className="value p_new">{userbid} {symbol}</p> </li>
-                {
-                                                bidStatus === 0 &&
-                                                <span>Start In: {endTime}</span>
-                                            }
+                <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Your Bid</p> <p className="value p_new">{isNaN(userbid)?0.00:userbid} {symbol}</p> </li>
+              
                 {
 
                   endTime != 0 ?
@@ -739,8 +726,8 @@ if (approveTokenSuccess && modal) {
           {address && bidStatus == 1  && address!== lister &&
             <button className="bg___BTN_J" onClick={bidToggle} >Place Bid</button>
           }
-          {address && bidStatus == 4 && approval > 0 &&
-            <button className="bg___BTN_J" onClick={buyNft} >Buy Now</button>
+          {address && bidStatus == 4 && approval > 0 && address!== lister &&
+            <button className="bg___BTN_J" onClick={buyNft}>Buy Now</button>
           }
           {address && bidStatus == 4 && approval == 0 &&
             <button className="bg___BTN_J" onClick={approveToken} >Approve to Buy</button>
@@ -768,6 +755,7 @@ if (approveTokenSuccess && modal) {
 
 
         <ModalBody>
+        <div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"150px"} style={{opacity:"51%"}}/></div>
           <div className="modaltext text-center mt-4" >Transaction is Processing...</div>
 
         </ModalBody>

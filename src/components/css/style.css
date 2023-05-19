@@ -5778,6 +5778,7 @@ min-height: 100vh;
   color: #fff;
   font-size: 16px;
   margin-right: 15px;
+  
   font-family: 'Poppins', sans-serif;
 }
 
@@ -5897,7 +5898,7 @@ min-height: 100vh;
   width: 100%;
   height: 210px;
   background-image: url(../images/nft_item.svg);
-  background-size: cover;
+  background-size: 100% 100%;
   border-radius: 20px;
   background-repeat: no-repeat;
 }
@@ -5913,6 +5914,7 @@ min-height: 100vh;
   background: linear-gradient(123deg, #020021, #440060);
   padding: 20px;
   transition: 0.5s;
+  height: 430px;
 }
 
 .product-content>div>h4>a {

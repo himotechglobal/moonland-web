@@ -64,7 +64,6 @@ const ExploreNew = () => {
   const [instantArray, setInstantArray] = useState([]);
 
   useEffect(() => {
-
     $('.tabs6').on('click', 'a', function (e) {
       e.preventDefault();
       var tabId = $(this).attr('data-tab');
@@ -81,11 +80,11 @@ const ExploreNew = () => {
     // else {
     //   web3Provider = new Web3.providers.HttpProvider(Config.RPC_URL)
     // }
-    init();
-    if (address) {
-      getCollection();
-      getImportedCollection();
-    }
+    // init();
+    // if (address) {
+    //   getCollection();
+    //   getImportedCollection();
+    // }
 
   }, [address])
 
@@ -95,9 +94,7 @@ const ExploreNew = () => {
     _ccounter = 0;
     _dcounter = 0;
 
-    getAllStatus();
-
-  }, [])
+  }, [address])
 
   const {data:_count} =useContractRead({
 address:NFT_MARKETPLACE,
@@ -131,80 +128,31 @@ watch:true
     }
   }
 
-  const getImportedCollection = async () => {
-  
-    // let _user = address;
-    // let _web3 = new Web3(web3Provider);
-    // let _getURI = API_URL + "/getnftuser/" + _user;
-    // let _imported = await fetch(_getURI);
-    // _imported = await _imported.json();
-    // if (_imported.result == "success") {
-    //   let userTokens = [];
-    //   console.log(_imported.data)
-    //   _imported.data.map(async (v, i) => {
-    //     let _nftContract = new _web3.eth.Contract(NFT_ABI, v.nft);
-    //     let _userBalance = await _nftContract.methods.balanceOf(_user).call();
-    //     console.log(_userBalance);
-    //     for (let j = 0; j < _userBalance; j++) {
-    //       let _userToken = await _nftContract.methods.tokenOfOwnerByIndex(_user, j).call();
-    //       userTokens.push({ "nft": v.nft, "nftId": _userToken });
-    //     }
-    //     console.log(userTokens)
-    //     if (i == (_imported.data.length - 1)) {
-    //       setImportedNfts(userTokens);
-
-    //     }
-
-    //   });
-
-    // }
-    }
 
 
 
 
 
 
-  //   //  let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI,MARKETPLACE);
-  //   //  let _nftAddress =  await _marketPlaceContract.methods.nftAddress().call() ;
-  //   //  let _nftContract = new _web3.eth.Contract(NFT_ABI,_nftAddress);
 
-  //   //  setnftAddress(_nftAddress)
-  //   //  if(address){
-
-  //   //  }
-
-  // }
-//   const {data:_nftAddress} =useContractRead({
-//     address:NFT_MARKETPLACE,
-//     abi:NFT_MARKETPLACE_ABI,
-//     functionName:"nftAddress",
-//     watch:true
-//       })
 
   const {data:_userBalance} =useContractRead({
     address:NFT,
     abi:NFT_ABI,
     functionName:"balanceOf",
     args:[address],
-    // watch:true
+    watch:true
       })
 
 
     
   const getCollection = async () => {
-    // let _web3 = new Web3(web3Provider);
-    // let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
-    // let _nftAddress = await _marketPlaceContract.methods.nftAddress().call();
-    // let _nftContract = new _web3.eth.Contract(NFT_ABI, _nftAddress);
 
-    setnftAddress(NFT)
     if (address) {
-      // let _userBalance = await _nftContract.methods.balanceOf(address).call();
+      setnftAddress(NFT)
       let userTokens = [];
 
       for (let i = 0; i < parseInt(_userBalance); i++) {
-        // let _userToken = await _nftContract.methods.tokenOfOwnerByIndex(address, i).call();
         userTokens.push({id: i});
      
         if (i == (parseInt(_userBalance) - 1)) {
@@ -218,21 +166,9 @@ watch:true
   }
 
 
-  // const {data:_status} =useContractRead({
-  //   address:NFT_MARKETPLACE,
-  //   abi:NFT_MARKETPLACE_ABI,
-  //   functionName:"getAuctionStatus",
-  //   args:[0],
-  //     })
+ 
 
-  const getStatus = async (tradeid) => {
-    let _web3 = new Web3(web3Provider);
-    let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
-    let _status = await _marketPlaceContract.methods.getAuctionStatus(tradeid).call();
-    // let _status = 1 ;
-    // console.log(_status);
-    return _status;
-  }
+
 const {data:_count1} =useContractRead({
     address:NFT_MARKETPLACE,
     abi:NFT_MARKETPLACE_ABI,
@@ -242,26 +178,10 @@ const {data:_count1} =useContractRead({
 
 
    
-      // const {data:_statusF} =useContractRead({
-      //   address:NFT_MARKETPLACE,
-      //   abi:NFT_MARKETPLACE_ABI,
-      //   functionName:"getFullTrade",
-      //   // args:[index2],
-      //   watch:true
-      //     })
-      //     console.log(_statusF);
-      // const {data:_status} =useContractRead({
-      //   address:NFT_MARKETPLACE,
-      //   abi:NFT_MARKETPLACE_ABI,
-      //   functionName:"getAuctionStatus",
-      //   // args:[index2],
-      //   watch:true
-      //     })
+  
 
   const getAllStatus = async () => {
-    // let _web3 = new Web3(web3Provider);
-    //  let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI,MARKETPLACE);
-    //  let _count =  await _marketPlaceContract.methods.getTradeCount().call() ;
+
 
     //  let c = 0 ;
     let userCounter=[]
@@ -291,40 +211,19 @@ const {data:_count1} =useContractRead({
       // }
       if(i == (parseInt(_count1)-1)){
      
-        // console.log(sold);
-        // setSaleArray(onsale);
-        // setSoldArray(sold);
-        // setInstantArray(instant);
-// setUserCount(userCounter)
-        // console.log(soldArray);
-        // console.log(saleArray);
+        setUserCount(userCounter)
+  
       }
      }
-
-    // let _getURI = API_URL + "/marketplace/myfarmpet";
-    // let _imported = await fetch(_getURI);
-    // _imported = await _imported.json();
-    // _imported = _imported[0];
-    // console.log(_imported.onsale)
-    // if (_imported.onsale && _imported.onsale != "") {
-    //   setSaleArray(_imported.onsale.split(','));
-    // }
-    // if (_imported.sold && _imported.sold != "") {
-    //   setSoldArray(_imported.sold.split(','));
-    //   // console.log(soldArray);
-    // }
-    // if (_imported.instant && _imported.instant != "") {
-    //   setInstantArray(_imported.instant.split(','));
-
-    // }
 
 
   }
 
   useEffect(() => {
 getAllStatus()
+getCollection()
 init()
-  }, [saleArray,_count1,_userBids])
+  }, [saleArray,_count1,_userBids,_userBalance,userNfts,userCount,userBids,address])
 
 
   const oloadmore = () => {
@@ -451,7 +350,7 @@ init()
 
     //   })
   }
-
+// console.log(parseInt(_userBalance));
 
   return (
     <div className="main-bg-explore">
@@ -472,10 +371,10 @@ init()
 
               <div className="main-marketplace">
                 <div className="main-tab-box">
-                  <ul className="tabs6 mb-3" >
-                    <li class="tab-button"><a href="#" class="tab-link active" data-tab="onsale">Auction</a></li>
-                    <li class="tab-button"><a href="#" class="tab-link" data-tab="onbuy">Fixed Price</a></li>
-                    <li class="tab-button"><a href="#" class="tab-link" data-tab="soldout">Expired</a></li>
+                  <ul className="tabs6 mb-3">
+                    <li class="tab-button"><a href="#" class="tab-link active" data-tab="onsale">Auction / Fixed Price</a></li>
+                    {/* <li class="tab-button"><a href="#" class="tab-link" data-tab="onbuy">Fixed Price</a></li> */}
+                    {/* <li class="tab-button"><a href="#" class="tab-link" data-tab="soldout">Expired</a></li> */}
                     <li class="tab-button"><a href="#" class="tab-link" data-tab="mybids">My Bids</a></li>
                     <li class="tab-button"><a href="#" class="tab-link" data-tab="collection"> Your NFTs</a></li>
                     {/* <li class="tab-button"><a href="#" class="tab-link" data-tab="imported"> Imported NFTs</a></li> */}
@@ -498,7 +397,7 @@ init()
 
                 <div class="tab-pane mt-2">
                   <div className="tab-panel active" id="onsale">
-                    <div className="row">
+                    <div className="row justify-content-center">
 
                       {/* {saleArray.length} */}
                       {/* {counter.length} */}
@@ -548,11 +447,11 @@ init()
                       </div>
                     }
                   </div>
-                  <div class="tab-panel row" id="onbuy">
+                  {/* <div class="tab-panel row" id="onbuy">
                     <div className="row">
                       {
                         counter?.length > 0 && instantArray?.length > 0 && counter?.map((v, i) => {
-                          // console.log(inArray(i,saleArray))
+                        
                           if (_dcounter < dlimit && $.inArray((counter.length - (i + 1)).toString(), instantArray) >= 0) {
                             _dcounter++;
                             return (
@@ -589,8 +488,8 @@ init()
                         < button type="button" className={dloading ? "loading action-btn" : "action-btn"} onClick={dloadmore} id="login-btn">Load more</button>
                       </div>
                     }
-                  </div>
-                  <div class="tab-panel row" id="soldout">
+                  </div> */}
+                  {/* <div class="tab-panel row" id="soldout">
                     <div className="row">
                       {
 
@@ -638,9 +537,9 @@ init()
                         < button type="button" className={sloading ? "loading action-btn" : "action-btn"} onClick={sloadmore} id="login-btn">Load more</button>
                       </div>
                     }
-                  </div>
+                  </div> */}
                   <div class="tab-panel" id="mybids">
-                    <div className="row">
+                    <div className="row justify-content-center">
                       {
                         userBids?.length > 0 && userBids?.map((v, i) => {
             
@@ -681,11 +580,11 @@ init()
 
                   <div class="tab-panel" id="collection">
 
-                    <div className="row">
+                    <div className="row justify-content-center">
 
 
                       {
-                        userNfts?.length > 0 && userNfts?.map((v, i) => {
+                       parseInt(_userBalance) > 0 && userNfts?.map((v, i) => {
                           if (i < climit) {
                       
                             return (
@@ -704,7 +603,7 @@ init()
                           }
                         })}
                       {
-                        userNfts?.length == 0 &&
+                        parseInt(_userBalance) == 0 &&
 <div className='marketplace-box-wrap8'>
                         <div className="text-center w-100 m-0 p-5  card  cards2">
                           <h3>No Collection Available</h3>

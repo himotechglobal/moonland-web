@@ -63,7 +63,8 @@ const Product = (props) => {
     const [userbid, setUserbid] = useState(0);
 
     const [price, setPrice] = useState(0);
-    const [newPrice, setNewPrice] = useState(0);
+    const [newPrice, setNewPrice] = useState("");
+    const [startPrice, setStartPrice] = useState("");
     const [newStartTime, setNewStartTime] = useState(null);
     const [newEndTime, setNewEndTime] = useState(null);
 
@@ -89,36 +90,9 @@ const Product = (props) => {
     let timeInterval2;
     const { address } = useAccount()
 
-    useEffect(() => {
-        // clearInterval(timeInterval);
-        // if (bidStatus === 1) {
-        //     timeInterval = setInterval(() => {
-        //         getTimer();
+    
 
-        //     }, 1000);
-        // }
-        getTimer();
-    }, [bidStatus]);
-
-    useEffect(() => {
-
-
-        // if (window.ethereum) {
-        //     web3Provider = window.ethereum;
-        // }
-        // else {
-        //     web3Provider = new Web3.providers.HttpProvider(Config.RPC_URL)
-
-        // }
-
-        clearInterval(timeInterval2);
-
-        timeInterval2 = setInterval(() => {
-
-            init();
-        }, 1000);
-
-    }, [address]);
+ 
 
 
     const { data: _tradeTime } = useContractRead({
@@ -168,18 +142,7 @@ const Product = (props) => {
             }
         }
     }
-    useEffect(() => {
-        // clearInterval(timeInterval);
-        // if (bidStatus === 1) {
-        //     timeInterval = setInterval(() => {
-        //         getTimer();
-
-        //     }, 1000);
-        // }
-       setInterval(() => {
-            getTimer();
-          }, 1000);
-    }, [bidStatus,_tradeTime]);
+  
     
 
     const { config: unLikeTradeConfig_ } = usePrepareContractWrite({
@@ -429,7 +392,7 @@ const Product = (props) => {
             setApproval(parseInt(_approval));
 
             // let _userBid = await _marketPlaceContract.methods.getBid(tradeid, address).call();
-            let _userBid = parseFloat(_userBid1 / 1e1 ** _decimals).toFixed(2);
+            let _userBid = parseFloat((_userBid1) / 1e1 ** _decimals).toFixed(2);
             setUserbid(_userBid)
 
         }
@@ -494,6 +457,14 @@ const Product = (props) => {
         setPrice(_price);
 
     }
+    useEffect(() => {
+        setInterval(() => {
+             getTimer();
+           }, 1000);
+        init()
+    }, [bidStatus,_tradeTime,_userBid1,address,_decimals,tradeid,_canClaim,_status,_trade]);
+
+
 
     const _amount = ethers.utils.parseEther('1').toString()
     const { config: placeBidConfig_ } = usePrepareContractWrite({
@@ -605,9 +576,10 @@ const Product = (props) => {
     }
 
     const handleNewPriceChange = (e) => {
-        setNewPrice(e.target.value);
-
-
+        setNewPrice((e.target.value));
+    }
+    const handleStartPriceChange = (e) => {
+        setStartPrice((e.target.value));
     }
 
 
@@ -627,7 +599,8 @@ const Product = (props) => {
         address: NFT_MARKETPLACE,
         abi: NFT_MARKETPLACE_ABI,
         functionName: 'renewInstantSellAuction',
-        args: [tradeid,newPrice>0? ethers.utils.parseEther(parseFloat(newPrice)).toString():0],
+        args: [tradeid, newPrice==""?0:ethers.utils.parseEther?.(newPrice.toString())],
+        enabled:newPrice>0?true:false
     })
 
     const { data: renewSaleData, writeAsync: renewSaleWriteAsync, isError: renewSaleError } = useContractWrite(renewSaleConfig_)
@@ -758,7 +731,9 @@ const Product = (props) => {
         address: NFT_MARKETPLACE,
         abi: NFT_MARKETPLACE_ABI,
         functionName: 'renewAuction',
-        args: [tradeid,newPrice>0? ethers.utils.parseEther(parseFloat(newPrice)).toString():0, _newStartTime, _newEndTime],
+        args: [tradeid,startPrice==""?0:ethers.utils.parseEther?.(startPrice.toString()), _newStartTime, _newEndTime],
+        enabled:startPrice>0?true:false
+      
     })
 
     const { data: renewAuctionData, writeAsync: renewAuctionWriteAsync, isError: renewAuctionError } = useContractWrite(renewAuctionConfig_)
@@ -778,12 +753,12 @@ const Product = (props) => {
 
     const renewAuction = async () => {
 
+        setModal(true);
+        await renewAuctionWriteAsync?.()
         // let _web3 = new Web3(web3Provider);
         // const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
         // let _newPrice = _web3.utils.toWei(newPrice.toString());
 
-        setModal(true);
-        await renewAuctionWriteAsync()
         // _marketPlaceContract.methods.renewAuction(tradeid, _newPrice, _newStartTime, _newEndTime).send({
         //     from: address
         // }).on('receipt', function (receipt) {
@@ -1014,10 +989,7 @@ const Product = (props) => {
                                                 bidStatus === 1 &&
                                                 <span>Ends In: {endTime}</span>
                                             }
-                                            {
-                                                bidStatus === 0 &&
-                                                <span>Start In: {endTime}</span>
-                                            }
+                                          
                                             {/* <div class="icons-p-wrp">
                           <a href="#">
                           <div class="circle-icon2">
@@ -1107,7 +1079,7 @@ const Product = (props) => {
                                                                         </div>
                                                                         <div class="p-list-content-c2">
                                                                             <div class="x-font-normal-blue">Buyer</div>
-                                                                            <div class="x-font-normal-white"><a className="text-white" href={"/profile/view/" + buyer}>{buyer}</a></div>
+                                                                            <div class="x-font-normal-white"><a className="text-white" href={"/profile/view/" + buyer}>{buyer.substring(0,8)+"...."+buyer.substring(buyer.length-6)}</a></div>
 
                                                                         </div>
                                                                     </div>
@@ -1271,7 +1243,7 @@ const Product = (props) => {
                                                 </>
                                             }
                                             {
-                                                address && bidStatus === 3 && lister === address && buyer == null &&
+                                                address && bidStatus === 3 && lister === address && (highestBidder == null || highestBidder == lister )&&
                                                 <>
                                                     <button className="bg___BTN_J" onClick={cancelAuction} >Cancel Auction</button>
                                                     <button className="bg___BTN_J" onClick={renewAuctionToggle} >Renew Auction</button>
@@ -1370,7 +1342,7 @@ const Product = (props) => {
                 <ModalBody >
 
                     <label><br />Enter New Price Amount  </label>
-                    <input className="form-control popupModal" onChange={handleNewPriceChange} type="text" value={newPrice} />
+                    <input className="form-control popupModal" onChange={handleStartPriceChange} type="number" value={startPrice} />
                     <label><br />Choose New Start Date & Time  </label>
                     <input className="form-control popupModal" onChange={handleStartTimeChange} type="datetime-local" value={newStartTime} />
                     <label><br />Choose New End Date & Time  </label>

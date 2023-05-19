@@ -354,7 +354,7 @@ const SinglePop = (props) => {
                 reset();
                 props.saleToggle();
     }
-
+console.log(instantsale);
     const putauction = async () => {
         let id = props.id;
         // let _web3 = new Web3(web3Provider);
@@ -364,7 +364,7 @@ const SinglePop = (props) => {
         // let _eTime = new Date(endTime).getTime() / 1000;
         // let _title = props.name;
         
-        if (instantsale=="false") {
+        if (instantsale) {
             setOnSaleModal(true);
 
 
@@ -410,128 +410,128 @@ const SinglePop = (props) => {
         }
     }
 
-    const putauctionImported = async () => {
-        let id = props.id;
-        let _web3 = new Web3(web3Provider);
-        let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-        let _sPrice = _web3.utils.toWei(price);
-        let _sTime = new Date(startTime).getTime() / 1000;
-        let _eTime = new Date(endTime).getTime() / 1000;
-        let _title = props.name;
-        setOnSaleModal(true);
+    // const putauctionImported = async () => {
+    //     let id = props.id;
+    //     let _web3 = new Web3(web3Provider);
+    //     let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+    //     let _sPrice = _web3.utils.toWei(price);
+    //     let _sTime = new Date(startTime).getTime() / 1000;
+    //     let _eTime = new Date(endTime).getTime() / 1000;
+    //     let _title = props.name;
+    //     setOnSaleModal(true);
 
-        if (instantsale) {
-
-
-            _marketPlaceContract.methods.openOtherInstantSellAuction(props.address, id, _sPrice, auctionToken, _title).send({
-                from: address
-
-            }).on('receipt', function (receipt) {
-                setOnSaleModal(false);
-                setSuccessModal(true);
-                reset();
-                props.saleToggle();
+    //     if (instantsale) {
 
 
-            }).on('error', function (receipt) {
-                setOnSaleModal(false);
+    //         _marketPlaceContract.methods.openOtherInstantSellAuction(props.address, id, _sPrice, auctionToken, _title).send({
+    //             from: address
+
+    //         }).on('receipt', function (receipt) {
+    //             setOnSaleModal(false);
+    //             setSuccessModal(true);
+    //             reset();
+    //             props.saleToggle();
 
 
-            });
-
-        }
-        else {
+    //         }).on('error', function (receipt) {
+    //             setOnSaleModal(false);
 
 
-            _marketPlaceContract.methods.openOtherAuction(auctionToken, props.address, id, _sPrice, _sTime, _eTime, _title).send({
-                from: address
+    //         });
 
-            }).on('receipt', function (receipt) {
-                setOnSaleModal(false);
-                setSuccessModal(true);
-                reset();
-                props.saleToggle();
-
-            }).on('error', function (receipt) {
-                setOnSaleModal(false);
+    //     }
+    //     else {
 
 
-            });
+    //         _marketPlaceContract.methods.openOtherAuction(auctionToken, props.address, id, _sPrice, _sTime, _eTime, _title).send({
+    //             from: address
 
-        }
-    }
-    const createToken = async () => {
-        setMinded(false);
+    //         }).on('receipt', function (receipt) {
+    //             setOnSaleModal(false);
+    //             setSuccessModal(true);
+    //             reset();
+    //             props.saleToggle();
 
-        let _web3 = new Web3(web3Provider);
-        let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-        let _nft = await _marketPlaceContract.methods.nftAddress().call();
-        let _nftContract = new _web3.eth.Contract(NFT_ABI, _nft);
-        console.log(filedata);
-        var formData = new FormData();
-        formData.append("name", name);
-        formData.append("description", description);
-        formData.append("artist", artist);
-        formData.append("public_profile_link", publicProfileLink);
-        formData.append("filename", fileName);
-        formData.append("fileType", fileType);
-        formData.append("filedata", filedata);
+    //         }).on('error', function (receipt) {
+    //             setOnSaleModal(false);
 
-        formData.append("height", height);
-        formData.append("breadth", breadth);
-        formData.append("length", length);
-        formData.append("weight", weight);
-        formData.append("tags", tags);
 
-        setApiModal(true);
-        axios
-            .post("https://dev.wizard.financial/api/uploadmeta", formData,
-                {
-                    headers: {
-                        'content-Type': 'multipart/form-data'
-                    }
-                }
-            )
-            .then((response) => {
-                setApiModal(false);
+    //         });
 
-                if (response.data.result === "success") {
-                    setMintModal(true);
+    //     }
+    // }
+    // const createToken = async () => {
+    //     setMinded(false);
 
-                    _nftContract.methods._Mint(response.data.id, response.data.url).send({
-                        from: address
-                    }).on('receipt', function (receipt) {
-                        setMintModal(false);
-                        if (saleon && !mined) {
+    //     let _web3 = new Web3(web3Provider);
+    //     let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
+    //     let _nft = await _marketPlaceContract.methods.nftAddress().call();
+    //     let _nftContract = new _web3.eth.Contract(NFT_ABI, _nft);
+    //     console.log(filedata);
+    //     var formData = new FormData();
+    //     formData.append("name", name);
+    //     formData.append("description", description);
+    //     formData.append("artist", artist);
+    //     formData.append("public_profile_link", publicProfileLink);
+    //     formData.append("filename", fileName);
+    //     formData.append("fileType", fileType);
+    //     formData.append("filedata", filedata);
+
+    //     formData.append("height", height);
+    //     formData.append("breadth", breadth);
+    //     formData.append("length", length);
+    //     formData.append("weight", weight);
+    //     formData.append("tags", tags);
+
+    //     setApiModal(true);
+    //     axios
+    //         .post("https://dev.wizard.financial/api/uploadmeta", formData,
+    //             {
+    //                 headers: {
+    //                     'content-Type': 'multipart/form-data'
+    //                 }
+    //             }
+    //         )
+    //         .then((response) => {
+    //             setApiModal(false);
+
+    //             if (response.data.result === "success") {
+    //                 setMintModal(true);
+
+    //                 _nftContract.methods._Mint(response.data.id, response.data.url).send({
+    //                     from: address
+    //                 }).on('receipt', function (receipt) {
+    //                     setMintModal(false);
+    //                     if (saleon && !mined) {
                       
-                            setMinded(true);
-                            if (props.imported) {
-                                // putauctionImported(response.data.id)
-                            }
-                            else {
-                                putauction(response.data.id);
+    //                         setMinded(true);
+    //                         if (props.imported) {
+    //                             // putauctionImported(response.data.id)
+    //                         }
+    //                         else {
+    //                             putauction(response.data.id);
 
-                            }
-                        }
-                        else {
-                            setSuccessModal(true);
-                            reset();
+    //                         }
+    //                     }
+    //                     else {
+    //                         setSuccessModal(true);
+    //                         reset();
 
-                        }
+    //                     }
 
-                    }).on('error', function (receipt) {
+    //                 }).on('error', function (receipt) {
 
-                        setMintModal(false);
+    //                     setMintModal(false);
 
-                    })
-                }
-                //   setPost(response.data);
-            }).catch(function (error) {
-                setApiModal(false);
+    //                 })
+    //             }
+    //             //   setPost(response.data);
+    //         }).catch(function (error) {
+    //             setApiModal(false);
 
 
-            });
-    }
+    //         });
+    // }
 
 
     const { data: _nft } = useContractRead({
@@ -594,11 +594,6 @@ const SinglePop = (props) => {
         setModal(false);
     }
 
-
-
-
-
-
     const approveToken = async () => {
         // let _web3 = new Web3(web3Provider);
         // let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
@@ -620,7 +615,6 @@ const SinglePop = (props) => {
         //     setModal(false);
 
         // })
-
     }
 
 
