@@ -51,7 +51,7 @@ const Product = (props) => {
 
     // const wallet = useWallet();
 
-    const bidStatusName = ['Inactive', 'Open', 'Paused', 'Closed']
+    const bidStatusName = ['Inactive', 'Open', 'Paused', 'Closed',]
     const [name, setName] = useState("Moon");
     const [balance, setBalance] = useState(0);
     const [depositAmount, setDepositAmount] = useState(0);
@@ -105,43 +105,59 @@ const Product = (props) => {
     // console.log(_tradeTime);
 
 
-    const getTimer = async () => {
-        // let _web3 = new Web3(web3Provider);
-        // let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-        // let _tradeTime = await _marketPlaceContract.methods.getAuctionTime(tradeid).call();
-
-        let _now = new Date().getTime() / 1e3;
-
-        if (parseInt(_tradeTime?._endtime) > _now) {
-            let remainingSeconds = parseInt(_tradeTime?._endtime) - _now;
-
-            let remainingDay = Math.floor(
+    const getTimer =() => {
+        // setStartTime(parseInt(_tradeTime?._starttime))
+            let _now = new Date().getTime() / 1e3;
+           if(parseInt(_tradeTime?._endtime) > _now){
+            setEndTime(parseInt(_tradeTime?._endtime) - _now)
+           }
+           let _startTime = _tradeTime?._starttime ; 
+           let _endTime = _tradeTime?._endtime ; 
+           let _timer = _tradeTime?._starttime ; 
+            if (parseInt(_startTime) > _now) {
+              _timer = _tradeTime?._starttime ; 
+            }
+            else if (parseInt(_endTime) > _now){
+              _timer = _tradeTime?._endtime ; 
+        
+            }
+            else{
+              _timer = "Ended" ;
+              setEndTime(_timer);
+        
+            }
+            if(_timer != "Ended"){
+        
+              let remainingSeconds = parseInt(_timer) - _now;
+        
+        
+              let remainingDay = Math.floor(
                 remainingSeconds / (60 * 60 * 24)
-            );
-            let remainingHour = Math.floor(
+              );
+              let remainingHour = Math.floor(
                 (remainingSeconds % (60 * 60 * 24)) / (60 * 60)
-            );
-            let remainingMinutes = Math.floor(
+              );
+              let remainingMinutes = Math.floor(
                 (remainingSeconds % (60 * 60)) / 60
-            );
-            let remainingSec = Math.floor(remainingSeconds % 60);
-            let _endTime;
-            if (remainingSeconds <= 0) {
-                _endTime = "Ended";
+              );
+              let remainingSec = Math.floor(remainingSeconds % 60);
+             
+              if (remainingSeconds <= 0) {
+              let _endTime = "Ended";
                 setEndTime(_endTime);
-
-            }
-            else if (remainingDay > 0) {
-                _endTime = remainingDay + "d : " + remainingHour + "h : " + remainingMinutes + "m";
+        
+              }
+              else if (remainingDay > 0) {
+              let _endTime = remainingDay + "d : " + remainingHour + "h : " + remainingMinutes + "m";
                 setEndTime(_endTime);
-
-            }
-            else {
-                _endTime = remainingHour + "h : " + remainingMinutes + "m : " + remainingSec + "s";
+        
+              }
+              else {
+               let _endTime = remainingHour + "h : " + remainingMinutes + "m : " + remainingSec + "s";
                 setEndTime(_endTime);
+              }
             }
-        }
-    }
+          }
   
     
 
@@ -283,6 +299,7 @@ const Product = (props) => {
         args: [tradeid, address],
         watch: true,
     })
+    
     const { data: _balance2 } = useContractRead({
         address: _fullTrade?.[5],
         abi: TOKEN_ABI,
@@ -304,6 +321,7 @@ const Product = (props) => {
         args: [tradeid,address],
         watch: true,
     })
+   
     // let _nftTokenId = _trade?.nftid;
     // let _nftToken = _trade?.nftadd;
     const { data: _mediaURI_One } = useContractRead({
@@ -351,7 +369,7 @@ const Product = (props) => {
         //    console.log(_trade);
 
         // let _fullTrade = await _marketPlaceContract.methods.getFullTrade(tradeid).call();
-        let _token = _fullTrade[5];
+        let _token = _fullTrade?.[5];
 
         //   console.log(_fullTrade);
         //  let _status =  await _marketPlaceContract.methods.getAuctionStatus(tradeid).call() ;
@@ -400,18 +418,13 @@ const Product = (props) => {
         let _nftToken = _trade?.nftadd;
         setNftAddress(_nftToken);
 
-        // let _nftTokenId = _trade.nftid;
-        // let _nftContract = new _web3.eth.Contract(NFT_ABI, _nftToken);
-        // let _mediaURI = await _nftContract.methods.tokenURI(_nftTokenId).call();
-
-        // let _owner = await _nftContract.methods.ownerOf(_nftTokenId).call();
         setOwner(_owner);
-        if (_trade?.buyer !== '0x0000000000000000000000000000000000000000') {
+        // if (_trade?.buyer !== '0x0000000000000000000000000000000000000000') {
             setBuyer(_trade?.buyer);
-        }
+        // }
         //  let _hs = await _nftContract.methods.tokenURI(_nftTokenId).call() ;
         setHighestBidder(_trade?.highestBidder);
-        setLister(_fullTrade.lister);
+        setLister(_fullTrade?.lister);
 
         let _highestBid = parseFloat(_trade?.maxbid / 1e1 ** _decimals).toFixed(2);
 
@@ -455,7 +468,6 @@ const Product = (props) => {
         setName(_name);
         let _price = parseFloat(_trade?.startingPrice / 1e1 ** _decimals).toFixed(2);
         setPrice(_price);
-
     }
     useEffect(() => {
         setInterval(() => {
@@ -463,15 +475,11 @@ const Product = (props) => {
            }, 1000);
         init()
     }, [bidStatus,_tradeTime,_userBid1,address,_decimals,tradeid,_canClaim,_status,_trade]);
-
-
-
-    const _amount = ethers.utils.parseEther('1').toString()
     const { config: placeBidConfig_ } = usePrepareContractWrite({
         address: NFT_MARKETPLACE,
         abi: NFT_MARKETPLACE_ABI,
         functionName: 'placeBid',
-        args: [tradeid, _amount]
+        args: [tradeid, parseFloat(damount)>0 ? ethers.utils.parseEther(parseFloat(damount).toString()):0]
     })
 
     const { data: placeBidData, writeAsync: placeBidWriteAsync, isError: placeBidError } = useContractWrite(placeBidConfig_)
@@ -493,57 +501,57 @@ const Product = (props) => {
 
 
 
-    const placeBid = async () => {
+    async function placeBid() {
         setDepositError(false);
-
-
+        let _amount = parseFloat(damount);
+    
         if (_amount + parseFloat(userbid) < minimumBid) {
-            setDepositError('Bid must be at least ' + bidIncreasePercentage + '% higher than highest bid. Suggested Bid: ' + (minimumBid) + ' ' + symbol);
-
-            return false;
+          setDepositError('Bid must be at least ' + bidIncreasePercentage + '% higher than highest bid. Suggested Bid: ' + (minimumBid) + ' ' + symbol + '');
+          return false;
         }
-
-
-        if (_amount + parseFloat(userbid) <= highestBid && highestBidder !== address) {
-            setDepositError('Please bid amount higher than your last bid.');
-            return false;
+    
+        if (_amount + parseFloat(userbid) <= highestBid && highestBidder != address) {
+          setDepositError('Please bid amount higher than your last bid.');
+          return false;
         }
-
-
-
-
+    
+    
+    
+    
+    
         if (balance <= 0 || (_amount - parseFloat(userbid)) > balance) {
-            setDepositError('Insufficient Balance. Please fund your wallet with some ' + symbol + ' Token and try again.');
-            return false;
+          setDepositError('Insufficient Balance. Please fund your wallet with some ' + symbol + ' Token and try again.');
+          return false;
         }
-
-        if (_amount <= 0 || _amount === "") {
-            setDepositError('Invalid Deposit Amount. Please enter a valid amount greater than 0.');
-            return false;
+    
+        if (_amount <= 0 || _amount == "") {
+          setDepositError('Invalid Deposit Amount. Please enter a valid amount greater than 0.');
+          return false;
         }
-
-
-
+    
+    
+    
         // let _web3 = new Web3(web3Provider);
-        // const _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-
-
+        // const _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
+    
+    
         // _amount = _web3.utils.toWei(_amount.toString());
-
+    
         setModal(true);
         await placeBidWriteAsync()
-        // _marketPlaceContract.methods.placeBid(tradeid, _amount).send({
-        //     from: address
+        // _marketPlaceContract.methods.placeBid(props.tradeid, _amount).send({
+        //   from: address
         // }).on('receipt', function (receipt) {
-        //     setModal(modal);
-        //     init();
-        //     bidToggle();
+        //   setModal(modal);
+        //   init();
+        //   bidToggle();
         // }).on('error', function (receipt) {
-        //     setModal(modal);
-
+        //   setModal(modal);
+    
         // })
-
-    }
+    
+    
+      }
 
 
     const getBase64FromUrl = async (url) => {
@@ -953,15 +961,20 @@ const Product = (props) => {
                                                 {likes}
                                             </span> */}
                                             </h1>
-                                         
+                                         {/* {buyer} */}
                                             {
                                                 buyer === lister ?
                                                     <p className="text-white mb-1" id="bidding">Cancelled</p>
                                                     :
-                                                    bidStatus === 4 ?
+                                                    bidStatus === 4 && buyer ==     "0x0000000000000000000000000000000000000000"?
                                                         <p className="text-white mb-1" id="bidding">Buy Now</p>
                                                         :
+                                                        buyer !=     "0x0000000000000000000000000000000000000000" ?
+<p className="text-white mb-1" id="bidding">Sold Out    </p>
+                                                        :
                                                         <p className="text-white mb-1" id="bidding">Bidding {bidStatusName[bidStatus]}</p>
+                                                        
+                                                        
 
                                             }
                                             {
@@ -986,8 +999,8 @@ const Product = (props) => {
                                                 <h3></h3>
                                             </div>
                                             {
-                                                bidStatus === 1 &&
-                                                <span>Ends In: {endTime}</span>
+                                                endTime != "Ended" &&
+                                                <span>{(parseInt(_tradeTime?._starttime) > new Date().getTime() / 1e3 ? "Starts in" : "Ends In" )}  {endTime}</span>
                                             }
                                           
                                             {/* <div class="icons-p-wrp">
@@ -1042,9 +1055,9 @@ const Product = (props) => {
                                                                     <div class="p-list-content-c2">
                                                                         <div class="x-font-normal-blue">Owner</div>
                                                                         <div class="x-font-normal-white" >
-                                                                            <a className="" href={"/profile/view/"+lister}>{lister.substring(0, 8) +
+                                                                            <a className="" href={"/profile/view/"+lister}>{lister?.substring(0, 8) +
                   "...." +
-                  lister.substring(lister.length - 6)}</a></div>
+                  lister?.substring(lister?.length - 6)}</a></div>
                                                                     </div>
                                                                 </div>
                                                             </li>
@@ -1062,14 +1075,14 @@ const Product = (props) => {
                                                                     </div>
                                                                     <div class="p-list-content-c2">
                                                                         <div class="x-font-normal-blue">NFT Address</div>
-                                                                        <div class="x-font-normal-white"><a href={Config.EX_LINK + nftAddress}>{nftAddress.substring(0, 8) +
+                                                                        <div class="x-font-normal-white"><a href={Config.EX_LINK + nftAddress}>{nftAddress?.substring(0, 8) +
                   "...." +
-                  nftAddress.substring(nftAddress.length - 6)}</a></div>
+                  nftAddress?.substring(nftAddress?.length - 6)}</a></div>
                                                                     </div>
                                                                 </div>
                                                             </li>
                                                             {
-                                                                buyer && buyer !== lister &&
+                                                                buyer !="0x0000000000000000000000000000000000000000" && buyer !== lister &&
                                                                 <li>
                                                                     <div class="p-list-content-wrp">
                                                                         <div class="p-list-content-c">
@@ -1079,7 +1092,7 @@ const Product = (props) => {
                                                                         </div>
                                                                         <div class="p-list-content-c2">
                                                                             <div class="x-font-normal-blue">Buyer</div>
-                                                                            <div class="x-font-normal-white"><a className="text-white" href={"/profile/view/" + buyer}>{buyer.substring(0,8)+"...."+buyer.substring(buyer.length-6)}</a></div>
+                                                                            <div class="x-font-normal-white"><a className="text-white" href={"/profile/view/" + buyer}>{buyer?.substring(0,8)+"...."+buyer?.substring(buyer?.length-6)}</a></div>
 
                                                                         </div>
                                                                     </div>
@@ -1213,10 +1226,12 @@ const Product = (props) => {
                             </div>
                         </div> */}
                                             </div>
-                                            {address && bidStatus === 1 && address!== lister &&
+                                            {address && bidStatus == 1 && address!== lister &&
                                                 <button className="bg___BTN_J" onClick={bidToggle} >Place Bid</button>
                                             }
-                                            {address && bidStatus === 4 && approval > 0 && buyer !== lister &&
+                                            {/* bud */}
+                                  
+                                            {address && bidStatus == 4 && approval > 0 && address!== lister && buyer ==     "0x0000000000000000000000000000000000000000" &&
                                                 <button className="bg___BTN_J" onClick={buyNft} >Buy Now</button>
                                             }
                                             {address && bidStatus === 4 && approval === 0 && buyer !== lister &&
@@ -1227,14 +1242,16 @@ const Product = (props) => {
                                                     <ConnectWalletBtn />
                                                 </div>
                                             }
-                                            {address && !canClaim && bidStatus === 3 && highestBidder === address && address !== lister && buyer == null &&
+                                            {address && !canClaim && bidStatus === 3 && highestBidder != address && address !== lister && buyer == null &&
                                                 <button className="bg___BTN_J" onClick={claimBid} >Claim</button>
 
                                             }
+                                        
                                             {address && !canClaim && userbid > 0 && bidStatus === 3 && highestBidder !== address &&
                                                 <button className="bg___BTN_J" onClick={claimBid} >Withdraw</button>
 
                                             }
+                                            
                                             {address && buyer == null && bidStatus === 4 && lister === address &&
                                                 <>
                                                     <button className="bg___BTN_J" onClick={cancelSale} >Cancel Sale</button>
@@ -1242,6 +1259,7 @@ const Product = (props) => {
 
                                                 </>
                                             }
+                                            
                                             {
                                                 address && bidStatus === 3 && lister === address && (highestBidder == null || highestBidder == lister )&&
                                                 <>

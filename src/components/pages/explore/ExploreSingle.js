@@ -34,14 +34,16 @@ const ExploreSingle = (props) => {
   const [depositError, setDepositError] = useState(null);
   const [buyer, setBuyer] = useState(null);
   const [lister, setLister] = useState(null);
-
+  const [show, setShow] = useState(true);
+  const [isAuction, setIsAuction] = useState(false);
   const [decimals, setDecimals] = useState(0);
   const [bidIncreasePercentage, setBidIncreasePercentage] = useState(0);
   const [minimumBid, setMinimumBid] = useState(0);
   const [symbol, setSymbol] = useState(null);
   const [highestBid, setHighestBid] = useState(0);
   const [userbid, setUserbid] = useState(0);
-  const [endTime, setEndTime] = useState(0);
+  const [endTime, setEndTime] = useState('Ended');
+  
   const [bidStatus, setBidStatus] = useState(null);
   const bidStatusName = ['Bidding Inactive', 'Bidding Open', 'Bidding Paused', 'Bidding Closed', ''];
   const [highestBidder, setHighestBidder] = useState(null);
@@ -107,7 +109,7 @@ const ExploreSingle = (props) => {
         args:[props?.tradeid],
         watch:true
           })
-   
+
       const {data:_status} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -115,7 +117,7 @@ const ExploreSingle = (props) => {
         args:[props?.tradeid],
         watch:true
           })
-         
+   
       const {data:_bidIncreasePercentage} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -176,8 +178,10 @@ const ExploreSingle = (props) => {
         args:[props?.tradeid, address],
         watch:true
           })
+     
 
   const init = async () => {
+    setIsAuction(_statusF?.isAuction)
     let _web3 = new Web3(web3Provider);
     let _marketPlaceContract = new _web3.eth.Contract(NFT_MARKETPLACE_ABI, NFT_MARKETPLACE);
     // let _trade = await _marketPlaceContract.methods.getTrade(props.tradeid).call();
@@ -219,7 +223,7 @@ const ExploreSingle = (props) => {
       setBidStatus(4)
 
     }
-    
+   
     setLister(_statusF?.lister)
     // let _bidIncreasePercentage = await _marketPlaceContract.methods.bidIncreasePercentage().call();
     setBidIncreasePercentage(parseInt(_bidIncreasePercentage));
@@ -466,15 +470,35 @@ if (withdrawSuccess && modal) {
     abi: NFT_MARKETPLACE_ABI,
     functionName: "getAuctionTime",
     args: [props.tradeid],
+  
 })
 
-const getTimer =() => {
-    let _now = new Date().getTime() / 1e3;
-   
 
-    if (parseInt(_tradeTime?._endtime) > _now) {
-      let remainingSeconds = parseInt(_tradeTime?._endtime) - _now;
-      // console.log("Remaining Sec" , remainingSeconds);
+const getTimer =() => {
+// setStartTime(parseInt(_tradeTime?._starttime))
+    let _now = new Date().getTime() / 1e3;
+   if(parseInt(_tradeTime?._endtime) > _now){
+    setEndTime(parseInt(_tradeTime?._endtime) - _now)
+   }
+   let _startTime = _tradeTime?._starttime ; 
+   let _endTime = _tradeTime?._endtime ; 
+   let _timer = _tradeTime?._starttime ; 
+    if (parseInt(_startTime) > _now) {
+      _timer = _tradeTime?._starttime ; 
+    }
+    else if (parseInt(_endTime) > _now){
+      _timer = _tradeTime?._endtime ; 
+
+    }
+    else{
+      _timer = "Ended" ;
+      setEndTime(_timer);
+
+    }
+    if(_timer != "Ended"){
+
+      let remainingSeconds = parseInt(_timer) - _now;
+
 
       let remainingDay = Math.floor(
         remainingSeconds / (60 * 60 * 24)
@@ -657,7 +681,11 @@ if (approveTokenSuccess && modal) {
       }
     });
   }
+
   return (
+<>
+{
+show && 
 
     <div className="col-lg-4 col-md-6 pb-4">
      <div className='marketplace-box-wrap3'>
@@ -699,37 +727,55 @@ if (approveTokenSuccess && modal) {
               <p>{bidStatusName?.[bidStatus]}</p>
             </div>
           </div>
+    
           <div className="more-detail">
-            {
-              bidStatus != 4 &&
+            {/* {bidStatus  } */}
+            
               <ul className="m-0">
+              {
+              bidStatus != 4 &&
+              <>
                 <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Highest Bid</p> <p className="value p_new">{highestBid} {symbol}</p> </li>
-                <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Your Bid</p> <p className="value p_new">{isNaN(userbid)?0.00:userbid} {symbol}</p> </li>
-              
+                <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Your Bid</p> <p className="value p_new">{isNaN(userbid)?0.00:userbid} {symbol}</p> 
+                </li>
+              </>
+}
+
+              {/* {endTime} */}
+              {/* { && <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Starts In</p> <p className="value p_new">{endTime}</p> </li>} */}
+           
                 {
 
-                  endTime != 0 ?
-                    <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Ends In</p> <p className="value p_new">{endTime}</p> </li>
+                  endTime != "Ended" ?
+                    <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">{(parseInt(_tradeTime?._starttime) > new Date().getTime() / 1e3 ? "Starts in" : "Ends In" )}</p> <p className="value p_new">{endTime}</p> </li>
                     :
-                    highestBidder == lister ?
+                    (buyer == lister ) ?
+                      <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Cancelled</p> </li>
+                      :
+                   (buyer == "0x0000000000000000000000000000000000000000" && endTime == "Ended" && isAuction ) ?
                       <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Expired</p> </li>
                       :
+                      (buyer != "0x0000000000000000000000000000000000000000") ?
                       <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Sold Out</p> </li>
+                      :
+                      <></>
 
                 }
 
+
+
               </ul>
-            }
+           
           </div>
 
 
           {address && bidStatus == 1  && address!== lister &&
             <button className="bg___BTN_J" onClick={bidToggle} >Place Bid</button>
           }
-          {address && bidStatus == 4 && approval > 0 && address!== lister &&
+          {address && bidStatus == 4 && approval > 0 && address!== lister && buyer == "0x0000000000000000000000000000000000000000" &&
             <button className="bg___BTN_J" onClick={buyNft}>Buy Now</button>
           }
-          {address && bidStatus == 4 && approval == 0 &&
+          {address && bidStatus == 4 && approval == 0 && 
             <button className="bg___BTN_J" onClick={approveToken} >Approve to Buy</button>
           }
           {!address &&
@@ -808,6 +854,8 @@ if (approveTokenSuccess && modal) {
 
     </div>
 
+}
+</>
   );
 
 

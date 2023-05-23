@@ -241,6 +241,7 @@ p {
   border-radius: 30px;
   transition: 0.5s;
   cursor: pointer;
+  margin: 5px;
 }
 
 .conbutton:hover {
@@ -5914,7 +5915,7 @@ min-height: 100vh;
   background: linear-gradient(123deg, #020021, #440060);
   padding: 20px;
   transition: 0.5s;
-  height: 430px;
+  /* height: 430px; */
 }
 
 .product-content>div>h4>a {
@@ -6696,11 +6697,11 @@ a {
 }
 
 .popup {
-  margin: 70px auto;
+  /* margin: 70px auto; */
   padding: 20px;
-  background-color: #09e1f6;
+  background-color: transparent;
   border-radius: 10px;
-  width: 30%;
+  /* width: 30%; */
   position: relative;
   transition: all 5s ease-in-out;
   text-align: center;

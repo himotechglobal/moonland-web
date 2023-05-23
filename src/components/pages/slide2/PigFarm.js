@@ -348,6 +348,7 @@ const PigFarm = () => {
         functionName: "balanceOf",
         args: [address],
     })
+   
     const { data: _sowApproved } = useContractRead({
         address: METLUX_TOKEN,
         abi: TOKEN_ABI,
@@ -373,6 +374,7 @@ const PigFarm = () => {
         functionName: "allowance",
         args: [address, PIG_FARMING],
     })
+   
     const { data: _nftTokenId } = useContractRead({
         address: BUILD_FARM,
         abi: NFT_ABI,
@@ -515,16 +517,16 @@ const PigFarm = () => {
             //   console.log(_sowApproved);
 
             // let _chickenFoodApproved = await _chickenFoodContract.methods.allowance(address, PIG_FARMING).call();
-            setChickenFoodApproved(_chickenFoodApproved);
+            setChickenFoodApproved(parseInt(_chickenFoodApproved));
 
-            let _sowBalance = parseFloat(_sowBalance1 / 1e18).toFixed();
+            let _sowBalance = parseFloat(_sowBalance1 / 1e18).toFixed(3);
             setSowBalance(_sowBalance);
             // let _boarBalance = await _boarContract.methods.balanceOf(address).call();
 
-            let _boarBalance = parseFloat(_boarBalance1 / 1e18).toFixed();
+            let _boarBalance = parseFloat(_boarBalance1 / 1e18).toFixed(3);
             setBoarBalance(_boarBalance)
             // let _boarApproved = await _boarContract.methods.allowance(address, PIG_FARMING).call();
-            setBoarApproved(_boarApproved);
+            setBoarApproved(parseInt(_boarApproved));
             // console.log(_boarApproved);
 
             // console.log(_userInfo);
@@ -560,7 +562,7 @@ const PigFarm = () => {
 
     }
   
-   
+
 
     // const { data: _chickenpigletToken } = useContractRead({
     //     address: PIG_INCUBATOR,
@@ -784,7 +786,7 @@ const PigFarm = () => {
         }
 
     }, [farmTokenId,_nftTokenId,_userEggs,eggsearned,layEndTime,eggHatchTime,eggunlockTime,unlockTime,_userInfo,_userItens,_userInfo2,_baseApprovedIncub,_userBoar,
-        _userSow,_userChickenDie,unlockTime,_userClaimTimes1,_chickenFoodBalance1, _capacity,_depositFee1,_balance,_chickenEggApproved,_claimChickenFee,_unlockItem2])
+        _userSow,_userChickenDie,unlockTime,_userClaimTimes1,_chickenFoodBalance1, _capacity,_depositFee1,_balance,_chickenEggApproved,_claimChickenFee,_unlockItem2,_baseApprovedFarm,_chickenFoodApproved,_sowApproved])
 
 
 
@@ -1702,26 +1704,11 @@ if (claimMaterialSuccess && modal) {
 
 
     const approveSow = async () => {
-        // let _web3 = new Web3(web3Provider);
+       
         setApprovalProcessing(true);
         setModal(true);
         await approveSowWriteAsync()
-        // document.getElementById("exampleModalCenter").modal('show')
-        // const _sowContract = new _web3.eth.Contract(TOKEN_ABI, sowToken);
-        // let _amount = _web3.utils.toWei('5000000000000000000')
-        // _sowContract.methods.approve(PIG_FARMING, _amount).send({ from: address }).on('receipt', function (receipt) {
-        //     setModal(modal);
-        //     setApprovalProcessing(false);
-
-        //     getData();
-
-        // })
-
-        //     .on('error', function (error, receipt) {
-        //         setModal(modal);
-        //         setApprovalProcessing(false);
-
-        //     });
+    
 
     }
 
@@ -1758,42 +1745,9 @@ if (claimMaterialSuccess && modal) {
 
     const addDays = async () => {
         setaddDdepositError(false);
-        // let _maxamount = parseInt(chickenFoodBalance / parseInt(20 * parseFloat(parseFloat(sowDeposited) + parseFloat(boarDeposited))));
-        // // console.log(chickenFoodBalance);
-        // // console.log(sowDeposited);
-        // // console.log(boarDeposited);
-        // // console.log(_maxamount);
-        // // console.log(addDayamount * 7);
-        // if (parseInt(_maxamount) < parseInt(addDayamount * 7)) {
-
-        //     setaddDdepositError("Error: Insufficient Food Balance");
-        //     return false;
-        // }
-
-        // else {
-            // let _web3 = new Web3(web3Provider);
-
             setModal(true);
             await addDaysWriteAsync()
-            // document.getElementById("exampleModalCenter").modal('show')
-            // const _farmingContract = new _web3.eth.Contract(PIG_FARMING_ABI, PIG_FARMING);
-            // let _camount = parseInt(addDayamount * 7);
-            //    console.log(farmTokenId,_camount,dayamount);
-
-            // _farmingContract.methods.addMoreDays(_camount).send({ from: address }).on('receipt', function (receipt) {
-
-            //     getData();
-            //     setModal(modal);
-            //     addDaysChickentoggle();
-
-            // })
-
-            //     .on('error', function (error, receipt) {
-            //         setModal(modal);
-
-            //     });
-
-        // }
+       
     }
 
 
@@ -1920,7 +1874,7 @@ if (claimMaterialSuccess && modal) {
 
 
     let _area = buyareadamount.toString();
-    console.log("AREA",_area)
+
     const { config: buyAreaNFTConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
@@ -1928,8 +1882,6 @@ if (claimMaterialSuccess && modal) {
         args: [_area],
         watch: true,
     })
-
-
 
     const { data: buyAreaNFTData, writeAsync: buyAreaNFTWriteAsync, isError: buyAreaNFTError } = useContractWrite(buyAreaNFTConfig_)
 
@@ -2101,16 +2053,16 @@ if (claimMaterialSuccess && modal) {
 
     }
 
-    const setMaxceDeposit = async () => {
+    const setMaxceDeposit= () => {
         let _damount = chickenEggBalance;
         if (chickenEggBalance > 50) {
             _damount = 50;
-            setcedAmount((_damount))
+            setcedAmount((_damount.toString()))
         }
 
       
     }
-console.log(chickenEggBalance);
+
 
     const setMaxDayDeposit = async () => {
         let _damount = chickenFoodBalance / (20 * (parseInt(boarDeposited) + parseInt(sowDeposited)));

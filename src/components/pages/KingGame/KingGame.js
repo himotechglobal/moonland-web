@@ -190,27 +190,11 @@ const KingGame = () => {
 
 	const getOtherInfor = async () => {
 
-		// let _web3 = new Web3(web3Provider);
-
-		// const _gameContract = new _web3.eth.Contract(KINGGAME_ABI, KINGGAME);
-		// let _token2 = await _gameContract.methods.token().call();
-		// console.log(_token)
-		// const _tokenContract = new _web3.eth.Contract(TOKEN_ABI, _token2);
-		// let _bidAmount = await _gameContract.methods.bidAmount().call();
-		// console.log(_bidAmount);
-		// let totalBid = await _gameContract.methods.totalBid().call();
-		// console.log(totalBid);
-		// let _tokenSymbol = await _tokenContract.methods.symbol().call();
-		// console.log(_tokenSymbol);
-		// let _decimals = await _tokenContract.methods.decimals().call();
-
-		// let _potBalance = await _tokenContract.methods.balanceOf(KINGGAME).call();
-		// console.log(_potBalance)
+		
 		let _potBalance = parseFloat(_potBalance1 / 1e1 ** _decimals).toFixed(4);
 		let _bidAmount = parseFloat(_bidAmount1 / 1e1 ** _decimals).toFixed(4);
 		let totalBid = parseFloat(_totalBid / 1e1 ** _decimals).toFixed(4);
-		// let _lastBidder = await _gameContract.methods.lastBidder().call();
-		// console.log(_lastBidder)
+
 
 
 		setlastBidder(_lastBidder)
@@ -224,25 +208,18 @@ const KingGame = () => {
 	}
 	const getApproved = async () => {
 
-		// let _web3 = new Web3(web3Provider);
-		// console.log("GA", KINGGAME)
-		// console.log("WA", address)
 		if (address) {
-			// const _gameContract = new _web3.eth.Contract(KINGGAME_ABI, KINGGAME);
-			// let _token = await _gameContract.methods.token().call();
-
-			// const _tokenContract = new _web3.eth.Contract(TOKEN_ABI, _token);
-			// let _approve = await _tokenContract.methods.allowance(address, KINGGAME).call();
+		
+		
 			setApproved(parseInt(_approve));
-			// console.log(_approve);
+		
 		}
 
 	}
 
 
-	// const _amount = _web3.utils.toWei('1');
+	
 	const _amount = ethers.utils.parseEther('1000000000').toString()
-	// console.log(_amount);
 	const { config: claimConfig_ } = usePrepareContractWrite({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
@@ -270,23 +247,6 @@ const KingGame = () => {
 		await claimWriteAsync()
 
 
-		// let _web3 = new Web3(web3Provider);
-
-		// const _gameContract = new _web3.eth.Contract(KINGGAME_ABI, KINGGAME);
-		// const _amount = _web3.utils.toWei('1');
-
-
-		// _gameContract.methods.restartAndClaim().send({ from: address }).on('receipt', function (receip) {
-		// 	getApproved();
-		// 	getLastBidder();
-		// 	// getTimer();
-		// 	getOtherInforPer();
-		// 	setModal(modal);
-		// })
-		// 	.on('error', function (error, receipt) {
-		// 		setModal(modal);
-
-		// 	});
 	}
 
 
@@ -294,9 +254,6 @@ const KingGame = () => {
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: 'participate',
-		// args: [KINGGAME, _amount]
-		// enabled: false
-
 	})
 
 	const { data: bidNowData, writeAsync: bidNowWriteAsync, isError: bidNowError } = useContractWrite(bidNowConfig_)
@@ -306,7 +263,7 @@ const KingGame = () => {
 	})
 
 	if (bidNowError && modal) {
-		// getLastBidder() ;
+
 		getOtherInforPer();
 
 		setModal(modal);
@@ -318,23 +275,7 @@ const KingGame = () => {
 	const bidNow = async () => {
 		setModal(!modal);
 		await bidNowWriteAsync()
-		// console.log("here");
-
-		// let _web3 = new Web3(web3Provider);
-		// const _gameContract = new _web3.eth.Contract(KINGGAME_ABI, KINGGAME);
-
-		// _gameContract.methods.participate().send({ from: address }).on('receipt', function (receip) {
-		// 	getApproved();
-		// 	getLastBidder();
-		// 	getOtherInforPer();
-		// 	// getTimer();
-
-		// 	setModal(modal);
-		// })
-		// 	.on('error', function (error, receipt) {
-		// 		setModal(modal);
-
-		// 	});
+	
 	}
 
 
@@ -364,28 +305,12 @@ const KingGame = () => {
 	const approveNow = async () => {
 		setModal(!modal);
 		await approveNowWriteAsync()
-		// let _web3 = new Web3(web3Provider);
-		// const _gameContract = new _web3.eth.Contract(KINGGAME_ABI, KINGGAME);
-		// let _token = await _gameContract.methods.token().call();
-		// const _tokenContract = new _web3.eth.Contract(TOKEN_ABI, _token);
-		// const _amount = _web3.utils.toWei('100000000');
-		// _tokenContract.methods.approve(KINGGAME, _amount).send({ from: address }).on('receipt', function (receipt) {
-		// 		getApproved();
-		// 		setModal(modal);
-		// 	})
-		// 		.on('error', function (error, receipt) {
-		// 			setModal(modal);
-
-		// 		});
+		
 	}
 
 
 	const getLastBidder = async () => {
 
-		// let _web3 = new Web3(web3Provider);
-		// console.log(Config);
-		// const _gameContract = new _web3.eth.Contract(KINGGAME_ABI, KINGGAME);
-		// let _lastBidder = await _gameContract.methods.lastBidder().call();
 
 		setlastBidder(_lastBidder)
 	}
@@ -402,6 +327,7 @@ const KingGame = () => {
 		if (address) {
 			// getdata()
 			getTimer()
+			getLastBidder()
 			clearInterval(timerInterval);
 			timerInterval = setInterval(() => {
 				getTimer()
@@ -425,20 +351,20 @@ const KingGame = () => {
 
 		}, 5000);
 
-		// getLastBidder() ;
 
-	}, [address,__nextTime,hasWinner,__lastBidTime,__endDelay,_lastBidder,timer,])
+
+	}, [address,__nextTime,hasWinner,__lastBidTime,__endDelay,_lastBidder,timer,_lastBidder])
 
 	const getTimer = async () => {
 
 		let _currentTime = new Date().getTime() / 1000;
-		console.log(new Date().getTime() / 1000);
+	
 		let _nextTime = parseInt(__nextTime);
 		let _lastBidTime = parseInt(__lastBidTime) ;
 		let _endDelay = parseInt(__endDelay)
 		let endTime;
 		let _remainingSeconds;
-		console.log("ddd",_lastBidTime);
+
 
 		setWaiting(false);
 
@@ -492,29 +418,15 @@ const KingGame = () => {
 			}
 			else {
 				endTime = remainingHour + "h : " + remainingMinutes + "m : " + remainingSec + "s";
-				console.log(endTime);
 	
 				setTimer(endTime);
 	
 			}
 		}
 		
-		// let _web3 = new Web3(web3Provider);
-		//  console.log(Config);
-		// const _gameContract = new _web3.eth.Contract(KINGGAME_ABI, KINGGAME);
-
-		// let _nextTime = await _gameContract.methods.nextStartTime().call() ;
-
-		// let _nextTime = await _gameContract.methods.nextStartTime().call();
-
-		// let _lastBidTime = await _gameContract.methods.lastBidTime().call();
-		// console.log(_lastBidTime);
-		// let _endDelay = await _gameContract.methods.endDelay().call();
-		// console.log(_endDelay);
-		// let hasWinner = await _gameContract.methods.hasWinner().call();
+		
 		setWinner(hasWinner);
 
-		// console.log('nextStart2', hasWinner)
 
 	
 
@@ -531,7 +443,7 @@ const KingGame = () => {
 						<div className="container">
 							<div className="finance-king_game">
 								<h1>Moon Emperor</h1>
-								{/* <h4>Lorem ipsum is placeholder text commonly used Lorem </h4> */}
+							
 								<p>Moon Emperor is a fun and exciting game of chance and speed. Anyone can participate in this game by connecting their wallet and bidding $MOON tokens. The last one standing when the timer runs out, takes the treasure.</p>
 							</div>
 						</div>
