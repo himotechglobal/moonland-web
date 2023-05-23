@@ -508,7 +508,7 @@ const PigFarm = () => {
 
             // let _chickenFoodBalance = await _chickenFoodContract.methods.balanceOf(address).call();
             let _chickenFoodBalance = parseFloat(ethers.utils.formatEther(_chickenFoodBalance1)).toFixed();
-            setChickenFoodBalance(_chickenFoodBalance);
+            setChickenFoodBalance(parseFloat(_chickenFoodBalance)/1e18);
 
             // let _sowBalance = await _sowContract.methods.balanceOf(address).call();
 
@@ -786,7 +786,7 @@ const PigFarm = () => {
         }
 
     }, [farmTokenId,_nftTokenId,_userEggs,eggsearned,layEndTime,eggHatchTime,eggunlockTime,unlockTime,_userInfo,_userItens,_userInfo2,_baseApprovedIncub,_userBoar,
-        _userSow,_userChickenDie,unlockTime,_userClaimTimes1,_chickenFoodBalance1, _capacity,_depositFee1,_balance,_chickenEggApproved,_claimChickenFee,_unlockItem2,_baseApprovedFarm,_chickenFoodApproved,_sowApproved])
+        _userSow,_userChickenDie,unlockTime,_userClaimTimes1,_chickenFoodBalance1, _capacity,_depositFee1,_balance,_chickenEggApproved,_claimChickenFee,_unlockItem2,_baseApprovedFarm,_chickenFoodApproved,_sowApproved,_userInfo1])
 
 
 
@@ -2381,8 +2381,6 @@ if (claimMaterialSuccess && modal) {
                                                 <a href="javacript:void" className="bg___BTN2" onClick={sowtoggle} >Deposit {sowSymbol}</a>
                                             }
                                         </div>
-
-
                                         <div className="btn-bp btn_new">
                                       {
                                                 sowDeposited > 0 && unlockTime > new Date().getTime() / 1e3 &&
@@ -2391,9 +2389,7 @@ if (claimMaterialSuccess && modal) {
 
                                             {
                                                 sowDeposited > 0 && unlockTime < new Date().getTime() / 1e3 &&
-
                                                 <a href="javacript:void" className="bg___BTN2" onClick={() => setremoveChickenModal(!removeChickenModal)}>Remove {sowSymbol} From Harvest</a>
-
                                             }
 
                                             {
