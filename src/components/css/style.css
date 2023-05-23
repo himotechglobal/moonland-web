@@ -234,7 +234,7 @@ p {
   padding: 10px 20px;
   font-weight: bold;
   font-size: 14px;
-  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(90deg, #eb00ff91, #03E1FF) border-box;
+  background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(55deg, #eb00ff91, #03E1FF) border-box;
   border-radius: 50em;
   border: 5px solid transparent;
   text-transform: capitalize !important;
