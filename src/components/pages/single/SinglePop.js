@@ -99,7 +99,7 @@ const SinglePop = (props) => {
 
 
                 }
-                console.log(input.files)
+                // console.log(input.files)
                 setFileName(input.files[0].name);
                 setFileType(input.files[0].type);
                 setFileData(input.files[0]);
@@ -139,7 +139,7 @@ const SinglePop = (props) => {
 
 
     const handleSaleon = (e) => {
-        console.log(e.target.checked);
+        // console.log(e.target.checked);
         setSaleon(e.target.checked);
     }
 
@@ -204,17 +204,17 @@ const SinglePop = (props) => {
     }
 
     const handleAuctionToken = (e) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         setAuctionToken(e.target.value);
     }
 
     const handleStartTime = (e) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         setStartTime(e.target.value);
     }
 
     const handleEndTime = (e) => {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         setEndTime(e.target.value);
     }
 
@@ -354,7 +354,7 @@ const SinglePop = (props) => {
                 reset();
                 props.saleToggle();
     }
-console.log(instantsale);
+// console.log(instantsale);
     const putauction = async () => {
         let id = props.id;
         // let _web3 = new Web3(web3Provider);

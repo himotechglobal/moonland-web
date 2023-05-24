@@ -100,6 +100,7 @@ const Product = (props) => {
         abi: NFT_MARKETPLACE_ABI,
         functionName: "getAuctionTime",
         args: [tradeid],
+        watch:true,
     })
 
     // console.log(_tradeTime);
@@ -253,6 +254,7 @@ const Product = (props) => {
         abi: NFT_MARKETPLACE_ABI,
         functionName: "getTrade",
         args: [tradeid],
+        watch:true,
     })
 
     const { data: _fullTrade } = useContractRead({
@@ -260,9 +262,10 @@ const Product = (props) => {
         abi: NFT_MARKETPLACE_ABI,
         functionName: "getFullTrade",
         args: [tradeid],
+        watch:true,
        
     })
-
+// console.log(_fullTrade);
     const { data: _bidIncreasePercentage } = useContractRead({
         address: NFT_MARKETPLACE,
         abi: NFT_MARKETPLACE_ABI,
@@ -470,11 +473,15 @@ const Product = (props) => {
         setPrice(_price);
     }
     useEffect(() => {
-        setInterval(() => {
+
+       const interval= setInterval(() => {
              getTimer();
            }, 1000);
+           setTimeout(() => {
+            clearInterval(interval);
+           }, 1000);
         init()
-    }, [bidStatus,_tradeTime,_userBid1,address,_decimals,tradeid,_canClaim,_status,_trade]);
+    }, [bidStatus,_tradeTime,_userBid1,address,_decimals,tradeid,_canClaim,_status,_trade,new Date().getTime() / 1e3]);
     const { config: placeBidConfig_ } = usePrepareContractWrite({
         address: NFT_MARKETPLACE,
         abi: NFT_MARKETPLACE_ABI,
@@ -1000,7 +1007,7 @@ const Product = (props) => {
                                             </div>
                                             {
                                                 endTime != "Ended" &&
-                                                <span>{(parseInt(_tradeTime?._starttime) > new Date().getTime() / 1e3 ? "Starts in" : "Ends In" )}  {endTime}</span>
+                                                <span>{(parseInt(_tradeTime?._starttime) > new Date().getTime() / 1e3 ? "Starts In" : "Ends In" )}  {endTime}</span>
                                             }
                                           
                                             {/* <div class="icons-p-wrp">
@@ -1242,9 +1249,9 @@ const Product = (props) => {
                                                     <ConnectWalletBtn />
                                                 </div>
                                             }
-                                            {address && !canClaim && bidStatus === 3 && highestBidder != address && address !== lister && buyer == null &&
+                                            {/* {bidStatus} */}
+                                            {address && !canClaim && bidStatus === 3 && address !== lister && highestBidder !=lister &&
                                                 <button className="bg___BTN_J" onClick={claimBid} >Claim</button>
-
                                             }
                                         
                                             {address && !canClaim && userbid > 0 && bidStatus === 3 && highestBidder !== address &&
@@ -1261,12 +1268,11 @@ const Product = (props) => {
                                             }
                                             
                                             {
-                                                address && bidStatus === 3 && lister === address && (highestBidder == null || highestBidder == lister )&&
+                                                address && bidStatus === 3 && lister === address && highestBidder==lister &&
                                                 <>
                                                     <button className="bg___BTN_J" onClick={cancelAuction} >Cancel Auction</button>
                                                     <button className="bg___BTN_J" onClick={renewAuctionToggle} >Renew Auction</button>
                                                 </>
-
                                             }
 
 

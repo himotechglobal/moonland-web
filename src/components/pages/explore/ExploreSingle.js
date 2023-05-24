@@ -109,7 +109,6 @@ const ExploreSingle = (props) => {
         args:[props?.tradeid],
         watch:true
           })
-
       const {data:_status} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -117,7 +116,6 @@ const ExploreSingle = (props) => {
         args:[props?.tradeid],
         watch:true
           })
-   
       const {data:_bidIncreasePercentage} =useContractRead({
         address:NFT_MARKETPLACE,
         abi:NFT_MARKETPLACE_ABI,
@@ -537,10 +535,13 @@ const getTimer =() => {
     //     }, 1000);
     // }
     init()
-   setInterval(() => {
-        getTimer();
-      }, 1000);
-}, [bidStatus,_tradeTime,_approval,_statusF]);
+    const interval= setInterval(() => {
+      getTimer();
+    }, 1000);
+    setTimeout(() => {
+     clearInterval(interval);
+    }, 1000);
+}, [bidStatus,_tradeTime,_approval,_statusF,new Date().getTime() / 1e3]); 
 
 //   const { config: unLikeTradeConfig } = usePrepareContractWrite({
 //     address: NFT_MARKETPLACE,
@@ -747,7 +748,7 @@ show &&
                 {
 
                   endTime != "Ended" ?
-                    <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">{(parseInt(_tradeTime?._starttime) > new Date().getTime() / 1e3 ? "Starts in" : "Ends In" )}</p> <p className="value p_new">{endTime}</p> </li>
+                    <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">{(parseInt(_tradeTime?._starttime) > new Date().getTime() / 1e3 ? "Starts In" : "Ends In" )}</p> <p className="value p_new">{endTime}</p> </li>
                     :
                     (buyer == lister ) ?
                       <li className="d-flex justify-content-between mt-1"><p className="title font-weight-bold p_new">Cancelled</p> </li>

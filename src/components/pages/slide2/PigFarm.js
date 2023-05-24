@@ -194,11 +194,13 @@ const PigFarm = () => {
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
         functionName: "getTokenPerFarmArea",
+        watch:true,
     })
     const { data: _baseToken } = useContractRead({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
         functionName: "baseToken",
+        watch:true,
     })
     const { data: _farmToken } = useContractRead({
         address: PIG_FARMING,
@@ -210,22 +212,26 @@ const PigFarm = () => {
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
         functionName: "metluxToken",
+        watch:true,
     })
     const { data: _boarToken } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
         functionName: "thermixToken",
+        watch:true,
     })
     const { data: _chickenFoodToken } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
         functionName: "positronsToken",
+        watch:true,
     })
     const { data: _depositFee } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
         functionName: "getDepositFee",
         args: [1],
+        watch:true,
     })
 
     // console.log("DF",_depositFee)
@@ -234,43 +240,51 @@ const PigFarm = () => {
         abi: PIG_FARMING_ABI,
         functionName: "getRemoveFee",
         args: [1],
+        watch:true,
     })
     const { data: _chickenFoodSymbol } = useContractRead({
         address: POSITRONS_TOKEN,
         abi: TOKEN_ABI,
         functionName: "symbol",
+        watch:true,
     })
     const { data: _symbol } = useContractRead({
         address: BUILD_FARM,
         abi: NFT_ABI,
         functionName: "symbol",
+        watch:true,
     })
     const { data: _sowSymbol } = useContractRead({
         address: METLUX_TOKEN,
         abi: TOKEN_ABI,
         functionName: "symbol",
+        watch:true,
     })
     const { data: _boarymbol } = useContractRead({
         address: THERMIX_TOKEN,
         abi: TOKEN_ABI,
         functionName: "symbol",
+        watch:true,
     })
     const { data: _baseSymbol } = useContractRead({
         address: TOKEN,
         abi: TOKEN_ABI,
         functionName: "symbol",
+        watch:true,
     })
     const { data: _baseApproved } = useContractRead({
         address: TOKEN,
         abi: TOKEN_ABI,
         functionName: "allowance",
         args: [address, MARKETPLACE],
+        watch:true,
     })
     const { data: _baseApprovedFarm } = useContractRead({
         address: TOKEN,
         abi: TOKEN_ABI,
         functionName: "allowance",
         args: [address, PIG_FARMING],
+        watch:true,
     })
 
 
@@ -279,25 +293,28 @@ const PigFarm = () => {
         address: TOKEN,
         abi: TOKEN_ABI,
         functionName: "allowance",
-        args: [address, PIG_INCUBATOR],
+        args: [address, PIG_INCUBATOR], watch:true,
     })
     const { data: _baseBalance } = useContractRead({
         address: TOKEN,
         abi: TOKEN_ABI,
         functionName: "balanceOf",
         args: [address],
+        watch:true,
     })
     const { data: _nftBalance } = useContractRead({
         address: BUILD_FARM,
         abi: NFT_ABI,
         functionName: "balanceOf",
         args: [address],
+        watch:true,
     })
     const { data: _userInfo } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
         functionName: "userInfo",
         args: [address],
+        watch:true,
     })
   
     const { data: _userSow } = useContractRead({
@@ -305,7 +322,9 @@ const PigFarm = () => {
         abi: PIG_FARMING_ABI,
         functionName: "getUserMetlux",
         args: [address],
+        watch:true,
     })
+    
     const { data: _userBoar } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
@@ -317,6 +336,7 @@ const PigFarm = () => {
         abi: PIG_FARMING_ABI,
         functionName: "pendingEules",
         args: [address],
+        watch:true,
     })
    
     const { data: _userChickenDie } = useContractRead({
@@ -324,6 +344,7 @@ const PigFarm = () => {
         abi: PIG_FARMING_ABI,
         functionName: "getUnlockTime",
         args: [address],
+        watch:true,
     })
     const { data: _userClaimTimes1 } = useContractRead({
         address: PIG_FARMING,
@@ -340,6 +361,7 @@ const PigFarm = () => {
         abi: TOKEN_ABI,
         functionName: "balanceOf",
         args: [address],
+        watch:true,
     })
 
     const { data: _sowBalance1 } = useContractRead({
@@ -347,19 +369,22 @@ const PigFarm = () => {
         abi: TOKEN_ABI,
         functionName: "balanceOf",
         args: [address],
+        watch:true,
     })
-   
+  
     const { data: _sowApproved } = useContractRead({
         address: METLUX_TOKEN,
         abi: TOKEN_ABI,
         functionName: "allowance",
         args: [address, PIG_FARMING],
+        watch:true,
     })
     const { data: _chickenFoodApproved } = useContractRead({
         address: POSITRONS_TOKEN,
         abi: TOKEN_ABI,
         functionName: "allowance",
         args: [address, PIG_FARMING],
+        watch:true,
     })
 
     const { data: _boarBalance1 } = useContractRead({
@@ -367,12 +392,14 @@ const PigFarm = () => {
         abi: TOKEN_ABI,
         functionName: "balanceOf",
         args: [address],
+        watch:true,
     })
     const { data: _boarApproved } = useContractRead({
         address: THERMIX_TOKEN,
         abi: TOKEN_ABI,
         functionName: "allowance",
         args: [address, PIG_FARMING],
+        watch:true,
     })
    
     const { data: _nftTokenId } = useContractRead({
@@ -380,18 +407,21 @@ const PigFarm = () => {
         abi: NFT_ABI,
         functionName: "ownerTokens",
         args: [address],
+        watch:true,
     })
     const { data: _approved } = useContractRead({
         address: BUILD_FARM,
         abi: NFT_ABI,
         functionName: "getApproved",
         args: [farmTokenId],
+        watch:true,
     })
     const { data: _landIsfree } = useContractRead({
         address: PIG_FARMING,
         abi: PIG_FARMING_ABI,
         functionName: "landIsfree",
         args: [farmTokenId, address],
+        watch:true,
     })
 
     const { data: _userInfo1 } = useContractRead({
@@ -399,6 +429,7 @@ const PigFarm = () => {
         abi: PIG_FARMING_ABI,
         functionName: "getUserToken",
         args: [address],
+        watch:true,
     })
 
 
@@ -507,8 +538,8 @@ const PigFarm = () => {
 
 
             // let _chickenFoodBalance = await _chickenFoodContract.methods.balanceOf(address).call();
-            let _chickenFoodBalance = parseFloat(ethers.utils.formatEther(_chickenFoodBalance1)).toFixed();
-            setChickenFoodBalance(parseFloat(_chickenFoodBalance)/1e18);
+            // let _chickenFoodBalance = parseFloat(ethers.utils.formatEther(_chickenFoodBalance1)).toFixed();
+            setChickenFoodBalance(parseFloat(_chickenFoodBalance1)/1e18);
 
             // let _sowBalance = await _sowContract.methods.balanceOf(address).call();
 
@@ -628,6 +659,7 @@ const PigFarm = () => {
         abi: PIG_INCUBATOR_ABI,
         functionName: "getUnlockTime",
         args: [address],
+        watch:true,
         // onSuccess:(data)=>{
         //     console.log(data?.toString());
         // }
@@ -739,7 +771,7 @@ const PigFarm = () => {
        
     }
     useEffect(() => {
-        setProcessed(false);
+   
 
         // if (window.ethereum) {
         //     web3Provider = window.ethereum;
@@ -751,19 +783,31 @@ const PigFarm = () => {
           getEggData() ;
         getData();
         if (unlockTime > 0) {
-            clearInterval(timeInterval);
-            timeInterval = setInterval(() => {
+            // clearInterval(timeInterval);
+            // timeInterval = setInterval(() => {
+            //     getTime();
+            // }, 1000);
+            const interval= setInterval(() => {
                 getTime();
-            }, 1000);
+              }, 1000);
+              setTimeout(() => {
+               clearInterval(interval);
+              }, 1000);
+
+
+            
 
         }
 
         if (layEndTime > 0) {
-            clearInterval(timeInterval1);
-            timeInterval1 = setInterval(() => {
-                getlayTime();
+            // clearInterval(timeInterval1);
+            // timeInterval1 = setInterval(() => {
+            //     getlayTime();
 
-            }, 1000);
+            // }, 1000);
+            setInterval(() => {
+                getlayTime();
+              }, 1000);
 
         }
         // console.log("eggitme",eggunlockTime)
@@ -785,8 +829,10 @@ const PigFarm = () => {
 
         }
 
-    }, [farmTokenId,_nftTokenId,_userEggs,eggsearned,layEndTime,eggHatchTime,eggunlockTime,unlockTime,_userInfo,_userItens,_userInfo2,_baseApprovedIncub,_userBoar,
-        _userSow,_userChickenDie,unlockTime,_userClaimTimes1,_chickenFoodBalance1, _capacity,_depositFee1,_balance,_chickenEggApproved,_claimChickenFee,_unlockItem2,_baseApprovedFarm,_chickenFoodApproved,_sowApproved,_userInfo1])
+    }, [farmTokenId,_nftTokenId,_userEggs,eggsearned,layEndTime,eggHatchTime,eggunlockTime,_userInfo,_userItens,_userInfo2,_baseApprovedIncub,_userBoar,
+        _userSow,_userChickenDie,unlockTime,_userClaimTimes1,_chickenFoodBalance1, _capacity,_depositFee1,_balance,_chickenEggApproved,_claimChickenFee,_unlockItem2,_baseApprovedFarm,_chickenFoodApproved,_sowApproved,_userInfo1,address,_sowBalance1,_boarBalance1,_nftBalance,_unlockItem,approvalProcessing,baseApprovedFarm,chickenFoodApproved,sowApproved,boarApproved,address])
+
+      
 
 
 
@@ -954,7 +1000,7 @@ const PigFarm = () => {
             // console.log('Current' , _current)
         }
         else {
-            let remainingSeconds = eggunlockTime - _current;
+            let remainingSeconds = parseInt(eggunlockTime) - _current;
             // console.log("Remaining Sec" , remainingSeconds);
 
             let remainingDay = Math.floor(
@@ -2024,7 +2070,6 @@ if (claimMaterialSuccess && modal) {
     }
     if (approveNFTSuccess && modal) {
         setModal(false);
-        lockNFT();
         getData();
 
 

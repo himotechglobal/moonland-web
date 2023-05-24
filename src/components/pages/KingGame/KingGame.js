@@ -63,78 +63,92 @@ const KingGame = () => {
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: "token",
+		watch:true,
 	})
 	const { data: _decimals } = useContractRead({
 		address: _token,
 		abi: TOKEN_ABI,
 		functionName: "decimals",
+		watch:true,
 	})
 	const { data: _tokenbalance1 } = useContractRead({
 		address: _token,
 		abi: TOKEN_ABI,
 		functionName: "balanceOf",
 		args: [address],
+		watch:true,
 	})
 	const { data: _token2 } = useContractRead({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: "token",
+		watch:true,
 
 	})
 	const { data: _bidAmount1 } = useContractRead({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: "bidAmount",
+		watch:true,
 
 	})
 	const { data: _totalBid } = useContractRead({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: "totalBid",
+		watch:true,
 	})
 	const { data: _tokenSymbol } = useContractRead({
 		address: _token2,
 		abi: TOKEN_ABI,
 		functionName: "symbol",
+		watch:true,
 	})
 	const { data: _potBalance1 } = useContractRead({
 		address: TOKEN,
 		abi: TOKEN_ABI,
 		functionName: "balanceOf",
 		args: [KINGGAME],
+		watch:true,
 	})
 
 	const { data: _lastBidder } = useContractRead({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: "lastBidder",
+		watch:true,
 	})
 	const { data: _approve } = useContractRead({
 		address: _token,
 		abi: TOKEN_ABI,
 		functionName: "allowance",
-		args: [address, KINGGAME]
+		args: [address, KINGGAME],
+		watch:true,
 	})
 	const { data: __nextTime } = useContractRead({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: "nextStartTime",
+		watch:true,
 	})
 	const { data: __lastBidTime } = useContractRead({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: "lastBidTime",
+		watch:true,
 	})
 
 	const { data: __endDelay } = useContractRead({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: "endDelay",
+		watch:true,
 	})
 	const { data: hasWinner } = useContractRead({
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: "hasWinner",
+		watch:true,
 	})
 
 	// console.log(hasWinner)

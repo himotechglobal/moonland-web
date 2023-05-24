@@ -237,7 +237,7 @@ p {
   background: radial-gradient(at bottom, #03E1FF, #161895)padding-box, linear-gradient(55deg, #eb00ff91, #03E1FF) border-box;
   border-radius: 50em;
   border: 5px solid transparent;
-  text-transform: capitalize !important;
+  text-transform: capitalize !important; 
   border-radius: 30px;
   transition: 0.5s;
   cursor: pointer;
@@ -4723,6 +4723,7 @@ min-height: 100vh;
   text-align: center;
   margin: 0 auto 10px auto;
   background-color: #fff;
+  color: #000000;
 }
 
 .progressbar li:after {

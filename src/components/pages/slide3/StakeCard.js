@@ -834,7 +834,7 @@ const StakeCard = (props) => {
 
 
                 <ModalBody>
-                <div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"150px"} style={{opacity:"80%"}}/></div>
+                <div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"150px"} style={{opacity:"65%"}}/></div>
                     <div className="modaltext text-center mt-4" >Processing your Request...</div>
 
                 </ModalBody>

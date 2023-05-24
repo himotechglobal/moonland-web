@@ -63,7 +63,7 @@ const ExploreNew = () => {
   const [soldArray, setSoldArray] = useState([]);
   const [instantArray, setInstantArray] = useState([]);
 
-  useEffect(() => {
+  // useEffect(() => {
     $('.tabs6').on('click', 'a', function (e) {
       e.preventDefault();
       var tabId = $(this).attr('data-tab');
@@ -86,7 +86,7 @@ const ExploreNew = () => {
     //   getImportedCollection();
     // }
 
-  }, [address])
+  // }, [address])
 
   useEffect(() => {
     _acounter = 0;

@@ -43,8 +43,9 @@ import { Link } from 'react-router-dom';
 const ChickenFarm = () => {
     const [modal, setModal] = useState(false);
     const toggle = () => {
-        setModal(!modal);
+        setModal(!modal)
     }
+
     const [farmArea, setFarmArea] = useState(0);
     const [farmCapacity, setFarmCapacity] = useState(0);
     const [farmBalance, setFarmBalance] = useState(0);
@@ -398,8 +399,9 @@ const ChickenFarm = () => {
         functionName: 'getUserToken',
         args: [address],
         watch: true,
+        
     })
- 
+
     const { data: _chickenEggToken } = useContractRead({
         address: CHICKEN_INCUBATOR,
         abi: CHICKEN_INCUBATOR_ABI,
@@ -721,16 +723,9 @@ const ChickenFarm = () => {
     }
 
     useEffect(() => {
-        // if (window.ethereum) {
-        //     web3Provider = window.ethereum;
-        // }
-        // else {
-        //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
-
-        // }
-        // getEggData();
         getData();
         getEggData()
+      
         if (unlockTime > 0) {
             clearInterval(timeInterval);
             timeInterval = setInterval(() => {
@@ -761,15 +756,15 @@ const ChickenFarm = () => {
         if (eggHatchTime > 0) {
             clearInterval(timeInterval3);
             timeInterval3 = setInterval(() => {
-                // getEggHatchTime() ;
+    
 
             }, 1000);
 
         }
 
-        // alert(farmBalance)
+   
 
-    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_userInfo,_baseApprovedFarm,modal,_chickenFoodApproved,_userInfo3,eggTime,eggunlockTime,unlockTime,_userChickenDie,_approved,_landIsfree,_nftTokenId,_chickenEggApproved,_chickenEggToken,_depositFee1,_balance,_userItens,_claimChickenFee1,_capacity])
+    }, [address, unlockTime, layunlockTime, layEndTime, eggunlockTime, eggHatchTime,_baseApproved,_baseApprovedFarm,_baseApprovedIncub,_nftBalance,_userInfo2,farmBalance,_userChickens,farmTokenId,_chickenApproved,_userInfo,_baseApprovedFarm,_chickenFoodApproved,_userInfo3,eggTime,eggunlockTime,unlockTime,_userChickenDie,_approved,_landIsfree,_nftTokenId,_chickenEggApproved,_chickenEggToken,_depositFee1,_balance,_userItens,_claimChickenFee1,_capacity])
 
     const { config: lockNFTConfig_ } = usePrepareContractWrite({
         address: CHICKEN_FARMING,

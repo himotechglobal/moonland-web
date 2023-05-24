@@ -87,17 +87,7 @@ const MarketplaceCard = (props) => {
   //  const wallet = useWallet();
   // let web3Provider = window.ethereum;
   // console.log(boxArray);
-  useEffect(() => {
-    // if (window.ethereum) {
-    //   web3Provider = window.ethereum;
-    // }
-    // else {
-    //   web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
-    // }
-    getData();
-    getPrice();
-    getTokenPrice();
-  }, [])
+ 
   const getData = () => {
     // console.log(props)
     let v = ELEMENTS[props.index]
@@ -105,7 +95,7 @@ const MarketplaceCard = (props) => {
   }
 
   let _atoken = ELEMENTS[props.index].address;
-  let _amt = ethers.utils.parseEther("1")
+  let _amt = ethers.utils.parseEther("1").toString()
   const { data: _baseTokenPrice1 } = useContractRead({
     address: ROUTER,
     abi: ROUTER_ABI,
@@ -113,6 +103,7 @@ const MarketplaceCard = (props) => {
     args: [_amt, ['0x903fcaf1a49b29678c15b43bc9f852232bfa7df1', '0xe9e7cea3dedca5984780bafc599bd69add087d56']],
     watch: true
   })
+
   const { data: _baseToken } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
@@ -126,7 +117,7 @@ const MarketplaceCard = (props) => {
     watch: true
   })
   const { data: _available } = useContractRead({
-    address: ELEMENTS[props.index].address,
+    address: ELEMENTS[props.index]?.address,
     abi: TOKEN_ABI,
     functionName: "balanceOf",
     args: [MARKETPLACE],
@@ -190,7 +181,7 @@ const MarketplaceCard = (props) => {
     functionName: "getTokenPerSolarFood",
     watch: true
   })
-  console.log(parseInt(_getPrice3));
+  // console.log(parseInt(_getPrice3));
   const { data: _getSold3 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
@@ -252,7 +243,7 @@ const MarketplaceCard = (props) => {
     functionName: "getTokenPerEule",
     watch: true
   })
-  console.log((_getPricePiglet));
+  // console.log((_getPricePiglet));
   const { data: _getSoldPiglet } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
@@ -444,6 +435,18 @@ const MarketplaceCard = (props) => {
       // console.log(_getSoldValue);
     }
   }
+  useEffect(() => {
+    // if (window.ethereum) {
+    //   web3Provider = window.ethereum;
+    // }
+    // else {
+    //   web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
+    // }
+    getData();
+    getPrice();
+    getTokenPrice();
+  }, [address,_available])
+
   return (
     <>
      

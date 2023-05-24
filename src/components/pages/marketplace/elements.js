@@ -384,7 +384,7 @@ const elements = (props) => {
                 setIsApprovedERC20(false)
             }
         }
-    }, [_approval, address, depositAmount]);
+    }, [_approval, address, depositAmount,isApprovedERC20]);
 
     // console.log((parseFloat(_approval)));
 
@@ -639,7 +639,7 @@ const elements = (props) => {
     // let _tokenAdd = ELEMENTS[key]?.address;
     // console.log(_amount);
     let _amount = isNaN(depositAmount)? 0: ethers.utils.parseEther?.((depositAmount*multiplier).toString())
-    console.log(depositAmount*multiplier);
+    
 
 //   console.log((depositAmount));
     const { config: buyFarmTokensConfig_ } = usePrepareContractWrite({
@@ -647,7 +647,7 @@ const elements = (props) => {
         abi: MARKETPLACE_ABI,
         functionName: 'buyMoonTokens',
         args: [ELEMENTS[key]?.address,  _amount],
-        enabled: ContractTokenBalance?.formatted >= depositAmount && depositAmount > 0
+        // enabled: ContractTokenBalance?.formatted >= depositAmount && depositAmount > 0
 
         // enabled: _amount > 0 ? true : false
     })
@@ -661,11 +661,11 @@ const elements = (props) => {
     })
 
 
-    if (buyFarmTokensError && modal) {
+    if (buyFarmTokensError && modal && buyModal) {
         getPrice();
         getData();
         setModal(false);
-        setBuyModal(!buyModal)
+        setBuyModal(false)
     }
     if (buyFarmTokensSuccess && modal) {
         setModal(false);
@@ -1069,7 +1069,7 @@ const elements = (props) => {
 
 
                     <ModalBody>
-                    <div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"200px"}/></div>
+                    <div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"150px"} style={{opacity:"51%"}}/></div>
                         <div className="modaltext text-center mt-4" >Processing your Request...</div>
 
                     </ModalBody>
