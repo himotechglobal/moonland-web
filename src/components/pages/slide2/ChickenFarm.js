@@ -55,13 +55,9 @@ const ChickenFarm = () => {
   const [buyareadamount, setbuyareadamount] = useState(0);
   const [eggDepositFee, setEggDepositFee] = useState(0);
   const [chickenClaimfee, setChickenClaimfee] = useState(0);
-
   const [chickenDepositFee, setChickenDepositFee] = useState(0);
-
   const [chickenRemoveFee, setChickenRemoveFee] = useState(0);
-
   const [depositedDay, setDepositedDay] = useState(0);
-
   const [farmLocked, setFarmLocked] = useState(false);
   const [farmApprove, setFarmApprove] = useState(false);
   const [farmTokenId, setFarmTokenId] = useState(null);
