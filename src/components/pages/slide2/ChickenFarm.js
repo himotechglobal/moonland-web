@@ -1806,7 +1806,7 @@ const ChickenFarm = () => {
                         </div>
                         <div className="time__list">
                           <h3>
-                            {chickenEggDeposited} {chickenEggSymbol}
+                            {chickenEggDeposited>0?chickenEggDeposited:0} {chickenEggSymbol}
                             {/* {
                                                         chickenEggDeposited > 0 && chickenEggDeposited <= 10 &&
                                                         <img src={eggs1} className="ml-2" width="60px" alt='' />
@@ -1824,7 +1824,7 @@ const ChickenFarm = () => {
                         </div>
                         <div className="time__list">
                           <h3>
-                            {adult} {chickenSymbol}
+                            {adult>0?adult:0} {chickenSymbol}
                             {/* {
                                                             adult > 0 && adult <= 10 &&
                                                             <img src={chicken1} width="60px" alt='' />
