@@ -913,7 +913,7 @@ const PigFarm = () => {
     hash: depositMoreChickenData?.hash,
   });
 
-  if (depositMoreChickenSuccess) {
+  if (depositMoreChickenSuccess && moreChickenModal) {
     moreChickentoggle();
   }
 
@@ -968,7 +968,7 @@ const PigFarm = () => {
     hash: depositSowData?.hash,
   });
 
-  if (depositSowSuccess) {
+  if (depositSowSuccess && sowModal) {
     sowtoggle();
   }
 
@@ -1273,7 +1273,7 @@ const PigFarm = () => {
     hash: addDaysData?.hash,
   });
 
-  if (addDaysSuccess) {
+  if (addDaysSuccess && addDaysChickenModal) {
     addDaysChickentoggle();
   }
 

@@ -732,7 +732,7 @@ const elements = (props) => {
                             {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxDeposit}>Max</span> */}
                           
                         </label>
-                        <input className="form-control mb-3" onChange={handleDepositChange} type="number" value={damount} />
+                        <input className="form-control mb-3" onChange={(e) => handleDepositChange(e)} type="number" value={damount} />
                         {
                             (key === 'fluid' || key === 'positron') &&
 
