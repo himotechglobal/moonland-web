@@ -973,9 +973,7 @@ const ChickenFarm = () => {
     hash: approveChickenFoodData?.hash,
   });
 
-  if (approveChickenFoodSuccess) {
-    depositChicken();
-  }
+  
 
   const approveChickenFood = async () => {
     setModal(true);
@@ -2050,7 +2048,7 @@ const ChickenFarm = () => {
             {chickenDepositFee > 0
               ? parseFloat(chickenDepositFee * solarAmount).toFixed(2)
               : 0}{" "}
-            {baseSymbol} (@ {chickenDepositFee} per chicken )
+            {baseSymbol} (@ {chickenDepositFee} per Solar )
           </span>
 
           {cdepositError && <span className="error">{cdepositError}</span>}

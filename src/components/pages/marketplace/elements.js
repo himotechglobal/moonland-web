@@ -477,7 +477,7 @@ const elements = (props) => {
     })
 
 
-    if (sellFarmTokensSuccess) {
+    if (sellFarmTokensSuccess && sellModal) {
         sellToggle()
     }
 

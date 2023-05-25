@@ -269,7 +269,7 @@ const ExploreSingle = (props) => {
     hash: placeBidData?.hash,
   });
 
-  if (placeBidSuccess) {
+  if (placeBidSuccess && bidModal) {
     bidToggle();
   }
   const { config: buyNftConfig } = usePrepareContractWrite({
