@@ -820,7 +820,7 @@ const ChickenFarm = () => {
     hash: depositMoreChickenData?.hash,
   });
 
-  if (depositMoreChickenSuccess) {
+  if (depositMoreChickenSuccess && moreChickenModal) {
     moreChickentoggle();
   }
 
@@ -859,7 +859,7 @@ const ChickenFarm = () => {
     hash: depositChickenData?.hash,
   });
 
-  if (depositChickenSuccess) {
+  if (depositChickenSuccess && chickenModal) {
     chickentoggle();
   }
 
@@ -1101,7 +1101,7 @@ const ChickenFarm = () => {
   const { isSuccess: addDaysSuccess } = useWaitForTransaction({
     hash: addDaysData?.hash,
   });
-  if (addDaysSuccess) {
+  if (addDaysSuccess && addDaysChickenModal) {
     addDaysChickentoggle();
   }
 
@@ -1137,7 +1137,7 @@ const ChickenFarm = () => {
     hash: depositEggData?.hash,
   });
 
-  if (depositEggSuccess) {
+  if (depositEggSuccess && eggModal) {
     eggtoggle();
   }
 
@@ -1193,7 +1193,7 @@ const ChickenFarm = () => {
     hash: buyAreaNFTData?.hash,
   });
 
-  if (buyAreaNFTSuccess) {
+  if (buyAreaNFTSuccess && buyAreaModal) {
     buyAreaToggle();
   }
 
@@ -1225,7 +1225,7 @@ const ChickenFarm = () => {
     hash: addAreaNFTData?.hash,
   });
 
-  if (addAreaNFTSuccess) {
+  if (addAreaNFTSuccess && areaModal) {
     areaToggle();
   }
 
@@ -1364,7 +1364,7 @@ const ChickenFarm = () => {
     depositEggSuccess,
     sellAreaSuccess,
     buyAreaNFTSuccess,
-    addAreaNFTSuccess || approveNFTSuccess,
+    addAreaNFTSuccess , approveNFTSuccess,
   ]);
 
   useEffect(() => {
