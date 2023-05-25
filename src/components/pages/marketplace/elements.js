@@ -510,6 +510,7 @@ const elements = (props) => {
     const handleDepositChange = (e) => {
         setDepositAmount(parseFloat(e.target.value));
         setdAmount(e.target.value);
+        // alert(parseFloat(e.target.value))
     }
 
     let _amount = isNaN(depositAmount)? 0: ethers.utils.parseEther?.((depositAmount*multiplier).toString())

@@ -1303,7 +1303,7 @@ const PigFarm = () => {
     hash: depositEggData?.hash,
   });
 
-  if (depositEggSuccess) {
+  if (depositEggSuccess && eggModal) {
     eggtoggle();
   }
 
@@ -1361,7 +1361,7 @@ const PigFarm = () => {
     hash: buyAreaNFTData?.hash,
   });
 
-  if (buyAreaNFTSuccess) {
+  if (buyAreaNFTSuccess && buyAreaModal) {
     buyAreaToggle();
   }
 
@@ -1393,7 +1393,7 @@ const PigFarm = () => {
     hash: addAreaNFTData?.hash,
   });
 
-  if (addAreaNFTSuccess) {
+  if (addAreaNFTSuccess && areaModal) {
     areaToggle();
   }
 
