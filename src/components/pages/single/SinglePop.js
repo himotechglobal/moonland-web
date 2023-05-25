@@ -291,9 +291,7 @@ const SinglePop = (props) => {
     hash: approveTokenData?.hash,
   });
 
-  if (approveTokenSuccess) {
-    getApproval();
-  }
+ 
 
   const approveToken = async () => {
     setModal(true);

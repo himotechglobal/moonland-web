@@ -6,9 +6,7 @@ import { KINGGAME, TX_LINK,TOKEN } from '../../../Config/index.js';
 import KINGGAME_ABI from '../../../Config/KINGGAME_ABI.json';
 import arrow from '../../images/round_arrow.svg';
 import modal_earth from '../../images/modal_earth.png'
-
 import Web3 from "web3"
-
 import TOKEN_ABI from "../../../Config/TOKEN_ABI.json"
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { ethers } from 'ethers';
@@ -265,7 +263,6 @@ const KingGame = () => {
 		abi: TOKEN_ABI,
 		functionName: 'approve',
 		args: [KINGGAME, _amount],
-		// enabled: false
 
 	})
 
@@ -279,7 +276,6 @@ const KingGame = () => {
 	const approveNow = async () => {
 		setModal(true);
 		await approveNowWriteAsync()
-		
 	}
 
 
@@ -290,44 +286,6 @@ const KingGame = () => {
 	}
 
 
-	useEffect(() => {
-		// if (window.ethereum) {
-		// 	web3Provider = window.ethereum;
-		// }
-		// else {
-		// 	web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
-
-		// }
-		if (address) {
-			// getdata()
-			getTimer()
-			getLastBidder()
-			clearInterval(timerInterval);
-			timerInterval = setInterval(() => {
-				getTimer()
-
-			}, 1000);
-
-
-			getOtherInforPer();
-
-
-
-			getApproved()
-
-		}
-		getOtherInfor();
-		clearInterval(timerInterval2);
-
-		timerInterval2 = setInterval(() => {
-			getOtherInfor();
-
-
-		}, 5000);
-
-
-
-	}, [address,__nextTime,hasWinner,__lastBidTime,__endDelay,_lastBidder,timer,_lastBidder])
 
 	const getTimer = async () => {
 
@@ -400,6 +358,33 @@ const KingGame = () => {
 		setWinner(hasWinner);
 	}
 
+	useEffect(() => {
+		// if (window.ethereum) {
+		// 	web3Provider = window.ethereum;
+		// }
+		// else {
+		// 	web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
+
+		// }
+		// if (address) {
+			// getdata()
+			getTimer()
+			getLastBidder()
+			clearInterval(timerInterval);
+			timerInterval = setInterval(() => {
+				getTimer()
+
+			}, 1000);
+			getOtherInforPer();
+			getApproved()
+
+		// }
+		getOtherInfor();
+
+
+
+
+	}, [address,__nextTime,hasWinner,__lastBidTime,__endDelay,_lastBidder,timer,_lastBidder])
 	useEffect(() => {
 		if (claimSuccess||bidNowSuccess||approveNowSuccess) {
 		  closeModal();
