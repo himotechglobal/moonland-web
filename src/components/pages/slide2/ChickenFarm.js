@@ -34,6 +34,7 @@ import {
 } from "wagmi";
 import { ethers } from "ethers";
 import { Link } from "react-router-dom";
+import { ConnectWalletBtn } from "../ConnectWalletBtn.js";
 
 const ChickenFarm = () => {
   const [modal, setModal] = useState(false);
@@ -1523,7 +1524,13 @@ const ChickenFarm = () => {
                                                </div> */}
 
                     <div className="pool-btns">
+                      {!address && (
+                  <div className="mt-3 text-center">
+                    <ConnectWalletBtn />
+                  </div>
+                )}
                       <div className="alientime">
+
                         {!farmLocked && farmBalance > 0 && farmApprove && (
                           <a className="bg___BTN2" onClick={lockNFT}>
                             Lock {farmSymbol} NFT
