@@ -370,11 +370,17 @@ const KingGame = () => {
 			// getdata()
 			getTimer()
 			getLastBidder()
-			clearInterval(timerInterval);
-			timerInterval = setInterval(() => {
-				getTimer()
+			// clearInterval(timerInterval);
+			// timerInterval = setInterval(() => {
+			// 	getTimer()
 
-			}, 1000);
+			// }, 1000);
+			const interval = setInterval(() => {
+				getTimer();
+			  }, 1000);
+			  setTimeout(() => {
+				clearInterval(interval);
+			  }, 1000);
 			getOtherInforPer();
 			getApproved()
 
