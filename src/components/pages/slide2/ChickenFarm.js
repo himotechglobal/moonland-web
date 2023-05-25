@@ -919,9 +919,7 @@ const ChickenFarm = () => {
   const { isSuccess: approvebaseTokenIncubSuccess } = useWaitForTransaction({
     hash: approvebaseTokenIncubData?.hash,
   });
-  if (approvebaseTokenIncubSuccess) {
-    getEggData();
-  }
+ 
 
   const approvebaseTokenIncub = async () => {
     setModal(true);
@@ -996,9 +994,7 @@ const ChickenFarm = () => {
   const { isSuccess: claimChickenSuccess } = useWaitForTransaction({
     hash: claimChickenData?.hash,
   });
-  if (claimChickenSuccess) {
-    getEggData();
-  }
+
 
   const claimChicken = async () => {
     if (parseFloat(chickenClaimfee) > parseFloat(baseBalance)) {
