@@ -1,7 +1,5 @@
 import React from 'react';
 import Header from '../../pages/header.js';
-import Footer from '../../pages/footer.js';
-import stoke from '../../images/stoke.png';
 import cb1 from '../../images/cb1.png';
 import cb2 from '../../images/cb2.png';
 import cb3 from '../../images/cb3.png';

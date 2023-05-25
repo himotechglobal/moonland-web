@@ -1,7 +1,5 @@
 import React from 'react';
 import Header from '../../pages/header.js';
-import Footer from '../../pages/footer.js';
-import stoke from '../../images/stoke.png';
 import StakeCard from './StakeCard.js';
 
 import arrow from '../../images/round_arrow.svg';

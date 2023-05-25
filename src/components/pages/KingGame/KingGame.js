@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Modal, ModalBody,Button } from 'reactstrap';
 
 import Header from '../header.js';
-import Footer from '../footer.js';
-import flower from '../../images/flower.png';
 import { KINGGAME, TX_LINK,TOKEN } from '../../../Config/index.js';
 import KINGGAME_ABI from '../../../Config/KINGGAME_ABI.json';
 import arrow from '../../images/round_arrow.svg';
 import modal_earth from '../../images/modal_earth.png'
 
 import Web3 from "web3"
-// import {useWallet} from '@binance-chain/bsc-use-wallet'
 
 import TOKEN_ABI from "../../../Config/TOKEN_ABI.json"
 import { useAccount, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
@@ -55,6 +52,9 @@ const KingGame = () => {
 	var timerInterval2;
 
 	const modalToggle = () => setModal(!modal);
+	const closeModal = () => {
+		setModal(false);
+	  };
 	const togglePlay = () => setShowPlay(!showPlay);
 
 	let web3Provider = window.ethereum;
@@ -151,22 +151,12 @@ const KingGame = () => {
 		watch:true,
 	})
 
-	// console.log(hasWinner)
 
 
 	const getOtherInforPer = async () => {
 		let _web3 = new Web3(web3Provider);
-		// console.log("GA", KINGGAME)
-		// console.log("WA", address)
 		const _gameContract = new _web3.eth.Contract(KINGGAME_ABI, KINGGAME);
-
-		// let _token = await _gameContract.methods.token().call();
-		// console.log(_token);
-		// const _tokenContract = new _web3.eth.Contract(TOKEN_ABI, _token);
-		// let _decimals = await _tokenContract.methods.decimals().call();
-		// console.log("Getting Events",_decimals)
 		if (address) {
-			// console.log("Getting Events Inside")
 			let _currentBlockck = await _web3.eth.getBlockNumber();
 
 			_gameContract.getPastEvents(
@@ -181,18 +171,13 @@ const KingGame = () => {
 				(error, events) => {
 					if (!error) {
 						var obj = JSON.parse(JSON.stringify(events));
-						// var array = Object.keys(obj)
 						setEvents(obj.reverse())
-						// console.log("Events", obj);
 					} else {
-						// console.log("Events Error", error);
+					
 					}
 				}
 			);
 
-
-			// let _tokenbalance = await _tokenContract.methods.balanceOf(address).call();
-			// console.log(_tokenbalance);
 
 			let _tokenbalance = parseFloat(_tokenbalance1 / 1e1 ** _decimals).toFixed(2);
 			setTokenbalance(_tokenbalance);
@@ -223,8 +208,6 @@ const KingGame = () => {
 	const getApproved = async () => {
 
 		if (address) {
-		
-		
 			setApproved(parseInt(_approve));
 		
 		}
@@ -248,19 +231,11 @@ const KingGame = () => {
 		hash: claimData?.hash,
 	})
 
-	if (claimError && modal) {
-		setModal(false);
-	}
-	if (claimSuccess && modal) {
-		setModal(false);
-	}
 
 
 	const claim = async () => {
-		setModal(!modal);
+		setModal(true);
 		await claimWriteAsync()
-
-
 	}
 
 
@@ -276,18 +251,9 @@ const KingGame = () => {
 		hash: bidNowData?.hash,
 	})
 
-	if (bidNowError && modal) {
-
-		getOtherInforPer();
-
-		setModal(modal);
-	}
-	if (bidNowSuccess && modal) {
-		setModal(false);
-	}
 
 	const bidNow = async () => {
-		setModal(!modal);
+		setModal(true);
 		await bidNowWriteAsync()
 	
 	}
@@ -309,15 +275,9 @@ const KingGame = () => {
 		hash: approveNowData?.hash,
 	})
 
-	if (approveNowError && modal) {
-		setModal(false);
-	}
-	if (approveNowSuccess && modal) {
-		setModal(false);
-	}
 
 	const approveNow = async () => {
-		setModal(!modal);
+		setModal(true);
 		await approveNowWriteAsync()
 		
 	}
@@ -331,13 +291,13 @@ const KingGame = () => {
 
 
 	useEffect(() => {
-		if (window.ethereum) {
-			web3Provider = window.ethereum;
-		}
-		else {
-			web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
+		// if (window.ethereum) {
+		// 	web3Provider = window.ethereum;
+		// }
+		// else {
+		// 	web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
 
-		}
+		// }
 		if (address) {
 			// getdata()
 			getTimer()
@@ -394,8 +354,6 @@ const KingGame = () => {
 		}
 		else if (_lastBidTime > 0 && hasWinner) {
 			setGameon(false);
-			// _remainingSeconds =   _currentTime  - _lastBidTime;
-			// _remainingSeconds = _endDelay - _remainingSeconds ;
 		}
 
 		else if (_nextTime > 0 && _nextTime > _currentTime) {
@@ -440,14 +398,19 @@ const KingGame = () => {
 		
 		
 		setWinner(hasWinner);
-
-
-	
-
-
 	}
 
-
+	useEffect(() => {
+		if (claimSuccess||bidNowSuccess||approveNowSuccess) {
+		  closeModal();
+		}
+	  }, [claimSuccess,bidNowSuccess,approveNowSuccess]);
+	  
+	  useEffect(() => {
+		if (claimError||bidNowError||approveNowError) {
+		  closeModal();
+		}
+	  }, [claimError,bidNowError,approveNowError]);
 	return (
 		<div>
 			<Header />

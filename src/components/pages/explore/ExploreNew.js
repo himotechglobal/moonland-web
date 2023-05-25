@@ -1,32 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import $ from "jquery";
-import { Row, Col, Container, Button, ModalHeader, ModalFooter, Modal, ModalBody } from "reactstrap";
+import {
+  Row,
+  Col,
+  Container,
+  Button,
+  ModalHeader,
+  ModalFooter,
+  Modal,
+  ModalBody,
+} from "reactstrap";
 
-import Header from '../header.js';
-import Footer from '../footer.js';
+import Header from "../header.js";
+import Footer from "../footer.js";
 // import Config, { API_URL, MARKETPLACE } from '../../../Config2/index.js';
 // import MARKETPLACE_ABI from '../../../Config2/MARKETPLACE_ABI.json';
-import {HARVEST_FARM, NFT, NFT_MARKETPLACE} from "../../../Config/index"
-import NFT_MARKETPLACE_ABI from "../../../Config/NFT_MARKETPLACE_ABI.json"
-import NFT_ABI from '../../../Config/NFT_ABI.json';
-import Web3 from "web3"
+import { HARVEST_FARM, NFT, NFT_MARKETPLACE } from "../../../Config/index";
+import NFT_MARKETPLACE_ABI from "../../../Config/NFT_MARKETPLACE_ABI.json";
+import NFT_ABI from "../../../Config/NFT_ABI.json";
+import Web3 from "web3";
 
-import { useState, useEffect } from 'react';
-import ExploreSingle from './ExploreSingle.js';
+import { useState, useEffect } from "react";
+import ExploreSingle from "./ExploreSingle.js";
 // import useWallet from '@binance-chain/bsc-use-wallet'
-import NftSingle from './NftSingle'
+import NftSingle from "./NftSingle";
 import axios from "axios";
-import { useAccount, useContractRead } from 'wagmi';
-import { Link } from 'react-router-dom';
+import { useAccount, useContractRead } from "wagmi";
+import { Link } from "react-router-dom";
 
 const ExploreNew = () => {
   let web3Provider = window.ethereum;
   // const wallet = useWallet();
-  const { address, isConnected } = useAccount()
+  const { address, isConnected } = useAccount();
   const [counter, setCounter] = useState([]);
   const [userCount, setUserCount] = useState([]);
-  
- 
   const [olimit, setolimit] = useState(20);
   const [oloading, setoLoading] = useState(false);
   const [slimit, setslimit] = useState(20);
@@ -63,219 +70,147 @@ const ExploreNew = () => {
   const [soldArray, setSoldArray] = useState([]);
   const [instantArray, setInstantArray] = useState([]);
 
-  // useEffect(() => {
-    $('.tabs6').on('click', 'a', function (e) {
-      e.preventDefault();
-      var tabId = $(this).attr('data-tab');
-      $(this).closest('.tabs6').find('a').removeClass('active');
-      $(this).addClass('active');
-      $('.tab-panel').removeClass('active');
-      $('#' + tabId).addClass('active');
-    });
-
-
-    // if (window.ethereum) {
-    //   web3Provider = window.ethereum;
-    // }
-    // else {
-    //   web3Provider = new Web3.providers.HttpProvider(Config.RPC_URL)
-    // }
-    // init();
-    // if (address) {
-    //   getCollection();
-    //   getImportedCollection();
-    // }
-
-  // }, [address])
+  $(".tabs6").on("click", "a", function (e) {
+    e.preventDefault();
+    var tabId = $(this).attr("data-tab");
+    $(this).closest(".tabs6").find("a").removeClass("active");
+    $(this).addClass("active");
+    $(".tab-panel").removeClass("active");
+    $("#" + tabId).addClass("active");
+  });
 
   useEffect(() => {
     _acounter = 0;
     _bcounter = 0;
     _ccounter = 0;
     _dcounter = 0;
+  }, [address]);
 
-  }, [address])
+  const { data: _count } = useContractRead({
+    address: NFT_MARKETPLACE,
+    abi: NFT_MARKETPLACE_ABI,
+    functionName: "getTradeCount",
+    watch: true,
+  });
 
-  const {data:_count} =useContractRead({
-address:NFT_MARKETPLACE,
-abi:NFT_MARKETPLACE_ABI,
-functionName:"getTradeCount",
-watch:true
-  })
-
-  const {data:_userBids} = useContractRead({
-address:NFT_MARKETPLACE,
-abi:NFT_MARKETPLACE_ABI,
-functionName:"getAuctionsOfUser",
-args:[address],
-watch:true
-  })
-
-
+  const { data: _userBids } = useContractRead({
+    address: NFT_MARKETPLACE,
+    abi: NFT_MARKETPLACE_ABI,
+    functionName: "getAuctionsOfUser",
+    args: [address],
+    watch: true,
+  });
   const init = async () => {
-    // let _web3 = new Web3(web3Provider);
-    // let _marketPlaceContract = new _web3.eth.Contract(MARKETPLACE_ABI, NFT_MARKETPLACE);
-    // let _count = await _marketPlaceContract.methods.getTradeCount().call();
-    // console.log(_count);
     let rows = [];
     for (let i = 0; i < parseInt(_count); i++) {
       rows.push({ id: i });
     }
     setCounter(rows);
     if (address) {
-      // let _userBids = await _marketPlaceContract.methods.getAuctionsOfUser(address).call();
       setUserBids(_userBids);
     }
-  }
-
-
-
-
-
-
-
-
-
-  const {data:_userBalance} =useContractRead({
-    address:NFT,
-    abi:NFT_ABI,
-    functionName:"balanceOf",
-    args:[address],
-    watch:true
-      })
-
-
-    
+  };
+  const { data: _userBalance } = useContractRead({
+    address: NFT,
+    abi: NFT_ABI,
+    functionName: "balanceOf",
+    args: [address],
+    watch: true,
+  });
   const getCollection = async () => {
-
     if (address) {
-      setnftAddress(NFT)
+      setnftAddress(NFT);
       let userTokens = [];
 
       for (let i = 0; i < parseInt(_userBalance); i++) {
-        userTokens.push({id: i});
-     
-        if (i == (parseInt(_userBalance) - 1)) {
+        userTokens.push({ id: i });
+
+        if (i == parseInt(_userBalance) - 1) {
           setUserNfts(userTokens);
         }
-
       }
     }
-    
+  };
 
-  }
-
-
- 
-
-
-const {data:_count1} =useContractRead({
-    address:NFT_MARKETPLACE,
-    abi:NFT_MARKETPLACE_ABI,
-    functionName:"getTradeCount",
-    watch:true
-      })
-
-
-   
-  
+  const { data: _count1 } = useContractRead({
+    address: NFT_MARKETPLACE,
+    abi: NFT_MARKETPLACE_ABI,
+    functionName: "getTradeCount",
+    watch: true,
+  });
 
   const getAllStatus = async () => {
-
-
     //  let c = 0 ;
-    let userCounter=[]
-    for(let i = 0 ; i < parseInt(_count1) ; i++ ) {
-      userCounter.push({id: i});
-      setUserCount(userCounter)
-      let onsale = [];
-      let sold = [];
-      let instant = [];
-      // let _statusF =  await _marketPlaceContract.methods.getFullTrade(i).call() ;
-      // console.log(_statusF)
-      // if(_statusF[8]){
-      //   let _status =  await _marketPlaceContract.methods.getAuctionStatus(i).call() ;
-      //   if(_status == 1){
-      //     onsale.push(i);
-      //   }
-      //   else{
-      //     if(_statusF.lister != _statusF.buyer){
-      //       sold.push(i);
-      //     }
-      //   }
+    let userCounter = [];
+    for (let i = 0; i < parseInt(_count1); i++) {
+      userCounter.push({ id: i });
+      setUserCount(userCounter);
 
-      // }
-      // else if(_statusF[6] == '0x0000000000000000000000000000000000000000' ){
-
-      //   instant.push(i)
-      // }
-      if(i == (parseInt(_count1)-1)){
-     
-        setUserCount(userCounter)
-  
+      if (i == parseInt(_count1) - 1) {
+        setUserCount(userCounter);
       }
-     }
-
-
-  }
+    }
+  };
 
   useEffect(() => {
-getAllStatus()
-getCollection()
-init()
-  }, [saleArray,_count1,_userBids,_userBalance,userNfts,userCount,userBids,address])
-
+    getAllStatus();
+    getCollection();
+    init();
+  }, [
+    saleArray,
+    _count1,
+    _userBids,
+    _userBalance,
+    userNfts,
+    userCount,
+    userBids,
+    address,
+  ]);
 
   const oloadmore = () => {
     setoLoading(true);
-    setolimit(olimit + 20)
+    setolimit(olimit + 20);
     setTimeout(() => {
       setoLoading(false);
-
     }, 3000);
-  }
+  };
   const sloadmore = () => {
     setsLoading(true);
-    setslimit(slimit + 20)
+    setslimit(slimit + 20);
     setTimeout(() => {
       setsLoading(false);
-
     }, 3000);
-  }
+  };
   const mloadmore = () => {
     setmLoading(true);
-    setmlimit(mlimit + 20)
+    setmlimit(mlimit + 20);
     setTimeout(() => {
       setmLoading(false);
-
     }, 3000);
-  }
+  };
 
   const cloadmore = () => {
     setcLoading(true);
-    setclimit(climit + 20)
+    setclimit(climit + 20);
     setTimeout(() => {
       setcLoading(false);
     }, 3000);
-  }
+  };
   const iloadmore = () => {
     setiLoading(true);
-    setilimit(ilimit + 20)
+    setilimit(ilimit + 20);
     setTimeout(() => {
       setiLoading(false);
-
     }, 3000);
-  }
+  };
 
   const dloadmore = () => {
     setdLoading(true);
-    setdlimit(dlimit + 20)
+    setdlimit(dlimit + 20);
     setTimeout(() => {
       setdLoading(false);
-
     }, 3000);
-  }
-
+  };
 
   const handleNFTId = async (e) => {
     let _web3 = new Web3(web3Provider);
@@ -288,19 +223,14 @@ init()
         let _mediaURI = await _nftContract.methods.tokenURI(0).call();
         if (_mediaURI == "" || _mediaURI == null) {
           setImportError("NFT is not compatible.");
-        }
-        else {
+        } else {
           setImportError(null);
-
         }
-
-      }
-      catch (e) {
+      } catch (e) {
         setImportError("NFT is not compatible.");
-
       }
     }
-  }
+  };
 
   const handleNFTAddress = async (e) => {
     let _web3 = new Web3(web3Provider);
@@ -313,72 +243,46 @@ init()
         let _mediaURI = await _nftContract.methods.tokenURI(0).call();
         if (_mediaURI == "" || _mediaURI == null) {
           setImportError("NFT is not compatible.");
-        }
-        else {
+        } else {
           setImportError(null);
-
         }
-
-      }
-      catch (e) {
+      } catch (e) {
         setImportError("NFT is not compatible.");
-
       }
     }
-
-  }
-
-  const importTokens = () => {
-    // var formData = new FormData();
-    // formData.append("user", address);
-    // formData.append("nft", importnftAddress);
-    // setApiModal(true);
-    // axios
-    //   .post(API_URL + "/addnftuser", formData
-    //   )
-    //   .then((response) => {
-    //     if (response.data.result == "success") {
-    //       setImportModal(false)
-    //       setApiModal(false);
-    //       getImportedCollection();
-
-    //     }
-    //     else {
-    //       setApiModal(false);
-    //       setImportError("Error: " + response.data.message);
-    //     }
-
-    //   })
-  }
-// console.log(parseInt(_userBalance));
+  };
 
   return (
     <div className="main-bg-explore">
-
-
       <div className="container">
-        <div className='nft___mark'>
+        <div className="nft___mark">
           <h1>NFT Marketplace</h1>
-          {/* <p>
-          Lorem ipsum is placeholder text commonly used Lorem ipsum is placeholder <br/>
-          text commonly used Lorem ipsum is placeholder text commonly used Lorem <br/>
-          ipsum is placeholder text commonly used
-          </p> */}
         </div>
         <div className="row">
           <div className="col-lg-12">
             <section id="product-tips">
-
               <div className="main-marketplace">
                 <div className="main-tab-box">
                   <ul className="tabs6 mb-3">
-                    <li class="tab-button"><a href="#" class="tab-link active" data-tab="onsale">Auction / Fixed Price</a></li>
+                    <li class="tab-button">
+                      <a href="#" class="tab-link active" data-tab="onsale">
+                        Auction / Fixed Price
+                      </a>
+                    </li>
                     {/* <li class="tab-button"><a href="#" class="tab-link" data-tab="onbuy">Fixed Price</a></li> */}
                     {/* <li class="tab-button"><a href="#" class="tab-link" data-tab="soldout">Expired</a></li> */}
-                    <li class="tab-button"><a href="#" class="tab-link" data-tab="mybids">My Bids</a></li>
-                    <li class="tab-button"><a href="#" class="tab-link" data-tab="collection"> Your NFTs</a></li>
+                    <li class="tab-button">
+                      <a href="#" class="tab-link" data-tab="mybids">
+                        My Bids
+                      </a>
+                    </li>
+                    <li class="tab-button">
+                      <a href="#" class="tab-link" data-tab="collection">
+                        {" "}
+                        Your NFTs
+                      </a>
+                    </li>
                     {/* <li class="tab-button"><a href="#" class="tab-link" data-tab="imported"> Imported NFTs</a></li> */}
-
                   </ul>
                   {/* <ul className="tabs5 pull-right">
 
@@ -390,62 +294,63 @@ init()
                   } 
                   </ul> */}
                 </div>
-               
-                 
-
-
 
                 <div class="tab-pane mt-2">
                   <div className="tab-panel active" id="onsale">
                     <div className="row justify-content-center">
-
                       {/* {saleArray.length} */}
                       {/* {counter.length} */}
 
                       {
                         // counter.length > 0 && saleArray.length > 0 && counter
-                        userCount?.length>0 &&  userCount?.map((v, i) => {
-                          if (_acounter < olimit 
-                            // && $.inArray((counter.length - (i + 1)).toString(), saleArray) >= 0
-                          ) {
-                            _acounter++;
-                         
-                            return (
-                              <ExploreSingle tradeid={v.id} />
-                              // <ExploreSingle tradeid={(userCount.length - (i + 1))} />
-                            )
-                          }
-                          else {
-                            if (userCount?.length == 0 && _acounter == 0 )
+                        userCount?.length > 0 &&
+                          userCount?.map((v, i) => {
+                            if (
+                              _acounter < olimit
+                              // && $.inArray((counter.length - (i + 1)).toString(), saleArray) >= 0
+                            ) {
+                              _acounter++;
+
                               return (
-                                <div className='marketplace-box-wrap8'>
-                                  <div className="text-center w-100 m-0 p-5  card cards2">
-                                  <h3>No Auction Available</h3>
-                                </div>
-                                </div>
-                              )
-                          }
-                        })}
-
-
-                      {
-                        userCount?.length == 0 &&
-<div className='marketplace-box-wrap8'>
-                        <div className="text-center w-100 m-0 p-5  card  cards2" >
-                          <h3>No Auction Available</h3>
-                        </div>
-                        </div>
-
+                                <ExploreSingle tradeid={v.id} />
+                                // <ExploreSingle tradeid={(userCount.length - (i + 1))} />
+                              );
+                            } else {
+                              if (userCount?.length == 0 && _acounter == 0)
+                                return (
+                                  <div className="marketplace-box-wrap8">
+                                    <div className="text-center w-100 m-0 p-5  card cards2">
+                                      <h3>No Auction Available</h3>
+                                    </div>
+                                  </div>
+                                );
+                            }
+                          })
                       }
 
+                      {userCount?.length == 0 && (
+                        <div className="marketplace-box-wrap8">
+                          <div className="text-center w-100 m-0 p-5  card  cards2">
+                            <h3>No Auction Available</h3>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
-                    {
-                      saleArray?.length > olimit && counter?.length > 0 &&
+                    {saleArray?.length > olimit && counter?.length > 0 && (
                       <div className="loadmore-btn">
-                        < button type="button" className={oloading ? "loading action-btn" : "action-btn"} onClick={oloadmore} id="login-btn">Load more</button>
+                        <button
+                          type="button"
+                          className={
+                            oloading ? "loading action-btn" : "action-btn"
+                          }
+                          onClick={oloadmore}
+                          id="login-btn"
+                        >
+                          Load more
+                        </button>
                       </div>
-                    }
+                    )}
                   </div>
                   {/* <div class="tab-panel row" id="onbuy">
                     <div className="row">
@@ -540,83 +445,90 @@ init()
                   </div> */}
                   <div class="tab-panel" id="mybids">
                     <div className="row justify-content-center">
-                      {
-                        userBids?.length > 0 && userBids?.map((v, i) => {
-            
+                      {userBids?.length > 0 &&
+                        userBids?.map((v, i) => {
                           if (_ccounter < mlimit) {
                             _ccounter++;
+                            return <ExploreSingle tradeid={v} />;
+                          } else {
                             return (
-                              <ExploreSingle tradeid={v} />
-                            )
-                          }
-                          else {
-                            return (
-                              <div className='marketplace-box-wrap8'>
-                              <div className="text-center w-100 m-0 p-5  card cards2">
-                                <h3>No Bids Available</h3>
+                              <div className="marketplace-box-wrap8">
+                                <div className="text-center w-100 m-0 p-5  card cards2">
+                                  <h3>No Bids Available</h3>
+                                </div>
                               </div>
-                              </div>
-                            )
+                            );
                           }
                         })}
-                      {
-                        userBids?.length == 0 &&
-<div className='marketplace-box-wrap8'>
-                        <div className="text-center w-100 m-0 p-5  card  cards2">
-                          <h3>No Bids Available</h3>
+                      {userBids?.length == 0 && (
+                        <div className="marketplace-box-wrap8">
+                          <div className="text-center w-100 m-0 p-5  card  cards2">
+                            <h3>No Bids Available</h3>
+                          </div>
                         </div>
-                        </div>
-
-                      }
+                      )}
                     </div>
 
-                    {
-                      userBids?.length > mlimit &&
+                    {userBids?.length > mlimit && (
                       <div className="loadmore-btn">
-                        < button type="button" className={mloading ? "loading action-btn" : "action-btn"} onClick={mloadmore} id="login-btn">Load more</button>
+                        <button
+                          type="button"
+                          className={
+                            mloading ? "loading action-btn" : "action-btn"
+                          }
+                          onClick={mloadmore}
+                          id="login-btn"
+                        >
+                          Load more
+                        </button>
                       </div>
-                    }
+                    )}
                   </div>
 
                   <div class="tab-panel" id="collection">
-
                     <div className="row justify-content-center">
-
-
-                      {
-                       parseInt(_userBalance) > 0 && userNfts?.map((v, i) => {
+                      {parseInt(_userBalance) > 0 &&
+                        userNfts?.map((v, i) => {
                           if (i < climit) {
-                      
                             return (
-                              <NftSingle nftindex={v.id} nftAddress={nftAddress} imported={false}/>
-                            )
-                          }
-                          else {
+                              <NftSingle
+                                nftindex={v.id}
+                                nftAddress={nftAddress}
+                                imported={false}
+                              />
+                            );
+                          } else {
                             return (
-                              <div className='marketplace-box-wrap8'>
-                              <div className="col-lg-12  cards2">
-                                <h3>No Collection Available</h3>
-
+                              <div className="marketplace-box-wrap8">
+                                <div className="col-lg-12  cards2">
+                                  <h3>No Collection Available</h3>
+                                </div>
                               </div>
-                              </div>
-                            )
+                            );
                           }
                         })}
-                      {
-                        parseInt(_userBalance) == 0 &&
-<div className='marketplace-box-wrap8'>
-                        <div className="text-center w-100 m-0 p-5  card  cards2">
-                          <h3>No Collection Available</h3>
+                      {parseInt(_userBalance) == 0 && (
+                        <div className="marketplace-box-wrap8">
+                          <div className="text-center w-100 m-0 p-5  card  cards2">
+                            <h3>No Collection Available</h3>
+                          </div>
                         </div>
-</div>
-                      }
+                      )}
                     </div>
-                    {
-                      userNfts?.length > climit &&
+                    {userNfts?.length > climit && (
                       <div className="loadmore-btn">
-                        < button type="button" className={cloading ? "loading action-btn" : "action-btn"} onClick={cloadmore} id="login-btn">Load more</button>
+                        <button
+                          type="button"
+                          className={
+                            cloading ? "loading action-btn" : "action-btn"
+                          }
+                          onClick={cloadmore}
+                          id="login-btn"
+                        >
+                          Load more
+                        </button>
                       </div>
-                    }
+                    )}
                   </div>
 
                   {/* <div class="tab-panel" id="imported">
@@ -655,66 +567,44 @@ init()
                       </div>
                     }
                   </div> */}
-
-
                 </div>
-
               </div>
-              
             </section>
-            
           </div>
         </div>
       </div>
 
       <Modal isOpen={apiModal} toggle={apiToggle} centered={true}>
-
-
         <ModalBody>
-          <div className="modaltext text-center mt-4 pb-3" >Saving NFT Media and Creating Meta... <br />Do not Close Tab/Window or reload</div>
-
+          <div className="modaltext text-center mt-4 pb-3">
+            Saving NFT Media and Creating Meta... <br />
+            Do not Close Tab/Window or reload
+          </div>
         </ModalBody>
-
       </Modal>
 
       <Modal isOpen={importModal} toggle={importToggle} centered={true}>
-
-
         <ModalBody>
-
-
           <label>Paste NFT Address </label>
-          <input className="form-control mb-1" onChange={handleNFTAddress} type="text" />
-          {
-            importError &&
-            <p className="text-dark">
-              Error: {importError}
-            </p>
-          }
-          {
-            !importError && importnftAddress != null &&
-            <p className="text-dark">
-              Success: NFT is compatible.
-            </p>
-          }
-
-
-
-
+          <input
+            className="form-control mb-1"
+            onChange={handleNFTAddress}
+            type="text"
+          />
+          {importError && <p className="text-dark">Error: {importError}</p>}
+          {!importError && importnftAddress != null && (
+            <p className="text-dark">Success: NFT is compatible.</p>
+          )}
         </ModalBody>
         <ModalFooter>
+          {/* <Button className="bg___BTN2 mr-3" onClick={importTokens}  >Import</Button> */}
 
-          <Button className="bg___BTN2 mr-3" onClick={importTokens}  >Import</Button>
-
-
-          <Button className="bg___BTN2" onClick={importToggle}>Cancel</Button>
+          <Button className="bg___BTN2" onClick={importToggle}>
+            Cancel
+          </Button>
         </ModalFooter>
       </Modal>
-
-
     </div>
   );
-
-
-}
+};
 export default ExploreNew;

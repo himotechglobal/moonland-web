@@ -2,23 +2,13 @@
 import React, { useState, useEffect, } from 'react';
 import { Button, ModalFooter, Modal, ModalBody } from "reactstrap";
 import Header from '../../pages/header.js';
-import Footer from '../../pages/footer.js';
-import stoke from '../../images/egg-GIF.gif';
-import cb1 from '../../images/cb1.png';
-import cb2 from '../../images/cb2.png';
-import cb3 from '../../images/cb3.png';
 import arrow from '../../images/round_arrow.svg';
 import moon_img from '../../images/moon_img.png';
 import modal_earth from '../../images/modal_earth.png';
 import bg_img from '../../images/bg_img.png';
-import cb4 from '../../images/cb4.png';
-import cb5 from '../../images/cb5.png';
-import cb6 from '../../images/cb6.png';
-import cb7 from '../../images/cb7.png';
 import { MARKETPLACE } from '../../../Config/index.js';
 import MARKETPLACE_ABI from '../../../Config/MARKETPLACE_ABI.json';
 import TOKEN_ABI from '../../../Config/TOKEN_ABI.json';
-import Web3 from "web3"
 import { useAccount, useBalance, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 import { Link, useParams } from 'react-router-dom';
 import { ethers } from 'ethers';
@@ -38,7 +28,6 @@ import b4 from '../../images/b4.svg'
 import b5 from '../../images/b5.svg'
 import b6 from '../../images/b6.svg'
 import b7 from '../../images/b7.svg'
-// import {useWallet} from '@binance-chain/bsc-use-wallet'
 
 
 
@@ -115,7 +104,6 @@ const elements = (props) => {
     const multiplier = ((key == "fluid" || key == "positron") ? 600 : 1)
     const [symbol, setSymbol] = useState(0);
     const [baseToken, setBaseToken] = useState(null);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [aseetBalance, setAseetBalance] = useState(0);
     const [aseetApproval, setAseetApproval] = useState(0);
 
@@ -141,6 +129,9 @@ const elements = (props) => {
 
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
+    const closeModal = () => {
+		setModal(false);
+	  };
 
     const [buyModal, setBuyModal] = useState(false);
     const buyToggle = () => setBuyModal(!buyModal);
@@ -149,18 +140,7 @@ const elements = (props) => {
     const sellToggle = () => setSellModal(!sellModal);
     const [sold, setSold] = useState(0);
     const [soldValue, setSoldValue] = useState(0);
-
-
-
-    // const wallet = useWallet();
     const { address, isConnected } = useAccount();
-    let web3Provider = window.ethereum;
-
-
-
-
-
-
     const { data: _getPriceChicken } = useContractRead({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
@@ -235,7 +215,6 @@ const elements = (props) => {
         args: [MARKETPLACE],
         watch: true,
     })
-    // console.log(_available);
     const { data: _balance1 } = useContractRead({
         address: _baseToken,
         abi: TOKEN_ABI,
@@ -257,15 +236,12 @@ const elements = (props) => {
         functionName: "totalSolarSold",
         watch: true
       })
-    // console.log(parseFloat(_getSold1 / 1e18).toFixed(2));
     const { data: _getSoldValue1 } = useContractRead({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
         functionName: "totalSolarSoldValue",
         watch: true
     })
-    // console.log(parseFloat(_getSoldValue1 / 1e18).toFixed(2));
-    // console.log(ELEMENTS[key].address);
     const { data: _assetDecimals } = useContractRead({
         address: ELEMENTS[key].address,
         abi: TOKEN_ABI,
@@ -287,9 +263,6 @@ const elements = (props) => {
         token: ELEMENTS[key].address
     })
    
-    // console.log(ContractTokenBalance?.formatted>=depositAmount);
-
-    // console.log(_assetAdd)
     const { data: _approval } = useContractRead({
         address: _baseToken,
         abi: TOKEN_ABI,
@@ -377,7 +350,7 @@ const elements = (props) => {
         if (_approval && address) {
             const price = parseFloat?.(depositAmount === "" ? "0" : depositAmount)
             const allowance = parseFloat?.(ethers.utils.formatUnits?.(_approval))
-            // console.log(allowance >= price, price, allowance);
+        
             if (allowance >= price) {
                 setIsApprovedERC20(true)
             } else {
@@ -385,17 +358,9 @@ const elements = (props) => {
             }
         }
     }, [_approval, address, depositAmount,isApprovedERC20]);
-
-    // console.log((parseFloat(_approval)));
-
-    // console.log(parseFloat(ethers.utils.formatEther(_approval)) >= parseFloat(depositAmount))
-
-// console.log(_getPriceChicken);
     const getPrice = async () => {
-        // let _web3 = new Web3(web3Provider);
-        // let _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
         if (key === 'solar') {
-            // let _getPrice = await _marketContract.methods.getTokenPerChicken().call();
+    
             let _getPrice = parseFloat(_getPriceChicken / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
             let _getSold = parseFloat(_getSold1 / 1e18).toFixed()
@@ -405,121 +370,77 @@ const elements = (props) => {
 
         }
         else if (key === 'solarCell') {
-            // let _getPrice = await _marketContract.methods.getTokenPerEgg().call();
+        
             let _getPrice = parseFloat(_getPriceChickenegg / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
-            // console.log(_getPriceChickenegg);
+        
             let _getSold = parseFloat(_getSold2 / 1e18).toFixed()
       setSold(_getSold);
-      // let _getSoldValue = await _marketContract.methods.totalEggSoldValue().call();
       let _getSoldValue = parseFloat(_getSoldValue2 / 1e18).toFixed()
       setSoldValue(_getSoldValue);
         }
         else if (key === 'fluid') {
-            // let _getPrice = await _marketContract.methods.getTokenPerChickenFood().call();
             let _getPrice = parseFloat(_getPriceChickenfood * 600 / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
             let _getSold = parseFloat(_getSold3 / 1e18).toFixed()
             setSold(_getSold);
-            // let _getSoldValue = await _marketContract.methods.totalChickenFoodSoldValue().call();
             let _getSoldValue = parseFloat(_getSoldValu3 / 1e18).toFixed()
             setSoldValue(_getSoldValue);
 
         }
         else if (key === 'thermix') {
-            // let _getPrice = await _marketContract.methods.getTokenPerBoar().call();
             let _getPrice = parseFloat(_getPriceBoar / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
             let _getSold = parseFloat(_getSold4 / 1e18).toFixed()
       setSold(_getSold);
-      // console.log(_getSold);
-      // let _getSoldValue = await _marketContract.methods.totalBoarSoldValue().call();
       let _getSoldValue = parseFloat(_getSoldValue4 / 1e18).toFixed()
       setSoldValue(_getSoldValue);
 
         }
         else if (key === 'metlux') {
-            // let _getPrice = await _marketContract.methods.getTokenPerSow().call();
             let _getPrice = parseFloat(_getPriceSow / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
             let _getSold = parseFloat(_getSold5 / 1e18).toFixed()
             setSold(_getSold);
-            // let _getSoldValue = await _marketContract.methods.totalSowSoldValue().call();
             let _getSoldValue = parseFloat(_getSoldValue5 / 1e18).toFixed()
             setSoldValue(_getSoldValue);
 
         }
         else if (key === 'eule') {
-            // let _getPrice = await _marketContract.methods.getTokenPerPiglet().call();
             let _getPrice = parseFloat(_getPricePiglet / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
             let _getSold = parseFloat(_getSoldPiglet / 1e18).toFixed()
             setSold(_getSold);
-            // console.log(_getSold);
-            // let _getSoldValue = await _marketContract.methods.totalPigletSoldValue().call();
             let _getSoldValue = parseFloat(_getSoldValuePiglet / 1e18).toFixed()
             setSoldValue(_getSoldValue);
         }
         else if (key === 'positron') {
-            // let _getPrice = await _marketContract.methods.getTokenPerPigfood().call();
             let _getPrice = parseFloat(_getPricePigfood * 600 / 1e18).toFixed(2)
             setTokenPrice(_getPrice);
             let _getSold = parseFloat(_getSoldPigfood / 1e18).toFixed()
             setSold(_getSold);
-            // console.log(_getSold)
-            // let _getSoldValue = await _marketContract.methods.totalPigFoodSoldValue().call();
             let _getSoldValue = parseFloat(_getSoldValuePigfood / 1e18).toFixed()
             setSoldValue(_getSoldValue);
         }
 
-        // let _getFee = await _marketContract.methods.sellFee().call();
         let _getFee = parseFloat(_getFeeSellFee / 1000).toFixed(4);
         setSellfee(_getFee);
-        // console.log("jbjjbj",_getFee);
     }
 
 
     const getData = async () => {
-        // let _web3 = new Web3(web3Provider);
-        // let _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-        // let baseToken = await _marketContract.methods.baseToken().call();
         setBaseToken(_baseToken);
-        // console.log(baseToken);
-        // let _tokenContract = new _web3.eth.Contract(TOKEN_ABI, _baseToken);
-        // let _symbol = await _tokenContract.methods.symbol().call();
-
-        // let _decimals = await _tokenContract.methods.decimals().call();
         setDecimals(_decimals)
         setSymbol(_symbol);
-
-
-
-        // let _atoken = ELEMENTS[key].address;
-        // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
-        // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
-        // console.log(_available);
         setAvailable(parseFloat(_available / 1e18).toFixed());
 
 
 
         if (address) {
-            // let _balance = await _tokenContract.methods.balanceOf(address).call();
-            // console.log(_balance);
             let _balance = parseFloat(_balance1 / 1e1 ** _decimals).toFixed(2);
-            // let _assetAdd = ELEMENTS[key].address;
-            // let _assetContract = new _web3.eth.Contract(TOKEN_ABI, _assetAdd);
-            // let _assetBalance = await _assetContract.methods.balanceOf(address).call();
-            // console.log(_assetBalance);
-            // let _assetDecimals = await _assetContract.methods.decimals().call();
-            // console.log(_assetDecimals);
-            // let _assetApproval = await _assetContract.methods.allowance(address, MARKETPLACE).call();
-            // console.log(_assetApproval);
-            // let _approval = await _tokenContract.methods.allowance(address, MARKETPLACE).call();
-            // console.log(_approval);
 
             let _assetBalance = parseFloat(_assetBalance1 / 1e1 ** _assetDecimals).toFixed(2);
             let _assetApproval = parseFloat(_assetApproval1 / 1e1 ** _assetDecimals).toFixed(2);
-            //   alert(_assetApproval);
             setAseetApproval(_assetApproval)
             setAseetBalance(_assetBalance)
             setApproved(_approval)
@@ -529,13 +450,6 @@ const elements = (props) => {
     }
 
     useEffect(() => {
-        // if (window.ethereum) {
-        //     web3Provider = window.ethereum;
-        // }
-        // else {
-        //     web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
-
-        // }
 
         getData();
         getPrice();
@@ -543,13 +457,8 @@ const elements = (props) => {
 
 
     const handleSellChange = (e) => {
-        // if(e.target.value!==""&&e.target.value!==0){
         setSellAmount(parseFloat(e.target.value));
         setsamount(e.target.value);
-    // }else{
-        // setSellAmount(0);
-        // setsamount(0);
-        // }
 
     }
 
@@ -560,7 +469,6 @@ const elements = (props) => {
         args: [ELEMENTS[key].address,isNaN(sellAmount)?0:  ethers.utils.parseEther?.((sellAmount*multiplier).toString())]
     })
 
-// console.log(parseInt(multiplier*parseInt(sellAmount)));
 
     const { data: sellFarmTokensData, writeAsync: sellFarmTokensWriteAsync, isError: sellFarmTokensError } = useContractWrite(sellFarmTokensConfig_)
 
@@ -569,28 +477,14 @@ const elements = (props) => {
     })
 
 
-    if (sellFarmTokensError && modal) {
-        getPrice();
-        setModal(false);
-        //     getData();
-        //     setModal(modal);
-        //     sellToggle()
-    }
-    if (sellFarmTokensSuccess && modal && sellModal) {
-        setModal(false);
-        setSellModal(false)
+    if (sellFarmTokensSuccess) {
+        sellToggle()
     }
 
 
     const sellFarmTokens = async () => {
-        // let _web3 = new Web3(web3Provider);
-        // let _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-        // setSellError(false)
-        // // let _tokenAdd = ELEMENTS[key].address;
-        // setModal(!modal);
 
         setSellError(false)
-        // let _tokenAdd = ELEMENTS[key].address;
       
 
         let _amount = parseFloat(sellAmount);
@@ -604,24 +498,8 @@ const elements = (props) => {
             return false;
         }
         else {
-            setModal(!modal);
+            setModal(true);
             await sellFarmTokensWriteAsync?.()
-            // _amount = _web3.utils.toWei(_amount.toString());
-
-            // _marketContract.methods.sellFarmTokens(_tokenAdd, _amount).send({
-            //     from: address
-            // }).on('receipt', function (receipt) {
-            //     getPrice();
-            //     getData();
-            //     setModal(modal);
-            //     sellToggle()
-
-            // }).on('error', function (receipt) {
-            //     setModal(modal);
-
-            // })
-
-
         }
 
 
@@ -634,22 +512,13 @@ const elements = (props) => {
         setdAmount(e.target.value);
     }
 
-
-  
-    // let _tokenAdd = ELEMENTS[key]?.address;
-    // console.log(_amount);
     let _amount = isNaN(depositAmount)? 0: ethers.utils.parseEther?.((depositAmount*multiplier).toString())
-    
 
-//   console.log((depositAmount));
     const { config: buyFarmTokensConfig_ } = usePrepareContractWrite({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
         functionName: 'buyMoonTokens',
         args: [ELEMENTS[key]?.address,  _amount],
-        // enabled: ContractTokenBalance?.formatted >= depositAmount && depositAmount > 0
-
-        // enabled: _amount > 0 ? true : false
     })
 
 
@@ -661,47 +530,16 @@ const elements = (props) => {
     })
 
 
-    if (buyFarmTokensError && modal && buyModal) {
-        getPrice();
-        getData();
-        setModal(false);
+    if (buyFarmTokensSuccess && buyModal) {
         setBuyModal(false)
-    }
-    if (buyFarmTokensSuccess && modal) {
-        setModal(false);
     }
 
     const buyFarmTokens = async () => {
-        // let _web3 = new Web3(web3Provider);
-        // let _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-
-        // let _tokenAdd = ELEMENTS[key].address;
         setModal(!modal);
         await buyFarmTokensWriteAsync?.();
-        // let _amount = parseFloat(depositAmount);
-
         if (key === 'fluid' || key === 'positron') {
             // _amount = _amount * 600;
         }
-        // _amount = _web3.utils.toWei(_amount.toString());
-
-        // _marketContract.methods.buyfarmTokens(_tokenAdd, _amount).send({
-        //     from: address
-        // }).on('receipt', function (receipt) {
-        //     getPrice();
-        //     getData();
-        //     setModal(modal);
-        //     setBuyModal(!buyModal)
-
-        // }).on('error', function (receipt) {
-        //     setModal(modal);
-
-        // })
-
-        // let _tokenContract = new _web3.eth.Contract(TOKEN_ABI, baseToken);
-
-
-
     }
 
     
@@ -721,39 +559,10 @@ const elements = (props) => {
     })
 
 
-    if (approveAssetError && modal) {
-        // getPrice();
-        // getData();
-        setModal(false);
-        // sellFarmTokens()
-    }
-    if (approveAssetSuccess && modal) {
-        setModal(false);
-    }
-
 
     const approveAsset = async () => {
-        // let _web3 = new Web3(web3Provider);
-
-        setModal(!modal);
+        setModal(true);
         await approveAssetWriteAsync?.()
-        // document.getElementById("exampleModalCenter").modal('show')
-        // const asset = ELEMENTS[key].address;
-        // const _tokenContract = new _web3.eth.Contract(TOKEN_ABI, asset);
-        // const _amount = _web3.utils.toWei('10000000000000');
-        // _tokenContract.methods.approve(MARKETPLACE, _amount).send({ from: address }).on('receipt', function (receipt) {
-        //     getPrice();
-        //     getData();
-        //     setModal(modal);
-        //     sellFarmTokens()
-
-        // })
-
-        //     .on('error', function (error, receipt) {
-        //         setModal(modal);
-
-        //     });
-
     }
 
 
@@ -775,47 +584,16 @@ const elements = (props) => {
     })
 
 
-    if (approveTokenError && modal) {
-        getPrice();
-        getData();
-        setModal(false);
-        buyFarmTokens()
-    }
-    if (approveTokenSuccess && modal) {
-        setModal(false);
-    }
-
 
 
     const approveToken = async () => {
-        // let _web3 = new Web3(web3Provider);
-
-
-
-        setModal(!modal);
+        setModal(true);
         await approveTokenWriteAsync?.()
-        // document.getElementById("exampleModalCenter").modal('show')
-        // const _tokenContract = new _web3.eth.Contract(TOKEN_ABI, baseToken);
-        // const _amount = _web3.utils.toWei('10000000000000');
-        // _tokenContract.methods.approve(MARKETPLACE, _amount).send({ from: address }).on('receipt', function (receipt) {
-        //     getPrice();
-        //     getData();
-        //     setModal(modal);
-        //     buyFarmTokens()
-
-        // })
-
-        //     .on('error', function (error, receipt) {
-        //         setModal(modal);
-
-        //     });
 
     }
 
 
     async function setMaxDeposit() {
-
-
         setdAmount(balance)
         setDepositAmount(balance)
     }
@@ -836,6 +614,19 @@ const elements = (props) => {
         setBuyModal(!buyModal)
     }
 
+	useEffect(() => {
+		if (sellFarmTokensSuccess||buyFarmTokensSuccess||approveAssetSuccess||approveTokenSuccess) {
+		  closeModal();
+          getData()
+          getPrice()
+		}
+	  }, [sellFarmTokensSuccess,buyFarmTokensSuccess,approveAssetSuccess,approveTokenSuccess]);
+	  
+	  useEffect(() => {
+		if (sellFarmTokensError||buyFarmTokensError||approveAssetError||approveTokenError) {
+		  closeModal();
+		}
+	  }, [sellFarmTokensError,buyFarmTokensError,approveAssetError,approveTokenError]);
     return (
         <div>
             <Header />

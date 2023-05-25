@@ -1,7 +1,6 @@
 import React  from 'react';
 import 'react-multi-carousel/lib/styles.css';
 import Header from '../../pages/header.js';
-import Footer from '../../pages/footer.js';
 import ExploreNew from '../explore/ExploreNew.js';
 import { Link } from 'react-router-dom';
 import arrow from '../../images/round_arrow.svg';

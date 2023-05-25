@@ -1,34 +1,18 @@
 import React, { Component } from "react";
-import $ from "jquery";
-import {
-  Row,
-  Col,
-  Container,
-  Button,
-  ModalHeader,
-  ModalFooter,
-  Modal,
-  ModalBody,
-} from "reactstrap";
+import { Modal, ModalBody } from "reactstrap";
 import Config, {
   NFT_MARKETPLACE,
   NFT_LINK,
   NFT,
 } from "../../../Config/index.js";
 import NFT_MARKETPLACE_ABI from "../../../Config/NFT_MARKETPLACE_ABI.json";
-import TOKEN_ABI from "../../../Config2/TOKEN_ABI.json";
 import NFT_ABI from "../../../Config/NFT_ABI.json";
-import Web3 from "web3";
 import { useState, useEffect } from "react";
-// import useWallet from '@binance-chain/bsc-use-wallet'
-
 import SinglePop from "../../pages/single/SinglePop";
 import { useAccount, useContractRead } from "wagmi";
 
 const NftSingle = (props) => {
-
   let web3Provider = window.ethereum;
-  // const wallet = useWallet();
   const { address, isConnected } = useAccount();
   const [name, setName] = useState(0);
   const [price, setPrice] = useState(0);
@@ -59,43 +43,21 @@ const NftSingle = (props) => {
   const toggle = () => setModal(!modal);
   const saleToggle = () => setSalemodal(!saleModal);
 
-
-
-  // const { data: _userToken } = useContractRead({
-  //   address: NFT,
-  //   abi: NFT_ABI,
-  //   functionName: "tokenOfOwnerByIndex",
-  //   args: [address, props.nftindex],
-  //   watch: true,
-  // });
-  // console.log(_userToken);
-  const {data:_media} =useContractRead({
-    address:NFT,
-    abi:NFT_ABI,
-    functionName:"tokenURI",
-    args:[props.nftindex],
-      })
+  const { data: _media } = useContractRead({
+    address: NFT,
+    abi: NFT_ABI,
+    functionName: "tokenURI",
+    args: [props.nftindex],
+  });
 
   const init = async () => {
-
-    let _web3 = new Web3(web3Provider);
-    let _nftContract = new _web3.eth.Contract(NFT_ABI, props.nftAddress);
-    // let _media = await _nftContract.methods.tokenURI(props.nftindex).call();
     let originalUrl = _media;
     let replacedUrl = originalUrl.replace("ipfs://", "https://ipfs.io/ipfs/");
-// console.log(replacedUrl);
-setMedia(replacedUrl);
-    // let response = await fetch(replacedUrl);
-    // let responseData = await response.json();
-    //  setMedia(_media.preview);
 
-    // setMedia(encodeURI(replacedUrl));
-
+    setMedia(replacedUrl);
     setName(_media.name);
-    //  _media = await getBase64FromUrl(_media);
-    //  setMedia(_media);
   };
- 
+
   const taketo = async (taketo) => {
     window.open(NFT_LINK + taketo, "_blank");
   };
@@ -113,14 +75,8 @@ setMedia(replacedUrl);
     });
   };
   useEffect(() => {
-    // if (window.ethereum) {
-    //   web3Provider = window.ethereum;
-    // } else {
-    //   web3Provider = new Web3.providers.HttpProvider(Config.RPC_URL);
-    // }
-
     init();
-  }, [address,_media]);
+  }, [address, _media]);
 
   return (
     <div className="col-lg-4 col-md-6 pb-4">
