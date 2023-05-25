@@ -368,7 +368,7 @@ const KingGame = () => {
 		// }
 		// if (address) {
 			// getdata()
-			getTimer()
+		
 			getLastBidder()
 			// clearInterval(timerInterval);
 			// timerInterval = setInterval(() => {
@@ -390,7 +390,7 @@ const KingGame = () => {
 
 
 
-	}, [address,__nextTime,hasWinner,__lastBidTime,__endDelay,_lastBidder,timer,_lastBidder])
+	}, [address,__nextTime,hasWinner,__lastBidTime,__endDelay,_lastBidder,timer,_lastBidder,_approve,new Date().getTime() / 1000])
 	useEffect(() => {
 		if (claimSuccess||bidNowSuccess||approveNowSuccess) {
 		  closeModal();
