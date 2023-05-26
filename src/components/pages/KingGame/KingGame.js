@@ -537,7 +537,7 @@ const KingGame = () => {
 													if (index < 5) {
 														return (
 															<tr>
-																<td ><a href={TX_LINK + value.transactionHash} target="_blank">Tx: {value.transactionHash.substring(0,6)+"..."+value.transactionHash.substring(value.transactionHash.length-6)}</a></td>
+																<td style={{textAlign:"start"}}><a href={TX_LINK + value.transactionHash} target="_blank">Tx: {value.transactionHash.substring(0,6)+"..."+value.transactionHash.substring(value.transactionHash.length-6)}</a></td>
 																<td >
 																	{value.event == "OnWin" &&
 																		<span>Restart</span>

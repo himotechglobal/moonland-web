@@ -301,7 +301,7 @@ const SinglePop = (props) => {
   useEffect(() => {
     if (putauctionSuccess || openAuctionSuccess || approveTokenSuccess) {
       closeModal();
-      reset();
+      // reset();
     }
   }, [putauctionSuccess, openAuctionSuccess, approveTokenSuccess]);
 

@@ -455,7 +455,7 @@ const PigFarm = () => {
       setEggsearned(parseFloat(_userEggs / 1e18).toFixed());
 
       setSowDeposited(parseFloat(_userSow / 1e18).toFixed());
-      if (parseFloat(_userInfo.sow) > 0) {
+      if (parseFloat(_userInfo?.sow) > 0) {
       }
 
       if (_userSow > 0) {
@@ -463,7 +463,7 @@ const PigFarm = () => {
       }
 
       let _current = new Date().getTime() / 1e3;
-      if (unlockTime > _current) {
+      if (parseInt(unlockTime) > _current) {
         setlayUnlockTime(parseInt(_userClaimTimes1[1]));
         setlayEndTime(parseInt(_userClaimTimes1[0]));
       }
@@ -479,21 +479,25 @@ const PigFarm = () => {
       let _boarBalance = parseFloat(_boarBalance1 / 1e18).toFixed(3);
       setBoarBalance(_boarBalance);
       setBoarApproved(parseInt(_boarApproved));
+      setFarmTokenId(_nftTokenId);
 
+      setLandIsfree(_landIsfree);
+      setFarmLocked(_userInfo1?.[4]);
+     setFarmTokenId(_userInfo1?.[1]);
+
+          setFarmArea(parseFloat(_userInfo1?.[2] / 1e18).toFixed());
+          setFarmCapacity(parseFloat(_userInfo1?.[3] / 1e18).toFixed());
       if (_nftBalance > 0 || _userInfo?.landlocked) {
         if (_approved === PIG_FARMING) {
           setFarmApprove(true);
         }
-        setFarmTokenId(_nftTokenId);
+       
+        // if (_userInfo1?.[4]) {
+        //   setFarmTokenId(_userInfo1?.[1]);
 
-        setLandIsfree(_landIsfree);
-        setFarmLocked(_userInfo1?.[4]);
-        if (_userInfo1?.[4]) {
-          setFarmTokenId(_userInfo1?.[1]);
-
-          setFarmArea(parseFloat(_userInfo1?.[2] / 1e18).toFixed());
-          setFarmCapacity(parseFloat(_userInfo1?.[3] / 1e18).toFixed());
-        }
+        //   setFarmArea(parseFloat(_userInfo1?.[2] / 1e18).toFixed());
+        //   setFarmCapacity(parseFloat(_userInfo1?.[3] / 1e18).toFixed());
+        // }
       }
     }
   };
@@ -583,8 +587,8 @@ const PigFarm = () => {
       setChickenEggBalance(parseFloat(_balance / 1e18).toFixed());
       setChickenEggDeposited(parseFloat(_userInfo2?.[0] / 1e18).toFixed());
       setChickenEggApproved(parseInt(_chickenEggApproved));
+      setAdult(parseFloat(parseFloat(_userItens) / 1e18).toFixed());
       if (parseInt(_userInfo2?.[0]) > 0) {
-        setAdult(parseFloat(parseFloat(_userItens) / 1e18).toFixed());
 
         setEggUnlockTime(_unlockItem);
         setEggHatchTime(_unlockItem2);
@@ -662,6 +666,7 @@ const PigFarm = () => {
     _userItens,
     _userInfo2,
     _baseApprovedIncub,
+    _baseBalance,
     _userBoar,
     _userSow,
     _userChickenDie,
@@ -675,6 +680,7 @@ const PigFarm = () => {
     _claimChickenFee,
     _unlockItem2,
     _baseApprovedFarm,
+    _baseApproved,
     _chickenFoodApproved,
     _sowApproved,
     _userInfo1,
@@ -687,8 +693,9 @@ const PigFarm = () => {
     baseApprovedFarm,
     chickenFoodApproved,
     sowApproved,
-    boarApproved,
-    address,
+    _boarApproved,
+    _approved,
+    _landIsfree
   ]);
 
   const lockNFT = async () => {
@@ -876,7 +883,7 @@ const PigFarm = () => {
   });
 
   if (removeChickenSuccess && removeChickenModal) {
-    setremoveChickenModal(false);
+    removeChickentoggle()
   }
 
   const removeChicken = async () => {
@@ -1021,9 +1028,7 @@ const PigFarm = () => {
     hash: approvebaseTokenFarmData?.hash,
   });
 
-  if (approvebaseTokenFarmSuccess) {
-    setApprovalProcessing(false);
-  }
+ 
 
   const approvebaseTokenFarm = async () => {
     setApprovalProcessing(true);
@@ -1105,9 +1110,7 @@ const PigFarm = () => {
     hash: approveChickenFoodData?.hash,
   });
 
-  if (approveChickenFoodSuccess) {
-    setApprovalProcessing(false);
-  }
+
 
   const approveChickenFood = async () => {
     setApprovalProcessing(true);
@@ -1213,9 +1216,6 @@ const PigFarm = () => {
     hash: approveBoarData?.hash,
   });
 
-  if (approveBoarSuccess) {
-    setApprovalProcessing(false);
-  }
 
   const approveBoar = async () => {
     setApprovalProcessing(true);
@@ -1245,9 +1245,7 @@ const PigFarm = () => {
     hash: approveSowData?.hash,
   });
 
-  if (approveSowSuccess) {
-    setApprovalProcessing(false);
-  }
+ 
 
   const approveSow = async () => {
     setApprovalProcessing(true);
@@ -1512,8 +1510,6 @@ const PigFarm = () => {
       approveNFTSuccess
     ) {
       closeModal();
-      getData();
-      getEggData();
     }
   }, [
     lockNFTSuccess,
@@ -1645,10 +1641,12 @@ const PigFarm = () => {
                                                         <h3>0</h3>
                                                         <p>DuoPods Capacity</p>
                                                     </div> */}
+                                                
                           <div
                             className="pool-btns"
                             style={{ justifyContent: "end" }}
                           >
+                           
                             {!farmLocked &&
                               farmBalance > 0 &&
                               farmApprove &&
@@ -2166,7 +2164,7 @@ const PigFarm = () => {
             chickenFoodApproved == 0 ||
             baseApprovedFarm == 0) && (
             <div className="container">
-              <h5>Approve following in order to deposit</h5>
+              <h5 style={{textAlign:"center"}}>Approve following in order to deposit</h5>
               <ul className="progressbar mt-3">
                 <li className={baseApprovedFarm > 0 ? "active" : ""}>
                   {baseSymbol}
@@ -2433,9 +2431,9 @@ const PigFarm = () => {
             <br />
             Enter Quantity to Transform
           </label>
-          <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxceDeposit}>
+          {/* <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxceDeposit}>
             Max
-          </span>
+          </span> */}
           <input
             className="form-control"
             onChange={handleeDepositChange}

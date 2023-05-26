@@ -309,6 +309,7 @@ const ChickenFarm = () => {
     args: [address],
     watch: true,
   });
+
   const { data: _chickenFoodBalance1 } = useContractRead({
     address: FLUID_TOKEN,
     abi: TOKEN_ABI,
@@ -477,7 +478,7 @@ const ChickenFarm = () => {
     setChickenFoodBalance(_chickenFoodBalance);
     setEggsearned(parseFloat(_userEggs / 1e18).toFixed());
 
-    setUnlockTime(_userChickenDie);
+    setUnlockTime(parseInt(_userChickenDie));
     setBaseSymbol(_baseSymbol);
     setFarmLocked(_userInfo2?.[4]);
     setLandIsfree(_landIsfree);
@@ -510,7 +511,7 @@ const ChickenFarm = () => {
     setHatched(parseFloat(_userItens?.[0] / 1e18).toFixed());
     let _adults = parseFloat(_userItens?.[1] / 1e18).toFixed();
     setAdult(_adults);
-    setEggUnlockTime(_unlockItem);
+    setEggUnlockTime(parseInt(_unlockItem));
     setEggHatchTime(_unlockItem2);
     let _claimChickenFee = parseFloat(
       (_adults * _claimChickenFee1) / 1e18
@@ -518,71 +519,7 @@ const ChickenFarm = () => {
     setChickenClaimfee(_claimChickenFee);
   };
 
-  useEffect(() => {
-    getData();
-    getEggData();
-
-    if (unlockTime > 0) {
-      clearInterval(timeInterval);
-      timeInterval = setInterval(() => {
-        getTime();
-      }, 1000);
-    }
-
-    if (layEndTime > 0) {
-      clearInterval(timeInterval1);
-      timeInterval1 = setInterval(() => {
-        getlayTime();
-      }, 1000);
-    }
-
-    if (eggunlockTime > 0) {
-      clearInterval(timeInterval2);
-      timeInterval2 = setInterval(() => {
-        getEggTime();
-      }, 1000);
-    }
-
-    if (eggHatchTime > 0) {
-      clearInterval(timeInterval3);
-      timeInterval3 = setInterval(() => {}, 1000);
-    }
-  }, [
-    address,
-    unlockTime,
-    layunlockTime,
-    layEndTime,
-    eggunlockTime,
-    eggHatchTime,
-    _baseApproved,
-    _baseApprovedFarm,
-    _baseApprovedIncub,
-    _nftBalance,
-    _userInfo2,
-    farmBalance,
-    _userChickens,
-    farmTokenId,
-    _chickenApproved,
-    _userInfo,
-    _baseApprovedFarm,
-    _chickenFoodApproved,
-    _userInfo3,
-    eggTime,
-    eggunlockTime,
-    unlockTime,
-    _userChickenDie,
-    _approved,
-    _landIsfree,
-    _nftTokenId,
-    _chickenEggApproved,
-    _chickenEggToken,
-    _depositFee1,
-    _balance,
-    _userItens,
-    _claimChickenFee1,
-    _capacity,
-    
-  ]);
+ 
 
   const { config: lockNFTConfig_ } = usePrepareContractWrite({
     address: CHICKEN_FARMING,
@@ -652,10 +589,10 @@ const ChickenFarm = () => {
   const getTime = async () => {
     let _current = new Date().getTime() / 1e3;
 
-    if (_current > parseInt(unlockTime)) {
+    if (_current > unlockTime) {
       setendTime(null);
     } else {
-      let remainingSeconds = parseInt(unlockTime) - _current;
+      let remainingSeconds = unlockTime - _current;
 
       let remainingDay = Math.floor(remainingSeconds / (60 * 60 * 24));
 
@@ -690,7 +627,7 @@ const ChickenFarm = () => {
       }
     }
   };
-
+  
   const getEggHatchTime = async () => {
     let _current = new Date().getTime() / 1e3;
     if (parseInt(_current) > parseInt(eggHatchTime)) {
@@ -729,7 +666,7 @@ const ChickenFarm = () => {
 
   const getEggTime = async () => {
     let _current = new Date().getTime() / 1e3;
-    if (parseInt(_current) > parseInt(eggunlockTime)) {
+    if (parseInt(_current) > eggunlockTime) {
       seteggTime("Yielded");
     } else {
       let remainingSeconds = eggunlockTime - _current;
@@ -762,7 +699,87 @@ const ChickenFarm = () => {
       }
     }
   };
+  useEffect(() => {
+    getData();
+    getEggData();
 
+    if (unlockTime > 0) {
+      clearInterval(timeInterval);
+      timeInterval = setInterval(() => {
+        getTime();
+      }, 1000);
+     
+    }
+
+    if (layEndTime > 0) {
+      // clearInterval(timeInterval1);
+      // timeInterval1 = setInterval(() => {
+      //   getlayTime();
+      // }, 1000);
+      const interval = setInterval(() => {
+        getlayTime();
+      }, 1000);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 1000);
+    }
+
+    if (eggunlockTime > 0) {
+      // clearInterval(timeInterval2);
+      // timeInterval2 = setInterval(() => {
+      //   getEggTime();
+      // }, 1000);
+      const interval = setInterval(() => {
+        getEggTime();
+      }, 1000);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 1000);
+    }
+
+    if (eggHatchTime > 0) {
+      clearInterval(timeInterval3);
+      timeInterval3 = setInterval(() => {}, 1000);
+    }
+  }, [
+    _userEggs,
+    address,
+    unlockTime,
+    layunlockTime,
+    layEndTime,
+    eggunlockTime,
+    eggHatchTime,
+    _baseApproved,
+    _baseApprovedFarm,
+    _baseApprovedIncub,
+    _nftBalance,
+    _userInfo2,
+    farmBalance,
+    _userChickens,
+    farmTokenId,
+    _chickenApproved,
+    _userInfo,
+    _baseApprovedFarm,
+    _chickenFoodApproved,
+    _userInfo3,
+    eggTime,
+    eggunlockTime,
+    _userChickenDie,
+    _chickenFoodBalance1,
+    _chickenBalance2,
+    _approved,
+    _landIsfree,
+    _nftTokenId,
+    _chickenEggApproved,
+    _unlockItem,
+    _chickenEggToken,
+    _depositFee1,
+    _balance,
+    _userItens,
+    _unlockItem2,
+    _claimChickenFee1,
+    _capacity,
+  ]);
   const { config: removeChickenConfig_ } = usePrepareContractWrite({
     address: CHICKEN_FARMING,
     abi: CHICKEN_FARMING_ABI,
@@ -826,10 +843,12 @@ const ChickenFarm = () => {
     if (parseInt(chickenFoodBalance) < cdamount * dayamount * 20) {
       setcDepositError("Error: Insufficient fluid amount");
       return false;
-    } else if (cdamount > farmCapacity - chickenDeposited) {
+    }
+     else if (cdamount > farmCapacity - chickenDeposited) {
       setcDepositError("Error: Insufficient Harvest Land");
       return false;
-    } else {
+    } 
+    else {
       setModal(true);
       await depositMoreChickenWriteAsync();
     }

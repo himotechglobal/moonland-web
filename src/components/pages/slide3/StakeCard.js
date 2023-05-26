@@ -139,13 +139,13 @@ const StakeCard = (props) => {
     functionName: "stakingFeeRate",
   });
 
-  const { data: _unstakeFee } = useContractRead({
+  const { data: _unstakeFee} = useContractRead({
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "unstakingFeeRate",
   });
 
-  const { data: _stakeEnabled } = useContractRead({
+  const {data: _stakeEnabled} = useContractRead({
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "stakeEnabled",
@@ -207,10 +207,10 @@ const StakeCard = (props) => {
     functionName: "totalStakedTokens",
   });
 
-  const getData = async () => {
+  const getData = () => {
     let v = STAKING_ARRAY[props.index];
     setStakeEnabled(_stakeEnabled);
-    if (v.address) {
+    if (v?.address) {
       setStakeStoken(_stakeToken);
       setStakeSymbol(_stakeSymbol);
       setEarnSymbol(_rewardSymbol ? _rewardSymbol : "Moonland");
@@ -247,7 +247,7 @@ const StakeCard = (props) => {
 
   useEffect(() => {
     getData();
-  }, [address, _totalStaked1, _approved]);
+  }, [address, _totalStaked1, _approved,approved,_depositedTokens1,_earnedTokens1,_depositFee,_unstakeFee,_stakeEnabled,_unstakeEnabled,_totalEarned1,_earnedTokens1,_balance1,_totalStaked2,_rewardToken,_apy]);
 
 //   const getEarned = async () => {
 //     let v = STAKING_ARRAY[props.index];
@@ -374,7 +374,9 @@ const StakeCard = (props) => {
   const { isSuccess: depositTokenSuccess } = useWaitForTransaction({
     hash: depositTokenData?.hash,
   });
-
+if(depositTokenSuccess && depositModal){
+  depositToggle()
+}
   const depositToken = async () => {
     setModal(true);
     await depositTokenWriteAsync();
@@ -410,7 +412,9 @@ const StakeCard = (props) => {
   const { isSuccess: withdrawTokenSuccess } = useWaitForTransaction({
     hash: withdrawTokenData?.hash,
   });
-
+if(withdrawTokenSuccess && withdrawModal){
+  withdrawToggle()
+}
 
 const withdrawToken = async () => {
     setModal(true);
@@ -420,7 +424,6 @@ const withdrawToken = async () => {
 useEffect(() => {
     if (approveSuccess || claimRewardSuccess || depositTokenSuccess || withdrawTokenSuccess) {
       closeModal();
-      getData();
     }
   }, [approveSuccess, claimRewardSuccess, depositTokenSuccess, withdrawTokenSuccess]);
   

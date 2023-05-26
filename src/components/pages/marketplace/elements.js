@@ -6,7 +6,7 @@ import arrow from '../../images/round_arrow.svg';
 import moon_img from '../../images/moon_img.png';
 import modal_earth from '../../images/modal_earth.png';
 import bg_img from '../../images/bg_img.png';
-import { MARKETPLACE } from '../../../Config/index.js';
+import { MARKETPLACE, METLUX_TOKEN } from '../../../Config/index.js';
 import MARKETPLACE_ABI from '../../../Config/MARKETPLACE_ABI.json';
 import TOKEN_ABI from '../../../Config/TOKEN_ABI.json';
 import { useAccount, useBalance, useContractRead, useContractWrite, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
@@ -149,7 +149,7 @@ const elements = (props) => {
         functionName: 'getTokenPerSolar',
         watch: true,
     })
-   
+
     const { data: _getPriceChickenegg } = useContractRead({
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
@@ -211,7 +211,7 @@ const elements = (props) => {
         watch: true,
     })
     const { data: _available } = useContractRead({
-        address: ELEMENTS[key].address._atoken,
+        address: ELEMENTS[key].address,
         abi: TOKEN_ABI,
         functionName: 'balanceOf',
         args: [MARKETPLACE],
@@ -259,12 +259,10 @@ const elements = (props) => {
         args: [address, MARKETPLACE],
         watch: true
     })
-
-    const { data: ContractTokenBalance } = useBalance({
-        address: MARKETPLACE,
+    const { data:ContractTokenBalance } = useBalance({
+        addressOrName: MARKETPLACE,
         token: ELEMENTS[key].address
     })
-   
     const { data: _approval } = useContractRead({
         address: _baseToken,
         abi: TOKEN_ABI,
@@ -454,7 +452,7 @@ const elements = (props) => {
     useEffect(() => {
         getData();
         getPrice();
-    }, [address,_getPriceChicken,_assetApproval1,_approval,_assetBalance1,_balance1,_available,_baseToken,_getFeeSellFee,_getPricePigfood,_getPricePiglet,_getPriceSow,_getPriceBoar,_getPriceChickenfood,_getPriceChicken,_getPriceChickenegg,_getSoldValue1,_getSold1])
+    }, [address,_getPriceChicken,_assetApproval1,_approval,_assetBalance1,_balance1,_available,_baseToken,_getFeeSellFee,_getPricePigfood,_getPricePiglet,_getPriceSow,_getPriceBoar,_getPriceChickenfood,_getPriceChicken,_getPriceChickenegg,_getSoldValue1,_getSold1,sellAmount,depositAmount,multiplier])
 
 
     const handleSellChange = (e) => {
@@ -467,7 +465,7 @@ const elements = (props) => {
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
         functionName: 'sellMoonTokens',
-        args: [ELEMENTS[key].address,isNaN(sellAmount)?0:  ethers.utils.parseEther?.((sellAmount*multiplier).toString())]
+        args: [ELEMENTS[key].address,isNaN(samount)?0:  ethers.utils.parseEther?.((samount*multiplier).toString())]
     })
 
 
@@ -478,9 +476,9 @@ const elements = (props) => {
     })
 
 
-    if (sellFarmTokensSuccess && sellModal) {
-        sellToggleClose()
-    }
+    // if (sellFarmTokensSuccess && sellModal) {
+    //     sellToggleClose()
+    // }
 
 
     const sellFarmTokens = async () => {
@@ -488,7 +486,7 @@ const elements = (props) => {
         setSellError(false)
       
 
-        let _amount = parseFloat(sellAmount);
+        let _amount = parseFloat(samount);
 
         if (key === 'fluid' || key === 'positron') {
             _amount = _amount * 600;
@@ -532,9 +530,9 @@ const elements = (props) => {
     })
 
 
-    if (buyFarmTokensSuccess && buyModal) {
-        buyToggleClose()
-    }
+    // if (buyFarmTokensSuccess && buyModal) {
+    //     buyToggleClose()
+    // }
 
     const buyFarmTokens = async () => {
         setModal(true);
@@ -616,8 +614,8 @@ const elements = (props) => {
 	useEffect(() => {
 		if (sellFarmTokensSuccess||buyFarmTokensSuccess||approveAssetSuccess||approveTokenSuccess) {
 		  closeModal();
-          getData()
-          getPrice()
+        //   getData()
+        //   getPrice()
 		}
 	  }, [sellFarmTokensSuccess,buyFarmTokensSuccess,approveAssetSuccess,approveTokenSuccess]);
 	  
@@ -626,6 +624,8 @@ const elements = (props) => {
 		  closeModal();
 		}
 	  }, [sellFarmTokensError,buyFarmTokensError,approveAssetError,approveTokenError]);
+
+
     return (
         <div>
             <Header />
@@ -673,7 +673,7 @@ const elements = (props) => {
                                         <div className="wrp-btn-back">
                                             
                                             {
-                                                available === 0 ?
+                                                available == 0 ?
                                                     <a href="#" className="bg___BTN3" >Sold Out</a>
                                                     :
                                                     <a href="#" className="bg___BTN3" onClick={buyToggle} >Buy</a>
@@ -749,13 +749,6 @@ const elements = (props) => {
                     </ModalBody>
                     <ModalFooter>
 
-
-
-
-
-
-
-                    
                         {
                             !isApprovedERC20 ?
                                 <Button className="bg___BTN2 mr-3" onClick={approveToken}>Approve</Button>
@@ -856,8 +849,6 @@ const elements = (props) => {
 
 
                 <Modal isOpen={modal} toggle={toggle} centered={true}>
-
-
                     <ModalBody>
                     <div  className="modal_img_div1"><img src={modal_earth} alt="moonland" width={"150px"} style={{opacity:"51%"}}/></div>
                         <div className="modaltext text-center mt-4" >Processing your Request...</div>

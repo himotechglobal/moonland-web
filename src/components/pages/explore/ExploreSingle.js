@@ -77,15 +77,15 @@ const ExploreSingle = (props) => {
 
   const [tokenAddress, settokenAddress] = useState(null);
 
-  useEffect(() => {
-    if (window.ethereum) {
-      web3Provider = window.ethereum;
-    } else {
-      web3Provider = new Web3.providers.HttpProvider(Config.RPC_URL);
-    }
+  // useEffect(() => {
+  //   if (window.ethereum) {
+  //     web3Provider = window.ethereum;
+  //   } else {
+  //     web3Provider = new Web3.providers.HttpProvider(Config.RPC_URL);
+  //   }
 
-    init();
-  }, [address]);
+  //   init();
+  // }, [address]);
 
   const { data: _trade } = useContractRead({
     address: NFT_MARKETPLACE,
@@ -433,7 +433,7 @@ const ExploreSingle = (props) => {
     setTimeout(() => {
       clearInterval(interval);
     }, 1000);
-  }, [bidStatus, _tradeTime, _approval, _statusF, new Date().getTime() / 1e3]);
+  }, [bidStatus, _tradeTime, _approval, _statusF, new Date().getTime() / 1e3,address]);
   async function unLikeTrade() {
     let _web3 = new Web3(web3Provider);
 
@@ -488,7 +488,7 @@ const ExploreSingle = (props) => {
       approveTokenSuccess
     ) {
       closeModal();
-      init();
+      // init();
     }
   }, [placeBidSuccess, buyNftSuccess, withdrawSuccess, approveTokenSuccess]);
 
@@ -617,7 +617,8 @@ const ExploreSingle = (props) => {
                       Buy Now
                     </button>
                   )}
-                {address && bidStatus == 4 && approval == 0 && (
+                {address && bidStatus == 4 && approval == 0 && address !== lister &&
+                  buyer == "0x0000000000000000000000000000000000000000" && (
                   <button className="bg___BTN_J" onClick={approveToken}>
                     Approve to Buy
                   </button>

@@ -84,12 +84,8 @@ const MarketplaceCard = (props) => {
   const [symbol, setSymbol] = useState(null);
   const [baseTokenPrice, setBaseTokenPrice] = useState(0);
   const { address, isConnected } = useAccount();
-  //  const wallet = useWallet();
-  // let web3Provider = window.ethereum;
-  // console.log(boxArray);
  
   const getData = () => {
-    // console.log(props)
     let v = ELEMENTS[props.index]
     setBoxArray(v);
   }
@@ -123,13 +119,6 @@ const MarketplaceCard = (props) => {
     args: [MARKETPLACE],
     watch: true
   })
-
-  // const { data: baseToken } = useContractRead({
-  //   address: MARKETPLACE,
-  //   abi: MARKETPLACE_ABI,
-  //   functionName: "baseToken",
-  //   watch: true
-  // })
   const { data: _getPrice1 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
@@ -181,7 +170,6 @@ const MarketplaceCard = (props) => {
     functionName: "getTokenPerSolarFood",
     watch: true
   })
-  // console.log(parseInt(_getPrice3));
   const { data: _getSold3 } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
@@ -243,7 +231,6 @@ const MarketplaceCard = (props) => {
     functionName: "getTokenPerEule",
     watch: true
   })
-  // console.log((_getPricePiglet));
   const { data: _getSoldPiglet } = useContractRead({
     address: MARKETPLACE,
     abi: MARKETPLACE_ABI,
@@ -281,167 +268,83 @@ const MarketplaceCard = (props) => {
     functionName: "totalPositronsSoldValue",
     watch: true
   })
-  // console.log(parseInt(_getSoldValuePigfood))
   const getTokenPrice = async () => {
-    // let _web3 = new Web3(web3Provider);
-    // let _marketContract = new _web3.eth.Contract(ROUTER_ABI, ROUTER);
-    // let _amt = _web3.utils.toWei('1');
-    // let _baseTokenPrice = await _marketContract.methods.getAmountsOut(_amt, ['0x903fcaf1a49b29678c15b43bc9f852232bfa7df1', '0xe9e7cea3dedca5984780bafc599bd69add087d56']).call();
     let _baseTokenPrice = parseFloat(_baseTokenPrice1[1] / 1e18).toFixed(2);
     setBaseTokenPrice(_baseTokenPrice)
-    // console.log(_baseTokenPrice);
   }
   const getPrice = async () => {
-    // let _web3 = new Web3(web3Provider);
-    // let _marketContract = new _web3.eth.Contract(MARKETPLACE_ABI, MARKETPLACE);
-    // let _baseToken = await _marketContract.methods.baseToken().call();
-    // setBaseToken(baseToken);
-    // console.log(_baseToken); 
-    // let _tokenContract = new _web3.eth.Contract(TOKEN_ABI, baseToken);
-    // let _symbol = await _tokenContract.methods.symbol().call();
     setSymbol(_symbol);
-    // console.log(_symbol);
     if (props.slug === 'solar') {
-      // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
-      // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
-      // console.log(_available);
       setAvailable(parseFloat(_available / 1e18).toFixed());
-      // let _baseToken = await _marketContract.methods.baseToken().call();
-      // setBaseToken(baseToken);
-      // let _tokenContract = new _web3.eth.Contract(TOKEN_ABI, _baseToken);
-      // let _getPrice = await _marketContract.methods.getTokenPerChicken().call();
-      //  console.log(_getPrice);
-      // let _getSold = await _marketContract.methods.totalChickenSold().call();
       let _getSold = parseFloat(_getSold1 / 1e18).toFixed()
       setSold(_getSold);
-      // console.log(_getSold);
-      // let _getSoldValue = await _marketContract.methods.totalChickenSoldValue().call();
       let _getSoldValue = parseFloat(_getSoldValue1 / 1e18).toFixed()
       setSoldValue(_getSoldValue);
-      // console.log(_getSoldValue);
       let _getPrice = parseFloat(_getPrice1 / 1e18).toFixed(2)
-      // console.log(_getPrice);
       setTokenPrice(_getPrice);
     }
     else if (props.slug === 'solarCell') {
       let _atoken = ELEMENTS[props.index].address;
-      // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
-      // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
-      // console.log(_available);
       setAvailable(parseFloat(_available1 / 1e18).toFixed());
-      // let _getPrice = await _marketContract.methods.getTokenPerEgg().call();
       let _getPrice = parseFloat(_getPrice2 / 1e18).toFixed(2)
       setTokenPrice(_getPrice);
-      // console.log(_getPrice);
-      // let _getSold = await _marketContract.methods.totalEggSold().call();
       let _getSold = parseFloat(_getSold2 / 1e18).toFixed()
       setSold(_getSold);
-      // let _getSoldValue = await _marketContract.methods.totalEggSoldValue().call();
       let _getSoldValue = parseFloat(_getSoldValue2 / 1e18).toFixed()
       setSoldValue(_getSoldValue);
-      // console.log(_getSoldValue);
     }
     else if (props.slug === 'fluid') {
       let _atoken = ELEMENTS[props.index].address;
-      // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
-      // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
-      // console.log(parseFloat(_available));
       setAvailable(parseFloat(_available / 1e18).toFixed());
-      // let _getPrice = await _marketContract.methods.getTokenPerChickenFood().call();
       let _getPrice = parseFloat(_getPrice3 * 600 / 1e18).toFixed(2)
       setTokenPrice(_getPrice);
-  
-      // console.log(_getPrice);
-      // let _getSold = await _marketContract.methods.totalChickenFoodSold().call();
       let _getSold = parseFloat(_getSold3 / 1e18).toFixed()
       setSold(_getSold);
-      // let _getSoldValue = await _marketContract.methods.totalChickenFoodSoldValue().call();
       let _getSoldValue = parseFloat(_getSoldValu3 / 1e18).toFixed()
       setSoldValue(_getSoldValue);
-      // console.log(_getSoldValue);
     }
     else if (props.slug === 'thermix') {
       let _atoken = ELEMENTS[props.index].address;
-      // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
-      // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
       setAvailable(parseFloat(_available1 / 1e18).toFixed());
-      // let _getPrice = await _marketContract.methods.getTokenPerBoar().call();
       let _getPrice = parseFloat(_getPrice4 / 1e18).toFixed(2)
       setTokenPrice(_getPrice);
-      // console.log(_getPrice);
-      // let _getSold = await _marketContract.methods.totalBoarSold().call();
       let _getSold = parseFloat(_getSold4 / 1e18).toFixed()
       setSold(_getSold);
-      // console.log(_getSold);
-      // let _getSoldValue = await _marketContract.methods.totalBoarSoldValue().call();
       let _getSoldValue = parseFloat(_getSoldValue4 / 1e18).toFixed()
       setSoldValue(_getSoldValue);
-      // console.log(_getSoldValue);
     }
     else if (props.slug === 'metlux') {
       let _atoken = ELEMENTS[props.index].address;
-      // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
-      // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
-      // console.log(_available);
       setAvailable(parseFloat(_available / 1e18).toFixed());
-      // let _getPrice = await _marketContract.methods.getTokenPerSow().call();
       let _getPrice = parseFloat(_getPrice5 / 1e18).toFixed(2)
       setTokenPrice(_getPrice);
-      // console.log(_getPrice);
-      // let _getSold = await _marketContract.methods.totalSowSold().call();
       let _getSold = parseFloat(_getSold5 / 1e18).toFixed()
       setSold(_getSold);
-      // let _getSoldValue = await _marketContract.methods.totalSowSoldValue().call();
       let _getSoldValue = parseFloat(_getSoldValue5 / 1e18).toFixed()
       setSoldValue(_getSoldValue);
-      // console.log(_getSoldValue);
     }
     else if (props.slug === 'eule') {
       let _atoken = ELEMENTS[props.index].address;
-      // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
-      // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
       setAvailable(parseFloat(_availablePiglet / 1e18).toFixed());
-      // console.log(_available);
-      // let _getPrice = await _marketContract.methods.getTokenPerPiglet().call();
       let _getPrice = parseFloat(_getPricePiglet / 1e18).toFixed(2)
       setTokenPrice(_getPrice);
-      // console.log(_getPrice);
-      // let _getSold = await _marketContract.methods.totalPigletSold().call();
       let _getSold = parseFloat(_getSoldPiglet / 1e18).toFixed()
       setSold(_getSold);
-      // console.log(_getSold);
-      // let _getSoldValue = await _marketContract.methods.totalPigletSoldValue().call();
       let _getSoldValue = parseFloat(_getSoldValuePiglet / 1e18).toFixed()
       setSoldValue(_getSoldValue);
-      // console.log(_getSoldValue);
     }
     else if (props.slug === 'positron') {
       let _atoken = ELEMENTS[props.index].address;
-      // let _atokenContract = new _web3.eth.Contract(TOKEN_ABI, _atoken);
-      // let _available = await _atokenContract.methods.balanceOf(MARKETPLACE).call();
-      // console.log(_available);
       setAvailable(parseFloat(_availablePigfood / 1e18).toFixed());
-      // let _getPrice = await _marketContract.methods.getTokenPerPigfood().call();
       let _getPrice = parseFloat(_getPricePigfood * 600 / 1e18).toFixed(2)
       setTokenPrice(_getPrice);
-      // console.log(_getPrice);
-      // let _getSold = await _marketContract.methods.totalPigFoodSold().call();
       let _getSold = parseFloat(_getSoldPigfood / 1e18).toFixed()
       setSold(_getSold);
-      // console.log(_getSold)
-      // let _getSoldValue = await _marketContract.methods.totalPigFoodSoldValue().call();
       let _getSoldValue = parseFloat(_getSoldValuePigfood / 1e18).toFixed()
       setSoldValue(_getSoldValue);
-      // console.log(_getSoldValue);
     }
   }
   useEffect(() => {
-    // if (window.ethereum) {
-    //   web3Provider = window.ethereum;
-    // }
-    // else {
-    //   web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org/')
-    // }
     getData();
     getPrice();
     getTokenPrice();
