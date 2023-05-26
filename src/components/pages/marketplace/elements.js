@@ -135,9 +135,11 @@ const elements = (props) => {
 
     const [buyModal, setBuyModal] = useState(false);
     const buyToggle = () => setBuyModal(!buyModal);
+    const buyToggleClose = () => setBuyModal(false);
 
     const [sellModal, setSellModal] = useState(false);
     const sellToggle = () => setSellModal(!sellModal);
+    const sellToggleClose = () => setSellModal(false);
     const [sold, setSold] = useState(0);
     const [soldValue, setSoldValue] = useState(0);
     const { address, isConnected } = useAccount();
@@ -450,10 +452,9 @@ const elements = (props) => {
     }
 
     useEffect(() => {
-
         getData();
         getPrice();
-    }, [address, modal,_getPriceChicken,_assetApproval1,_approval,_assetBalance1,_balance1,_available,_baseToken,_getFeeSellFee,_getPricePigfood,_getPricePiglet,_getPriceSow,_getPriceBoar,_getPriceChickenfood,_getPriceChicken,_getPriceChickenegg,_getSoldValue1,_getSold1])
+    }, [address,_getPriceChicken,_assetApproval1,_approval,_assetBalance1,_balance1,_available,_baseToken,_getFeeSellFee,_getPricePigfood,_getPricePiglet,_getPriceSow,_getPriceBoar,_getPriceChickenfood,_getPriceChicken,_getPriceChickenegg,_getSoldValue1,_getSold1])
 
 
     const handleSellChange = (e) => {
@@ -478,7 +479,7 @@ const elements = (props) => {
 
 
     if (sellFarmTokensSuccess && sellModal) {
-        sellToggle()
+        sellToggleClose()
     }
 
 
@@ -532,11 +533,11 @@ const elements = (props) => {
 
 
     if (buyFarmTokensSuccess && buyModal) {
-        setBuyModal(false)
+        buyToggleClose()
     }
 
     const buyFarmTokens = async () => {
-        setModal(!modal);
+        setModal(true);
         await buyFarmTokensWriteAsync?.();
         if (key === 'fluid' || key === 'positron') {
             // _amount = _amount * 600;
@@ -584,9 +585,6 @@ const elements = (props) => {
         hash: approveTokenData?.hash,
     })
 
-
-
-
     const approveToken = async () => {
         setModal(true);
         await approveTokenWriteAsync?.()
@@ -601,9 +599,9 @@ const elements = (props) => {
 
 
     async function setMaxSell() {
-        let _amt = parseFloat(aseetBalance)
+        let _amt = aseetBalance
         if (key === 'fluid' || key === 'positron') {
-            _amt = parseFloat(_amt / 600).toFixed()
+            _amt = _amt / 600
         }
 
 
@@ -778,7 +776,7 @@ const elements = (props) => {
                         } */}
 
 
-                        {
+                        {/* {
                             aseetApproval < sellAmount &&
                             <Button className="bg___BTN2 mr-3" onClick={approveAsset}>Approve {ELEMENTS[key].name}</Button>
                         }
@@ -786,7 +784,7 @@ const elements = (props) => {
                         {
                             aseetApproval > sellAmount &&
                             <Button className="bg___BTN2 mr-3" onClick={sellFarmTokens}>Sell</Button>
-                        }
+                        } */}
 
 
                         <Button className="bg___BTN2" onClick={buyToggle}>Cancel</Button>
@@ -825,7 +823,7 @@ const elements = (props) => {
 
                             <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxSell}>Max</span>
                         </label>
-                        <input className="form-control mb-3" onChange={handleSellChange} type="text" value={samount} />
+                        <input className="form-control mb-3" onChange={handleSellChange} type="number" value={samount} />
                         {
                             (key === 'fluid' || key === 'positron') &&
                             <span className="info mt-3">Weight: {parseFloat(samount * 600).toFixed(2)} ml ({ELEMENTS[key].name})</span>

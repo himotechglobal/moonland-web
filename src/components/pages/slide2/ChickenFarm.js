@@ -447,10 +447,8 @@ const ChickenFarm = () => {
     args: [_amt],
     watch: true,
   });
-
   const getData = async () => {
     setFarmBalance(parseInt(_nftBalance));
-
     setFarmPrice(parseFloat(_tokenPerfarm / 1e18).toFixed(2));
     setbaseToken(_baseToken);
     setFarmToken(_farmToken);
@@ -481,21 +479,22 @@ const ChickenFarm = () => {
 
     setUnlockTime(_userChickenDie);
     setBaseSymbol(_baseSymbol);
+    setFarmLocked(_userInfo2?.[4]);
+    setLandIsfree(_landIsfree);
+
 
     if (_nftBalance > 0 || _userInfo?.landlocked) {
       setFarmTokenId(parseInt(_nftTokenId));
       if (_approved === CHICKEN_FARMING) {
         setFarmApprove(true);
       }
-      if (_userInfo2?.[4]) {
+      // if (_userInfo2?.[4]) {
         setFarmTokenId(_userInfo2?.[1]);
 
         setFarmArea(parseFloat(_userInfo2?.[2] / 1e18).toFixed(2));
         setFarmCapacity(parseFloat(_userInfo2?.[3] / 1e18).toFixed(2));
-      }
-      setLandIsfree(_landIsfree);
+      // }
 
-      setFarmLocked(_userInfo2?.[4]);
     }
   };
 
@@ -582,6 +581,7 @@ const ChickenFarm = () => {
     _userItens,
     _claimChickenFee1,
     _capacity,
+    
   ]);
 
   const { config: lockNFTConfig_ } = usePrepareContractWrite({
@@ -1455,7 +1455,7 @@ const ChickenFarm = () => {
                           <p>Your Balance</p>
                         </div>
                         <div className="time__list">
-                          <h3>{farmArea} sq Yards</h3>
+                          <h3>{farmArea>0?farmArea:0} sq Yards</h3>
                           <p>Your Land’s Area</p>
                         </div>
                         {/* <div className="time__list">
@@ -1463,7 +1463,7 @@ const ChickenFarm = () => {
                                                     <p>Market Value</p>
                                                 </div> */}
                         <div className="time__list">
-                          <h3>{farmCapacity ?? 0}</h3>
+                          <h3>{farmCapacity>0?farmCapacity:0}</h3>
                           <p>Harvesters Capacity</p>
                         </div>
 
