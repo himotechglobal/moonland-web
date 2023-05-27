@@ -353,6 +353,7 @@ const ChickenFarm = () => {
     functionName: "getApproved",
     args: [_nftTokenId],
     watch: true,
+    
   });
   const { data: _landIsfree } = useContractRead({
     address: CHICKEN_FARMING,
@@ -485,12 +486,16 @@ const ChickenFarm = () => {
 
 
     if (_nftBalance > 0 || _userInfo?.landlocked) {
+      // alert(_nftTokenId)
       setFarmTokenId(parseInt(_nftTokenId));
-      if (_approved === CHICKEN_FARMING) {
+      if (_approved == CHICKEN_FARMING) {
         setFarmApprove(true);
+        // setFarmTokenId(_userInfo2?.[1]);
+
       }
       // if (_userInfo2?.[4]) {
-        setFarmTokenId(_userInfo2?.[1]);
+        // alert(CHICKEN_FARMING)
+        // alert(_userInfo2?.[1])
 
         setFarmArea(parseFloat(_userInfo2?.[2] / 1e18).toFixed(2));
         setFarmCapacity(parseFloat(_userInfo2?.[3] / 1e18).toFixed(2));
@@ -520,12 +525,14 @@ const ChickenFarm = () => {
   };
 
  
-
+  // alert(farmTokenId)
   const { config: lockNFTConfig_ } = usePrepareContractWrite({
     address: CHICKEN_FARMING,
     abi: CHICKEN_FARMING_ABI,
     functionName: "checkAndTransferLand",
     args: [address, farmTokenId],
+    enabled: farmApprove && farmTokenId
+    // watch: true
   });
 
   const {
@@ -822,6 +829,9 @@ const ChickenFarm = () => {
       cdamount == "" ? 0 : ethers.utils.parseEther(cdamount).toString(),
       farmTokenId,
     ],
+    enabled: chickenApproved > 0 &&
+    chickenFoodApproved > 0 &&
+    baseApprovedFarm > 0 && farmTokenId && cdamount > 0
   });
 
   const {
@@ -863,6 +873,7 @@ const ChickenFarm = () => {
       solarAmount == "" ? 0 : ethers.utils.parseEther(solarAmount).toString(),
       parseInt(dayamount),
     ],
+    enabled: solarAmount > 0 && dayamount > 0
   });
 
   const {
@@ -1167,6 +1178,7 @@ const ChickenFarm = () => {
     abi: MARKETPLACE_ABI,
     functionName: "sellMoonLand",
     args: [farmTokenId],
+    enabled: landIsfree
   });
 
   const {
@@ -1203,9 +1215,9 @@ const ChickenFarm = () => {
     hash: buyAreaNFTData?.hash,
   });
 
-  if (buyAreaNFTSuccess && buyAreaModal) {
-    buyAreaToggle();
-  }
+  // if (buyAreaNFTSuccess) {
+  //   buyAreaToggle();
+  // }
 
   const buyAreaNFT = async () => {
     setbuyareadepositError(false);
@@ -1254,7 +1266,7 @@ const ChickenFarm = () => {
     abi: NFT_ABI,
     functionName: "approve",
     args: [CHICKEN_FARMING, farmTokenId],
-    watch: true,
+    enabled: farmTokenId,
   });
 
   const {

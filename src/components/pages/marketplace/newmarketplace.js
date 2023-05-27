@@ -30,7 +30,7 @@ const ELEMENTS = [
         'name': 'FLUID',
         'price': '1',
         'image': cb2,
-        'address': '0xd6e52657A95248f51cAB46065f314711a4cd1cdc'
+        'address': '0xb4e0f6aEfb68449917879068E9C32703268F9C89'
     },
     {
         'slug': 'thermix',
@@ -58,7 +58,7 @@ const ELEMENTS = [
         'name': 'POSITRON',
         'price': '5',
         'image': cb7,
-        'address': '0x16775217Bab1C67D0b60104B52b3504B37E7FB89'
+        'address': '0x19Aca1DB633622ADA2cc722991db21989f6F4F9B'
     }
 ];
 const marketplace2 = () => {

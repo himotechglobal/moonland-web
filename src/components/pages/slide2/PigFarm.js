@@ -483,7 +483,7 @@ const PigFarm = () => {
 
       setLandIsfree(_landIsfree);
       setFarmLocked(_userInfo1?.[4]);
-     setFarmTokenId(_userInfo1?.[1]);
+    //  setFarmTokenId(_userInfo1?.[1]);
 
           setFarmArea(parseFloat(_userInfo1?.[2] / 1e18).toFixed());
           setFarmCapacity(parseFloat(_userInfo1?.[3] / 1e18).toFixed());
@@ -602,6 +602,7 @@ const PigFarm = () => {
     abi: PIG_FARMING_ABI,
     functionName: "checkAndTransferLand",
     args: [address, farmTokenId],
+    enabled: farmTokenId
   });
 
   const {
@@ -991,7 +992,7 @@ const PigFarm = () => {
     }
 
     if (chickenFoodBalance < cdamount * dayamount * 7 * 20) {
-      setcDepositError("Error: Insufficient fluid Balance");
+      setcDepositError("Error: Insufficient POS Balance");
       return false;
     } else if (cdamount > farmCapacity - sowDeposited) {
       setcDepositError("Error: Insufficient Harvest Land");
@@ -1288,7 +1289,7 @@ const PigFarm = () => {
     args: [
       cedamount == "" ? 0 : ethers.utils.parseEther?.(cedamount).toString(),
     ],
-    watch: true,
+    enabled: cedamount > 0 && cedamount != "" && cedamount != 0,
   });
 
   const {
@@ -1410,7 +1411,6 @@ const PigFarm = () => {
     abi: NFT_ABI,
     functionName: "approve",
     args: [PIG_FARMING, farmTokenId],
-    watch: true,
     enabled: farmTokenId,
   });
 

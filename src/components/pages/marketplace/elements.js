@@ -55,7 +55,7 @@ const ELEMENTS = {
         'image': fluds,
         'img': b3,
         'desc':"Superconductor fluid is a type of fluid used by solar cells to power the process of solar harvesting. It is a critical resource required for the efficient and effective generation of electricity by solar cells. Superconductor fluid enables the smooth flow of electrons, reducing resistance and increasing the conductivity of solar cells. This, in turn, helps to increase the efficiency of solar cells in converting sunlight into electrical energy. Without superconductor fluid, the process of solar harvesting is not possible.",
-        'address': '0xd6e52657A95248f51cAB46065f314711a4cd1cdc'
+        'address': '0xb4e0f6aEfb68449917879068E9C32703268F9C89'
 
     },
     'thermix': {
@@ -90,7 +90,7 @@ const ELEMENTS = {
         'price': '5',
         'image': mooon,
         'img': b7,
-        'address': '0x16775217Bab1C67D0b60104B52b3504B37E7FB89',
+        'address': '0x19Aca1DB633622ADA2cc722991db21989f6F4F9B',
         'desc':"Positron is a fuel that is essential for the functioning of Thermix and Metlux, two materials used in the creation of MoonPods. The combination of Thermix and Metlux provides the necessary insulation and protection from the harsh lunar environment, while Positron acts as the fuel source for these materials to function properly. Without Positron, the construction of MoonPods and other space habitats would not be possible, highlighting the crucial role it plays in the development of a sustainable Moopod."
 
     }
@@ -465,7 +465,8 @@ const elements = (props) => {
         address: MARKETPLACE,
         abi: MARKETPLACE_ABI,
         functionName: 'sellMoonTokens',
-        args: [ELEMENTS[key].address,isNaN(samount)?0:  ethers.utils.parseEther?.((samount*multiplier).toString())]
+        args: [ELEMENTS[key].address,isNaN(samount)?0:  ethers.utils.parseEther?.((samount*multiplier).toString())],
+        enabled:  aseetApproval >= sellAmount
     })
 
 
@@ -494,6 +495,10 @@ const elements = (props) => {
 
         if (_amount > aseetBalance) {
             setSellError("Error: Insufficient Balance");
+            return false;
+        }
+       else if (_amount < 0 || _amount == 0 || _amount == "") {
+            setSellError("Error: Invalid Amount");
             return false;
         }
         else {
@@ -839,7 +844,7 @@ const elements = (props) => {
                         }
 
                         {
-                            aseetApproval >= sellAmount &&
+                            aseetApproval >= sellAmount && samount > 0 && samount != "" &&
                             <Button className="bg___BTN2 mr-3" onClick={sellFarmTokens}>Sell</Button>
                         }
                         <Button className="bg___BTN2" onClick={sellToggle}>Cancel</Button>
