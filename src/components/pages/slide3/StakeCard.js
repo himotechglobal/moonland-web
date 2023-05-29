@@ -208,6 +208,7 @@ const StakeCard = (props) => {
   });
 
   const getData = () => {
+    setApproved(parseInt(_approved));
     let v = STAKING_ARRAY[props.index];
     setStakeEnabled(_stakeEnabled);
     if (v?.address) {
@@ -225,7 +226,7 @@ const StakeCard = (props) => {
         6
       );
       setTotalEarned(_totalEarned);
-      setApproved(parseInt(_approved));
+     
       if (address) {
         let _depositedTokens = parseFloat(_depositedTokens1 / 1e18).toFixed(5);
         setUserStaked(_depositedTokens);
@@ -247,7 +248,7 @@ const StakeCard = (props) => {
 
   useEffect(() => {
     getData();
-  }, [address, _totalStaked1, _approved,approved,_depositedTokens1,_earnedTokens1,_depositFee,_unstakeFee,_stakeEnabled,_unstakeEnabled,_totalEarned1,_earnedTokens1,_balance1,_totalStaked2,_rewardToken,_apy]);
+  }, [address, _totalStaked1, _approved,_depositedTokens1,_earnedTokens1,_depositFee,_unstakeFee,_stakeEnabled,_unstakeEnabled,_totalEarned1,_earnedTokens1,_balance1,_totalStaked2,_rewardToken,_apy]);
 
 //   const getEarned = async () => {
 //     let v = STAKING_ARRAY[props.index];
@@ -291,10 +292,9 @@ const StakeCard = (props) => {
 //   if (approveError && modal) {
 //     setModal(false);
 //   }
-//   if (approveSuccess && modal) {
-//     setModal(false);
-//     getData();
-//   }
+  if (approveSuccess && modal) {
+   window.location.reload()
+  }
 
   const approveToken = async () => {
     setModal(true);
@@ -376,6 +376,7 @@ const StakeCard = (props) => {
   });
 if(depositTokenSuccess && depositModal){
   depositToggle()
+  window.location.reload()
 }
   const depositToken = async () => {
     setModal(true);

@@ -577,7 +577,7 @@ const PigFarm = () => {
   });
 
   const getEggData = async () => {
-    setIncubCapacity(parseInt(_capacity) / 1e18);
+    setIncubCapacity(parseFloat(parseInt(_capacity) / 1e18).toFixed(2));
 
     setChickenEggSymbol(_chickenEggSymbol);
 
@@ -602,7 +602,7 @@ const PigFarm = () => {
     abi: PIG_FARMING_ABI,
     functionName: "checkAndTransferLand",
     args: [address, farmTokenId],
-    enabled: farmTokenId
+    enabled: farmTokenId && farmBalance > 0 
   });
 
   const {
@@ -1304,6 +1304,7 @@ const PigFarm = () => {
 
   if (depositEggSuccess && eggModal) {
     eggtoggle();
+    window.location.reload()
   }
 
   const depositEgg = async () => {
@@ -1394,6 +1395,7 @@ const PigFarm = () => {
 
   if (addAreaNFTSuccess && areaModal) {
     areaToggle();
+    window.location.reload()
   }
 
   const addAreaNFT = async () => {

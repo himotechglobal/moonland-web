@@ -1,4 +1,10 @@
 
+@media (min-width: 576px){
+.modal-dialog-centered{
+    min-height:100% !important;
+    top:50px;
+}}
+
 @media(max-width: 1166px){
     .bg-new10{
         background-image: url(../images/gamebg1024.png);

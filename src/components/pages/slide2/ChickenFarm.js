@@ -676,7 +676,7 @@ const ChickenFarm = () => {
     if (parseInt(_current) > eggunlockTime) {
       seteggTime("Yielded");
     } else {
-      let remainingSeconds = eggunlockTime - _current;
+      let remainingSeconds = eggunlockTime - parseInt(_current);
 
       let remainingDay = Math.floor(remainingSeconds / (60 * 60 * 24));
       let remainingHour = Math.floor(
@@ -1010,6 +1010,7 @@ const ChickenFarm = () => {
     abi: CHICKEN_INCUBATOR_ABI,
     functionName: "claimAdults",
     watch: true,
+    enabled:adult > 0 && baseApprovedIncub > 0
   });
 
   const {
@@ -1160,6 +1161,7 @@ const ChickenFarm = () => {
 
   if (depositEggSuccess && eggModal) {
     eggtoggle();
+    window.location.reload()
   }
 
   const depositEgg = async () => {
@@ -1249,6 +1251,7 @@ const ChickenFarm = () => {
 
   if (addAreaNFTSuccess && areaModal) {
     areaToggle();
+    window.location.reload()
   }
 
   const addAreaNFT = async () => {
