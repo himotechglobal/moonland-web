@@ -197,6 +197,7 @@ const PigFarm = () => {
     address: PIG_FARMING,
     abi: PIG_FARMING_ABI,
     functionName: "MoonLand",
+    watch:true
   });
 
   const { data: _sowToken } = useContractRead({
@@ -319,6 +320,7 @@ const PigFarm = () => {
     abi: PIG_FARMING_ABI,
     functionName: "getUserThermix",
     args: [address],
+    watch:true
   });
   const { data: _userEggs } = useContractRead({
     address: PIG_FARMING,
@@ -602,7 +604,8 @@ const PigFarm = () => {
     abi: PIG_FARMING_ABI,
     functionName: "checkAndTransferLand",
     args: [address, farmTokenId],
-    enabled: farmTokenId && farmBalance > 0 
+    enabled: farmTokenId && farmBalance > 0 ,
+    
   });
 
   const {
@@ -618,6 +621,9 @@ const PigFarm = () => {
   useEffect(() => {
     getEggData();
     getData();
+    // if(endTime==0){
+    //   window.location
+    // }
     if (unlockTime > 0) {
       // clearInterval(timeInterval);
       // timeInterval = setInterval(() => {
@@ -908,7 +914,7 @@ const PigFarm = () => {
       cdamount == "" ? 0 : ethers.utils.parseEther(cdamount.toString()),
       parseInt(farmTokenId),
     ],
-    watch: true,
+   enabled:cdamount>0
   });
 
   const {
@@ -941,7 +947,13 @@ const PigFarm = () => {
       chickenFoodBalance <
       parseInt(parseInt(cdamount) * parseInt(depositedDay) * 20)
     ) {
-      setcDepositError("Error: Inssufficient fluid Balance");
+      setcDepositError(`Error: Insufficient ${chickenFoodSymbol} Balance`);
+      return false;
+    } else if(parseInt(cdamount) <=0){
+      setcDepositError("Error: Quantity must be greater than 0.");
+      return false;
+    }else if(chickenDepositFee * cdamount>baseBalance){
+      setcDepositError(`Error: Insufficient ${baseSymbol} Balance`);
       return false;
     } else {
       setModal(true);
@@ -1401,7 +1413,7 @@ const PigFarm = () => {
   const addAreaNFT = async () => {
     setareadepositError(false);
     if (areadamount * farmPrice > baseBalance) {
-      setareadepositError("Error: Insufficient Balance");
+      setareadepositError(`Error: Insufficient ${baseSymbol} Balance`);
     } else {
       setModal(true);
       await addAreaNFTWriteAsync();

@@ -103,75 +103,88 @@ const StakeCard = (props) => {
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "stakeTokenAddress",
+    watch:true
   });
   const { data: _stakeSymbol } = useContractRead({
     address: _stakeToken,
     abi: TOKEN_ABI,
     functionName: "symbol",
+    watch:true
   });
 
   const { data: _decimals } = useContractRead({
     address: _stakeToken,
     abi: TOKEN_ABI,
     functionName: "decimals",
+    watch:true
   });
 
   const { data: _rewardToken } = useContractRead({
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "rewardTokenAddress",
+    watch:true
   });
   const { data: _rewardSymbol } = useContractRead({
     address: _rewardToken,
     abi: TOKEN_ABI,
     functionName: "symbol",
+    watch:true
   });
 
   const { data: _apy } = useContractRead({
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "rewardRate",
+    watch:true
   });
 
   const { data: _depositFee } = useContractRead({
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "stakingFeeRate",
+    watch:true
   });
 
   const { data: _unstakeFee} = useContractRead({
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "unstakingFeeRate",
+    watch:true
   });
 
   const {data: _stakeEnabled} = useContractRead({
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "stakeEnabled",
+    watch:true
   });
 
   const { data: _unstakeEnabled } = useContractRead({
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "unstakeEnabled",
+    watch:true
   });
 
   const { data: _claimEnabled } = useContractRead({
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "claimEnabled",
+    watch:true
   });
   const { data: _totalStaked1 } = useContractRead({
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "totalStakedTokens",
+    watch:true
   });
 
   const { data: _totalEarned1 } = useContractRead({
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "totalClaimedRewards",
+    watch:true
   });
 
   const { data: _depositedTokens1 } = useContractRead({
@@ -179,6 +192,7 @@ const StakeCard = (props) => {
     abi: STAKING_ABI,
     functionName: "depositedTokens",
     args: [address],
+    watch:true
   });
 
   const { data: _earnedTokens1 } = useContractRead({
@@ -186,6 +200,7 @@ const StakeCard = (props) => {
     abi: STAKING_ABI,
     functionName: "getPendingReward",
     args: [address],
+    watch:true,
   });
 
   const { data: _approved } = useContractRead({
@@ -193,18 +208,21 @@ const StakeCard = (props) => {
     abi: TOKEN_ABI,
     functionName: "allowance",
     args: [address, STAKING_ARRAY[props.index]?.address],
+    watch:true
   });
   const { data: _balance1 } = useContractRead({
     address: _stakeToken,
     abi: TOKEN_ABI,
     functionName: "balanceOf",
     args: [address],
+    watch:true
   });
 
   const { data: _totalStaked2 } = useContractRead({
     address: STAKING_ARRAY[props.index]?.address,
     abi: STAKING_ABI,
     functionName: "totalStakedTokens",
+    watch:true
   });
 
   const getData = () => {
@@ -232,7 +250,7 @@ const StakeCard = (props) => {
         setUserStaked(_depositedTokens);
         let _earnedTokens = parseFloat(
           _earnedTokens1 / 1e1 ** _decimals
-        ).toFixed(4);
+        ).toFixed(6);
 
         setUserEarned(_earnedTokens);
         let _balance = parseFloat(_balance1 / 1e1 ** _decimals).toFixed(4);
@@ -248,7 +266,7 @@ const StakeCard = (props) => {
 
   useEffect(() => {
     getData();
-  }, [address, _totalStaked1, _approved,_depositedTokens1,_earnedTokens1,_depositFee,_unstakeFee,_stakeEnabled,_unstakeEnabled,_totalEarned1,_earnedTokens1,_balance1,_totalStaked2,_rewardToken,_apy]);
+  }, [address, _totalStaked1, _approved,_depositedTokens1,_earnedTokens1,_depositFee,_unstakeFee,_stakeEnabled,_unstakeEnabled,_totalEarned1,_balance1,_totalStaked2,_rewardToken,_apy]);
 
 //   const getEarned = async () => {
 //     let v = STAKING_ARRAY[props.index];
@@ -415,6 +433,7 @@ if(depositTokenSuccess && depositModal){
   });
 if(withdrawTokenSuccess && withdrawModal){
   withdrawToggle()
+  window.location.reload()
 }
 
 const withdrawToken = async () => {
@@ -533,7 +552,7 @@ return (
             </li>
           </ul>
           <div className="alena-arean">
-            {claimEnabled && (
+            {claimEnabled && userEarned>0 && (
               <>
                 <h3>
                   {earnSymbol} <span>earned</span>
