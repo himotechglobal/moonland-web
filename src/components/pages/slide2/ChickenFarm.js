@@ -27,7 +27,7 @@ import NFT_ABI from "../../../Config/NFT_ABI.json";
 import TOKEN_ABI from "../../../Config/TOKEN_ABI.json";
 import {
   useAccount,
-  useContractRead,
+  useContractRead, 
   useContractWrite,
   usePrepareContractWrite,
   useWaitForTransaction,
