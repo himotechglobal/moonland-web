@@ -854,14 +854,7 @@ const PigFarm = () => {
           "m";
         seteggTime(_endTime);
       } else {
-        _endTime =
-          remainingHour +
-          "h : " +
-          remainingMinutes +
-          "m : " +
-          remainingSec +
-          "s";
-        seteggTime(_endTime);
+       window.location.reload()
       }
     }
   };
