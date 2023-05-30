@@ -1137,6 +1137,7 @@ const PigFarm = () => {
       address: PIG_INCUBATOR,
       abi: PIG_INCUBATOR_ABI,
       functionName: "claimMaterial",
+      enabled: adult > 0 
     }
   );
   const {
