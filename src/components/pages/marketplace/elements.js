@@ -420,9 +420,9 @@ const elements = (props) => {
     if (address) {
       let _balance = parseFloat(_balance1 / 1e1 ** _decimals).toFixed(2);
 
-      let _assetBalance = parseFloat(
+      let _assetBalance = parseInt(
         _assetBalance1 / 1e1 ** _assetDecimals
-      ).toFixed(2);
+      );
       let _assetApproval = parseFloat(
         _assetApproval1 / 1e1 ** _assetDecimals
       ).toFixed(2);
