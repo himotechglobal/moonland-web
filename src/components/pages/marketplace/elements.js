@@ -259,6 +259,7 @@ const elements = (props) => {
         args: [address, MARKETPLACE],
         watch: true
     })
+   
     const { data:ContractTokenBalance } = useBalance({
         addressOrName: MARKETPLACE,
         token: ELEMENTS[key].address
@@ -448,7 +449,6 @@ const elements = (props) => {
         }
 
     }
-
     useEffect(() => {
         getData();
         getPrice();
@@ -655,7 +655,7 @@ const elements = (props) => {
                                             <h1>{ELEMENTS[key].name}</h1>
                                             <div className='moon___c'>
                                                 <p>Rate</p>
-                                                <h6>$ {ELEMENTS[key]?.price} ~ {tokenPrice}</h6>
+                                                <h6>$ {ELEMENTS[key]?.price} ~ {tokenPrice>0?tokenPrice:"0"}</h6>
                                             </div>
                                             <div className='moon___buy__btm mb__m'>
                                                 <p>Total Sold</p>
@@ -759,10 +759,18 @@ const elements = (props) => {
                                 <Button className="bg___BTN2 mr-3" onClick={approveToken}>Approve</Button>
                                 :
                                 ContractTokenBalance?.formatted < depositAmount*multiplier
-                                    ? <p>
+                                    ? <p style={{color:"red"}}>
                                         Marketplace have no {ELEMENTS[key].name} Balance
                                     </p>
                                     :
+                                    (damount * tokenPrice)>balance ?
+                                    <p style={{color:"red"}}>
+                                        Insufficient {symbol} Balance.
+                                    </p>:
+                                    damount<0 ?
+                                    <p style={{color:"red"}}>
+                                         Qauntity must be positive.
+                                    </p>:
                                     <Button className="bg___BTN2 mr-3" onClick={buyFarmTokens}>Buy</Button>
 
                         }
@@ -797,11 +805,11 @@ const elements = (props) => {
                         <div className="moveRight">
                             <span className="pull-left">
                                 Your {ELEMENTS[key].name} Balance<br />
-                                {aseetBalance}
+                                {aseetBalance>0?aseetBalance:"0"}
                             </span>
                             <span className="pull-right">
                                 Your Token Balance<br />
-                                {balance} {symbol}
+                                {balance>0?balance:"0"} {symbol}
                             </span>
                         </div>
                         <label ><br />
@@ -839,12 +847,12 @@ const elements = (props) => {
                     </ModalBody>
                     <ModalFooter>
                         {
-                            aseetApproval < sellAmount &&
+                            aseetApproval == 0 &&
                             <Button className="bg___BTN2 mr-3" onClick={approveAsset}>Approve {ELEMENTS[key].name}</Button>
                         }
 
                         {
-                            aseetApproval >= sellAmount && samount > 0 && samount != "" &&
+                            aseetApproval > 0 && samount > 0 && samount != "" &&
                             <Button className="bg___BTN2 mr-3" onClick={sellFarmTokens}>Sell</Button>
                         }
                         <Button className="bg___BTN2" onClick={sellToggle}>Cancel</Button>

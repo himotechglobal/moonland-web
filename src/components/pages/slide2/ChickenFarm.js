@@ -1224,7 +1224,7 @@ const ChickenFarm = () => {
   const buyAreaNFT = async () => {
     setbuyareadepositError(false);
     if (buyareadamount * farmPrice > baseBalance) {
-      setbuyareadepositError("Error: Insufficient Balance");
+      setbuyareadepositError(`Error: Insufficient ${baseSymbol} Balance`);
     } else {
       setModal(true);
       await buyAreaNFTWriteAsync?.();
@@ -1257,7 +1257,7 @@ const ChickenFarm = () => {
   const addAreaNFT = async () => {
     setareadepositError(false);
     if (areadamount * farmPrice > baseBalance) {
-      setareadepositError("Error: Insufficient Balance");
+      setareadepositError(`Error: Insufficient ${baseSymbol} Balance`);
     } else {
       setModal(true);
       await addAreaNFTWriteAsync();
@@ -2177,7 +2177,9 @@ const ChickenFarm = () => {
               Approve {chickenFoodSymbol}
             </Button>
           )}
-          {chickenApproved > 0 &&
+          {parseFloat(chickenDepositFee * cdamount).toFixed(2)>baseBalance?<p style={{color:"red"}}>
+                                        Insufficient {baseSymbol} Balance.
+                                    </p>: chickenApproved > 0 &&
             chickenFoodApproved > 0 &&
             baseApprovedFarm > 0 && (
               <Button className="bg___BTN2 mr-3" onClick={depositMoreChicken}>
@@ -2231,7 +2233,9 @@ const ChickenFarm = () => {
               Approve {baseSymbol}
             </Button>
           )}
-          {baseApproved > 0 && (
+          {buyareadamount<0?<p style={{color:"red"}}>
+                                         Harvest Area must be positive.
+                                    </p>:baseApproved > 0 && (
             <Button className="bg___BTN2 mr-3" onClick={buyAreaNFT}>
               Buy
             </Button>
@@ -2286,7 +2290,9 @@ const ChickenFarm = () => {
               Approve {baseSymbol}
             </Button>
           )}
-          {baseApproved > 0 && (
+          { areadamount<0?<p style={{color:"red"}}>
+                                         Harvest Area must be positive.
+                                    </p>: baseApproved > 0 && (
             <Button className="bg___BTN2 mr-3" onClick={addAreaNFT}>
               Add
             </Button>

@@ -2307,7 +2307,9 @@ const PigFarm = () => {
               Approve {chickenFoodSymbol}
             </Button>
           )}
-          {sowApproved > 0 &&
+          {(chickenDepositFee * cdamount)>baseBalance?  <p style={{color:"red"}}>
+                                        Insufficient {baseSymbol} Balance.
+                                    </p>: sowApproved > 0 &&
             chickenFoodApproved > 0 &&
             baseApprovedFarm > 0 && (
               <Button className="bg___BTN2 mr-3" onClick={depositMoreChicken}>
@@ -2365,7 +2367,9 @@ const PigFarm = () => {
               Approve {baseSymbol}
             </Button>
           )}
-          {baseApproved > 0 && (
+          {(buyareadamount * farmPrice * 10)>baseBalance?
+          <p style={{color:"red"}}>Insufficient {baseSymbol} Balance</p>:
+            baseApproved > 0 && (
             <Button className="bg___BTN2 mr-3" onClick={buyAreaNFT}>
               Buy
             </Button>
@@ -2422,7 +2426,8 @@ const PigFarm = () => {
               Approve {baseSymbol}
             </Button>
           )}
-          {baseApproved > 0 && (
+          
+          {(areadamount * farmPrice * 10)>baseBalance?<p style={{color:"red"}}>Insufficient {baseSymbol} Balance</p>:  baseApproved > 0 && (
             <Button className="bg___BTN2 mr-3" onClick={addAreaNFT}>
               Add
             </Button>
@@ -2472,7 +2477,8 @@ const PigFarm = () => {
               Approve {baseSymbol}
             </Button>
           )}
-          {chickenEggApproved > 0 && baseApprovedIncub > 0 && (
+          {(cedamount * eggDepositFee)>baseBalance?<p style={{color:"red"}}>Insufficient {baseSymbol} Balance</p>:
+          chickenEggApproved > 0 && baseApprovedIncub > 0 && (
             <Button className="bg___BTN2 mr-3" onClick={depositEgg}>
               Deposit
             </Button>
@@ -2540,7 +2546,15 @@ const PigFarm = () => {
               Approve {chickenFoodSymbol}
             </Button>
           )}
-          {chickenFoodApproved > 0 && (
+          {parseFloat(
+                  (parseInt(sowDeposited) + parseInt(boarDeposited)) *
+                    addDayamount *
+                    7 *
+                    20
+                ).toFixed(2)>chickenFoodBalance?<p style={{color:"red"}}>
+                Insufficient {chickenFoodSymbol} Balance.
+            </p>:
+          chickenFoodApproved > 0 && (
             <Button className="bg___BTN2 mr-3" onClick={addDays}>
               Add Days
             </Button>
