@@ -197,7 +197,7 @@ const PigFarm = () => {
     address: PIG_FARMING,
     abi: PIG_FARMING_ABI,
     functionName: "MoonLand",
-    watch:true
+    watch: true,
   });
 
   const { data: _sowToken } = useContractRead({
@@ -320,7 +320,7 @@ const PigFarm = () => {
     abi: PIG_FARMING_ABI,
     functionName: "getUserThermix",
     args: [address],
-    watch:true
+    watch: true,
   });
   const { data: _userEggs } = useContractRead({
     address: PIG_FARMING,
@@ -344,7 +344,7 @@ const PigFarm = () => {
     args: [address],
     watch: true,
   });
- 
+
   const { data: _chickenFoodBalance1 } = useContractRead({
     address: POSITRONS_TOKEN,
     abi: TOKEN_ABI,
@@ -485,15 +485,15 @@ const PigFarm = () => {
 
       setLandIsfree(_landIsfree);
       setFarmLocked(_userInfo1?.[4]);
-    //  setFarmTokenId(_userInfo1?.[1]);
+      //  setFarmTokenId(_userInfo1?.[1]);
 
-          setFarmArea(parseFloat(_userInfo1?.[2] / 1e18).toFixed());
-          setFarmCapacity(parseFloat(_userInfo1?.[3] / 1e18).toFixed());
+      setFarmArea(parseFloat(_userInfo1?.[2] / 1e18).toFixed());
+      setFarmCapacity(parseFloat(_userInfo1?.[3] / 1e18).toFixed());
       if (_nftBalance > 0 || _userInfo?.landlocked) {
         if (_approved === PIG_FARMING) {
           setFarmApprove(true);
         }
-       
+
         // if (_userInfo1?.[4]) {
         //   setFarmTokenId(_userInfo1?.[1]);
 
@@ -591,7 +591,6 @@ const PigFarm = () => {
       setChickenEggApproved(parseInt(_chickenEggApproved));
       setAdult(parseFloat(parseFloat(_userItens) / 1e18).toFixed());
       if (parseInt(_userInfo2?.[0]) > 0) {
-
         setEggUnlockTime(_unlockItem);
         setEggHatchTime(_unlockItem2);
         setChickenClaimfee(parseInt(_claimChickenFee) / 1e18);
@@ -604,8 +603,7 @@ const PigFarm = () => {
     abi: PIG_FARMING_ABI,
     functionName: "checkAndTransferLand",
     args: [address, farmTokenId],
-    enabled: farmTokenId && farmBalance > 0 ,
-    
+    enabled: farmTokenId && farmBalance > 0,
   });
 
   const {
@@ -702,7 +700,7 @@ const PigFarm = () => {
     sowApproved,
     _boarApproved,
     _approved,
-    _landIsfree
+    _landIsfree,
   ]);
 
   const lockNFT = async () => {
@@ -890,7 +888,7 @@ const PigFarm = () => {
   });
 
   if (removeChickenSuccess && removeChickenModal) {
-    removeChickentoggle()
+    removeChickentoggle();
   }
 
   const removeChicken = async () => {
@@ -914,7 +912,7 @@ const PigFarm = () => {
       cdamount == "" ? 0 : ethers.utils.parseEther(cdamount.toString()),
       parseInt(farmTokenId),
     ],
-   enabled:cdamount>0
+    enabled: cdamount > 0,
   });
 
   const {
@@ -949,10 +947,10 @@ const PigFarm = () => {
     ) {
       setcDepositError(`Error: Insufficient ${chickenFoodSymbol} Balance`);
       return false;
-    } else if(parseInt(cdamount) <=0){
+    } else if (parseInt(cdamount) <= 0) {
       setcDepositError("Error: Quantity must be greater than 0.");
       return false;
-    }else if(chickenDepositFee * cdamount>baseBalance){
+    } else if (chickenDepositFee * cdamount > baseBalance) {
       setcDepositError(`Error: Insufficient ${baseSymbol} Balance`);
       return false;
     } else {
@@ -1041,8 +1039,6 @@ const PigFarm = () => {
     hash: approvebaseTokenFarmData?.hash,
   });
 
- 
-
   const approvebaseTokenFarm = async () => {
     setApprovalProcessing(true);
 
@@ -1123,8 +1119,6 @@ const PigFarm = () => {
     hash: approveChickenFoodData?.hash,
   });
 
-
-
   const approveChickenFood = async () => {
     setApprovalProcessing(true);
 
@@ -1137,7 +1131,7 @@ const PigFarm = () => {
       address: PIG_INCUBATOR,
       abi: PIG_INCUBATOR_ABI,
       functionName: "claimMaterial",
-      enabled: adult > 0 
+      enabled: adult > 0,
     }
   );
   const {
@@ -1230,7 +1224,6 @@ const PigFarm = () => {
     hash: approveBoarData?.hash,
   });
 
-
   const approveBoar = async () => {
     setApprovalProcessing(true);
 
@@ -1258,8 +1251,6 @@ const PigFarm = () => {
   const { isSuccess: approveSowSuccess } = useWaitForTransaction({
     hash: approveSowData?.hash,
   });
-
- 
 
   const approveSow = async () => {
     setApprovalProcessing(true);
@@ -1317,7 +1308,7 @@ const PigFarm = () => {
 
   if (depositEggSuccess && eggModal) {
     eggtoggle();
-    window.location.reload()
+    window.location.reload();
   }
 
   const depositEgg = async () => {
@@ -1408,7 +1399,7 @@ const PigFarm = () => {
 
   if (addAreaNFTSuccess && areaModal) {
     areaToggle();
-    window.location.reload()
+    window.location.reload();
   }
 
   const addAreaNFT = async () => {
@@ -1656,12 +1647,11 @@ const PigFarm = () => {
                                                         <h3>0</h3>
                                                         <p>DuoPods Capacity</p>
                                                     </div> */}
-                                                
+
                           <div
                             className="pool-btns"
                             style={{ justifyContent: "end" }}
                           >
-                           
                             {!farmLocked &&
                               farmBalance > 0 &&
                               farmApprove &&
@@ -2179,7 +2169,9 @@ const PigFarm = () => {
             chickenFoodApproved == 0 ||
             baseApprovedFarm == 0) && (
             <div className="container">
-              <h5 style={{textAlign:"center"}}>Approve following in order to deposit</h5>
+              <h5 style={{ textAlign: "center" }}>
+                Approve following in order to deposit
+              </h5>
               <ul className="progressbar mt-3">
                 <li className={baseApprovedFarm > 0 ? "active" : ""}>
                   {baseSymbol}
@@ -2307,15 +2299,17 @@ const PigFarm = () => {
               Approve {chickenFoodSymbol}
             </Button>
           )}
-          {(chickenDepositFee * cdamount)>baseBalance?  <p style={{color:"red"}}>
-                                        Insufficient {baseSymbol} Balance.
-                                    </p>: sowApproved > 0 &&
+          {chickenDepositFee * cdamount > baseBalance ? (
+            <p style={{ color: "red" }}>Insufficient {baseSymbol} Balance.</p>
+          ) : (
+            sowApproved > 0 &&
             chickenFoodApproved > 0 &&
             baseApprovedFarm > 0 && (
               <Button className="bg___BTN2 mr-3" onClick={depositMoreChicken}>
                 Deposit
               </Button>
-            )}
+            )
+          )}
           <Button className="bg___BTN2" onClick={moreChickentoggle}>
             Cancel
           </Button>
@@ -2367,12 +2361,14 @@ const PigFarm = () => {
               Approve {baseSymbol}
             </Button>
           )}
-          {(buyareadamount * farmPrice * 10)>baseBalance?
-          <p style={{color:"red"}}>Insufficient {baseSymbol} Balance</p>:
+          {buyareadamount * farmPrice * 10 > baseBalance ? (
+            <p style={{ color: "red" }}>Insufficient {baseSymbol} Balance</p>
+          ) : (
             baseApproved > 0 && (
-            <Button className="bg___BTN2 mr-3" onClick={buyAreaNFT}>
-              Buy
-            </Button>
+              <Button className="bg___BTN2 mr-3" onClick={buyAreaNFT}>
+                Buy
+              </Button>
+            )
           )}
           <Button className="bg___BTN2" onClick={buyAreaToggle}>
             Cancel
@@ -2426,11 +2422,15 @@ const PigFarm = () => {
               Approve {baseSymbol}
             </Button>
           )}
-          
-          {(areadamount * farmPrice * 10)>baseBalance?<p style={{color:"red"}}>Insufficient {baseSymbol} Balance</p>:  baseApproved > 0 && (
-            <Button className="bg___BTN2 mr-3" onClick={addAreaNFT}>
-              Add
-            </Button>
+
+          {areadamount * farmPrice * 10 > baseBalance ? (
+            <p style={{ color: "red" }}>Insufficient {baseSymbol} Balance</p>
+          ) : (
+            baseApproved > 0 && (
+              <Button className="bg___BTN2 mr-3" onClick={addAreaNFT}>
+                Add
+              </Button>
+            )
           )}
           <Button className="bg___BTN2" onClick={areaToggle}>
             Cancel
@@ -2477,11 +2477,15 @@ const PigFarm = () => {
               Approve {baseSymbol}
             </Button>
           )}
-          {(cedamount * eggDepositFee)>baseBalance?<p style={{color:"red"}}>Insufficient {baseSymbol} Balance</p>:
-          chickenEggApproved > 0 && baseApprovedIncub > 0 && (
-            <Button className="bg___BTN2 mr-3" onClick={depositEgg}>
-              Deposit
-            </Button>
+          {cedamount * eggDepositFee > baseBalance ? (
+            <p style={{ color: "red" }}>Insufficient {baseSymbol} Balance</p>
+          ) : (
+            chickenEggApproved > 0 &&
+            baseApprovedIncub > 0 && (
+              <Button className="bg___BTN2 mr-3" onClick={depositEgg}>
+                Deposit
+              </Button>
+            )
           )}
           <Button className="bg___BTN2" onClick={eggtoggle}>
             Cancel
@@ -2547,17 +2551,20 @@ const PigFarm = () => {
             </Button>
           )}
           {parseFloat(
-                  (parseInt(sowDeposited) + parseInt(boarDeposited)) *
-                    addDayamount *
-                    7 *
-                    20
-                ).toFixed(2)>chickenFoodBalance?<p style={{color:"red"}}>
-                Insufficient {chickenFoodSymbol} Balance.
-            </p>:
-          chickenFoodApproved > 0 && (
-            <Button className="bg___BTN2 mr-3" onClick={addDays}>
-              Add Days
-            </Button>
+            (parseInt(sowDeposited) + parseInt(boarDeposited)) *
+              addDayamount *
+              7 *
+              20
+          ).toFixed(2) > chickenFoodBalance ? (
+            <p style={{ color: "red" }}>
+              Insufficient {chickenFoodSymbol} Balance.
+            </p>
+          ) : (
+            chickenFoodApproved > 0 && (
+              <Button className="bg___BTN2 mr-3" onClick={addDays}>
+                Add Days
+              </Button>
+            )
           )}
           <Button className="bg___BTN2" onClick={addDaysChickentoggle}>
             Cancel
