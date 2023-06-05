@@ -21,6 +21,7 @@ import TOKEN_ABI from "../../../Config/TOKEN_ABI.json";
 import childe from "../../images/childe.svg";
 import mbuild from "../../images/mbuild.png";
 import arrow from "../../images/round_arrow.svg";
+import moon from '../../images/cb7.png';
 import {
   useAccount,
   useContractRead,
@@ -28,6 +29,8 @@ import {
   usePrepareContractWrite,
   useWaitForTransaction,
 } from "wagmi";
+import acc__arrow_revse from "../../images/acc__arrow_revse.svg";
+import acc__arrow from "../../images/acc__arrow.svg";
 import { ethers } from "ethers";
 import land from "../../images/land.svg";
 import { Link } from "react-router-dom";
@@ -176,6 +179,8 @@ const PigFarm = () => {
 
   const [buyModal, setBuyModal] = useState(false);
   const buyToggle = () => setBuyModal(!buyModal);
+  const [show, setShow] = useState(false);
+
 
   const { address, isConnected } = useAccount();
 
@@ -1647,10 +1652,35 @@ const PigFarm = () => {
                                                         <h3>0</h3>
                                                         <p>DuoPods Capacity</p>
                                                     </div> */}
-
-                          <div
+ <div
+                          className="acc__arrow___icon"
+                          onClick={() => setShow((prev) => !prev)}
+                        >
+                          {show ? (
+                            <img src={acc__arrow_revse} alt="" />
+                          ) : (
+                            <img src={acc__arrow} alt="" />
+                          )}
+                        </div>
+                      
+                        </div>
+                        <div className="alienbtns">
+                          {/* <div className="pool-btns">
+                                   <p style={{color: '#fff'}}>Chicken Farming is being upgraded to a newer version with enhanced features between 8:30 hours UTC to 12:30 hours UTC. During this time you won't be able to perform any actions. </p>
+                                   </div> */}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {show && <div className="acc__summery">
+                  <div className="acc__summery__in">
+                  <div
                             className="pool-btns"
-                            style={{ justifyContent: "end" }}
+                            // style={{ justifyContent: "end" }}
                           >
                             {!farmLocked &&
                               farmBalance > 0 &&
@@ -1684,18 +1714,11 @@ const PigFarm = () => {
                               </a>
                             )}
                           </div>
-                        </div>
-                        <div className="alienbtns">
-                          {/* <div className="pool-btns">
-                                   <p style={{color: '#fff'}}>Chicken Farming is being upgraded to a newer version with enhanced features between 8:30 hours UTC to 12:30 hours UTC. During this time you won't be able to perform any actions. </p>
-                                   </div> */}
-                        </div>
-                      </div>
-                    </div>
+
+                    
                   </div>
                 </div>
-              </div>
-            </div>
+             }
             <div className="row">
               <div className="col-lg-6">
                 <div className="marketplace-box-wrap5">
@@ -1738,9 +1761,9 @@ const PigFarm = () => {
                               )}
                               <p className="marquee">
                                 <span>
-                                  <i className="fa fa-warning yellow"></i>
+                                  <i className="fa fa-warning yellow"></i>{" "}
                                   {/* Time remaining for {chickenFoodSymbol} to end. */}
-                                  Time until the next SoPod is built
+                                  SoPod will be built in
                                 </span>
                               </p>
                             </>
@@ -1842,7 +1865,7 @@ const PigFarm = () => {
                             style={{ height: "109px", paddingLeft: "12px" }}
                           />
                         </div>
-                        <a href="/marketplace" className="bg___BTN2">
+                        <a href="/buy/thermix#" className="bg___BTN2">
                           Buy Thermix
                         </a>
                       </div>
@@ -1857,8 +1880,23 @@ const PigFarm = () => {
                         <div style={{ textAlign: "center" }}>
                           <img src={metlux} alt="metlux" />
                         </div>
-                        <a href="/marketplace" className="bg___BTN2">
+                        <a href="/buy/metlux#" className="bg___BTN2">
                           Buy Metlux
+                        </a>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "10px",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <div style={{ textAlign: "center" }}>
+                          <img style={{height:"95px"}} src={"https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2F7iSB07jCKP8ic0IlDVhX%2FFluid.png?alt=media&token=cacea51a-d2be-42d2-9e41-ff401cbf5367"} alt="metlux" />
+                        </div>
+                        <a href="/buy/positron#" className="bg___BTN2">
+                          Buy Positron
                         </a>
                       </div>
                     </div>
@@ -1877,11 +1915,11 @@ const PigFarm = () => {
                         sowBalance > 0 &&
                         sowDeposited == 0 && (
                           <a
-                            href="javacript:void"
                             className="bg___BTN2"
                             onClick={sowtoggle}
                           >
-                            Deposit {sowSymbol}
+                            {/* Deposit {sowSymbol} */}
+                            Build SoPod
                           </a>
                         )}
                     </div>
@@ -1889,13 +1927,13 @@ const PigFarm = () => {
                       {sowDeposited > 0 &&
                         unlockTime > new Date().getTime() / 1e3 && (
                           <a
-                            href="javacript:void"
+                            // href="javacript:void"
                             className="bg___BTN2"
                             onClick={() =>
                               setMoreChickenModal(!moreChickenModal)
                             }
                           >
-                            Build
+                            Build More
                           </a>
                         )}
 
@@ -1914,7 +1952,7 @@ const PigFarm = () => {
 
                       {sowDeposited > 0 && (
                         <a
-                          href="javacript:void"
+                          // href="javacript:void"
                           className="bg___BTN2"
                           onClick={() =>
                             setaddDaysChickenModal(!addDaysChickenModal)
@@ -2006,12 +2044,13 @@ const PigFarm = () => {
 
                         {chickenEggApproved == 0 && (
                           <a className="bg___BTN2" onClick={approveChickenEgg}>
-                            Approve {chickenEggSymbol} Forge
+                            Approve {chickenEggSymbol}
                           </a>
                         )}
                         {chickenEggApproved > 0 && chickenEggDeposited == 0 && (
                           <a className="bg___BTN2" onClick={eggtoggle}>
-                            Put {chickenEggSymbol} in Forge
+                            {/* Put {chickenEggSymbol} in Forge */}
+                            Forge Materials
                           </a>
                         )}
 
@@ -2072,19 +2111,30 @@ const PigFarm = () => {
 
       <Modal isOpen={sowModal} toggle={sowtoggle} centered={true}>
         <ModalBody>
-          <div className="moveRight">
-            <span className="pull-left">
+          <div >
+        <div className="sopod_build">
+        <div style={{display:"flex",flexDirection:"column",gap:"15px"}}>
+          <span>
               <b>Your {sowSymbol} Balance</b>
               <br />
               {sowBalance}
             </span>
-            <span className="pull-right ">
+            <span >
+              <b>Your {boarSymbol} Balance</b>
+              <br />
+              {boarBalance}
+            </span>
+          </div>
+      <div className="align_center">
+      <span>
               <b>Your available Capacity</b>
               <br />
               {parseFloat(farmCapacity) -
                 (parseFloat(sowDeposited) + parseFloat(boarDeposited))}{" "}
               Material
             </span>
+      </div>
+        </div>
           </div>
           <label className="mb-3">
             <br />
@@ -2106,19 +2156,19 @@ const PigFarm = () => {
             Materials @ (1 {sowSymbol}/{boarSymbol} per 10 sq. m.)
           </span>
           <span className="info">
-            <b>Note:</b> 1 {boarSymbol} is required for 10 {sowSymbol} to build.{" "}
+            <b>Note:</b> 1 {boarSymbol} is required for 1 {sowSymbol} to build one SoPod.{" "}
             {boarSymbol} is automatically dedcuted from your wallet and adjusted
-            to remaining space and required {chickenFoodSymbol} is dedcuted from
+            to remaining space and required {chickenFoodSymbol}(Positron) is dedcuted from
             your wallet
           </span>
           <span className="info mt-1">
             <b>Required {boarSymbol}:</b> {requiredBoar} {boarSymbol} (@ 1{" "}
-            {boarSymbol} per 10 {sowSymbol} )
+            {boarSymbol} per 1 {sowSymbol} )
           </span>
 
           <label className="">
             <br />
-            <b>Enter Weeks to Build</b>
+            <b>Enter Amount to Build</b>
           </label>
 
           <input
@@ -2127,12 +2177,16 @@ const PigFarm = () => {
             type="number"
             value={dayamount}
           />
-          <span className="info">
+          {/* <span className="info">
             <b>Note:</b> It takes One week for each {sowSymbol} to deliver one{" "}
             {chickenEggSymbol}
+          </span> */}
+           <span className="info">
+            <b>Note:</b> It takes 1 week for a SoPod to get built, rented and generate 1{" "}
+            {chickenEggSymbol}.
           </span>
           <span className="info mt-1">
-            <b>Est. {chickenEggSymbol}:</b>{" "}
+            <b>Est. Positron:</b>{" "}
             {parseFloat(parseFloat(requiredBoar) + parseFloat(cdamount)) *
               20 *
               dayamount *
@@ -2140,10 +2194,10 @@ const PigFarm = () => {
             {chickenFoodSymbol} @ (20 {chickenFoodSymbol} per material daily)
           </span>
           <span className="info mt-3">
-            <b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance}{" "}
+            <b>Available {chickenFoodSymbol}:</b> {chickenFoodBalance}{" "}
             {chickenFoodSymbol}
           </span>
-          <span className="info mt-3">
+          {/* <span className="info mt-3">
             <b>Your {chickenFoodSymbol} Cost for Total Materials in Farm: </b>{" "}
             {parseFloat(
               (parseFloat(sowDeposited) +
@@ -2154,10 +2208,10 @@ const PigFarm = () => {
                 20
             ).toFixed(2)}{" "}
             {chickenFoodSymbol}
-          </span>
+          </span> */}
           <span className="info mt-1">
             <b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)}{" "}
-            {baseSymbol} (@ {chickenDepositFee} per Material )
+            ${baseSymbol} (@ {chickenDepositFee} per Material )
           </span>
 
           {cdepositError && <span className="error">{cdepositError}</span>}
@@ -2174,7 +2228,7 @@ const PigFarm = () => {
               </h5>
               <ul className="progressbar mt-3">
                 <li className={baseApprovedFarm > 0 ? "active" : ""}>
-                  {baseSymbol}
+                  ${baseSymbol}
                 </li>
                 <li className={chickenFoodApproved > 0 ? "active" : ""}>
                   {chickenFoodSymbol}
@@ -2191,7 +2245,7 @@ const PigFarm = () => {
           )}
           {baseApprovedFarm == 0 && !approvalProcessing && (
             <Button className="bg___BTN2 mr-3" onClick={approvebaseTokenFarm}>
-              Approve {baseSymbol}
+              Approve ${baseSymbol}
             </Button>
           )}
 
@@ -2224,7 +2278,7 @@ const PigFarm = () => {
             chickenFoodApproved > 0 &&
             baseApprovedFarm > 0 && (
               <Button className="bg___BTN2 mr-3" onClick={depositSow}>
-                Deposit
+                Build
               </Button>
             )}
           <Button className="bg___BTN2" onClick={sowtoggle}>
@@ -2239,8 +2293,8 @@ const PigFarm = () => {
         centered={true}
       >
         <ModalBody>
-          <div className="moveRight">
-            <span className="pull-left">
+          <div>
+            {/* <span className="pull-left">
               Your {sowSymbol} Balance
               <br />
               {sowBalance}
@@ -2250,11 +2304,35 @@ const PigFarm = () => {
               <br />
               {farmCapacity -
                 (parseInt(sowDeposited) + parseInt(boarDeposited))}
+            </span> */}
+             <div className="sopod_build">
+        <div style={{display:"flex",flexDirection:"column",gap:"15px"}}>
+          <span>
+              <b>Your {sowSymbol} Balance</b>
+              <br />
+              {sowBalance}
             </span>
+            <span >
+              <b>Your {boarSymbol} Balance</b>
+              <br />
+              {boarBalance}
+            </span>
+          </div>
+      <div className="align_center">
+      <span>
+              {/* Your available {farmSymbol} Capacity */}
+              Your available Land (sq yards)
+              <br />
+              {farmCapacity -
+                (parseInt(sowDeposited) + parseInt(boarDeposited))}
+            </span>
+      </div>
+        </div>
           </div>
           <label className="mb-3">
             <br />
-            Enter Quantity to add in Harvest
+            {/* Enter Quantity to add in Harvest */}
+            Enter number of SoPods to build
           </label>
           <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>
             Max
@@ -2269,21 +2347,25 @@ const PigFarm = () => {
           <span className="info">
             Max:{" "}
             {farmCapacity - (parseInt(sowDeposited) + parseInt(boarDeposited))}{" "}
-            {sowSymbol} @ (1 {sowSymbol} per sq. m.)
+            {sowSymbol} @ (1 {sowSymbol} per sq yards)
           </span>
 
           <span className="info">
             Est. {chickenFoodSymbol}: {cdamount * 20 * depositedDay}{" "}
-            {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per {sowSymbol}{" "}
+            {chickenFoodSymbol} @ (600 {chickenFoodSymbol} per Material{" "}
             daily)
           </span>
+          <span className="info mt-1">
+            <b>Note:</b> “1 {boarSymbol} is required against 1 {sowSymbol} to build 1 SoPod.
+{boarSymbol} will be deducted automatically from your wallet.”
+          </span>
           <span className="info mt-3">
-            <b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance}{" "}
+            <b>Available {chickenFoodSymbol}:</b> {chickenFoodBalance}{" "}
             {chickenFoodSymbol}
           </span>
           <span className="info mt-1">
             <b>Fee:</b> {parseFloat(chickenDepositFee * cdamount).toFixed(2)}{" "}
-            {baseSymbol} (@ {chickenDepositFee} per MATERIAL(s) )
+            ${baseSymbol} (@ {chickenDepositFee} per MATERIAL(s) )
           </span>
 
           {cdepositError && <span className="error">{cdepositError}</span>}
@@ -2306,7 +2388,7 @@ const PigFarm = () => {
             chickenFoodApproved > 0 &&
             baseApprovedFarm > 0 && (
               <Button className="bg___BTN2 mr-3" onClick={depositMoreChicken}>
-                Deposit
+                Build
               </Button>
             )
           )}
@@ -2508,7 +2590,7 @@ const PigFarm = () => {
           </div>
           <label className="mb-3">
             <br />
-            Enter Weeks to add in Building
+            Extend building weeks for assembled Materials
           </label>
           <span
             className="bg___BTN2 maxbtn ml-2 p-2"
@@ -2524,7 +2606,7 @@ const PigFarm = () => {
           />
 
           <span className="info mt-3">
-            <b>Your {chickenFoodSymbol} Cost for Total Material in Build:</b>{" "}
+            <b>Your {chickenFoodSymbol} Cost for Total assembled Materials:</b>{" "}
             {(sowDeposited && boarDeposited && addDayamount) > 0
               ? parseFloat(
                   (parseInt(sowDeposited) + parseInt(boarDeposited)) *
@@ -2536,7 +2618,7 @@ const PigFarm = () => {
             {chickenFoodSymbol}
           </span>
           <span className="info mt-3">
-            <b>Your Available {chickenFoodSymbol}:</b> {chickenFoodBalance}{" "}
+            <b>Available {chickenFoodSymbol}:</b> {chickenFoodBalance}{" "}
             {chickenFoodSymbol}
           </span>
 
@@ -2562,7 +2644,8 @@ const PigFarm = () => {
           ) : (
             chickenFoodApproved > 0 && (
               <Button className="bg___BTN2 mr-3" onClick={addDays}>
-                Add Days
+                {/* Add Days */}
+                Add
               </Button>
             )
           )}

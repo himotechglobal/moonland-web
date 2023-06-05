@@ -17,6 +17,8 @@ import mooon from '../../images/moon_pods.svg';
 import mat from '../../images/mat.svg';
 import energy from '../../images/energy.png';
 import eules from '../../images/eules.svg';
+import thermix from "../../images/thermix.png";
+import metlux from "../../images/metlux.png";
 import fluds from '../../images/fluds.png';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -49,14 +51,14 @@ const ELEMENTS = [
       'slug': 'thermix',
       'name': 'THERMIX',
       'price': '100',
-      'image': mat,
+      'image': thermix,
       'address': '0x12F32f5FC8C87b053DfBc8F56C159094B42730d1'
   },
   {
       'slug': 'metlux',
       'name': 'METLUX',
       'price': '100',
-      'image': land,
+      'image': metlux,
       'address': '0x8D1502d8Acc70b861F58186270Bc81F671e0B2d8'
   },
   {

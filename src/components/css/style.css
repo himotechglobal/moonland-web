@@ -2834,6 +2834,7 @@ backdrop-filter: blur(54.5px);
     border-radius: 8px !important;
     color: #fff !important;
     margin-top: 1rem;
+    margin-bottom: .5rem;
 }
 .form-control:focus{
   box-shadow: inherit !important;
@@ -4726,7 +4727,21 @@ min-height: 100vh;
   background-color: #fff;
   color: #000000;
 }
-
+.sopod_build{
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width:768px){
+  .sopod_build{
+    display: flex;
+   flex-direction: column;
+   justify-content: center;
+   gap: 15px;
+  }
+  .align_center{
+    text-align: center;
+  }
+}
 .progressbar li:after {
   content: "";
   position: absolute;

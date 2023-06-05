@@ -5,10 +5,10 @@ import land from "../../images/land.svg";
 import childe from "../../images/childe.svg";
 import bysine from "../../images/bysine.png";
 import arrow from "../../images/round_arrow.svg";
-import acc__arrow_revse from "../../images/acc__arrow_revse.svg";
 import modal_earth from "../../images/modal_earth.png";
 import chickSine from "../../images/chickSine.svg";
 import solerimg1 from "../../images/solerimg1.svg";
+import acc__arrow_revse from "../../images/acc__arrow_revse.svg";
 import acc__arrow from "../../images/acc__arrow.svg";
 import {
   CHICKEN_FARMING,

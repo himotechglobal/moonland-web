@@ -9,6 +9,8 @@ import bg_img from "../../images/bg_img.png";
 import { MARKETPLACE, METLUX_TOKEN } from "../../../Config/index.js";
 import MARKETPLACE_ABI from "../../../Config/MARKETPLACE_ABI.json";
 import TOKEN_ABI from "../../../Config/TOKEN_ABI.json";
+import metlux from "../../images/metlux.png";
+import thermix from "../../images/thermix.png";
 import {
   useAccount,
   useBalance,
@@ -55,7 +57,7 @@ const ELEMENTS = {
   fluid: {
     name: "SUPERCONDUCTOR FLUID",
     price: "1",
-    image: fluds,
+    image: "https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2FJoILLv3a235XSXVrabq4%2FFluid%202.png?alt=media&token=bd0b3667-8570-4920-9991-3f8f939a1d85",
     img: b3,
     desc: "Superconductor fluid is a type of fluid used by solar cells to power the process of solar harvesting. It is a critical resource required for the efficient and effective generation of electricity by solar cells. Superconductor fluid enables the smooth flow of electrons, reducing resistance and increasing the conductivity of solar cells. This, in turn, helps to increase the efficiency of solar cells in converting sunlight into electrical energy. Without superconductor fluid, the process of solar harvesting is not possible.",
     address: "0xb4e0f6aEfb68449917879068E9C32703268F9C89",
@@ -63,7 +65,7 @@ const ELEMENTS = {
   thermix: {
     name: "THERMIX",
     price: "100",
-    image: mat,
+    image: thermix,
     img: b4,
     address: "0x12F32f5FC8C87b053DfBc8F56C159094B42730d1",
     desc: "Thermix is a cutting-edge technology designed to maintain a comfortable temperature inside MoonPods, which are structures built for human habitation on the moon. The device generates the ideal temperature for a human-friendly environment by using advanced algorithms and sensors. With its sophisticated features, high demand and limited supply, the Thermix is a highly sought-after product among moon settlers and space enthusiasts.",
@@ -71,7 +73,7 @@ const ELEMENTS = {
   metlux: {
     name: "METLUX",
     price: "100",
-    image: land,
+    image: metlux,
     img: b5,
     address: "0x8D1502d8Acc70b861F58186270Bc81F671e0B2d8",
     desc: "Metlux is a specially crafted metal made by mixing different materials to create a highly durable and protective material that can safeguard MoonPods from a variety of environmental hazards. It is designed to provide protection from space debris, UV radiation, and gamma rays, which are dangerous to both humans and equipments. Metlux is lightweight, conductive, and resistant to extreme temperatures and harsh conditions as well, making it ideal to use it on moon. Its advanced properties make it an essential component for ensuring the safety and longevity of Moonpods.",
@@ -87,7 +89,7 @@ const ELEMENTS = {
   positron: {
     name: "POSITRON",
     price: "5",
-    image: mooon,
+    image: "https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2F7iSB07jCKP8ic0IlDVhX%2FFluid.png?alt=media&token=cacea51a-d2be-42d2-9e41-ff401cbf5367",
     img: b7,
     address: "0x19Aca1DB633622ADA2cc722991db21989f6F4F9B",
     desc: "Positron is a fuel that is essential for the functioning of Thermix and Metlux, two materials used in the creation of MoonPods. The combination of Thermix and Metlux provides the necessary insulation and protection from the harsh lunar environment, while Positron acts as the fuel source for these materials to function properly. Without Positron, the construction of MoonPods and other space habitats would not be possible, highlighting the crucial role it plays in the development of a sustainable Moopod.",
