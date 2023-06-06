@@ -930,9 +930,10 @@ const PigFarm = () => {
     hash: depositMoreChickenData?.hash,
   });
 
-  // if (depositMoreChickenSuccess) {
-  //   moreChickentoggle();
-  // }
+  if (depositMoreChickenSuccess && moreChickenModal) {
+    moreChickentoggle();
+    window.location.reload();
+  }
 
   const depositMoreChicken = async () => {
     setcDepositError(false);
@@ -1281,9 +1282,10 @@ const PigFarm = () => {
     hash: addDaysData?.hash,
   });
 
-  // if (addDaysSuccess && addDaysChickenModal) {
-  //   addDaysChickentoggle();
-  // }
+  if (addDaysSuccess && addDaysChickenModal) {
+    addDaysChickentoggle();
+    window.location.reload();
+  }
 
   const addDays = async () => {
     setaddDdepositError(false);
