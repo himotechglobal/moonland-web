@@ -10,6 +10,7 @@ import chickSine from "../../images/chickSine.svg";
 import solerimg1 from "../../images/solerimg1.svg";
 import acc__arrow_revse from "../../images/acc__arrow_revse.svg";
 import acc__arrow from "../../images/acc__arrow.svg";
+import new_land from "../../images/new_land.png";
 import {
   CHICKEN_FARMING,
   CHICKEN_INCUBATOR,
@@ -1728,7 +1729,7 @@ const ChickenFarm = () => {
 
                     <div className="pool-btns">
                       <div>
-                        <img src={solerimg1} alt="" width={100} />
+                        <img src={"https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2F8LrpEPcW5NBk5JRCrkrq%2FSolar%20pannel.png?alt=media&token=21a1fb93-aa74-4fe5-8ae1-c0e818202f27"} alt="" width={100} />
                         <Link className="bg___BTN2" to="/buy/solar">
                           Buy Cells
                         </Link>
@@ -1914,7 +1915,7 @@ const ChickenFarm = () => {
 
                     <div className="pool-btns">
                       <div className="js__ac">
-                        <img src={bysine} alt="" width={100} />
+                        <img src={"https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2FCdrQvkqZvIN6aa5ISoJl%2Fenergy.png?alt=media&token=12fb42df-55b1-464f-ab1e-3c00eb09d9b9"} alt="" width={100} />
                         <a className="bg___BTN2" href="/buy/solarCell">
                           Buy Energy Packets
                         </a>
@@ -2188,22 +2189,29 @@ const ChickenFarm = () => {
 
       <Modal isOpen={buyAreaModal} toggle={buyAreaToggle} centered={true}>
         <ModalBody>
+        <div className="modal_img_div">
+              <img
+                src={new_land}
+                alt="moonland"
+              />
+            </div>
           <div className="moveRight">
             <span className="pull-left">
-              Your ${baseSymbol} Balance
-              <br />
+              
               {baseBalance}
+              <br />
+              ${baseSymbol} Balance
             </span>
             <span className="pull-right ">
               {/* Your available {farmSymbol} */}
-              Your Land Area
+              Land
               <br />
               {farmCapacity - chickenDeposited} sq yards
             </span>
           </div>
           <label className="mb-3">
             <br />
-            Enter Harvest Area to Buy (sq yards)
+            Enter sq yards planning to buy
             {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
           </label>
           <input

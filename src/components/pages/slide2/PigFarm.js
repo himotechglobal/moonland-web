@@ -475,7 +475,7 @@ const PigFarm = () => {
         setlayEndTime(parseInt(_userClaimTimes1[0]));
       }
 
-      setChickenFoodBalance(parseFloat(_chickenFoodBalance1) / 1e18);
+      setChickenFoodBalance((parseFloat(_chickenFoodBalance1) / 1e18).toFixed(4));
       setSowApproved(_sowApproved);
 
       setChickenFoodApproved(parseInt(_chickenFoodApproved));
@@ -930,9 +930,9 @@ const PigFarm = () => {
     hash: depositMoreChickenData?.hash,
   });
 
-  if (depositMoreChickenSuccess && moreChickenModal) {
-    moreChickentoggle();
-  }
+  // if (depositMoreChickenSuccess) {
+  //   moreChickentoggle();
+  // }
 
   const depositMoreChicken = async () => {
     setcDepositError(false);
@@ -1281,9 +1281,9 @@ const PigFarm = () => {
     hash: addDaysData?.hash,
   });
 
-  if (addDaysSuccess && addDaysChickenModal) {
-    addDaysChickentoggle();
-  }
+  // if (addDaysSuccess && addDaysChickenModal) {
+  //   addDaysChickentoggle();
+  // }
 
   const addDays = async () => {
     setaddDdepositError(false);
@@ -1860,7 +1860,7 @@ const PigFarm = () => {
                       <div className="thermix_sub_btn">
                         <div style={{ textAlign: "center" }}>
                           <img
-                            src={thermix}
+                            src={"https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2F8DhJInDZW4OFzdsDRiSM%2FThermixes.png?alt=media&token=1e8ad21b-948d-40d4-bb5e-9e31b94e9169"}
                             alt="thermix"
                             style={{ height: "109px", paddingLeft: "12px" }}
                           />
@@ -1878,7 +1878,7 @@ const PigFarm = () => {
                         }}
                       >
                         <div style={{ textAlign: "center" }}>
-                          <img src={metlux} alt="metlux" />
+                          <img src={"https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2FQAgoZzTjyx2FjOpBUWrq%2FMatlux%20Pads.png?alt=media&token=ea8b5f7c-48e5-4c2f-a104-effb3d4a1cf9"} alt="metlux" style={{ height: "109px"}}/>
                         </div>
                         <a href="/buy/metlux#" className="bg___BTN2">
                           Buy Metlux
@@ -2038,7 +2038,7 @@ const PigFarm = () => {
                           justifyContent: "center",
                         }}
                       >
-                        <a href="/marketplace" className="bg___BTN2">
+                        <a href="/buy/eule" className="bg___BTN2">
                           Buy Eule
                         </a>
 
@@ -2059,7 +2059,7 @@ const PigFarm = () => {
                             className="bg___BTN2"
                             onClick={() => claimMaterial()}
                           >
-                            Claim Material (Fee: {chickenClaimfee} {baseSymbol}){" "}
+                            Claim Material (Fee: {chickenClaimfee} ${baseSymbol}){" "}
                           </a>
                         )}
 
@@ -2531,7 +2531,7 @@ const PigFarm = () => {
           </div>
           <label className="mb-3">
             <br />
-            Enter Quantity to Transform
+            Enter Eule Amount
           </label>
           {/* <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxceDeposit}>
             Max
@@ -2543,8 +2543,8 @@ const PigFarm = () => {
             value={cedamount}
           />
           <span className="info mt-3">
-            <b>Fee:</b> {cedamount * eggDepositFee} {baseSymbol} (@
-            {eggDepositFee} {baseSymbol} per Eules)
+            <b>Fee:</b> {cedamount * eggDepositFee} ${baseSymbol} (@
+            {eggDepositFee} ${baseSymbol} per Eules)
           </span>
           <br />
           <span className="info">
@@ -2556,7 +2556,7 @@ const PigFarm = () => {
         <ModalFooter>
           {baseApprovedIncub == 0 && (
             <Button className="bg___BTN2 mr-3" onClick={approvebaseTokenIncub}>
-              Approve {baseSymbol}
+              Approve ${baseSymbol}
             </Button>
           )}
           {cedamount * eggDepositFee > baseBalance ? (
@@ -2565,7 +2565,7 @@ const PigFarm = () => {
             chickenEggApproved > 0 &&
             baseApprovedIncub > 0 && (
               <Button className="bg___BTN2 mr-3" onClick={depositEgg}>
-                Deposit
+                Forge
               </Button>
             )
           )}

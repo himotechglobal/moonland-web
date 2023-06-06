@@ -241,6 +241,7 @@ const KingGame = () => {
 		address: KINGGAME,
 		abi: KINGGAME_ABI,
 		functionName: 'participate',
+		enabled:approved > 0 && !winner && gameOn
 	})
 
 	const { data: bidNowData, writeAsync: bidNowWriteAsync, isError: bidNowError } = useContractWrite(bidNowConfig_)
@@ -464,7 +465,7 @@ const KingGame = () => {
 
 										{gameOn &&
 											<>
-												<p>Total Bids: {totalBid > 0 ? totalBid : "0"} {tokenSymbol}</p>
+												<p>Total Bids: {totalBid > 0 ? totalBid : "0"} ${tokenSymbol}</p>
 											</>
 
 										}
@@ -480,8 +481,8 @@ const KingGame = () => {
 										<div className="bit-c-img">
 											{/* <h3>Bid Now!</h3> */}
 											<div className="bid-smallbox">
-												<p>{bidAmount > 0 ? bidAmount : '0'} {tokenSymbol}</p>
-												<p>Your Balance {tokenBalance > 0 ? tokenBalance : '0.00'} {tokenSymbol}</p>
+												<p>{bidAmount > 0 ? bidAmount : '0'} ${tokenSymbol}</p>
+												<p>Your Balance {tokenBalance > 0 ? tokenBalance : '0.00'} ${tokenSymbol}</p>
 
 
 

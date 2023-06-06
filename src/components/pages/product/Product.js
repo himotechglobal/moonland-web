@@ -980,7 +980,7 @@ const Product = (props) => {
                                           Highest Bid
                                         </div>
                                         <div class="x-font-normal-white">
-                                          {highestBid} {symbol}
+                                          {highestBid} ${symbol}
                                         </div>
                                       </div>
                                       <div class="p-list-content-c2">
@@ -988,7 +988,7 @@ const Product = (props) => {
                                           Your Bid
                                         </div>
                                         <div class="x-font-normal-white">
-                                          {userbid} {symbol}
+                                          {userbid} ${symbol}
                                         </div>
                                       </div>
                                     </div>
@@ -1008,7 +1008,7 @@ const Product = (props) => {
                                         Price
                                       </div>
                                       <div class="x-font-normal-white">
-                                        {buyPrice} {symbol}
+                                        {buyPrice} ${symbol}
                                       </div>
                                     </div>
                                   </div>
@@ -1211,7 +1211,7 @@ const Product = (props) => {
             <span>
               Your Balance
               <br />
-              {balance} {symbol}
+              {balance} ${symbol}
             </span>
           </div>
           <label>

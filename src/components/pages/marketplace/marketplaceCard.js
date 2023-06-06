@@ -30,14 +30,14 @@ const ELEMENTS = [
       'slug': 'solar',
       'name': 'SOLAR CELL',
       'price': '10',
-      'image': solor,
+      'image': "https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2F8LrpEPcW5NBk5JRCrkrq%2FSolar%20pannel.png?alt=media&token=21a1fb93-aa74-4fe5-8ae1-c0e818202f27",
       'address': '0x57f450240b7a9eAEDfb6FE8DfA83087b4f312109'
   },
   {
       'slug': 'solarCell',
       'name': 'ENERGY PACKET',
       'price': '0.12',
-      'image': energy,
+      'image': "https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2FCdrQvkqZvIN6aa5ISoJl%2Fenergy.png?alt=media&token=12fb42df-55b1-464f-ab1e-3c00eb09d9b9",
       'address': '0xD5DF9651c2731dA0d47978A79f4F6594034038eC'
   },
   {
@@ -51,21 +51,21 @@ const ELEMENTS = [
       'slug': 'thermix',
       'name': 'THERMIX',
       'price': '100',
-      'image': thermix,
+      'image': "https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2F8DhJInDZW4OFzdsDRiSM%2FThermixes.png?alt=media&token=1e8ad21b-948d-40d4-bb5e-9e31b94e9169",
       'address': '0x12F32f5FC8C87b053DfBc8F56C159094B42730d1'
   },
   {
       'slug': 'metlux',
       'name': 'METLUX',
       'price': '100',
-      'image': metlux,
+      'image': "https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2FQAgoZzTjyx2FjOpBUWrq%2FMatlux%20Pads.png?alt=media&token=ea8b5f7c-48e5-4c2f-a104-effb3d4a1cf9",
       'address': '0x8D1502d8Acc70b861F58186270Bc81F671e0B2d8'
   },
   {
       'slug': 'eule',
       'name': 'EULE',
       'price': '10',
-      'image': eules,
+      'image': "https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2FSdACsQvs8KNQBcxMYTWB%2FEules.png?alt=media&token=9998cacc-172c-4467-afae-07a7fe7f0544",
       'address': '0xd63E96e180661e094383e66AA838863A87FDeB9F'
   },
   {

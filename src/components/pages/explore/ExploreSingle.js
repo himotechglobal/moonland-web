@@ -516,8 +516,8 @@ const ExploreSingle = (props) => {
                 )}
               </a>
               <div class="product-content">
-                <div className="d-flex w-100 justify-content-between">
-                  <h4 className="">
+                <div className="">
+                  <h4 style={{textAlign:"center",opacity:"0.5",fontWeight:"700"}}>
                     <a href={"/product/" + props.tradeid}>{name}</a>
                   </h4>
                   {/* <span className="p-1">
@@ -533,8 +533,8 @@ const ExploreSingle = (props) => {
                 </div>
                 <div className="wrp-busd">
                   <div className="busd-child1">
-                    <h5>
-                      {price} {symbol}
+                    <h5 style={{opacity:"0.5",fontWeight:"700"}}>
+                      {price} <span >${symbol}</span>
                     </h5>
                   </div>
                   <div className="busd-child2">
@@ -549,19 +549,19 @@ const ExploreSingle = (props) => {
                     {bidStatus != 4 && (
                       <>
                         <li className="d-flex justify-content-between mt-1">
-                          <p className="title font-weight-bold p_new">
+                          <p className="title font-weight-bold p_new" style={{opacity:"0.5",fontWeight:"700"}}>
                             Highest Bid
                           </p>{" "}
                           <p className="value p_new">
-                            {highestBid} {symbol}
+                            {highestBid} ${symbol}
                           </p>{" "}
                         </li>
                         <li className="d-flex justify-content-between mt-1">
-                          <p className="title font-weight-bold p_new">
+                          <p className="title font-weight-bold p_new" style={{opacity:"0.5",fontWeight:"700"}}>
                             Your Bid
                           </p>{" "}
                           <p className="value p_new">
-                            {isNaN(userbid) ? 0.0 : userbid} {symbol}
+                            {isNaN(userbid) ? 0.0 : userbid} ${symbol}
                           </p>
                         </li>
                       </>
@@ -572,7 +572,7 @@ const ExploreSingle = (props) => {
 
                     {endTime != "Ended" ? (
                       <li className="d-flex justify-content-between mt-1">
-                        <p className="title font-weight-bold p_new">
+                        <p className="title font-weight-bold p_new" style={{opacity:"0.5",fontWeight:"700"}}>
                           {parseInt(_tradeTime?._starttime) >
                           new Date().getTime() / 1e3
                             ? "Starts In"
@@ -582,7 +582,7 @@ const ExploreSingle = (props) => {
                       </li>
                     ) : buyer == lister ? (
                       <li className="d-flex justify-content-between mt-1">
-                        <p className="title font-weight-bold p_new">
+                        <p className="title font-weight-bold p_new" style={{opacity:"0.5",fontWeight:"800",fontSize:"15px"}}>
                           Cancelled
                         </p>{" "}
                       </li>
@@ -590,12 +590,12 @@ const ExploreSingle = (props) => {
                       endTime == "Ended" &&
                       isAuction ? (
                       <li className="d-flex justify-content-between mt-1">
-                        <p className="title font-weight-bold p_new">Expired</p>{" "}
+                        <p className="title font-weight-bold p_new" style={{opacity:"0.5",fontWeight:"800",fontSize:"15px"}}>Expired</p>{" "}
                       </li>
                     ) : buyer !=
                       "0x0000000000000000000000000000000000000000" ? (
                       <li className="d-flex justify-content-between mt-1">
-                        <p className="title font-weight-bold p_new">Sold Out</p>{" "}
+                        <p className="title font-weight-bold p_new" style={{opacity:"0.5",fontWeight:"800",fontSize:"15px"}}>Sold Out</p>{" "}
                       </li>
                     ) : (
                       <></>
