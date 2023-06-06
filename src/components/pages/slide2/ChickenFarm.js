@@ -2204,7 +2204,7 @@ const ChickenFarm = () => {
             </span>
             <span className="pull-right ">
               {/* Your available {farmSymbol} */}
-              Land
+              Land Balance
               <br />
               {farmCapacity - chickenDeposited} sq yards
             </span>
