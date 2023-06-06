@@ -37,6 +37,7 @@ import { Link } from "react-router-dom";
 import thermix from "../../images/thermix.png";
 import metlux from "../../images/metlux.png";
 import modal_earth from "../../images/modal_earth.png";
+import { ConnectWalletBtn } from "../ConnectWalletBtn.js";
 
 const PigFarm = () => {
   const [chickenClaimfee, setChickenClaimfee] = useState(0);
@@ -492,19 +493,16 @@ const PigFarm = () => {
       setFarmLocked(_userInfo1?.[4]);
       //  setFarmTokenId(_userInfo1?.[1]);
 
-      setFarmArea(parseFloat(_userInfo1?.[2] / 1e18).toFixed());
-      setFarmCapacity(parseFloat(_userInfo1?.[3] / 1e18).toFixed());
+      
       if (_nftBalance > 0 || _userInfo?.landlocked) {
         if (_approved === PIG_FARMING) {
           setFarmApprove(true);
         }
 
-        // if (_userInfo1?.[4]) {
-        //   setFarmTokenId(_userInfo1?.[1]);
-
-        //   setFarmArea(parseFloat(_userInfo1?.[2] / 1e18).toFixed());
-        //   setFarmCapacity(parseFloat(_userInfo1?.[3] / 1e18).toFixed());
-        // }
+        if (_userInfo1?.[4]) {
+          setFarmArea(parseFloat(_userInfo1?.[2] / 1e18).toFixed());
+      setFarmCapacity(parseFloat(_userInfo1?.[3] / 1e18).toFixed());
+        }
       }
     }
   };
@@ -630,16 +628,16 @@ const PigFarm = () => {
     //   window.location
     // }
     if (unlockTime > 0) {
-      // clearInterval(timeInterval);
-      // timeInterval = setInterval(() => {
-      //     getTime();
+      clearInterval(timeInterval);
+      timeInterval = setInterval(() => {
+          getTime();
+      }, 1000);
+      // const interval = setInterval(() => {
+      //   getTime();
       // }, 1000);
-      const interval = setInterval(() => {
-        getTime();
-      }, 1000);
-      setTimeout(() => {
-        clearInterval(interval);
-      }, 1000);
+      // setTimeout(() => {
+      //   clearInterval(interval);
+      // }, 1000);
     }
 
     if (layEndTime > 0) {
@@ -1291,9 +1289,12 @@ const PigFarm = () => {
   }
 
   const addDays = async () => {
+    
+   if(addDayamount>0){
     setaddDdepositError(false);
     setModal(true);
     await addDaysWriteAsync();
+   }
   };
 
   const { config: depositEggConfig_ } = usePrepareContractWrite({
@@ -1327,8 +1328,10 @@ const PigFarm = () => {
       setceDepositError("Error: Insufficient Eule Balance");
       return false;
     } else {
-      setModal(true);
+      if(cedamount>0){
+        setModal(true);
       await depositEggWriteAsync();
+      }
     }
   };
 
@@ -1384,8 +1387,10 @@ const PigFarm = () => {
     if (buyareadamount * farmPrice > baseBalance) {
       setbuyareadepositError("Error: Insufficient Balance");
     } else {
-      setModal(true);
+      if(buyareadamount>0){
+        setModal(true);
       await buyAreaNFTWriteAsync();
+      }
     }
   };
 
@@ -1417,8 +1422,10 @@ const PigFarm = () => {
     if (areadamount * farmPrice > baseBalance) {
       setareadepositError(`Error: Insufficient ${baseSymbol} Balance`);
     } else {
+     if(areadamount>0){
       setModal(true);
       await addAreaNFTWriteAsync();
+     }
     }
   };
 
@@ -1687,6 +1694,11 @@ const PigFarm = () => {
                             className="pool-btns"
                             // style={{ justifyContent: "end" }}
                           >
+                             {!address && (
+                        <div className="mt-3 text-center">
+                          <ConnectWalletBtn />
+                        </div>
+                      )}
                             {!farmLocked &&
                               farmBalance > 0 &&
                               farmApprove &&
@@ -2192,10 +2204,10 @@ const PigFarm = () => {
           </span>
           <span className="info mt-1">
             <b>Est. Positron:</b>{" "}
-            {parseFloat(parseFloat(requiredBoar) + parseFloat(cdamount)) *
+            {cdamount>0?parseFloat(parseFloat(requiredBoar) + parseFloat(cdamount)) *
               20 *
               dayamount *
-              7}{" "}
+              7:0}{" "}
             {chickenFoodSymbol} @ (20 {chickenFoodSymbol} per material daily)
           </span>
           <span className="info mt-3">
@@ -2597,12 +2609,12 @@ const PigFarm = () => {
             <br />
             Extend building weeks for assembled Materials
           </label>
-          <span
+          {/* <span
             className="bg___BTN2 maxbtn ml-2 p-2"
             onClick={setMaxDayDeposit}
           >
             Max
-          </span>
+          </span> */}
           <input
             className="form-control"
             onChange={handleAddDayChange}

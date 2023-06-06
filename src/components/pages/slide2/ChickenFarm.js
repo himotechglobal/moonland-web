@@ -361,6 +361,7 @@ const ChickenFarm = () => {
     functionName: "landIsfree",
     args: [_nftTokenId, address],
     watch: true,
+    enabled:_nftTokenId
   });
 
   const { data: _userInfo2 } = useContractRead({
@@ -491,13 +492,13 @@ const ChickenFarm = () => {
         setFarmApprove(true);
         // setFarmTokenId(_userInfo2?.[1]);
       }
-      // if (_userInfo2?.[4]) {
+      if (_userInfo2?.[4]) {
       // alert(CHICKEN_FARMING)
       // alert(_userInfo2?.[1])
 
       setFarmArea(parseFloat(_userInfo2?.[2] / 1e18).toFixed(2));
       setFarmCapacity(parseFloat(_userInfo2?.[3] / 1e18).toFixed(2));
-      // }
+      }
     }
   };
 
@@ -855,9 +856,14 @@ const ChickenFarm = () => {
     } else if (cdamount > farmCapacity - chickenDeposited) {
       setcDepositError("Error: Insufficient Harvest Land");
       return false;
+    } else if (cdamount > chickenBalance) {
+      setcDepositError("Error: Insufficient Solar Balance");
+      return false;
     } else {
-      setModal(true);
+      if(cdamount>0){
+        setModal(true);
       await depositMoreChickenWriteAsync();
+      }
     }
   };
 
@@ -895,8 +901,14 @@ const ChickenFarm = () => {
     } else if (solarAmount > farmCapacity - chickenDeposited) {
       setcDepositError("Error: Insufficient Harvest Land");
       return false;
-    } else {
+    }else if (solarAmount>chickenBalance) {
+      setcDepositError("Error: Insufficient Solar Balance");
+      return false;
+    }
+     else {
+     if(solarAmount>0){
       setModal(true);
+     }
       await depositChickenWriteAsync();
     }
   };
@@ -1163,8 +1175,10 @@ const ChickenFarm = () => {
       setceDepositError("Error: Insufficient Energy Packets");
       return false;
     } else {
+    if(cedamount>0){
       setModal(true);
       await depositEggWriteAsync();
+    }
     }
   };
 
@@ -1190,7 +1204,9 @@ const ChickenFarm = () => {
     setModal(true);
     await sellAreaWriteAsync?.();
   };
-
+if(sellAreaSuccess){
+  window.location.reload()
+}
   let _area = parseFloat(buyareadamount);
 
   const { config: buyAreaNFTConfig_ } = usePrepareContractWrite({
@@ -1210,17 +1226,19 @@ const ChickenFarm = () => {
     hash: buyAreaNFTData?.hash,
   });
 
-  // if (buyAreaNFTSuccess) {
-  //   buyAreaToggle();
-  // }
+  if (buyAreaNFTSuccess && buyAreaModal) {
+    buyAreaToggle();
+  }
 
   const buyAreaNFT = async () => {
     setbuyareadepositError(false);
     if (buyareadamount * farmPrice > baseBalance) {
       setbuyareadepositError(`Error: Insufficient ${baseSymbol} Balance`);
     } else {
-      setModal(true);
+      if(buyareadamount>0){
+        setModal(true);
       await buyAreaNFTWriteAsync?.();
+      }
     }
   };
 
@@ -1252,8 +1270,10 @@ const ChickenFarm = () => {
     if (areadamount * farmPrice > baseBalance) {
       setareadepositError(`Error: Insufficient ${baseSymbol} Balance`);
     } else {
-      setModal(true);
+      if(areadamount>0){
+        setModal(true);
       await addAreaNFTWriteAsync();
+      }
     }
   };
 
@@ -1561,7 +1581,7 @@ const ChickenFarm = () => {
                         )}
                         {farmBalance > 0 && !farmApprove && (
                           <a className="bg___BTN2" onClick={approveNFT}>
-                            Approve & Lock {farmSymbol} NFT
+                            Approve {farmSymbol} NFT
                           </a>
                         )}
 
