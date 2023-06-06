@@ -781,6 +781,7 @@ const ChickenFarm = () => {
     _unlockItem2,
     _claimChickenFee1,
     _capacity,
+    endTime
   ]);
   const { config: removeChickenConfig_ } = usePrepareContractWrite({
     address: CHICKEN_FARMING,
@@ -1688,7 +1689,7 @@ const ChickenFarm = () => {
                                 <p className="marquee">
                                   <span>
                                     <i className="fa fa-warning yellow"></i>{" "}
-                                    Time remaining for Solar Fluid.
+                                    Time until Fluid is consumed.
                                   </span>
                                 </p>
                               </>
@@ -1734,6 +1735,12 @@ const ChickenFarm = () => {
                           Buy Cells
                         </Link>
                       </div>
+                      <div>
+                        <img src={"https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2FJoILLv3a235XSXVrabq4%2FFluid%202.png?alt=media&token=bd0b3667-8570-4920-9991-3f8f939a1d85"} alt="" width={100} />
+                        <Link className="bg___BTN2" to="/buy/fluid">
+                          Buy Fluid
+                        </Link>
+                      </div>
                       <div
                         style={{
                           display: "flex",
@@ -1742,6 +1749,7 @@ const ChickenFarm = () => {
                           justifyContent: "center",
                         }}
                       >
+                        
                         {chickenApproved === 0 && (
                           <a className="bg___BTN2" onClick={approveChicken}>
                             <img className="sine" src={chickSine} alt="" />
@@ -2016,14 +2024,15 @@ const ChickenFarm = () => {
               {chickenBalance}
             </span>
             <span className="pull-right ">
-              Your available {farmSymbol}
+              Your available Area
+              {/* {farmSymbol} */}
               <br />
               {farmCapacity - chickenDeposited} sq yards
             </span>
           </div>
           <label className="mb-3">
             <br />
-            Enter Solar for Harvest
+            Enter Solars To Assemble
           </label>
           <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>
             Max
@@ -2039,9 +2048,9 @@ const ChickenFarm = () => {
             {chickenSymbol} per sq. m.)
           </span>
 
-          <label className="">
+          <label className="mb-0">
             <br />
-            Enter Days to Harvest
+            Harvesting Days
           </label>
 
           <input
@@ -2055,10 +2064,10 @@ const ChickenFarm = () => {
             (600 {chickenFoodSymbol} per {chickenSymbol} daily)
           </span>
           <span className="info mt-3">
-            <b>Your Available SOLAR FLUID:</b> {chickenFoodBalance}{" "}
+            <b>Your Available FLUID:</b> {chickenFoodBalance}{" "}
             {chickenFoodSymbol}
           </span>
-          <span className="info mt-3">
+          {/* <span className="info mt-3">
             <b>Your SOLAR FLUID Cost for Total SOLAR in Harvest:</b>{" "}
             {chickenDeposited > 0
               ? parseFloat(
@@ -2068,13 +2077,13 @@ const ChickenFarm = () => {
                 ).toFixed(2)
               : 0}{" "}
             {chickenFoodSymbol}
-          </span>
+          </span> */}
           <span className="info mt-1">
             <b>Fee:</b>{" "}
             {chickenDepositFee > 0
               ? parseFloat(chickenDepositFee * solarAmount).toFixed(2)
               : 0}{" "}
-            {baseSymbol} (@ {chickenDepositFee} per Solar )
+            ${baseSymbol} (@ {chickenDepositFee} per Solar )
           </span>
 
           {cdepositError && <span className="error">{cdepositError}</span>}
@@ -2095,7 +2104,7 @@ const ChickenFarm = () => {
             chickenFoodApproved > 0 &&
             baseApprovedFarm > 0 && (
               <Button className="bg___BTN2 mr-3" onClick={depositChicken}>
-                Deposit
+                Assemble
               </Button>
             )}
           <Button className="bg___BTN2" onClick={chickentoggle}>
@@ -2204,14 +2213,14 @@ const ChickenFarm = () => {
             </span>
             <span className="pull-right ">
               {/* Your available {farmSymbol} */}
-              Land Balance
+              Land Area
               <br />
               {farmCapacity - chickenDeposited} sq yards
             </span>
           </div>
           <label className="mb-3">
             <br />
-            Enter sq yards planning to buy
+            {/* Enter sq yards planning to buy */}
             {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
           </label>
           <input
@@ -2252,22 +2261,28 @@ const ChickenFarm = () => {
 
       <Modal isOpen={areaModal} toggle={areaToggle} centered={true}>
         <ModalBody>
+        <div className="modal_img_div">
+              <img
+                src={new_land}
+                alt="moonland"
+              />
+            </div>
           <div className="moveRight">
             <span className="pull-left">
-              Your ${baseSymbol} Balance
+              ${baseSymbol} Balance
               <br />
               {baseBalance}
             </span>
             <span className="pull-right ">
               {/* Your available {farmSymbol} */}
-              Your Land Area
+              Land Area
               <br />
               {farmCapacity - chickenDeposited} sq yards
             </span>
           </div>
           <label className="mb-3">
             <br />
-            Enter Harvest Area to add-on (sq yards)
+            {/* Enter Harvest Area to add-on (sq yards) */}
             {/* <span className="depositButton maxbtn ml-2 p-2" onClick={setMaxArea}>Max</span> */}
           </label>
           <input
@@ -2332,7 +2347,7 @@ const ChickenFarm = () => {
           />
           <span className="info mt-3">
             <b>Fee:</b> {cedamount * eggDepositFee} ${baseSymbol} (@
-            {eggDepositFee} ${baseSymbol} Energy Packets)
+            {eggDepositFee} ${baseSymbol} per Energy Packet)
           </span>
           <br />
           <span className="info">
@@ -2344,7 +2359,7 @@ const ChickenFarm = () => {
         <ModalFooter>
           {baseApprovedIncub == 0 && (
             <Button className="bg___BTN2 mr-3" onClick={approvebaseTokenIncub}>
-              Approve {baseSymbol}
+              Approve ${baseSymbol}
             </Button>
           )}
           {cedamount * eggDepositFee > baseBalance ? (
@@ -2394,7 +2409,7 @@ const ChickenFarm = () => {
             value={addDayamount}
           />
           <span className="info mt-3">
-            <b>Your Solar Fluid Cost for Total Solar in Harvest:</b>{" "}
+            <b>Total Fluid required for assembled Solars:</b>{" "}
             {addDayamount > 0
               ? parseFloat(chickenDeposited * addDayamount * 20).toFixed(2)
               : 0}{" "}

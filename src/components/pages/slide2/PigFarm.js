@@ -608,7 +608,9 @@ const PigFarm = () => {
     abi: PIG_FARMING_ABI,
     functionName: "checkAndTransferLand",
     args: [address, farmTokenId],
-    enabled: farmTokenId && farmBalance > 0,
+    enabled: !farmLocked &&
+    farmBalance > 0 &&
+    farmApprove &&farmTokenId,
   });
 
   const {
@@ -706,6 +708,7 @@ const PigFarm = () => {
     _boarApproved,
     _approved,
     _landIsfree,
+    eggTime
   ]);
 
   const lockNFT = async () => {
@@ -1694,7 +1697,7 @@ const PigFarm = () => {
                               )}
                             {farmBalance > 0 && !farmApprove && processed && (
                               <a className="bg___BTN2" onClick={approveNFT}>
-                                Approve & Lock {farmSymbol} NFT
+                                Approve {farmSymbol} NFT
                               </a>
                             )}
                             {farmLocked && processed && (
