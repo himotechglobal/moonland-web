@@ -628,10 +628,16 @@ const PigFarm = () => {
     //   window.location
     // }
     if (unlockTime > 0) {
-      clearInterval(timeInterval);
-      timeInterval = setInterval(() => {
-          getTime();
-      }, 1000);
+      // clearInterval(timeInterval);
+      // timeInterval = setInterval(() => {
+      //     getTime();
+      // }, 1000);
+      const interval = setInterval(() => {
+			  getTime();
+			  }, 1000);
+			  setTimeout(() => {
+				clearInterval(interval);
+			  }, 1000);
       // const interval = setInterval(() => {
       //   getTime();
       // }, 1000);
@@ -680,7 +686,6 @@ const PigFarm = () => {
     _userBoar,
     _userSow,
     _userChickenDie,
-    unlockTime,
     _userClaimTimes1,
     _chickenFoodBalance1,
     _capacity,
@@ -980,7 +985,10 @@ const PigFarm = () => {
       ethers.utils.parseEther(_boar).toString(),
       _dayamount,
     ],
-    watch: true,
+    enabled:cdamount>0 && dayamount>0&&sowApproved > 0 &&
+    boarApproved > 0 &&
+    chickenFoodApproved > 0 &&
+    baseApprovedFarm > 0
   });
 
   const {
@@ -1138,7 +1146,7 @@ const PigFarm = () => {
       address: PIG_INCUBATOR,
       abi: PIG_INCUBATOR_ABI,
       functionName: "claimMaterial",
-      enabled: adult > 0,
+      // enabled: adult > 0,
     }
   );
   const {
@@ -1319,7 +1327,7 @@ const PigFarm = () => {
 
   if (depositEggSuccess && eggModal) {
     eggtoggle();
-    window.location.reload();
+    // window.location.reload();
   }
 
   const depositEgg = async () => {
@@ -2074,7 +2082,7 @@ const PigFarm = () => {
                         {adult > 0 && baseApprovedIncub > 0 && (
                           <a
                             className="bg___BTN2"
-                            onClick={() => claimMaterial()}
+                            onClick={claimMaterial}
                           >
                             Claim Material (Fee: {chickenClaimfee} ${baseSymbol}){" "}
                           </a>

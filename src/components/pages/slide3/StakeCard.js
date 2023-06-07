@@ -84,18 +84,24 @@ const StakeCard = (props) => {
   const closeModal = () => {
   setModal(false);
 };
-
+const [damount, setdAmount] = useState("");
   const [depositModal, setDepositModal] = useState(false);
-  const depositToggle = () => setDepositModal(!depositModal);
-
+  const depositToggle = () =>{
+    setDepositModal(!depositModal);
+setdAmount("")
+  }
+  const [wamount, setwAmount] = useState("");
   const [withdrawModal, setWithdrawModal] = useState(false);
-  const withdrawToggle = () => setWithdrawModal(!withdrawModal);
+  const withdrawToggle = () =>{
+    setWithdrawModal(!withdrawModal);
+    setwAmount("")
+  }
 
-  const [damount, setdAmount] = useState("");
+ 
   const [depositAmount, setDepositAmount] = useState(0);
   const [depositError, setDepositError] = useState(false);
 
-  const [wamount, setwAmount] = useState("");
+ 
   const [withdrawAmount, setWithdrawAmount] = useState(0);
   const [withdrawError, setWithdrawError] = useState(false);
 
@@ -380,7 +386,7 @@ const StakeCard = (props) => {
     abi: STAKING_ABI,
     functionName: "stake",
     args: [_amount1],
-    enabled: depositAmount > 0,
+    enabled: damount > 0,
   });
 
   const {
@@ -397,8 +403,11 @@ if(depositTokenSuccess && depositModal){
   window.location.reload()
 }
   const depositToken = async () => {
-    setModal(true);
-    await depositTokenWriteAsync();
+if(damount>0){
+
+  setModal(true);
+  await depositTokenWriteAsync();
+}
   };
 
   const setMaxWithdraw = () => {
@@ -437,8 +446,11 @@ if(withdrawTokenSuccess && withdrawModal){
 }
 
 const withdrawToken = async () => {
+
+  if(wamount>0){
     setModal(true);
     await withdrawTokenWriteAsync();
+  }
 };
 
 useEffect(() => {
@@ -574,7 +586,7 @@ return (
               </>
             )}
 
-            {unstakeEnabled && (
+            {unstakeEnabled && userStaked > 0 && (
               <>
                 <h3>
                   {stakeSymbol} <span>staked</span>
@@ -693,9 +705,9 @@ return (
           {depositError && <span className="error">{depositError}</span>}
         </ModalBody>
         <ModalFooter>
-          <Button className="bg___BTN2 mr-3" onClick={depositToken}>
+          {balance>damount?<Button className="bg___BTN2 mr-3" onClick={depositToken}>
             Deposit
-          </Button>
+          </Button>:<p style={{color:"red"}}>Insufficient Token Balance.</p>}
 
           <Button className="bg___BTN2" onClick={depositToggle}>
             Cancel
@@ -737,9 +749,9 @@ return (
           {withdrawError && <span className="error">{withdrawError}</span>}
         </ModalBody>
         <ModalFooter>
-          <Button className="bg___BTN2 mr-3" onClick={withdrawToken}>
+         {userStaked>wamount ?<Button className="bg___BTN2 mr-3" onClick={withdrawToken}>
             Withdraw
-          </Button>
+          </Button>:<p style={{color:"red"}}>Insufficient Deposited Balance.</p>}
 
           <Button className="bg___BTN2" onClick={withdrawToggle}>
             Cancel

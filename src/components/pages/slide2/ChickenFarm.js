@@ -162,8 +162,11 @@ const ChickenFarm = () => {
   const removeChickentoggle = () => setremoveChickenModal(!removeChickenModal);
 
   const [addDaysChickenModal, setaddDaysChickenModal] = useState(false);
-  const addDaysChickentoggle = () =>
+  const addDaysChickentoggle = () =>{
+
     setaddDaysChickenModal(!addDaysChickenModal);
+    setaddDayamount("")
+  }
 
   const [buyModal, setBuyModal] = useState(false);
   const buyToggle = () => setBuyModal(!buyModal);
@@ -814,8 +817,10 @@ const ChickenFarm = () => {
       setcrDepositError("Error: Insufficient deposited balance");
       return false;
     } else {
-      setModal(true);
-      await removeChickenWriteAsync();
+      if(crdamount>0){
+        setModal(true);
+        await removeChickenWriteAsync();
+      }
     }
   };
   const { config: depositMoreChickenConfig_ } = usePrepareContractWrite({
@@ -1139,8 +1144,11 @@ const ChickenFarm = () => {
       setaddDdepositError("Error: Insufficient fluid Balance");
       return false;
     } else {
-      setModal(true);
-      await addDaysWriteAsync();
+      if(addDayamount>0){
+        setModal(true);
+        await addDaysWriteAsync();
+      }
+     
     }
   };
 
