@@ -1640,20 +1640,14 @@ if(sellAreaSuccess){
                           <h3>
                             {isNaN(chickenBalance) ? 0.0 : chickenBalance}{" "}
                             {chickenSymbol}
-                            {/* {
-                                                            chickenBalance > 0 && chickenBalance <= 10 &&
-                                                            <img src={chicken1} width="60px" alt="" />
-                                                        }
-                                                        {
-                                                            chickenBalance > 10 && chickenBalance <= 100 &&
-                                                            <img src={chicken100} width="60px" alt="" />
-                                                        }
-                                                        {
-                                                            chickenBalance > 100 && chickenBalance <= 1000 &&
-                                                            <img src={chicken1000} width="60px" alt="" />
-                                                        } */}
                           </h3>
                           <p>Balance</p>
+                        </div>
+                        <div class="time__list">
+                          <h3>
+                          {parseInt(chickenDeposited)}{" "}{chickenSymbol}
+                          </h3>
+                          <p>Solar Assembled</p>
                         </div>
                         {/* <div className="time__list"><h3>{isNaN(chickenDeposited)? 0.00:chickenDeposited} {chickenSymbol} */}
 
@@ -1971,7 +1965,7 @@ if(sellAreaSuccess){
                         {chickenEggApproved == 0 && (
                           <a className="bg___BTN2" onClick={approveChickenEgg}>
                             <img className="sine" src={chickSine} alt="" />
-                            Approve Cells for Incubator
+                            Approve Energy for Incubator
                           </a>
                         )}
                         {chickenEggApproved > 0 && chickenEggDeposited == 0 && (

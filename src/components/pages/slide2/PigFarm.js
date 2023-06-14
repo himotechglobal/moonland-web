@@ -2197,7 +2197,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
 
           <label className="">
             <br />
-            <b>Enter Amount to Build</b>
+            <b>Enter Weeks to Build</b>
           </label>
 
           <input

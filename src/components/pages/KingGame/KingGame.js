@@ -460,7 +460,7 @@ const KingGame = () => {
 										}
 
 
-										<p>Moon Treasure:{potBalance > 0 ? potBalance : "0"} {tokenSymbol}</p>
+										<p>Moon Treasure:{potBalance > 0 ? potBalance : "0"} ${tokenSymbol}</p>
 
 
 										{gameOn &&
