@@ -1751,7 +1751,18 @@ body.smr-open .slide-menu-right {
   -webkit-box-shadow: 0 0 12px 4px #ff00f069;
   box-shadow: 0 0 12px 4px #ff00f069;
 }
+button:disabled,
+button[disabled] {
+  cursor: not-allowed !important;
+  pointer-events: auto !important;
 
+  opacity: 0.5;
+}
+.image_background{
+  background: linear-gradient(313deg, #03E1FF, #03E1FF, #8066FF, #8066FF, #EB00FF, #EB00FF);
+  padding: 1px;
+  border-radius: 25px;
+}
 .moveRight {
   display: block;
   width: 100%;

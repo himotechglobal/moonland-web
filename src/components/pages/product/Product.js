@@ -5,7 +5,7 @@ import check from "../../images/check.png";
 import Config, { NFT_MARKETPLACE, TOKEN } from "../../../Config/index.js";
 import NFT_MARKETPLACE_ABI from "../../../Config/NFT_MARKETPLACE_ABI.json";
 import TOKEN_ABI from "../../../Config/TOKEN_ABI.json";
-import NFT_ABI from "../../../Config/NFT_ABI.json";
+import NFT_ABI from "../../../Config2/NFT_ABI.json";
 import { useState, useEffect } from "react";
 import nft_item from "../../images/nft_item.svg";
 
@@ -276,8 +276,8 @@ const Product = (props) => {
   const { data: _mediaURI_One } = useContractRead({
     address: _trade?.nftadd,
     abi: NFT_ABI,
-    functionName: "tokenURI",
-    args: [0],
+    functionName: "BASE_URI",
+    // args: [0],
     watch: true,
   });
   const { data: _owner } = useContractRead({
@@ -361,6 +361,7 @@ const Product = (props) => {
     );
     setPrice(_price);
   };
+ 
   useEffect(() => {
     const interval = setInterval(() => {
       getTimer();
@@ -716,8 +717,6 @@ const Product = (props) => {
   }
   if (approveTokenSuccess && modal) {
     setModal(false);
-    init();
-    bidToggle();
   }
 
   const approveToken = async () => {
@@ -735,7 +734,7 @@ const Product = (props) => {
               <div class="col-lg-12">
                 <div class="row">
                   <div class="col-lg-6">
-                    <div class="product-contents">
+                    <div class={media != null?"image_background":"product-contents"}>
                       {media != null ? (
                         <img
                           src={media}
@@ -935,6 +934,33 @@ const Product = (props) => {
                                   </div>
                                 </div>
                               </li>
+                             {highestBidder !=="0x0000000000000000000000000000000000000000" &&<li>
+                                <div class="p-list-content-wrp">
+                                  <div class="p-list-content-c">
+                                    <div class="p-l-img">
+                                      {/* <img src="../assets/images/avatar.png" alt="" />
+                                                                            <img alt="" /> */}
+                                    </div>
+                                    <div class="check-img2">
+                                      <img src={check} alt="" />
+                                    </div>
+                                  </div>
+                                  <div class="p-list-content-c2">
+                                    <div class="x-font-normal-blue">
+                                      Highest Bidder
+                                    </div>
+                                    <div class="x-font-normal-white">
+                                      <a href={Config.EX_LINK + highestBidder}>
+                                        {highestBidder?.substring(0, 8) +
+                                          "...." +
+                                          highestBidder?.substring(
+                                            highestBidder?.length - 6
+                                          )}
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </li>}
                               {buyer !=
                                 "0x0000000000000000000000000000000000000000" &&
                                 buyer !== lister && (
@@ -1098,7 +1124,7 @@ const Product = (props) => {
                             </div>
                         </div> */}
                       </div>
-                      {address && bidStatus == 1 && address !== lister && (
+                      {address && bidStatus == 1 && buyer !== lister && (
                         <button className="bg___BTN_J" onClick={bidToggle}>
                           Place Bid
                         </button>
@@ -1108,7 +1134,7 @@ const Product = (props) => {
                       {address &&
                         bidStatus == 4 &&
                         approval > 0 &&
-                        address !== lister &&
+                        buyer !== lister &&address !== lister &&
                         buyer ==
                           "0x0000000000000000000000000000000000000000" && (
                           <button className="bg___BTN_J" onClick={buyNft}>
@@ -1133,7 +1159,9 @@ const Product = (props) => {
                         !canClaim &&
                         bidStatus === 3 &&
                         address !== lister &&
-                        highestBidder != lister && (
+                        highestBidder == address && 
+                        buyer==null &&
+                        (
                           <button className="bg___BTN_J" onClick={claimBid}>
                             Claim
                           </button>
@@ -1243,7 +1271,7 @@ const Product = (props) => {
             </Button>
           )}
           {approval > 0 && approval >= damount * decimals && (
-            <Button className="depositButton mr-3" onClick={placeBid}>
+            <Button className="depositButton mr-3" disabled={damount==0 || damount==""} onClick={placeBid}>
               Bid Now
             </Button>
           )}
@@ -1316,7 +1344,7 @@ const Product = (props) => {
           />
         </ModalBody>
         <ModalFooter>
-          <Button className="depositButton mr-3" onClick={renewAuction}>
+          <Button className="depositButton mr-3" onClick={renewAuction} disabled={newStartTime==null||newEndTime==null||startPrice==""}>
             Renew Auction
           </Button>
 

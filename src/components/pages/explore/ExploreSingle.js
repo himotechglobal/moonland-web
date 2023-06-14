@@ -13,7 +13,7 @@ import {
 import Config, { NFT_MARKETPLACE } from "../../../Config/index.js";
 import NFT_MARKETPLACE_ABI from "../../../Config/NFT_MARKETPLACE_ABI.json";
 import TOKEN_ABI from "../../../Config/TOKEN_ABI.json";
-import NFT_ABI from "../../../Config/NFT_ABI.json";
+import NFT_ABI from "../../../Config2/NFT_ABI.json";
 import Web3 from "web3";
 import { useState, useEffect } from "react";
 import {
@@ -113,8 +113,8 @@ const ExploreSingle = (props) => {
   const { data: _mediaURI } = useContractRead({
     address: _trade?.nftadd,
     abi: NFT_ABI,
-    functionName: "tokenURI",
-    args: [_trade?.nftid],
+    functionName: "BASE_URI",
+    // args: [_trade?.nftid],
     watch: true,
   });
 
@@ -257,6 +257,7 @@ const ExploreSingle = (props) => {
         ? ethers.utils.parseEther(parseFloat(depositAmount).toString())
         : 0,
     ],
+    enabled:parseFloat(depositAmount) > 0 && approval > 0 && approval >= damount * decimals
   });
 
   const {
@@ -277,6 +278,9 @@ const ExploreSingle = (props) => {
     abi: NFT_MARKETPLACE_ABI,
     functionName: "buyNft",
     args: [props?.tradeid],
+    enabled:props?.tradeid && bidStatus == 4 &&
+    approval > 0 &&
+    address !== lister
   });
 
   const {
@@ -294,6 +298,10 @@ const ExploreSingle = (props) => {
     abi: NFT_MARKETPLACE_ABI,
     functionName: "withdraw",
     args: [props?.tradeid],
+    enabled:props?.tradeid && !canClaim &&
+    bidStatus == 3 &&
+    highestBidder == address &&
+    buyer == null
   });
 
   const {
@@ -365,6 +373,7 @@ const ExploreSingle = (props) => {
     functionName: "getAuctionTime",
     args: [props.tradeid],
     watch: true,
+
   });
 
   const getTimer = () => {
@@ -467,18 +476,18 @@ const ExploreSingle = (props) => {
     await approveTokenWriteAsync?.();
   }
 
-  const getBase64FromUrl = async (url) => {
-    const data = await fetch(url);
-    const blob = await data.blob();
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(blob);
-      reader.onloadend = () => {
-        const base64data = reader.result;
-        resolve(base64data);
-      };
-    });
-  };
+  // const getBase64FromUrl = async (url) => {
+  //   const data = await fetch(url);
+  //   const blob = await data.blob();
+  //   return new Promise((resolve) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(blob);
+  //     reader.onloadend = () => {
+  //       const base64data = reader.result;
+  //       resolve(base64data);
+  //     };
+  //   });
+  // };
 
   useEffect(() => {
     if (
@@ -507,12 +516,14 @@ const ExploreSingle = (props) => {
                 {media == null ? (
                   <div class="product-img">{/* <img src={media} /> */}</div>
                 ) : (
-                  <div
+               <div className="image_background" style={{borderRadius:"20px"}}>
+                   <div
                     class="product-img"
                     style={{ backgroundImage: "url(" + media + ")" }}
                   >
                     {/* <img src={media} /> */}
                   </div>
+               </div>
                 )}
               </a>
               <div class="product-content">
@@ -714,7 +725,7 @@ const ExploreSingle = (props) => {
                 </Button>
               )}
               {approval > 0 && approval >= damount * decimals && (
-                <Button className="depositButton mr-3" onClick={placeBid}>
+                <Button className="depositButton mr-3" disabled={damount==0 || damount==""} onClick={placeBid}>
                   Bid Now
                 </Button>
               )}

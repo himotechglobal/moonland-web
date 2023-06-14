@@ -30,6 +30,7 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 import acc__arrow_revse from "../../images/acc__arrow_revse.svg";
+import new_land from "../../images/new_land.png";
 import acc__arrow from "../../images/acc__arrow.svg";
 import { ethers } from "ethers";
 import land from "../../images/land.svg";
@@ -885,7 +886,9 @@ const PigFarm = () => {
         ? 0
         : ethers.utils.parseEther?.(crdamount.toString()).toString(),
     ],
-    watch: true,
+enabled:sowDeposited > 0 &&
+unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
+
   });
 
   const {
@@ -923,7 +926,9 @@ const PigFarm = () => {
       cdamount == "" ? 0 : ethers.utils.parseEther(cdamount.toString()),
       parseInt(farmTokenId),
     ],
-    enabled: cdamount > 0,
+    enabled: cdamount > 0 && sowApproved > 0 &&
+    chickenFoodApproved > 0 &&
+    baseApprovedFarm > 0 
   });
 
   const {
@@ -1069,7 +1074,7 @@ const PigFarm = () => {
       PIG_INCUBATOR,
       ethers.utils.parseEther("5000000000000000000").toString(),
     ],
-    watch: true,
+   
   });
 
   const {
@@ -1146,7 +1151,7 @@ const PigFarm = () => {
       address: PIG_INCUBATOR,
       abi: PIG_INCUBATOR_ABI,
       functionName: "claimMaterial",
-      // enabled: adult > 0,
+      enabled: adult > 0 && baseApprovedIncub > 0 ,
     }
   );
   const {
@@ -1167,7 +1172,7 @@ const PigFarm = () => {
     address: PIG_FARMING,
     abi: PIG_FARMING_ABI,
     functionName: "claimEules",
-    watch: true,
+    enabled:eggsearned > 0
   });
 
   const {
@@ -1190,7 +1195,6 @@ const PigFarm = () => {
     abi: TOKEN_ABI,
     functionName: "approve",
     args: [PIG_INCUBATOR, euleAmount],
-    watch: true,
   });
 
   const {
@@ -1226,7 +1230,6 @@ const PigFarm = () => {
       PIG_FARMING,
       ethers.utils.parseEther("5000000000000000000").toString(),
     ],
-    watch: true,
   });
 
   const {
@@ -1254,7 +1257,6 @@ const PigFarm = () => {
       PIG_FARMING,
       ethers.utils.parseEther("5000000000000000000").toString(),
     ],
-    watch: true,
   });
 
   const {
@@ -1278,7 +1280,7 @@ const PigFarm = () => {
     abi: PIG_FARMING_ABI,
     functionName: "addMoreDays",
     args: [parseInt(addDayamount * 7)],
-    watch: true,
+    enabled:chickenFoodApproved > 0
   });
 
   const {
@@ -1312,7 +1314,8 @@ const PigFarm = () => {
     args: [
       cedamount == "" ? 0 : ethers.utils.parseEther?.(cedamount).toString(),
     ],
-    enabled: cedamount > 0 && cedamount != "" && cedamount != 0,
+    enabled: cedamount > 0 && chickenEggApproved > 0 &&
+    baseApprovedIncub > 0 
   });
 
   const {
@@ -1348,7 +1351,7 @@ const PigFarm = () => {
     abi: MARKETPLACE_ABI,
     functionName: "sellMoonLandPigsty",
     args: [farmTokenId],
-    watch: true,
+    enabled:landIsfree && farmBalance > 0
   });
 
   const {
@@ -1373,7 +1376,8 @@ const PigFarm = () => {
     abi: MARKETPLACE_ABI,
     functionName: "buyMoonLandPigsty",
     args: [_area],
-    watch: true,
+    enabled:baseApproved > 0
+
   });
 
   const {
@@ -1407,7 +1411,7 @@ const PigFarm = () => {
     abi: MARKETPLACE_ABI,
     functionName: "addMoonLandAreaPigsty",
     args: [parseInt(areadamount).toString(), farmTokenId],
-    watch: true,
+  enabled:baseApproved > 0 && farmTokenId && areadamount>0
   });
 
   const {
@@ -1918,7 +1922,7 @@ const PigFarm = () => {
                         }}
                       >
                         <div style={{ textAlign: "center" }}>
-                          <img style={{height:"95px"}} src={"https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2F7iSB07jCKP8ic0IlDVhX%2FFluid.png?alt=media&token=cacea51a-d2be-42d2-9e41-ff401cbf5367"} alt="metlux" />
+                          <img style={{height:"110px"}} src={"https://1193010105-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FySy2cQ7xPCwuFdbC6Xgd%2Fuploads%2F7iSB07jCKP8ic0IlDVhX%2FFluid.png?alt=media&token=cacea51a-d2be-42d2-9e41-ff401cbf5367"} alt="metlux" />
                         </div>
                         <a href="/buy/positron#" className="bg___BTN2">
                           Buy Positron
@@ -2425,14 +2429,21 @@ const PigFarm = () => {
 
       <Modal isOpen={buyAreaModal} toggle={buyAreaToggle} centered={true}>
         <ModalBody>
+        <div className="modal_img_div">
+              <img
+                src={new_land}
+                alt="moonland"
+              />
+            </div>
           <div className="moveRight">
             <span className="pull-left">
-              Your {baseSymbol} Balance
+              Your ${baseSymbol} Balance
               <br />
               {baseBalance}
             </span>
             <span className="pull-right ">
-              Your available {farmSymbol}
+              Your available Area
+              {/* {farmSymbol} */}
               <br />
               {farmCapacity - sowDeposited} sq yards
             </span>
@@ -2449,7 +2460,7 @@ const PigFarm = () => {
             value={buyareadamount}
           />
           <span className="info mt-3">
-            <b>Cost:</b> {buyareadamount * farmPrice * 10} {baseSymbol}
+            <b>Cost:</b> {buyareadamount * farmPrice * 10} ${baseSymbol}
           </span>
           <span className="info mt-1">
             <b>Area:</b> {buyareadamount * 10} sq. m.
@@ -2465,11 +2476,11 @@ const PigFarm = () => {
         <ModalFooter>
           {baseApproved == 0 && (
             <Button className="bg___BTN2 mr-3" onClick={approvebaseToken}>
-              Approve {baseSymbol}
+              Approve ${baseSymbol}
             </Button>
           )}
           {buyareadamount * farmPrice * 10 > baseBalance ? (
-            <p style={{ color: "red" }}>Insufficient {baseSymbol} Balance</p>
+            <p style={{ color: "red" }}>Insufficient ${baseSymbol} Balance</p>
           ) : (
             baseApproved > 0 && (
               <Button className="bg___BTN2 mr-3" onClick={buyAreaNFT}>

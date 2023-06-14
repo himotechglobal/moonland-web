@@ -156,11 +156,16 @@ const ChickenFarm = () => {
   const nosellAreaToggle = () => setnoSellModal(!nosellAreaModal);
 
   const [eggModal, setEggModal] = useState(false);
-  const eggtoggle = () => setEggModal(!eggModal);
+  const eggtoggle = () =>{
+   setEggModal(!eggModal);
+   setcedAmount("")
+  }
 
   const [removeChickenModal, setremoveChickenModal] = useState(false);
-  const removeChickentoggle = () => setremoveChickenModal(!removeChickenModal);
-
+  const removeChickentoggle = () => {
+  setremoveChickenModal(!removeChickenModal);
+  setcrdAmount("")
+  }
   const [addDaysChickenModal, setaddDaysChickenModal] = useState(false);
   const addDaysChickentoggle = () =>{
 

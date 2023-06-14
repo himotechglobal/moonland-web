@@ -14,7 +14,7 @@ const Options = ({tokenIndex}) => {
         args:[tokenIndex],
         watch: true,
     })
-
+// console.log(approvedToken);
 
   return (
 

@@ -3,7 +3,7 @@ import $ from "jquery";
 import { Button, Modal, ModalBody } from "reactstrap";
 import Config, { MARKETPLACE } from "../../../Config2";
 import NFT_MARKETPLACE_ABI from "../../../Config/NFT_MARKETPLACE_ABI.json";
-import NFT_ABI from "../../../Config/NFT_ABI.json";
+import NFT_ABI from "../../../Config2/NFT_ABI.json";
 import axios from "axios";
 import Web3 from "web3";
 import {
@@ -99,7 +99,7 @@ const SinglePop = (props) => {
     });
 
     getTokenList();
-  });
+  },[]);
 
   const handleSaleon = (e) => {
     setSaleon(e.target.checked);
@@ -239,7 +239,7 @@ const SinglePop = (props) => {
   });
 
   const putauction = async () => {
-    if (instantsale) {
+    if (instantsale==true) {
       setOnSaleModal(true);
       await putauctionWriteAsync();
     } else {
@@ -301,15 +301,18 @@ const SinglePop = (props) => {
   useEffect(() => {
     if (putauctionSuccess || openAuctionSuccess || approveTokenSuccess) {
       closeModal();
-      // reset();
+      setModal(false)
+      setOnSaleModal(false)
     }
-  }, [putauctionSuccess, openAuctionSuccess, approveTokenSuccess]);
+  }, [putauctionSuccess|| openAuctionSuccess|| approveTokenSuccess]);
 
   useEffect(() => {
     if (putauctionError || openAuctionError || approveTokenError) {
       closeModal();
+      setModal(false)
+      setOnSaleModal(false)
     }
-  }, [putauctionError, openAuctionError, approveTokenError]);
+  }, [putauctionError||openAuctionError||approveTokenError]);
   return (
     <div>
       <section id="create-sec-pop">
@@ -347,7 +350,7 @@ const SinglePop = (props) => {
                       <input
                         placeholder="Enter Price"
                         onChange={handlePrice}
-                        type="text"
+                        type="number"
                         value={price}
                       />
                     </div>
@@ -400,7 +403,7 @@ const SinglePop = (props) => {
                     // props.imported ?
                     //     <button onClick={putauctionImported}>Put On Sale</button>
 
-                    <button onClick={putauction}>Put On Sale</button>
+                    <button onClick={putauction} disabled={instantsale==true?(price =="" ||auctionToken==null):(price =="" || auctionToken==null || startTime==null || endTime==null)}>Put On Sale</button>
                   ) : (
                     <button onClick={approveToken}>Approve to Create</button>
                   )}
@@ -529,7 +532,7 @@ const SinglePop = (props) => {
       <Modal isOpen={onSaleModal} toggle={saleToggle} centered={true}>
         <ModalBody>
           <div className="modaltext text-center mt-4 pb-3">
-            Creating Auction on Marketplace.
+            Creating {instantsale==true?"Sale":"Auction"} on Marketplace.
           </div>
         </ModalBody>
       </Modal>

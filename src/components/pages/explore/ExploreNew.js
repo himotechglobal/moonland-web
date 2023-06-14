@@ -17,7 +17,7 @@ import Footer from "../footer.js";
 // import MARKETPLACE_ABI from '../../../Config2/MARKETPLACE_ABI.json';
 import { HARVEST_FARM, NFT, NFT_MARKETPLACE } from "../../../Config/index";
 import NFT_MARKETPLACE_ABI from "../../../Config/NFT_MARKETPLACE_ABI.json";
-import NFT_ABI from "../../../Config/NFT_ABI.json";
+import NFT_ABI from "../../../Config2/NFT_ABI.json";
 import Web3 from "web3";
 
 import { useState, useEffect } from "react";
@@ -157,13 +157,9 @@ const ExploreNew = () => {
     getCollection();
     init();
   }, [
-    saleArray,
     _count1,
     _userBids,
     _userBalance,
-    userNfts,
-    userCount,
-    userBids,
     address,
   ]);
 
@@ -298,33 +294,35 @@ const ExploreNew = () => {
                 <div class="tab-pane mt-2">
                   <div className="tab-panel active" id="onsale">
                     <div className="row justify-content-center">
-                      {/* {saleArray.length} */}
-                      {/* {counter.length} */}
+                 
 
                       {
-                        // counter.length > 0 && saleArray.length > 0 && counter
+                    
                         userCount?.length > 0 &&
                           userCount?.map((v, i) => {
-                            if (
-                              _acounter < olimit
-                              // && $.inArray((counter.length - (i + 1)).toString(), saleArray) >= 0
-                            ) {
-                              _acounter++;
+                            return (
+                              <ExploreSingle tradeid={v.id} />
+                          
+                            );
+                            // if (
+                            //   _acounter < olimit
+                             
+                            // ) {
+                            //   _acounter++;
 
-                              return (
-                                <ExploreSingle tradeid={v.id} />
-                                // <ExploreSingle tradeid={(userCount.length - (i + 1))} />
-                              );
-                            } else {
-                              if (userCount?.length == 0 && _acounter == 0)
-                                return (
-                                  <div className="marketplace-box-wrap8">
-                                    <div className="text-center w-100 m-0 p-5  card cards2">
-                                      <h3>No Auction Available</h3>
-                                    </div>
-                                  </div>
-                                );
-                            }
+                             
+                            // } else {
+                            //   if (userCount?.length == 0 && _acounter == 0)
+                            //     return (
+                            //       <div className="marketplace-box-wrap8">
+                            //         <div className="text-center w-100 m-0 p-5  card cards2">
+                            //           <h3>No Auction Available</h3>
+                            //         </div>
+                            //       </div>
+                            //     );
+                            // }
+
+                            
                           })
                       }
 
@@ -337,7 +335,7 @@ const ExploreNew = () => {
                       )}
                     </div>
 
-                    {saleArray?.length > olimit && counter?.length > 0 && (
+                    {/* {saleArray?.length > olimit && counter?.length > 0 && (
                       <div className="loadmore-btn">
                         <button
                           type="button"
@@ -350,7 +348,7 @@ const ExploreNew = () => {
                           Load more
                         </button>
                       </div>
-                    )}
+                    )} */}
                   </div>
                   {/* <div class="tab-panel row" id="onbuy">
                     <div className="row">
@@ -447,18 +445,19 @@ const ExploreNew = () => {
                     <div className="row justify-content-center">
                       {userBids?.length > 0 &&
                         userBids?.map((v, i) => {
-                          if (_ccounter < mlimit) {
-                            _ccounter++;
-                            return <ExploreSingle tradeid={v} />;
-                          } else {
-                            return (
-                              <div className="marketplace-box-wrap8">
-                                <div className="text-center w-100 m-0 p-5  card cards2">
-                                  <h3>No Bids Available</h3>
-                                </div>
-                              </div>
-                            );
-                          }
+                          return <ExploreSingle tradeid={v} />;
+                          // if (_ccounter < mlimit) {
+                          //   _ccounter++;
+                            
+                          // } else {
+                          //   return (
+                          //     <div className="marketplace-box-wrap8">
+                          //       <div className="text-center w-100 m-0 p-5  card cards2">
+                          //         <h3>No Bids Available</h3>
+                          //       </div>
+                          //     </div>
+                          //   );
+                          // }
                         })}
                       {userBids?.length == 0 && (
                         <div className="marketplace-box-wrap8">
@@ -492,9 +491,8 @@ const ExploreNew = () => {
                           if (i < climit) {
                             return (
                               <NftSingle
-                                nftindex={v.id}
+                                nftindex={i}
                                 nftAddress={nftAddress}
-                                imported={false}
                               />
                             );
                           } else {
