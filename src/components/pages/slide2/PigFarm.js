@@ -454,7 +454,7 @@ const PigFarm = () => {
     setBaseSymbol(_baseSymbol);
     setFarmBalance(parseInt(_nftBalance));
     setApprovalProcessing(false);
-    if (address) {
+    if (address && isConnected) {
       setBaseApproved(_baseApproved);
       setBaseApprovedFarm(parseInt(_baseApprovedFarm));
       setBaseApprovedIncub(parseInt(_baseApprovedIncub));
@@ -500,11 +500,17 @@ const PigFarm = () => {
           setFarmApprove(true);
         }
 
-        if (_userInfo1?.[4]) {
+        if (_userInfo1?.[4]==true) {
           setFarmArea(parseFloat(_userInfo1?.[2] / 1e18).toFixed());
       setFarmCapacity(parseFloat(_userInfo1?.[3] / 1e18).toFixed());
+        }else{
+          setFarmArea(0);
+          setFarmCapacity(0);
         }
       }
+    }else{
+      setFarmArea(0);
+      setFarmCapacity(0);
     }
   };
 
@@ -956,7 +962,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
       parseInt(farmCapacity) -
         parseInt(parseInt(sowDeposited) + parseInt(boarDeposited))
     ) {
-      setcDepositError("Error: Insufficient Harvest Land");
+      setcDepositError("Error: Insufficient Build Land");
       return false;
     } else if (
       chickenFoodBalance <
@@ -1025,14 +1031,14 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
       setcDepositError("Error: Insufficient POS Balance");
       return false;
     } else if (cdamount > farmCapacity - sowDeposited) {
-      setcDepositError("Error: Insufficient Harvest Land");
+      setcDepositError("Error: Insufficient Build Land");
       return false;
     } else if (
       parseInt(parseInt(cdamount) + parseInt(requiredBoar)) >
       parseInt(farmCapacity) -
         parseInt(parseInt(sowDeposited) + parseInt(boarDeposited))
     ) {
-      setcDepositError("Error: Insufficient Harvest Land");
+      setcDepositError("Error: Insufficient Build Land");
       return false;
     } else {
       setModal(true);

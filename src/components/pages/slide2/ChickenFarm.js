@@ -458,6 +458,9 @@ const ChickenFarm = () => {
     args: [_amt],
     watch: true,
   });
+  // _nftBalance > 0 || _userInfo?.landlocked
+  // console.log(_userInfo?.landlocked);
+  // console.log(_nftBalance>0);
   const getData = async () => {
     setFarmBalance(parseInt(_nftBalance));
     setFarmPrice(parseFloat(_tokenPerfarm / 1e18).toFixed(2));
@@ -492,7 +495,7 @@ const ChickenFarm = () => {
     setBaseSymbol(_baseSymbol);
     setFarmLocked(_userInfo2?.[4]);
     setLandIsfree(_landIsfree);
-
+if(address && isConnected){
     if (_nftBalance > 0 || _userInfo?.landlocked) {
       // alert(_nftTokenId)
       setFarmTokenId(parseInt(_nftTokenId));
@@ -508,6 +511,10 @@ const ChickenFarm = () => {
       setFarmCapacity(parseFloat(_userInfo2?.[3] / 1e18).toFixed(2));
       }
     }
+  }else{
+    setFarmArea(0);
+    setFarmCapacity(0);
+  }
   };
 
   const getEggData = async () => {
@@ -1645,7 +1652,7 @@ if(sellAreaSuccess){
                         </div>
                         <div class="time__list">
                           <h3>
-                          {parseInt(chickenDeposited)}{" "}{chickenSymbol}
+                          {chickenDeposited>0?parseInt(chickenDeposited):0}{" "}{chickenSymbol}
                           </h3>
                           <p>Solar Assembled</p>
                         </div>
