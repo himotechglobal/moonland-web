@@ -1064,8 +1064,7 @@ if(address && isConnected){
   const { config: claimEggsConfig_ } = usePrepareContractWrite({
     address: CHICKEN_FARMING,
     abi: CHICKEN_FARMING_ABI,
-    functionName: "claimCells",
-    watch: true,
+    functionName: "claimCells"
   });
 
   const {
@@ -1074,13 +1073,18 @@ if(address && isConnected){
     isError: claimEggsError,
   } = useContractWrite(claimEggsConfig_);
 
-  const { isSuccess: claimEggsSuccess } = useWaitForTransaction({
+  const { isSuccess: claimEggsSuccess , isError: claimError } = useWaitForTransaction({
     hash: claimEggsData?.hash,
   });
 
+  console.log(claimEggsError);
   const claimEggs = async () => {
     setModal(true);
-    await claimEggsWriteAsync();
+   
+    await claimEggsWriteAsync?.();
+    if(claimError){
+        console.log(claimError);
+    }
   };
 
   const { config: approveChickenEggConfig_ } = usePrepareContractWrite({
@@ -1892,11 +1896,11 @@ if(sellAreaSuccess){
                                                         <img src={eggs1000} className="ml-2" width="60px" alt='' />
                                                     } */}
                           </h3>
-                          <p>Forged By You</p>
+                          <p>In Process</p>
                         </div>
-                        <div className="time__list">
+                        {/* <div className="time__list">
                           <h3>
-                            {adult > 0 ? adult : 0} {chickenSymbol}
+                            {adult > 0 ? adult : 0} {chickenSymbol} */}
                             {/* {
                                                             adult > 0 && adult <= 10 &&
                                                             <img src={chicken1} width="60px" alt='' />
@@ -1909,9 +1913,9 @@ if(sellAreaSuccess){
                                                             adult > 100 && adult <= 1000 &&
                                                             <img src={chicken1000} width="60px" alt='' />
                                                         } */}
-                          </h3>
+                          {/* </h3>
                           <p>Forged Total</p>
-                        </div>
+                        </div> */}
 
                         <div className="time__list">
                           <h3 className="timer">{eggTime}</h3>

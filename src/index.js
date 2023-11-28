@@ -15,10 +15,17 @@ import {
 // import { infuraProvider } from "wagmi/providers/infura";
 import { publicProvider } from "wagmi/providers/public";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
-import { getDefaultWallets, RainbowKitProvider,darkTheme } from "@rainbow-me/rainbowkit";
+import { getDefaultWallets, RainbowKitProvider,darkTheme, connectorsForWallets } from "@rainbow-me/rainbowkit";
 import {  Theme } from '@rainbow-me/rainbowkit'
 import moonlandSheild from '../src/components/images/moonlandSheild.svg'
-
+import {
+  coinbaseWallet,
+  injectedWallet,
+  metaMaskWallet,
+  rainbowWallet,
+  trustWallet,
+  walletConnectWallet,
+} from '@rainbow-me/rainbowkit/wallets';
  
 const bsc = {
   id: 56,
@@ -142,15 +149,28 @@ const { chains,provider,webSocketProvider } = configureChains([
     },
   }),
 ]);
-const { connectors } = getDefaultWallets({
-  appName: "My RainbowKit App",
-  chains,
-});
+ 
+
+const connectors =  connectorsForWallets([{
+  groupName: 'Popular',
+  wallets : [
+    metaMaskWallet({ chains , shimDisconnect : true }),
+    coinbaseWallet({chains}),
+    walletConnectWallet({chains}),
+    trustWallet({chains})
+  ]
+}])
+// const { connectors } = getDefaultWallets({
+//   appName: "My RainbowKit App",
+//   chains,
+  
+// });
 const client = createClient({
   autoConnect: true,
   connectors,
   provider,
   webSocketProvider,
+  
 });
 // polyfill Buffer for client
 const root = ReactDOM.createRoot(document.getElementById("root"));

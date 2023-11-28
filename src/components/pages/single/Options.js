@@ -11,8 +11,7 @@ const Options = ({tokenIndex}) => {
         address: NFT_MARKETPLACE,
         abi: NFT_MARKETPLACE_ABI,
         functionName: 'getApprovedToken',
-        args:[tokenIndex],
-        watch: true,
+        args:[tokenIndex]
     })
 // console.log(approvedToken);
 

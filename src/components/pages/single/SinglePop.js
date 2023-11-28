@@ -210,6 +210,7 @@ const SinglePop = (props) => {
     abi: NFT_MARKETPLACE_ABI,
     functionName: "openInstantSellAuction",
     args: [id, _sPrice, auctionToken, _title],
+    enabled: id && _sPrice && auctionToken && _title
   });
 
   const {
@@ -227,7 +228,12 @@ const SinglePop = (props) => {
     abi: NFT_MARKETPLACE_ABI,
     functionName: "openAuction",
     args: [auctionToken, id, _sPrice, _sTime, _eTime, _title],
+    enabled: id !== undefined && _sPrice && _sTime && _eTime && auctionToken && _title
+
   });
+
+  console.log(auctionToken, id, _sPrice, _sTime, _eTime, _title);
+  console.log(id && _sPrice && _sTime && _eTime && auctionToken && _title)
   const {
     data: openAuctionData,
     writeAsync: openAuctionWriteAsync,
@@ -357,7 +363,7 @@ const SinglePop = (props) => {
                     <div class="royalities-child martb-top">
                       <label>Token</label>
                       <select
-                        onChange={handleAuctionToken}
+                        onChange={() => handleAuctionToken}
                         value={auctionToken}
                       >
                         <option style={{ background: "#ae00c5" }} value="">
