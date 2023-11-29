@@ -993,7 +993,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
       cdamount == ""
         ? 0
         : ethers.utils.parseEther(parseInt(cdamount).toString()).toString(),
-      ethers.utils.parseEther(requiredBoar.toString()).toString(),
+      ethers.utils.parseEther(parseInt(requiredBoar).toString()).toString(),
       _dayamount,
     ],
     enabled:cdamount>0 && dayamount>0&&sowApproved > 0 &&
@@ -1497,16 +1497,18 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
     let _availableArea = parseInt(farmCapacity) -
       (parseInt(sowDeposited) + parseInt(boarDeposited))
     if (parseInt(sowBalance) > parseInt(_availableArea)) {
-      _damount = _availableArea;
+      _damount = parseInt(_availableArea/2);
     }
     setcdAmount(_damount);
     setcDepositAmount(_damount);
+    setRequiredBoar(Math.ceil(parseFloat(_damount / 1).toFixed()));
+
   };
 
   const handlecDepositChange = (e) => {
     setcDepositAmount(e.target.value);
     setcdAmount(e.target.value);
-    setRequiredBoar(Math.ceil(parseInt(e.target.value / 10)));
+    setRequiredBoar(Math.ceil(parseFloat(e.target.value / 1).toFixed()));
   };
 
   const handleAddDayChange = (e) => {
@@ -2166,8 +2168,8 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
       <span>
               <b>Your available Capacity</b>
               <br />
-              {parseFloat(farmCapacity) -
-                (parseFloat(sowDeposited) + parseFloat(boarDeposited))}{" "}
+                {parseInt((parseInt(farmCapacity) -
+                (parseInt(sowDeposited) + parseInt(boarDeposited)))/2)}{" "}
               Material
             </span>
       </div>
@@ -2360,8 +2362,8 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
               {/* Your available {farmSymbol} Capacity */}
               Your available Land (sq yards)
               <br />
-              {farmCapacity -
-                (parseInt(sowDeposited) + parseInt(boarDeposited))}
+              {parseInt((parseInt(farmCapacity) -
+                (parseInt(sowDeposited) + parseInt(boarDeposited)))/2)}
             </span>
       </div>
         </div>
@@ -2383,7 +2385,8 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
           />
           <span className="info">
             Max:{" "}
-            {farmCapacity - (parseInt(sowDeposited) + parseInt(boarDeposited))}{" "}
+            {parseInt((parseInt(farmCapacity) -
+                (parseInt(sowDeposited) + parseInt(boarDeposited)))/2)}
             {sowSymbol} @ (1 {sowSymbol} per sq yards)
           </span>
 
