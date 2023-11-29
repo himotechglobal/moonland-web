@@ -973,7 +973,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
     } else if (parseInt(cdamount) <= 0) {
       setcDepositError("Error: Quantity must be greater than 0.");
       return false;
-    } else if (chickenDepositFee * cdamount > baseBalance) {
+    } else if (parseInt(chickenDepositFee) * parseInt(cdamount) > parseInt(baseBalance)) {
       setcDepositError(`Error: Insufficient ${baseSymbol} Balance`);
       return false;
     } else {
@@ -982,7 +982,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
     }
   };
 
-  let _boar = requiredBoar.toString();
+  // let _boar = requiredBoar.toString();
   let _dayamount = dayamount * 7;
   const { config: depositSowConfig_ } = usePrepareContractWrite({
     address: PIG_FARMING,
@@ -993,7 +993,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
       cdamount == ""
         ? 0
         : ethers.utils.parseEther(parseInt(cdamount).toString()).toString(),
-      ethers.utils.parseEther(_boar).toString(),
+      ethers.utils.parseEther(requiredBoar.toString()).toString(),
       _dayamount,
     ],
     enabled:cdamount>0 && dayamount>0&&sowApproved > 0 &&
@@ -1018,19 +1018,19 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
 
   const depositSow = async () => {
     setcDepositError(false);
-    if (cdamount === "" || cdamount === 0) {
+    if (parseInt(cdamount) === "" || parseInt(cdamount) === 0) {
       setcDepositError("Error: Invalid Sow Quantity");
       return false;
     }
-    if (dayamount === "" || dayamount === 0) {
+    if (parseInt(dayamount) === "" || parseInt(dayamount) === 0) {
       setcDepositError("Error: Invalid Day");
       return false;
     }
 
-    if (chickenFoodBalance < cdamount * dayamount * 7 * 20) {
+    if (parseInt(chickenFoodBalance) < parseInt(cdamount) * parseInt(dayamount) * 7 * 20) {
       setcDepositError("Error: Insufficient POS Balance");
       return false;
-    } else if (cdamount > farmCapacity - sowDeposited) {
+    } else if (parseInt(cdamount) > parseInt(farmCapacity) - parseInt(sowDeposited)) {
       setcDepositError("Error: Insufficient Build Land");
       return false;
     } else if (
@@ -1489,13 +1489,15 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
   const setMaxcrDeposit = async () => {
     let _damount = sowDeposited;
 
-    setcrdAmount(parseFloat(_damount));
+    setcrdAmount(parseInt(_damount));
   };
 
   const setMaxcDeposit = async () => {
-    let _damount = sowBalance;
-    if (sowBalance > farmCapacity) {
-      _damount = farmCapacity;
+    let _damount = parseInt(sowBalance);
+    let _availableArea = parseInt(farmCapacity) -
+      (parseInt(sowDeposited) + parseInt(boarDeposited))
+    if (parseInt(sowBalance) > parseInt(_availableArea)) {
+      _damount = _availableArea;
     }
     setcdAmount(_damount);
     setcDepositAmount(_damount);
@@ -1504,7 +1506,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
   const handlecDepositChange = (e) => {
     setcDepositAmount(e.target.value);
     setcdAmount(e.target.value);
-    setRequiredBoar(Math.ceil(parseFloat(e.target.value / 10).toFixed(2)));
+    setRequiredBoar(Math.ceil(parseInt(e.target.value / 10)));
   };
 
   const handleAddDayChange = (e) => {
