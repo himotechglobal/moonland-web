@@ -918,7 +918,7 @@ if(address && isConnected){
     } else if (solarAmount > farmCapacity - chickenDeposited) {
       setcDepositError("Error: Insufficient Harvest Land");
       return false;
-    }else if (solarAmount>chickenBalance) {
+    }else if (parseInt(solarAmount)>parseInt(chickenBalance)) {
       setcDepositError("Error: Insufficient Solar Balance");
       return false;
     }
@@ -1344,9 +1344,10 @@ if(sellAreaSuccess){
   };
 
   const setMaxcDeposit = async () => {
-    let _damount = chickenBalance;
-    if (chickenBalance > farmCapacity) {
-      _damount = farmCapacity;
+    let _damount = parseInt(chickenBalance);
+    let _availableArea = parseInt(farmCapacity) - parseInt(chickenDeposited)
+    if (chickenBalance > _availableArea) {
+      _damount = _availableArea;
     }
     setcdAmount(_damount);
     setSolarAmount(_damount);
