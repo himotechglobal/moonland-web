@@ -912,10 +912,10 @@ if(address && isConnected){
 
   const depositChicken = async () => {
     setcDepositError(false);
-    if (chickenFoodBalance < solarAmount * dayamount * 600) {
+    if (parseInt(chickenFoodBalance) < parseInt(solarAmount) * parseInt(dayamount) * 600) {
       setcDepositError("Error: Insufficient fluid Balance");
       return false;
-    } else if (solarAmount > farmCapacity - chickenDeposited) {
+    } else if (parseInt(solarAmount) > parseInt(farmCapacity) - parseInt(chickenDeposited)) {
       setcDepositError("Error: Insufficient Harvest Land");
       return false;
     }else if (parseInt(solarAmount)>parseInt(chickenBalance)) {
@@ -923,7 +923,7 @@ if(address && isConnected){
       return false;
     }
      else {
-     if(solarAmount>0){
+     if(parseInt(solarAmount)>0){
       setModal(true);
      }
       await depositChickenWriteAsync();
