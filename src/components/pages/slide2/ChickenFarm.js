@@ -840,7 +840,7 @@ if(address && isConnected){
     abi: CHICKEN_FARMING_ABI,
     functionName: "depositMore",
     args: [
-      cdamount == "" ? 0 : ethers.utils.parseEther(cdamount).toString(),
+      cdamount == "" ? 0 : ethers.utils.parseEther(cdamount.toString()).toString(),
       farmTokenId,
     ],
     enabled:
@@ -890,7 +890,7 @@ if(address && isConnected){
     functionName: "deposit",
     args: [
       parseInt(farmTokenId),
-      solarAmount == "" ? 0 : ethers.utils.parseEther(solarAmount).toString(),
+      solarAmount == "" ? 0 : ethers.utils.parseEther(solarAmount.toString()).toString(),
       parseInt(dayamount),
     ],
     enabled: solarAmount > 0 && dayamount > 0,
@@ -1344,9 +1344,9 @@ if(sellAreaSuccess){
   };
 
   const setMaxcDeposit = async () => {
-    let _damount = parseInt(chickenBalance);
-    let _availableArea = parseInt(farmCapacity) - parseInt(chickenDeposited)
-    if (chickenBalance > _availableArea) {
+    let _damount = parseInt(chickenBalance.toString());
+    let _availableArea = parseInt(farmCapacity.toString()) - parseInt(chickenDeposited.toString())
+    if (parseInt(chickenBalance.toString()) > _availableArea) {
       _damount = _availableArea;
     }
     setcdAmount(_damount);
