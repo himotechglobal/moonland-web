@@ -499,7 +499,11 @@ const PigFarm = () => {
         if (_approved === PIG_FARMING) {
           setFarmApprove(true);
         }
+        if(_requiredBoar){
+          setRequiredBoar(parseInt((parseInt(_requiredBoar) - parseInt(_userInfo?.[1]))/1e18))
+          console.log(parseInt(_requiredBoar),parseInt(_userInfo?.[1]));
 
+        }
         if (_userInfo1?.[4]==true) {
           setFarmArea(parseFloat(_userInfo1?.[2] / 1e18).toFixed());
       setFarmCapacity(parseFloat(_userInfo1?.[3] / 1e18).toFixed());
@@ -528,6 +532,13 @@ const PigFarm = () => {
     watch: true,
   });
 
+  const { data: perThermixMetlux } = useContractRead({
+    address: PIG_FARMING,
+    abi: PIG_FARMING_ABI,
+    functionName: "perThermixMetlux", 
+    watch: true,
+  });
+  
   const { data: _chickenEggSymbol } = useContractRead({
     address: EULE_TOKEN,
     abi: TOKEN_ABI,
@@ -549,6 +560,15 @@ const PigFarm = () => {
     args: [address],
     watch: true,
   });
+
+  const { data: _requiredBoar } = useContractRead({
+    address: PIG_FARMING,
+    abi: PIG_FARMING_ABI,
+    functionName: "getRequiredThermix",
+    args: [parseInt(cdamount)+parseInt(sowDeposited)],
+    watch: true,
+  });
+
   const { data: _chickenEggApproved } = useContractRead({
     address: EULE_TOKEN,
     abi: TOKEN_ABI,
@@ -718,6 +738,7 @@ const PigFarm = () => {
     _boarApproved,
     _approved,
     _landIsfree,
+    _requiredBoar,
     eggTime
   ]);
 
@@ -923,16 +944,17 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
       document.getElementById("exampleModalCenter").modal("show");
     }
   };
+  
 
   const { config: depositMoreChickenConfig_ } = usePrepareContractWrite({
     address: PIG_FARMING,
     abi: PIG_FARMING_ABI,
     functionName: "depositMoreMetlux",
     args: [
-      cdamount == "" ? 0 : ethers.utils.parseEther(cdamount.toString()),
+      cdamount == "" ? 0 : ethers.utils.parseEther(parseInt(cdamount).toString()).toString(),
       parseInt(farmTokenId),
     ],
-    enabled: cdamount > 0 && sowApproved > 0 &&
+    enabled: parseInt(cdamount) > 0 && sowApproved > 0 &&
     chickenFoodApproved > 0 &&
     baseApprovedFarm > 0 
   });
@@ -954,13 +976,14 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
 
   const depositMoreChicken = async () => {
     setcDepositError(false);
+    // alert(parseInt(cdamount))
+    let _available = parseInt((parseInt(farmCapacity) -
+    parseInt(parseInt(sowDeposited) + parseInt(boarDeposited))))
     if (parseInt(sowBalance) < parseInt(cdamount)) {
       setcDepositError("Error: Insufficient Metlux Balance");
       return false;
     } else if (
-      parseInt(cdamount) >
-      parseInt(farmCapacity) -
-        parseInt(parseInt(sowDeposited) + parseInt(boarDeposited))
+      parseInt(cdamount) + parseInt(requiredBoar) > parseInt(_available)
     ) {
       setcDepositError("Error: Insufficient Build Land");
       return false;
@@ -978,6 +1001,8 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
       return false;
     } else {
       setModal(true);
+      // alert(ethers.utils.parseEther(parseInt(cdamount).toString()).toString())
+      // alert(parseInt(farmTokenId))
       await depositMoreChickenWriteAsync();
     }
   };
@@ -1495,20 +1520,20 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
   const setMaxcDeposit = async () => {
     let _damount = parseInt(sowBalance);
     let _availableArea = parseInt(farmCapacity) -
-      (parseInt(sowDeposited) + parseInt(boarDeposited))
+      (parseInt(sowDeposited) + parseInt(boarDeposited) + parseInt(requiredBoar))
     if (parseInt(sowBalance) > parseInt(_availableArea)) {
-      _damount = parseInt(_availableArea/2);
+      _damount = parseInt(_availableArea);
     }
     setcdAmount(_damount);
     setcDepositAmount(_damount);
-    setRequiredBoar(Math.ceil(parseFloat(_damount / 1).toFixed()));
+    // setRequiredBoar(Math.ceil(parseFloat(_damount / parseInt(perThermixMetlux)).toFixed()));
 
   };
 
   const handlecDepositChange = (e) => {
     setcDepositAmount(e.target.value);
     setcdAmount(e.target.value);
-    setRequiredBoar(Math.ceil(parseFloat(e.target.value / 1).toFixed()));
+    // setRequiredBoar(Math.ceil(parseFloat(e.target.value / parseInt(perThermixMetlux)).toFixed()));
   };
 
   const handleAddDayChange = (e) => {
@@ -1950,7 +1975,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
                         </a>
                       )}
 
-                      {boarBalance > 0 &&
+                      {farmLocked && boarBalance > 0 &&
                         sowBalance > 0 &&
                         sowDeposited == 0 && (
                           <a
@@ -2037,12 +2062,12 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
                         <h3> {chickenEggBalance}</h3>
                         <p>Your Eule</p>
                       </div>
-                      <div className="build___item">
+                      {/* <div className="build___item">
                         <h3>
                           {chickenEggDeposited} {chickenEggSymbol}
                         </h3>
                         <p> Forged in Total</p>
-                      </div>
+                      </div> */}
                       <div className="build___item bi__one">
                         <h3>{incubCapacity ? incubCapacity : 0}</h3>
                         <p>Available Slot</p>
@@ -2169,7 +2194,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
               <b>Your available Capacity</b>
               <br />
                 {parseInt((parseInt(farmCapacity) -
-                (parseInt(sowDeposited) + parseInt(boarDeposited)))/2)}{" "}
+                (parseInt(sowDeposited) + parseInt(boarDeposited))))}{" "}
               Material
             </span>
       </div>
@@ -2190,12 +2215,12 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
           />
           <span className="info">
             <b>Max:</b>{" "}
-            {parseFloat(farmCapacity) -
-              (parseFloat(sowDeposited) + parseFloat(boarDeposited))}{" "}
+            {parseInt((parseInt(farmCapacity) -
+                (parseInt(sowDeposited) + parseInt(boarDeposited))))}{" "}
             Materials @ (1 {sowSymbol}/{boarSymbol} per 10 sq. m.)
           </span>
           <span className="info">
-            <b>Note:</b> 1 {boarSymbol} is required for 1 {sowSymbol} to build one SoPod.{" "}
+            <b>Note:</b> 1 {boarSymbol} is required for {parseInt(perThermixMetlux)} {sowSymbol} to build one SoPod.{" "}
             {boarSymbol} is automatically dedcuted from your wallet and adjusted
             to remaining space and required {chickenFoodSymbol}(Positron) is dedcuted from
             your wallet
@@ -2363,7 +2388,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
               Your available Land (sq yards)
               <br />
               {parseInt((parseInt(farmCapacity) -
-                (parseInt(sowDeposited) + parseInt(boarDeposited)))/2)}
+                (parseInt(sowDeposited) + parseInt(boarDeposited))))}
             </span>
       </div>
         </div>
@@ -2386,7 +2411,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
           <span className="info">
             Max:{" "}
             {parseInt((parseInt(farmCapacity) -
-                (parseInt(sowDeposited) + parseInt(boarDeposited)))/2)}
+                (parseInt(sowDeposited) + parseInt(boarDeposited))))}
             {sowSymbol} @ (1 {sowSymbol} per sq yards)
           </span>
 
@@ -2396,7 +2421,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
             daily)
           </span>
           <span className="info mt-1">
-            <b>Note:</b> “1 {boarSymbol} is required against 1 {sowSymbol} to build 1 SoPod.
+            <b>Note:</b> “1 {boarSymbol} is required against {parseInt(perThermixMetlux)} {sowSymbol} to build 1 SoPod.
 {boarSymbol} will be deducted automatically from your wallet.”
           </span>
           <span className="info mt-3">
