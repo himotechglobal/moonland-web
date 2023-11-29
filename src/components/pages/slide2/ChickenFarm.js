@@ -867,13 +867,13 @@ if(address && isConnected){
 
   const depositMoreChicken = async () => {
     setcDepositError(false);
-    if (parseInt(chickenFoodBalance) < cdamount * dayamount * 20) {
+    if (parseInt(chickenFoodBalance) < parseInt(cdamount) * parseInt(dayamount) * 20) {
       setcDepositError("Error: Insufficient fluid amount");
       return false;
-    } else if (cdamount > farmCapacity - chickenDeposited) {
+    } else if (parseInt(cdamount) > parseInt(farmCapacity) - parseInt(chickenDeposited)) {
       setcDepositError("Error: Insufficient Harvest Land");
       return false;
-    } else if (cdamount > chickenBalance) {
+    } else if (parseInt(cdamount) > parseInt(chickenBalance)) {
       setcDepositError("Error: Insufficient Solar Balance");
       return false;
     } else {
@@ -2218,7 +2218,7 @@ if(sellAreaSuccess){
               Approve {chickenFoodSymbol}
             </Button>
           )}
-          {parseFloat(chickenDepositFee * cdamount).toFixed(2) > baseBalance ? (
+          {parseInt(parseInt(chickenDepositFee) * parseInt(cdamount)) > parseInt(baseBalance) ? (
             <p style={{ color: "red" }}>Insufficient {baseSymbol} Balance.</p>
           ) : (
             chickenApproved > 0 &&
