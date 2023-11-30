@@ -2398,9 +2398,9 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
             {/* Enter Quantity to add in Harvest */}
             Enter number of SoPods to build
           </label>
-          <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>
+          {/* <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>
             Max
-          </span>
+          </span> */}
 
           <input
             className="form-control"
