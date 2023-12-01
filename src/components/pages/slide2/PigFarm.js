@@ -1857,7 +1857,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
                       <div className="build__value mrt">
                         <p>SoPods Rented</p>
                         <h3 className="text-right">
-                          {isNaN(boarDeposited) ? 0 : boarDeposited}{" "}
+                          {isNaN(sowDeposited) ? 0 : sowDeposited}{" "}
                           {/* {boarSymbol} */}
                         </h3>
                       </div>
@@ -2204,9 +2204,9 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
             <br />
             <b>Enter Quantity to Build</b>
           </label>
-          <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>
+          {/* <span className="bg___BTN2 maxbtn ml-2 p-2" onClick={setMaxcDeposit}>
             Max
-          </span>
+          </span> */}
           <input
             className="form-control"
             onChange={handlecDepositChange}
@@ -2217,22 +2217,20 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
             <b>Max:</b>{" "}
             {parseInt((parseInt(farmCapacity) -
                 (parseInt(sowDeposited) + parseInt(boarDeposited))))}{" "}
-            Materials @ (1 {sowSymbol}/{boarSymbol} per 10 sq. m.)
+            Materials @ (1 Material per 1 sq. yards.)
           </span>
           <span className="info">
-            <b>Note:</b> 1 {boarSymbol} is required for {parseInt(perThermixMetlux)} {sowSymbol} to build one SoPod.{" "}
-            {boarSymbol} is automatically dedcuted from your wallet and adjusted
-            to remaining space and required {chickenFoodSymbol}(Positron) is dedcuted from
-            your wallet
+            <b>Note:</b> 1 {boarSymbol} is required for {parseInt(perThermixMetlux)} {sowSymbol} to build one SoPod.{" "} 
+            You're required to provide {chickenFoodSymbol}(Positron) to your SoPods to keep them functioning. 
           </span>
           <span className="info mt-1">
-            <b>Required {boarSymbol}:</b> {requiredBoar} {boarSymbol} (@ 1{" "}
-            {boarSymbol} per 1 {sowSymbol} )
+            <b>Required {boarSymbol}:</b> {_requiredBoar} {boarSymbol} (@ 1{" "}
+            {boarSymbol} per {_requiredBoar} {sowSymbol} )
           </span>
 
           <label className="">
             <br />
-            <b>Enter Weeks to Build</b>
+            <b>Enter Weeks to Function</b>
           </label>
 
           <input
@@ -2421,8 +2419,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
             daily)
           </span>
           <span className="info mt-1">
-            <b>Note:</b> “1 {boarSymbol} is required against {parseInt(perThermixMetlux)} {sowSymbol} to build 1 SoPod.
-{boarSymbol} will be deducted automatically from your wallet.”
+            <b>Note:</b> “1 {boarSymbol} is required against {parseInt(perThermixMetlux)} {sowSymbol} to build 1 SoPod. You're required to provide {chickenFoodSymbol}(Positron) to your SoPods to keep them functioning."
           </span>
           <span className="info mt-3">
             <b>Available {chickenFoodSymbol}:</b> {chickenFoodBalance}{" "}
@@ -2662,7 +2659,7 @@ unlockTime < new Date().getTime() / 1e3 &&    crdamount !== ""
           </div>
           <label className="mb-3">
             <br />
-            Extend building weeks for assembled Materials
+            Extend functioning weeks of your SoPods
           </label>
           {/* <span
             className="bg___BTN2 maxbtn ml-2 p-2"

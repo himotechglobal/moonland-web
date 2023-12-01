@@ -109,7 +109,7 @@ const Header = () => {
           <div className="header-c2">
             <div className="menulist-d-wrp">
               <ul className="menu-list-d">
-                <li><NavLink style={navLinkStyles} to="/">Home</NavLink></li>
+                <li><NavLink style={navLinkStyles} to="https://www.moonland.estate/">Home</NavLink></li>
                 <li><NavLink style={navLinkStyles} to="/choose">Invest </NavLink></li>
                 {/* <li><a href="/#team-sec">The Team </a></li> */}
                 {/* <li><a href="/#tokensec">Tokenomics</a></li>
@@ -140,7 +140,7 @@ const Header = () => {
           <button class="close-menu"><img src={closedicon} alt=''/></button>
         </div>
           <ul className="menu-list2">
-            <li><NavLink style={navLinkStyles} to="/">Home</NavLink></li>
+            <li><NavLink style={navLinkStyles} to="https://www.moonland.estate/">Home</NavLink></li>
             <li><NavLink style={navLinkStyles} to="/choose">Invest </NavLink></li>
             {/* <li><a href="/#team-sec">The Team </a></li> */}
             {/* <li><a href="/#tokensec">Tokenomics</a></li> */}
